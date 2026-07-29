@@ -1,6 +1,6 @@
 # Neon Genie Hermes Skill v3.0
 
-A modular, governed skill implementing the complete Neon Genie capability surface. Self-contained — no external knowledge bases (e.g. Notion) are required.
+A modular, governed skill implementing the complete Neon Genie capability surface. Self-contained — no external knowledge bases are required.
 
 ## Design principle
 

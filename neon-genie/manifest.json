@@ -42,5 +42,6 @@
       "model_prior_as_speculative_only"
     ],
     "auto_load_evidence_intelligence": "when_improves_result"
-  }
+  },
+  "license": "MIT"
 }

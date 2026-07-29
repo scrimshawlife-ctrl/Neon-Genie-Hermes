@@ -6,7 +6,7 @@
 
 [![Version](https://img.shields.io/badge/version-3.1.0-7c3aed?style=for-the-badge)](./neon-genie/manifest.json)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
-[![License](https://img.shields.io/badge/license-Proprietary-334155?style=for-the-badge)](#license)
+[![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
 [![Profiles](https://img.shields.io/badge/profiles-11-ec4899?style=for-the-badge)](#profiles)
 [![Hermes](https://img.shields.io/badge/Hermes-skill-f59e0b?style=for-the-badge)](#installation)
 [![Status](https://img.shields.io/badge/status-stable-22c55e?style=for-the-badge)](https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes)
@@ -341,10 +341,9 @@ Version source of truth: [`neon-genie/manifest.json`](./neon-genie/manifest.json
 
 ## License
 
-**Proprietary** — Applied Alchemy Labs / Zero State.  
-All rights reserved unless a separate written license is granted.
+**MIT** — Copyright (c) 2026 Applied Alchemy Labs / Zero State.
 
-See [`LICENSE`](./LICENSE).
+Free to use, copy, modify, merge, publish, distribute, sublicense, and sell, subject to including the copyright and permission notice. See [`LICENSE`](./LICENSE) for the full text.
 
 ---
 

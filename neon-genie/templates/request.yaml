@@ -1,0 +1,16 @@
+request_id: ""
+requested_outcome: ""
+target_user: ""
+current_state: ""
+desired_state: ""
+constraints: []
+canonical_sources: []
+preferred_profiles: []
+requested_outputs: []
+authority:
+  research: true
+  drafting: true
+  execution: false
+  spending: false
+  publishing: false
+human_review_required: true

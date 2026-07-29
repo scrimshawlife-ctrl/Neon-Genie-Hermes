@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Product Packet",
+  "type": "object",
+  "required": [
+    "target_user",
+    "job_to_be_done",
+    "product_boundary",
+    "system_inventory",
+    "core_loops",
+    "conflict_scan",
+    "experience_architecture",
+    "validation_path",
+    "promotion_state"
+  ],
+  "properties": {
+    "target_user": {},
+    "job_to_be_done": {},
+    "product_boundary": {},
+    "system_inventory": {},
+    "core_loops": {},
+    "conflict_scan": {},
+    "experience_architecture": {},
+    "validation_path": {},
+    "promotion_state": {}
+  },
+  "additionalProperties": true
+}

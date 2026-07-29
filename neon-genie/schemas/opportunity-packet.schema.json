@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Opportunity Packet",
+  "type": "object",
+  "required": [
+    "blocked_transition",
+    "outcome_model",
+    "system_topology",
+    "opportunity_thesis",
+    "validation_path",
+    "scorecard",
+    "promotion_state"
+  ],
+  "properties": {
+    "blocked_transition": {},
+    "outcome_model": {},
+    "system_topology": {},
+    "opportunity_thesis": {},
+    "validation_path": {},
+    "scorecard": {},
+    "promotion_state": {}
+  },
+  "additionalProperties": true
+}

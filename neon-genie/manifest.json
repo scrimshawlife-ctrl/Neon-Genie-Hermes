@@ -1,0 +1,34 @@
+{
+  "skill": "neon-genie",
+  "version": "3.0.0",
+  "profiles": [
+    "core",
+    "product_architecture",
+    "opportunity_mining",
+    "fragmentation",
+    "zero_option",
+    "agentic_services",
+    "commercial",
+    "evidence_intelligence",
+    "memetic",
+    "audit_delivery",
+    "wayfinder_handoff"
+  ],
+  "default_profiles": [
+    "core"
+  ],
+  "claim_labels": [
+    "OBSERVED",
+    "INFERRED",
+    "SPECULATIVE",
+    "NOT_COMPUTABLE"
+  ],
+  "modes": [
+    "OPEN",
+    "ALIGN",
+    "ASCEND",
+    "CLEAR",
+    "SEAL"
+  ],
+  "authority": "advisory_only"
+}

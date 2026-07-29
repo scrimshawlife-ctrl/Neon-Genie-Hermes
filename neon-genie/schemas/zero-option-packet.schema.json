@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Zero Option Packet",
+  "type": "object",
+  "required": [
+    "constraints",
+    "capabilities",
+    "opportunities",
+    "shadow_flags",
+    "system_state"
+  ],
+  "properties": {
+    "constraints": {},
+    "capabilities": {},
+    "opportunities": {},
+    "shadow_flags": {},
+    "system_state": {}
+  },
+  "additionalProperties": true
+}

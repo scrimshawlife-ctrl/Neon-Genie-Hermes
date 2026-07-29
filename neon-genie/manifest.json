@@ -1,6 +1,6 @@
 {
   "skill": "neon-genie",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "profiles": [
     "core",
     "product_architecture",
@@ -30,5 +30,17 @@
     "CLEAR",
     "SEAL"
   ],
-  "authority": "advisory_only"
+  "authority": "advisory_only",
+  "research": {
+    "mode": "proactive",
+    "default": true,
+    "offline_opt_out": true,
+    "source_priority": [
+      "operator_supplied",
+      "workspace_context",
+      "live_host_tools",
+      "model_prior_as_speculative_only"
+    ],
+    "auto_load_evidence_intelligence": "when_improves_result"
+  }
 }

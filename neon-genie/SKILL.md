@@ -1,7 +1,7 @@
 ---
 name: neon-genie
-version: 3.0.0
-description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff.
+version: 3.1.0
+description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: Proprietary
 ---
@@ -14,17 +14,57 @@ Convert weak signals, blocked state transitions, fragmented systems, raw ideas, 
 
 Neon Genie owns product and opportunity intelligence. It does not grant execution, forecast, governance, spending, publication, or canon-promotion authority.
 
-Canonical sources are **operator-supplied** (repo files, pasted evidence, declared URLs, or other host-available context). No external knowledge base is required to load or run this skill.
+## Research doctrine (default: proactive)
+
+**Automatically perform any research the host can run when it improves usefulness of the result.** Do not wait for the operator to name every source. Prefer a researched, labeled answer over a thin `NOT_COMPUTABLE` wall when facts are fetchable.
+
+### Source stack (priority order)
+
+1. **Operator-supplied** — pasted evidence, attached files, declared URLs, explicit `canonical_sources`
+2. **Workspace / host context** — open repo, local files, prior run artifacts Hermes can read
+3. **Live host research** — web search, page fetch, academic indexes (e.g. arXiv), docs, registries, market/public filings, standards bodies, news, competitor sites, grant/board databases — *whatever tools the host exposes*
+4. **Model prior** — only as `SPECULATIVE` or scaffolding; never as `OBSERVED`
+
+No external knowledge base is required to *load* the skill. Research uses **host-available tools at run time**. If a tool class is unavailable, record the gap and continue with the best remaining stack.
+
+### When to research (auto)
+
+Run research during `ALIGN` and again in `ASCEND` whenever any of these hold:
+
+- a material claim would otherwise be `NOT_COMPUTABLE` or weak `SPECULATIVE` and is fetchable;
+- buyer, market, competitor, pricing, regulation, or technical feasibility is decision-critical;
+- grants, boards, philanthropy, standards, or “current external facts” affect the scorecard;
+- product/system claims depend on public APIs, licenses, or third-party capabilities;
+- the operator asked for an audit, opportunity, commercial model, or handoff packet.
+
+### Research loop
+
+```text
+GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
+  → LABEL (OBSERVED | INFERRED | SPECULATIVE | NOT_COMPUTABLE)
+  → RE-SCORE → (repeat until usefulness plateaus or budget/tooling ends)
+```
+
+### Research rules
+
+- **Proactive by default** — research is on unless the operator sets `research: false` or `offline: true`.
+- **Smallest sufficient fetch** — enough evidence for the decision, not infinite crawl.
+- **Cite or drop** — every `OBSERVED` claim needs a source pointer (URL, path, title+date, or tool result id).
+- **Never fabricate** — if fetch fails or tools are absent, mark `NOT_COMPUTABLE` with the attempted query.
+- **Freshness** — prefer primary/current sources; note retrieval time for volatile facts.
+- **Attribution boundaries** — separate person / company / foundation / model inference.
+- **Authority unchanged** — research may draft; it may not submit, contact, spend, publish, or mutate repos.
+- **Privacy** — do not probe private systems without declared access; public + operator-granted only.
 
 ## Default operating sequence
 
 Always execute:
 
 1. `OPEN`
-2. `ALIGN`
-3. `ASCEND`
+2. `ALIGN`  ← includes gap-driven research plan + first fetch pass
+3. `ASCEND` ← continues research when new gaps appear
 4. `CLEAR`
-5. `SEAL`
+5. `SEAL`   ← source manifest lists every fetch
 
 Every material claim must be labeled:
 
@@ -37,7 +77,7 @@ SHADOW detects drift and anomalies only. FORECAST performs evidence-based infere
 
 ## Router
 
-Determine the smallest sufficient profile set.
+Determine the smallest sufficient profile set. **Additionally auto-load** `evidence_intelligence` whenever external facts would change the recommendation, scorecard, or handoff quality — even if the operator did not name that profile.
 
 ```yaml
 profile_router:
@@ -55,7 +95,14 @@ profile_router:
   commercial:
     triggers: [pricing, buyer, revenue, costs, market pressure, business model]
   evidence_intelligence:
-    triggers: [grants, boards, philanthropy, competitive research, current external facts]
+    triggers:
+      - grants
+      - boards
+      - philanthropy
+      - competitive research
+      - current external facts
+      - auto: any material external gap that research can close
+    default_when: improves_result
   memetic:
     triggers: [name, hook, pitch language, public framing, shareability]
   audit_delivery:
@@ -64,7 +111,7 @@ profile_router:
     triggers: [build plan, engineering readiness, execution packet]
 ```
 
-Do not activate a profile merely because it exists.
+Do not activate a specialized product/commercial profile merely because it exists. Do activate research when usefulness requires it.
 
 ## Core pipeline
 
@@ -72,6 +119,8 @@ Do not activate a profile merely because it exists.
 SIGNAL
 → BLOCKED TRANSITION
 → OUTCOME MODEL
+→ EVIDENCE GAPS
+→ RESEARCH LOOP (host tools)
 → SYSTEM TOPOLOGY
 → OPPORTUNITY THESIS
 → INTERVENTION
@@ -87,6 +136,10 @@ SIGNAL
 
 - `RUNE.NG.INTAKE`
 - `RUNE.NG.EVIDENCE.NORMALIZE`
+- `RUNE.NG.RESEARCH.GAP_DETECT`
+- `RUNE.NG.RESEARCH.QUERY_PLAN`
+- `RUNE.NG.RESEARCH.FETCH`
+- `RUNE.NG.RESEARCH.CITE`
 - `RUNE.NG.BLOCKED_TRANSITION`
 - `RUNE.NG.OUTCOME.MODEL`
 - `RUNE.NG.TOPOLOGY`
@@ -104,7 +157,7 @@ SIGNAL
 
 Neon Genie may:
 
-- research;
+- research (proactively, via host tools);
 - infer;
 - generate;
 - compare;
@@ -176,7 +229,7 @@ Fail closed when:
 - Zero State benefit reduces portability or user control;
 - a concept duplicates an existing subsystem without wrapper classification;
 - the implementation handoff changes product intent;
-- missing data is fabricated instead of marked `NOT_COMPUTABLE`.
+- missing data is fabricated instead of marked `NOT_COMPUTABLE` after research was attempted (or correctly skipped under offline mode).
 
 ## Profile loading
 
@@ -208,7 +261,8 @@ Any proposed change to product intent returns to Neon Genie as a change request.
 
 Every run should record:
 
-- source manifest;
+- source manifest (operator + workspace + live fetches, with tool and timestamp);
+- research queries attempted and outcomes;
 - input hash;
 - selected profiles;
 - assumptions;

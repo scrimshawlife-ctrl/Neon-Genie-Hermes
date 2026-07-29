@@ -1,15 +1,16 @@
 # Capability Map
 
-1. Governed invention refinery
-2. Product architecture and system coherence
-3. Blocked-transition and topology mining
-4. Fragmentation opportunity detection
-5. Zero-State optionality and micro-execution loops
-6. Agentic action decomposition
-7. x402 capability-market analysis
-8. Commercial simulation and portfolio routing
-9. Competitive, grant, board, philanthropy, and stakeholder intelligence
-10. Memetic and pitch-language pressure testing
-11. Audit-first delivery packages
-12. Wayfinder execution handoff
-13. Failure memory, registries, provenance, and deterministic receipts
+1. Proactive host-tool research loop (web, academic, registries, public facts)
+2. Governed invention refinery
+3. Product architecture and system coherence
+4. Blocked-transition and topology mining
+5. Fragmentation opportunity detection
+6. Zero-State optionality and micro-execution loops
+7. Agentic action decomposition
+8. x402 capability-market analysis
+9. Commercial simulation and portfolio routing
+10. Competitive, grant, board, philanthropy, and stakeholder intelligence
+11. Memetic and pitch-language pressure testing
+12. Audit-first delivery packages
+13. Wayfinder execution handoff
+14. Failure memory, registries, provenance, and deterministic receipts

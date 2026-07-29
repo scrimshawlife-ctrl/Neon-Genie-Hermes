@@ -11,3 +11,8 @@
 - Memetic strength cannot promote an unproven concept.
 - Wayfinder packet cannot modify product intent.
 - No packet grants execution authority.
+
+- Proactive research runs by default when host tools can close material gaps.
+- Research failure or missing tooling yields `NOT_COMPUTABLE` with attempted query — never fabricated OBSERVED claims.
+- `research.enabled=false` / offline mode skips live fetches and relies on operator + workspace sources only.
+- Model prior without fetch is at most `SPECULATIVE`.

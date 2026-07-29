@@ -4,7 +4,7 @@
 
 ### Governed Hermes skill for invention, product architecture & opportunity intelligence
 
-[![Version](https://img.shields.io/badge/version-3.0.0-7c3aed?style=for-the-badge)](./neon-genie/manifest.json)
+[![Version](https://img.shields.io/badge/version-3.1.0-7c3aed?style=for-the-badge)](./neon-genie/manifest.json)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-Proprietary-334155?style=for-the-badge)](#license)
 [![Profiles](https://img.shields.io/badge/profiles-11-ec4899?style=for-the-badge)](#profiles)
@@ -53,6 +53,7 @@ Most “idea → product” agents invent freely and overclaim. Neon Genie is th
 | **Fail closed** | Mandatory gates block promotion when buyer/user, proof, or authority is missing |
 | **Advisory only** | Research, model, score, route — never spend, publish, or mutate runtime state without explicit downstream auth |
 | **Handoff-ready** | Stable product intent packages for Wayfinder execution — without rewriting intent |
+| **Proactive research** | Auto-runs host research when facts would improve the answer; never fabricates |
 
 Built for **Hermes** custom skills by [Applied Alchemy Labs](https://github.com/scrimshawlife-ctrl) / Zero State.
 
@@ -94,7 +95,9 @@ The skill root is `neon-genie/` (contains `SKILL.md` + `manifest.json`).
 
 > **Requirement:** a Hermes runtime that loads custom skills from a skills directory. Neon Genie is the skill package; Hermes is the host.
 >
-> **Self-contained.** No external knowledge base is required. Canonical sources are whatever the operator supplies — local files, repo contents, pasted evidence, or declared URLs.
+> **Self-contained to load.** No external knowledge base is required.
+>
+> **Proactive research by default.** Neon Genie uses host tools (web search, page fetch, academic indexes such as arXiv when available, docs, registries, public filings, etc.) to close decision-critical gaps. Operator-supplied files still take priority. Set `research.enabled=false` for offline runs.
 
 ---
 
@@ -104,9 +107,9 @@ Invoke with the smallest profile set that matches the job:
 
 ```text
 /neon-genie audit this project using product_architecture, commercial,
-and wayfinder_handoff. Treat repo files and supplied evidence as canonical.
-Separate OBSERVED, INFERRED, SPECULATIVE, and NOT_COMPUTABLE.
-Do not modify the repository.
+and wayfinder_handoff. Research anything decision-critical via host tools.
+Operator files rank highest; label OBSERVED / INFERRED / SPECULATIVE /
+NOT_COMPUTABLE. Do not modify the repository.
 ```
 
 **Zero-capital loop**
@@ -327,9 +330,10 @@ Any proposed change to product intent returns to Neon Genie as a change request.
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.0.0** |
+| Version | **3.1.0** |
 | Authority | `advisory_only` |
 | Default profiles | `core` |
+| Research mode | **proactive** (opt out with `research.enabled=false`) |
 
 Version source of truth: [`neon-genie/manifest.json`](./neon-genie/manifest.json) and frontmatter in [`SKILL.md`](./neon-genie/SKILL.md).
 
@@ -353,6 +357,6 @@ GitHub: [@scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl)
 
 <div align="center">
 
-<sub>Neon Genie v3.0.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.1.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 
 </div>

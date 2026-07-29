@@ -269,7 +269,7 @@ Memetic strength **cannot** increase promotion readiness when evidence or feasib
 ```text
 Neon-Genie-Hermes/
 ├── README.md                 # You are here
-├── LICENSE                   # Proprietary notice
+├── LICENSE                   # MIT License
 ├── docs/assets/hero.jpg      # Banner art
 └── neon-genie/               # ← install this directory
     ├── SKILL.md              # Kernel, router, authority, runes

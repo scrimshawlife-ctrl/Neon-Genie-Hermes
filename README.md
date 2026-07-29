@@ -93,6 +93,8 @@ cp -R neon-genie "$HERMES_SKILLS_DIR/"
 The skill root is `neon-genie/` (contains `SKILL.md` + `manifest.json`).
 
 > **Requirement:** a Hermes runtime that loads custom skills from a skills directory. Neon Genie is the skill package; Hermes is the host.
+>
+> **Self-contained.** No external knowledge base is required. Canonical sources are whatever the operator supplies — local files, repo contents, pasted evidence, or declared URLs.
 
 ---
 
@@ -102,8 +104,9 @@ Invoke with the smallest profile set that matches the job:
 
 ```text
 /neon-genie audit this project using product_architecture, commercial,
-and wayfinder_handoff. Use Notion as canonical. Separate OBSERVED,
-INFERRED, SPECULATIVE, and NOT_COMPUTABLE. Do not modify the repository.
+and wayfinder_handoff. Treat repo files and supplied evidence as canonical.
+Separate OBSERVED, INFERRED, SPECULATIVE, and NOT_COMPUTABLE.
+Do not modify the repository.
 ```
 
 **Zero-capital loop**

@@ -4,6 +4,7 @@ target_user: ""
 current_state: ""
 desired_state: ""
 constraints: []
+# Operator-supplied only (paths, URLs, pasted docs). No external KB required.
 canonical_sources: []
 preferred_profiles: []
 requested_outputs: []

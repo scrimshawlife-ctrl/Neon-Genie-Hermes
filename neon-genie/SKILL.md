@@ -14,6 +14,8 @@ Convert weak signals, blocked state transitions, fragmented systems, raw ideas, 
 
 Neon Genie owns product and opportunity intelligence. It does not grant execution, forecast, governance, spending, publication, or canon-promotion authority.
 
+Canonical sources are **operator-supplied** (repo files, pasted evidence, declared URLs, or other host-available context). No external knowledge base is required to load or run this skill.
+
 ## Default operating sequence
 
 Always execute:

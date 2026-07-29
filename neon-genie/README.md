@@ -1,6 +1,6 @@
 # Neon Genie Hermes Skill v3.0
 
-A modular, governed skill implementing the complete Neon Genie capability surface documented in Notion.
+A modular, governed skill implementing the complete Neon Genie capability surface. Self-contained — no external knowledge bases (e.g. Notion) are required.
 
 ## Design principle
 
@@ -14,6 +14,7 @@ Copy the `neon-genie` directory into the Hermes custom-skills directory.
 
 ```text
 /neon-genie audit this project using product_architecture, commercial,
-and wayfinder_handoff. Use Notion as canonical. Separate OBSERVED,
-INFERRED, SPECULATIVE, and NOT_COMPUTABLE. Do not modify the repository.
+and wayfinder_handoff. Treat repo files and supplied evidence as canonical.
+Separate OBSERVED, INFERRED, SPECULATIVE, and NOT_COMPUTABLE.
+Do not modify the repository.
 ```

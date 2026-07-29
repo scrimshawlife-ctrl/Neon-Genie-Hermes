@@ -4,7 +4,7 @@
 Resolve request, outcome, actor, current state, evidence, constraints, authority, and requested artifact.
 
 ## ALIGN
-Establish canonical sources, evidence hierarchy, assumptions, non-goals, novelty threshold, buildability threshold, and success criteria.
+Establish operator-supplied canonical sources (no external KB required), evidence hierarchy, assumptions, non-goals, novelty threshold, buildability threshold, and success criteria.
 
 ## ASCEND
 Run state-transition, topology, intervention, validation, scoring, and routing functions.

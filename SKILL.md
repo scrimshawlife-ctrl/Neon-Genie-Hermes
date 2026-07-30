@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.14.0
+version: 3.15.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
@@ -34,24 +34,29 @@ See `references/hermes-runtime-contract.md` for path, artifact, authority, and d
 
 **Optional companions:** host research tools, Wayfinder (handoff consumer). Their absence never blocks local advisory work.
 
-## Packaging CLI (thin)
+## Packaging CLI
 
-Deterministic packaging helpers only — not a product-reasoning engine:
+One pattern (packaging only — not a product brain):
+
+```text
+python scripts/neon_genie.py do <job> [options]
+```
+
+| Job | Use |
+|-----|-----|
+| `doctor` | Full smoke after install |
+| `check` | Skill integrity |
+| `recipe` | Named example (`--list` / `--name`) |
+| `route` / `validate` / `receipt` | Profiles, schema, receipt |
+| `eval` / `transcripts` | Golden tests |
+| `learn` | PROPOSED outcome ledger entry |
 
 ```bash
-python scripts/neon_genie.py do check
-python scripts/neon_genie.py do validate --packet path.json --type opportunity
-python scripts/neon_genie.py do route --text "zero capital first cash"
-python scripts/neon_genie.py do receipt --profiles core,zero_option --out receipt.json
-python scripts/neon_genie.py do eval
-python scripts/neon_genie.py do recipe
-python scripts/neon_genie.py do transcripts
-python scripts/neon_genie.py do learn --class proof_failed --summary "no cash in 7d" --ledger out/neon-genie/learning-ledger.jsonl
+python scripts/neon_genie.py help
 python scripts/neon_genie.py do doctor
 ```
 
-Intents: `check` · `validate` · `route` · `receipt` · `eval` · `recipe` · `transcripts` · `learn` · `doctor`. See `QUICKSTART.md`.  
-Golden prose: `evals/transcripts/`. Post-SEAL: `references/post-seal-verification.md`.
+See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `evals/transcripts/`. Post-SEAL: `references/post-seal-verification.md`.
 
 ## Mission
 

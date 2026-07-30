@@ -2,8 +2,8 @@
 
 | Doc | Purpose |
 |-----|---------|
-| [../README.md](../README.md) | Public overview |
-| [../QUICKSTART.md](../QUICKSTART.md) | Install and first prompts |
+| [../README.md](../README.md) | Public overview + **How to use** (Hermes & CLI) |
+| [../QUICKSTART.md](../QUICKSTART.md) | Short install and command table |
 | [../SKILL.md](../SKILL.md) | Full skill operating contract |
 | [../CHANGELOG.md](../CHANGELOG.md) | Release history |
 | [PREMIERE.md](./PREMIERE.md) | Premiere thesis & comparison vs idea agents |

@@ -39,7 +39,10 @@ REQUIRED_PATHS = [
     "scripts/validate_packet.py",
     "scripts/route_profiles.py",
     "scripts/build_receipt.py",
+    "scripts/run_fixture_invariants.py",
+    "scripts/audit_release_version.py",
     "install.sh",
+    ".github/workflows/hermes-evals.yml",
 ]
 
 FORBIDDEN_PATTERNS = [

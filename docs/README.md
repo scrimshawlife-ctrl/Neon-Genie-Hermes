@@ -7,6 +7,7 @@
 | [../SKILL.md](../SKILL.md) | Full skill operating contract |
 | [../CHANGELOG.md](../CHANGELOG.md) | Release history |
 | [ROADMAP.md](./ROADMAP.md) | Waves 1–4 |
+| [RELEASE-CHECKLIST-v3.5.md](./RELEASE-CHECKLIST-v3.5.md) | Release gates for v3.5 |
 | [../references/hermes-runtime-contract.md](../references/hermes-runtime-contract.md) | Hermes runtime / authority / artifacts |
 | [../references/CAPABILITY_MAP.md](../references/CAPABILITY_MAP.md) | Capability surface |
 | [../references/GOLDEN_TESTS.md](../references/GOLDEN_TESTS.md) | Eval invariants |

@@ -16,7 +16,7 @@ Installable skill root, Hermes runtime contract, `install.sh`, VERSION/CHANGELOG
 
 **Status:** shipped as **v3.3.0**.
 
-## Wave 3 — Thin operator surface (current)
+## Wave 3 — Thin operator surface
 
 Optional packaging CLI only (no product brain in Python):
 
@@ -24,11 +24,13 @@ Optional packaging CLI only (no product brain in Python):
 python scripts/neon_genie.py do check | validate | route | receipt
 ```
 
-**Status:** shipping as **v3.4.0**.
+**Status:** shipped as **v3.4.0**.
 
-## Wave 4 — Release maturity
+## Wave 4 — Release maturity (current)
 
-CI evals workflow, release checklist, default install as peer of Kubrick in operator environments.
+CI evals workflow, release checklist, version audit, fixture invariants.
+
+**Status:** shipping as **v3.5.0**.
 
 ## Non-goals (all waves)
 

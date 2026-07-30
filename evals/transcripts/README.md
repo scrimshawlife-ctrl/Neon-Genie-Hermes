@@ -13,6 +13,8 @@ These are **not** live model outputs. They are skill-contract goldens: labels, r
 | `03-fragmentation.md` | Multi-portal friction | core, fragmentation | Defrag only if burden < value; access NC |
 | `04-commercial-missing-buyer.md` | Pricing ask without buyer map | core, commercial | Gate C / role separation + DataRequest |
 | `05-offline-audit.md` | Client audit offline | core, audit_delivery | No OBSERVED from model prior (Gate N) |
+| `06-agentic-x402-misfit.md` | Agentic + x402 on consulting | core, agentic_services | Gate F ornamental x402 REJECT |
+| `07-memetic-cannot-promote.md` | Viral name, weak evidence | core, memetic | Gate D memetic cannot promote |
 
 ## Rubric
 

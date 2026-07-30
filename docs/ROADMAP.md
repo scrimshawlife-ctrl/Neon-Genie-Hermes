@@ -73,8 +73,9 @@ Public entry points:
 | Release | Focus |
 |---------|--------|
 | **3.12.0** | Commercial + audit recipes; `do doctor` full-suite smoke |
+| **3.13.0** | Agentic/memetic recipes; transcripts 06–07 (x402 / Gate D) |
 
-Further work: more transcripts, live Hermes hardening, operator feedback — not a new premiere wave.
+Further work: live Hermes hardening, more domain transcripts, operator feedback — not a new premiere wave.
 
 ## Non-goals (all waves)
 

@@ -19,6 +19,8 @@ They are **not** execution authority.
 | `fragmentation.brief.yaml` | Multi-portal friction / defrag scan |
 | `commercial.brief.yaml` | Pricing scaffold + buyer DataRequest |
 | `audit.brief.yaml` | Offline audit diagnostic package |
+| `agentic.brief.yaml` | Agentic graph + x402 misfit |
+| `memetic.brief.yaml` | Name pressure without promotion override |
 
 ## Sample packets
 
@@ -37,6 +39,8 @@ python scripts/neon_genie.py do recipe --name zero-option-executable
 python scripts/neon_genie.py do recipe --name fragmentation
 python scripts/neon_genie.py do recipe --name commercial
 python scripts/neon_genie.py do recipe --name audit
+python scripts/neon_genie.py do recipe --name agentic
+python scripts/neon_genie.py do recipe --name memetic
 python scripts/neon_genie.py do doctor
 ```
 

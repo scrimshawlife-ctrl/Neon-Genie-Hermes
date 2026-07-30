@@ -5,6 +5,19 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.13.0] — 2026-07-30
+
+### Added
+
+- Recipes: `agentic` (x402 REJECT scaffold) and `memetic` (Gate D promotion cap)
+- Briefs: `examples/agentic.brief.yaml`, `examples/memetic.brief.yaml`
+- Transcripts: `06-agentic-x402-misfit.md`, `07-memetic-cannot-promote.md` (7 total)
+- Doctor suite smokes agentic + memetic recipes
+
+### Changed
+
+- Gallery/examples indexes; ROADMAP maintenance 3.13.0
+
 ## [3.12.0] — 2026-07-30
 
 ### Added

@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.7.0
+version: 3.8.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
@@ -91,11 +91,37 @@ GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
 - **Proactive by default** — research is on unless the operator sets `research: false` or `offline: true`.
 - **Smallest sufficient fetch** — enough evidence for the decision, not infinite crawl.
 - **Cite or drop** — every `OBSERVED` claim needs a source pointer (URL, path, title+date, or tool result id).
-- **Never fabricate** — if fetch fails or tools are absent, mark `NOT_COMPUTABLE` with the attempted query.
+- **Find → request private → NOT_COMPUTABLE** — for public/fetchable gaps, attempt research first; for operator/private gaps, emit a `DataRequest` before (or instead of) `NOT_COMPUTABLE`; never invent.
+- **Never fabricate** — if fetch fails or tools are absent, mark `NOT_COMPUTABLE` with the attempted query (after find was attempted or correctly skipped offline, and after request when private).
 - **Freshness** — prefer primary/current sources; note retrieval time for volatile facts.
 - **Attribution boundaries** — separate person / company / foundation / model inference.
 - **Authority unchanged** — research may draft; it may not submit, contact, spend, publish, or mutate repos.
-- **Privacy** — do not probe private systems without declared access; public + operator-granted only.
+- **Privacy** — do not probe private systems without declared access; public + operator-granted only; request private facts via `DataRequest`.
+
+## Evidence Request Protocol
+
+Priority when a material fact is missing:
+
+1. **Find** — if sensitivity is public (or unknown-but-likely-public) and host tools can run, attempt research; cite or drop.
+2. **Request** — if sensitivity is operator/private or access is undeclared, emit a `DataRequest` (`schemas/data-request.schema.json`) instead of inventing.
+3. **NOT_COMPUTABLE** — only after find was attempted (or correctly skipped offline) and/or a DataRequest is open or unanswered.
+4. **Never** mark model prior as `OBSERVED`.
+
+### DataRequest (required fields)
+
+- `field`, `why_decision_critical`, `sensitivity` (`public`|`operator`|`private`),
+  `suggested_source`, `blocks_promotion` (bool), `status` (`open`|`satisfied`|`waived`)
+
+### CLEAR rules
+
+- Public gap + tools available + no research attempt → fail (Gate P)
+- Private decision-critical gap + no DataRequest → fail (Gate Q)
+- Private/unknown fact labeled OBSERVED from model prior without source → fail (Gate R)
+- Open DataRequests with `blocks_promotion: true` cap promotion until satisfied or waived
+
+### SEAL
+
+Run receipt must list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `schemas/run-receipt.schema.json`.
 
 ## Default operating sequence
 
@@ -272,9 +298,12 @@ Fail closed when:
 - Zero State benefit reduces portability or user control;
 - a concept duplicates an existing subsystem without wrapper classification;
 - the implementation handoff changes product intent;
-- missing data is fabricated instead of marked `NOT_COMPUTABLE` after research was attempted (or correctly skipped under offline mode).
+- missing data is fabricated instead of marked `NOT_COMPUTABLE` after research was attempted (or correctly skipped under offline mode);
+- public fetchable facts are skipped without a research attempt (Gate P);
+- private decision-critical facts lack a `DataRequest` (Gate Q);
+- private facts are silently invented as `OBSERVED` without source or request (Gate R).
 
-Also apply anti-overclaim gates A–O in `references/anti-overclaim-patterns.md` during CLEAR.
+Also apply anti-overclaim gates A–R in `references/anti-overclaim-patterns.md` during CLEAR.
 
 ## Profile loading
 

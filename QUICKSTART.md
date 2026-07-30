@@ -81,6 +81,12 @@ OPEN → ALIGN → ASCEND → CLEAR → SEAL
 
 Core is always loaded. Other profiles load on trigger match. Research is proactive by default when host tools can close gaps.
 
+## Missing data
+
+1. Neon tries to **find** public facts (research).
+2. If private, it **requests** via DataRequest (does not invent).
+3. Only then `NOT_COMPUTABLE`.
+
 ## Profiles
 
 | Profile | When |

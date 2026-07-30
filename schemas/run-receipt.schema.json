@@ -16,7 +16,14 @@
     "claims_by_label": {},
     "not_computable_fields": {},
     "promotion_state": {},
-    "human_review_required": {}
+    "human_review_required": {},
+    "data_requests": { "type": "array" },
+    "open_blocking_requests": { "type": "array" },
+    "research_attempts": { "type": "array" },
+    "evidence_protocol": {
+      "type": "string",
+      "enum": ["find_request_not_computable"]
+    }
   },
   "additionalProperties": true
 }

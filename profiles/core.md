@@ -24,11 +24,15 @@ Select specialized profiles only when triggers match (smallest sufficient set).
 
 ### CLEAR
 Flag unsupported claims, authority leakage, duplicate concepts, hidden dependencies, scope expansion, and uncited “facts.”
-Apply `references/anti-overclaim-patterns.md` gates A–O as relevant.
+Apply `references/anti-overclaim-patterns.md` gates A–R as relevant (including Evidence Request Protocol gates P–R):
+- **P** — public gap with tools available and no research attempt;
+- **Q** — private/operator decision-critical gap with no `DataRequest`;
+- **R** — private/unknown fact labeled `OBSERVED` from model prior without source.
 Confirm research attempts were logged for remaining `NOT_COMPUTABLE` fields.
+Open DataRequests with `blocks_promotion: true` cap promotion until satisfied or waived.
 
 ### SEAL
-Emit selected packets plus run receipt, including full source manifest and research log.
+Emit selected packets plus run receipt, including full source manifest, research log, and evidence spine fields: `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `schemas/run-receipt.schema.json` and `schemas/data-request.schema.json`.
 Never grant execution, spending, or publishing authority in sealed packets.
 
 ## Claim labels (mandatory on material claims)

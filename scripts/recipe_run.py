@@ -65,6 +65,21 @@ def recipe_product_audit(out: Path) -> int:
     rc.write_json(product_path, product_stub)
     rc.validate_packet(product_path, "product")
 
+    # Example brief has empty canonical_sources → open private access DataRequest
+    data_req = {
+        "request_id": "dr-product-access",
+        "field": "critical_integration_access",
+        "why_decision_critical": (
+            "Integration feasibility cannot be OBSERVED without declared access"
+        ),
+        "sensitivity": "private",
+        "suggested_source": "Operator environment credentials or access inventory",
+        "blocks_promotion": True,
+        "status": "open",
+    }
+    data_requests = [data_req]
+    rc.write_json(out / "data-requests.json", data_requests)
+
     receipt_path = out / "run-receipt.json"
     rc.build_receipt(
         receipt_path,
@@ -72,6 +87,7 @@ def recipe_product_audit(out: Path) -> int:
         status="PROPOSED",
         promotion_state="SPEC_COMPLETE",
         packets=[product_path, handoff_path],
+        data_requests=data_requests,
     )
     return rc.finish(
         recipe="product-audit",
@@ -82,6 +98,7 @@ def recipe_product_audit(out: Path) -> int:
             out / "profile-route.json",
             product_path,
             handoff_path,
+            out / "data-requests.json",
             receipt_path,
             out / "recipe-summary.json",
         ],

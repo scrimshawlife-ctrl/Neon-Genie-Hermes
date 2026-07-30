@@ -21,6 +21,11 @@ REQUIRED_CASES = {
     "authority-leakage.json",
     "fictional-resource.json",
     "scorecard-cannot-override-gate.json",
+    "public-gap-must-attempt-research.json",
+    "public-gap-research-attempted.json",
+    "private-gap-must-request.json",
+    "private-gap-request-open.json",
+    "private-gap-silent-invent.json",
 }
 
 

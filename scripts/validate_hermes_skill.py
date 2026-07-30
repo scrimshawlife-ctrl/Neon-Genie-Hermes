@@ -49,6 +49,7 @@ REQUIRED_ANY: list[list[str]] = [
     ["evals/rubric.md", "examples/evals/rubric.md"],
     ["examples/README.md"],
     ["scripts/paths.py"],
+    ["scripts/distribution_spine.py"],
     ["scripts/validate_hermes_skill.py"],
     ["scripts/neon_genie.py"],
     ["scripts/validate_packet.py"],
@@ -68,7 +69,6 @@ REQUIRED_ANY: list[list[str]] = [
     ["examples/packets/sample-opportunity.packet.json"],
     ["evals/transcripts/README.md", "examples/evals/transcripts/README.md"],
     ["evals/transcripts/rubric.md", "examples/evals/transcripts/rubric.md"],
-    ["examples/gallery/README.md"],
     ["examples/commercial.brief.yaml"],
     ["examples/audit.brief.yaml"],
     ["examples/agentic.brief.yaml"],
@@ -100,6 +100,8 @@ FULL_ONLY: list[str] = [
     "docs/DEMO.md",
     "install.sh",
     ".github/workflows/hermes-evals.yml",
+    "examples/gallery/README.md",
+    "distribution.yaml",
 ]
 
 FORBIDDEN_PATTERNS = [

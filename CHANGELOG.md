@@ -5,6 +5,22 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.18.0] — 2026-07-30
+
+### Added
+
+- **Distribution spine** (`distribution.yaml` + `scripts/distribution_spine.py`)
+  - Single-source Hub mirrors, package parity, generated SKILL.md support list
+  - `do dist verify|write|report` with stable `NG-PKG-*` diagnostics
+  - Negative packaging tests (`scripts/test_distribution_spine.py`)
+- CI: distribution verify + negative tests; hub-layout doctor smoke; OS/Python smoke matrix
+- Doctor runs distribution verify on full tree; skips on Hub installs
+
+### Changed
+
+- `sync_skill_package.sh` delegates to `distribution_spine.py write`
+- SKILL.md hub support file list is generated (markers `BEGIN/END HUB_SUPPORT_FILES`)
+
 ## [3.17.0] — 2026-07-30
 
 ### Added

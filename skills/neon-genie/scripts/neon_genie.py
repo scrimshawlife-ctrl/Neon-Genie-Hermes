@@ -57,11 +57,15 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "record_learning.py",
         "description": "Append a PROPOSED outcome to a local ledger",
     },
+    "dist": {
+        "script": "distribution_spine.py",
+        "description": "Verify/write Hub mirrors + package (distribution.yaml)",
+    },
 }
 
 # Everyday first in help; aliases for older script-style names
 EVERYDAY = ("doctor", "check", "recipe", "route", "validate")
-VERIFY = ("eval", "transcripts")
+VERIFY = ("eval", "transcripts", "dist")
 OUTCOMES = ("receipt", "learn")
 
 ALIASES = {
@@ -72,6 +76,8 @@ ALIASES = {
     "run-evals": ("eval", []),
     "check-transcripts": ("transcripts", []),
     "record-learning": ("learn", []),
+    "distribution": ("dist", []),
+    "sync-dist": ("dist", ["write"]),
     "product-audit": ("recipe", ["--name", "product-audit"]),
     "zero-option": ("recipe", ["--name", "zero-option"]),
     "fragmentation": ("recipe", ["--name", "fragmentation"]),

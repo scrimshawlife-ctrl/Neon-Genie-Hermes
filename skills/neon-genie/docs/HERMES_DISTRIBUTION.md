@@ -51,14 +51,22 @@ Also works:
 
 ### For maintainers (keep package in sync)
 
-After changing the skill at repo root:
+Canonical contract: **`distribution.yaml`**. After changing schemas, profiles, scripts, examples, or SKILL packaging:
 
 ```bash
-./scripts/sync_skill_package.sh
-git add skills/neon-genie skills.sh.json
-git commit -m "chore: sync skills/neon-genie package for Hermes tap"
+python scripts/distribution_spine.py write   # or: ./scripts/sync_skill_package.sh
+python scripts/distribution_spine.py verify
+git add distribution.yaml SKILL.md references/ examples/evals skills/neon-genie
+git commit -m "chore: sync distribution spine + hub package"
 ```
 
+| Command | Purpose |
+|---------|---------|
+| `do dist verify` | Fail on mirror drift, bad hub refs, package parity |
+| `do dist write` | Refresh mirrors, regenerate SKILL support list, rsync package |
+| `do dist report` | JSON report for CI/agents |
+
+Diagnostics use `NG-PKG-*` codes (see spine stderr).
 ---
 
 ## Alternate discovery paths
@@ -111,7 +119,9 @@ Hermes Hub only copies **explicitly path-referenced** files under
 `references/`, `templates/`, `scripts/`, `assets/`, `examples/`  
 (security allowlist).
 
-As of **v3.17.0**, Neon Genie ships **hub mirrors** of the packaging tree:
+As of **v3.17+**, Neon Genie ships **hub mirrors** of the packaging tree.
+As of **v3.18.0**, mirrors + package + SKILL list are driven by **`distribution.yaml`**
+(no hand-maintained triple drift).
 
 | Full install | Hub mirror (allowlisted) |
 |--------------|--------------------------|
@@ -120,13 +130,12 @@ As of **v3.17.0**, Neon Genie ships **hub mirrors** of the packaging tree:
 | `evals/` | `examples/evals/` |
 | `VERSION`, `manifest.json` | `references/VERSION`, `references/manifest.json` |
 
-`SKILL.md` lists every required support path under those dirs so  
+`SKILL.md` support-file bullets are **generated** so  
 `hermes skills install …` pulls a **working packaging CLI** (`do doctor` green).
 
 Scripts resolve either layout via `scripts/paths.py`.
 
 **Still recommended for maintainers:** clone + `./install.sh` (full tree + docs + CI).
-
 ---
 
 ## One-liner for users

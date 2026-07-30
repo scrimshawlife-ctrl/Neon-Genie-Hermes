@@ -78,8 +78,9 @@ Public entry points:
 | **3.15.0** | README How to use; simplified `do <job>` help for agents & users |
 | **3.16.0** | Hermes Skills Hub tap package (`skills/neon-genie/`) + distribution docs |
 | **3.17.0** | Hub-hardened package: allowlisted mirrors + dual-path resolver so hub install runs `do doctor` |
+| **3.18.0** | Distribution spine: single-source mirrors, generated hub contract, negative packaging tests, OS smoke matrix |
 
-Further work: live Hermes hardening, operator feedback, optional official catalog PR — not a new premiere wave.
+Further work: live Hermes behavioral evals, run envelope, operator feedback, optional official catalog PR — not a new premiere wave.
 
 ## Non-goals (all waves)
 

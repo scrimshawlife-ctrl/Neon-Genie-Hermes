@@ -20,6 +20,10 @@ SKILL_ROOT = SCRIPT_DIR.parent
 PY = sys.executable
 CLI = SCRIPT_DIR / "neon_genie.py"
 
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
+
 
 def step(name: str, args: list[str]) -> int:
     print(f"==> {name}")
@@ -34,6 +38,16 @@ def step(name: str, args: list[str]) -> int:
 def main() -> int:
     steps: list[tuple[str, list[str]]] = [
         ("skill integrity", ["do", "check"]),
+    ]
+    # Distribution spine only on full tree (has distribution.yaml + root schemas/)
+    if (SKILL_ROOT / "distribution.yaml").is_file() and not ng_paths.is_hub_layout():
+        steps.append(("distribution spine", ["do", "dist", "verify"]))
+    else:
+        print("==> distribution spine")
+        print("SKIP: hub layout or no distribution.yaml (expected on Hub installs)")
+
+    steps.extend(
+        [
         ("golden gate evals", ["do", "eval"]),
         ("golden transcripts", ["do", "transcripts"]),
         ("recipe list", ["do", "recipe", "--list"]),
@@ -76,7 +90,8 @@ def main() -> int:
                 "opportunity",
             ],
         ),
-    ]
+        ]
+    )
 
     for name, args in steps:
         code = step(name, args)

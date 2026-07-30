@@ -21,6 +21,11 @@ jobs:
       - name: Skill integrity (do check)
         run: python scripts/neon_genie.py do check
 
+      - name: Distribution spine (mirrors + package + SKILL list)
+        run: |
+          python scripts/distribution_spine.py verify
+          python scripts/test_distribution_spine.py
+
       - name: Wave 3 packaging CLI regression
         run: python scripts/test_wave3_cli.py
 
@@ -68,8 +73,74 @@ jobs:
           python scripts/neon_genie.py do validate --packet examples/packets/sample-opportunity.packet.json --type opportunity
           python scripts/neon_genie.py do validate --packet examples/packets/sample-receipt.packet.json --type receipt --strict-authority
 
+      - name: Hub-layout smoke (allowlisted files only)
+        run: |
+          python - <<'PY'
+          import re, shutil, tempfile, subprocess, sys
+          from pathlib import Path
+          from urllib.parse import unquote, urlsplit
+          RE = re.compile(
+              r"(?:\]\(|`|(?:^|[\s\"']))((?:references|templates|scripts|assets|examples)/[^\s)`\"'<>]+)",
+              re.MULTILINE,
+          )
+          root = Path(".").resolve()
+          skill = (root / "SKILL.md").read_text(encoding="utf-8")
+          paths = set()
+          for m in RE.finditer(skill.replace("\\", "/")):
+              raw = unquote(urlsplit(m.group(1).rstrip(".,;:")).path)
+              paths.add(raw)
+          non_files = [p for p in paths if not (root / p).is_file()]
+          if non_files:
+              raise SystemExit(f"non-file hub refs: {non_files}")
+          tmp = Path(tempfile.mkdtemp(prefix="ng-hub-ci-"))
+          (tmp / "SKILL.md").write_text(skill, encoding="utf-8")
+          for rel in paths:
+              dest = tmp / rel
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copy2(root / rel, dest)
+          r = subprocess.run(
+              [sys.executable, "scripts/neon_genie.py", "do", "doctor"],
+              cwd=tmp,
+          )
+          raise SystemExit(r.returncode)
+          PY
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: neon-genie-eval-artifacts
           path: out/neon-genie/
+
+  # Path + CLI smoke across OS/Python (not full recipe matrix)
+  smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.11", "3.12"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Path resolver + integrity + dist verify
+        shell: bash
+        run: |
+          python scripts/paths.py 2>/dev/null || true
+          python -c "import scripts.paths as p" 2>/dev/null || python -c "
+          import sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          import paths
+          print(paths.schemas_dir())
+          print(paths.profiles_dir())
+          print(paths.evals_dir())
+          print(paths.version_path().read_text().strip())
+          "
+          python scripts/neon_genie.py do check
+          python scripts/distribution_spine.py verify
+          python scripts/neon_genie.py do eval
+          python scripts/neon_genie.py do route --text "zero capital first cash" --json

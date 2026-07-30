@@ -28,17 +28,21 @@ Verified: security scan SAFE, hub install ~118 files, `do doctor` green (hub lay
 
 ## Official optional catalog (PR)
 
+**PR:** https://github.com/NousResearch/hermes-agent/pull/75028
+
 Per [Hermes optional skills contributing](https://hermes-agent.nousresearch.com/docs/reference/optional-skills-catalog):
 
-1. Add `optional-skills/productivity/neon-genie/` (SKILL.md + support tree)
-2. Open PR against `NousResearch/hermes-agent`
-3. After merge: appears under `hermes skills browse --source official`
+1. `optional-skills/productivity/neon-genie/` — curated leaf (not monorepo dump)
+2. Hub-style layout: `references/profiles` + `references/schemas` only
+3. Packaging CLI + examples + golden evals; `do doctor` green
+4. Upstream monorepo remains source of truth for releases / distribution spine
+
+After merge:
 
 ```bash
 hermes skills install official/productivity/neon-genie
+hermes skills browse --source official
 ```
-
-Upstream remains the source of truth for packaging releases; optional catalog tracks major skill versions.
 
 ## Maintainer refresh
 

@@ -2,17 +2,19 @@
 
 Sibling skill to Kubrick: **shared architecture patterns**, separate domain (opportunity / product intelligence, not cinematic engineering).
 
-## Wave 1 — Ops shell (current)
+## Wave 1 — Ops shell
 
 Installable skill root, Hermes runtime contract, `install.sh`, VERSION/CHANGELOG/QUICKSTART, smoke validator, examples + evals skeleton, flatten nested package.
 
-**Status:** shipped as **v3.2.0** (branch `feat/ops-shell-wave1`).
+**Status:** shipped as **v3.2.0**.
 
-## Wave 2 — Domain depth
+## Wave 2 — Domain depth (current)
 
 - Thicken profile contracts
 - Fill missing packet schemas (`EvidenceIntelligencePacket`, `MemeticPressurePacket`, `AuditDeliveryPacket`)
 - Richer golden/eval cases and anti-overclaim references
+
+**Status:** shipping as **v3.3.0** on `feat/ops-shell-wave1`.
 
 ## Wave 3 — Thin operator surface
 

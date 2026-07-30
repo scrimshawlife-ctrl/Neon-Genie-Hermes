@@ -14,3 +14,7 @@
 12. Audit-first delivery packages
 13. Wayfinder execution handoff
 14. Failure memory, registries, provenance, and deterministic receipts
+15. Anti-overclaim CLEAR gates (A–O) with eval fixtures
+16. Full packet schema surface (including evidence, memetic, audit)
+
+Packet schemas: `schemas/`. Profile contracts: `profiles/`. Gates: `references/anti-overclaim-patterns.md`.

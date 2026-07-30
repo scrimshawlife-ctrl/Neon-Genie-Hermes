@@ -28,3 +28,9 @@ Fixtures: `evals/cases/`. Rubric skeleton: `evals/rubric.md`.
 | `evals/cases/zero-option.json` | Empty skills/access → NOT_COMPUTABLE |
 | `evals/cases/x402-misfit.json` | Ornamental x402 rejected |
 | `evals/cases/wayfinder-change-control.json` | Product intent change control |
+| `evals/cases/memetic-cannot-promote.json` | Gate D — memetic cannot raise promotion |
+| `evals/cases/offline-no-fabricated-observed.json` | Gate N — offline model prior ≤ SPECULATIVE |
+| `evals/cases/buyer-beneficiary-conflation.json` | Gate C — role conflation fails |
+| `evals/cases/authority-leakage.json` | Gate E — packets do not grant execution |
+
+Anti-overclaim catalog: `references/anti-overclaim-patterns.md`.

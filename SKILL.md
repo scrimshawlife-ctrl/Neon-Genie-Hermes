@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.2.0
+version: 3.3.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
@@ -30,7 +30,7 @@ triggers:
 
 Neon Genie is a **standalone Hermes skill**. Hermes loads this directory directly and uses `SKILL.md` as the operating contract. No Python package install, Kubrick skill, Wayfinder runtime, or external knowledge base is required to load.
 
-See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy.
+See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy. Profile contracts live in `profiles/`; packet schemas in `schemas/`.
 
 **Optional companions:** host research tools, Wayfinder (handoff consumer). Their absence never blocks local advisory work.
 
@@ -211,17 +211,19 @@ Neon Genie may not, without explicit downstream authorization:
 
 A run emits one or more of:
 
-- `NeonGenieOpportunityPacket`
-- `NeonGenieProductPacket`
-- `FragmentationOpportunityPacket`
-- `ZeroOptionPacket`
-- `AgenticServiceGraph`
-- `CommercialSimulationPacket`
-- `EvidenceIntelligencePacket`
-- `MemeticPressurePacket`
-- `AuditDeliveryPacket`
-- `WayfinderExecutionPacket`
-- `NeonGenieRunReceipt`
+- `NeonGenieOpportunityPacket` → `schemas/opportunity-packet.schema.json`
+- `NeonGenieProductPacket` → `schemas/product-packet.schema.json`
+- `FragmentationOpportunityPacket` → `schemas/fragmentation-packet.schema.json`
+- `ZeroOptionPacket` → `schemas/zero-option-packet.schema.json`
+- `AgenticServiceGraph` → `schemas/agentic-service-graph.schema.json`
+- `CommercialSimulationPacket` → `schemas/commercial-simulation.schema.json`
+- `EvidenceIntelligencePacket` → `schemas/evidence-intelligence-packet.schema.json`
+- `MemeticPressurePacket` → `schemas/memetic-pressure-packet.schema.json`
+- `AuditDeliveryPacket` → `schemas/audit-delivery-packet.schema.json`
+- `WayfinderExecutionPacket` → `schemas/wayfinder-execution-packet.schema.json`
+- `NeonGenieRunReceipt` → `schemas/run-receipt.schema.json`
+
+Anti-overclaim gates: `references/anti-overclaim-patterns.md`.
 
 ## Promotion ladder
 
@@ -256,6 +258,8 @@ Fail closed when:
 - a concept duplicates an existing subsystem without wrapper classification;
 - the implementation handoff changes product intent;
 - missing data is fabricated instead of marked `NOT_COMPUTABLE` after research was attempted (or correctly skipped under offline mode).
+
+Also apply anti-overclaim gates A–O in `references/anti-overclaim-patterns.md` during CLEAR.
 
 ## Profile loading
 

@@ -21,3 +21,7 @@ Wave 1 captures invariants for later automated runners. Fixtures live in `evals/
 | `zero-option.json` | No skills/access → NOT_COMPUTABLE |
 | `x402-misfit.json` | Ornamental x402 rejected |
 | `wayfinder-change-control.json` | Intent change blocked without Neon review |
+| `memetic-cannot-promote.json` | High memetic score cannot raise promotion past failed evidence |
+| `offline-no-fabricated-observed.json` | Offline model prior cannot be OBSERVED |
+| `buyer-beneficiary-conflation.json` | Collapsed commercial roles fail Gate C |
+| `authority-leakage.json` | Packets never grant spend/publish/execute |

@@ -4,7 +4,7 @@
 
 ### Governed Hermes skill for invention, product architecture & opportunity intelligence
 
-[![Version](https://img.shields.io/badge/version-3.2.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.3.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
 [![Profiles](https://img.shields.io/badge/profiles-11-ec4899?style=for-the-badge)](#profiles)
@@ -251,8 +251,11 @@ A run emits one or more of:
 | `WayfinderExecutionPacket` | [`schemas/wayfinder-execution-packet.schema.json`](./schemas/wayfinder-execution-packet.schema.json) |
 | `NeonGenieRunReceipt` | [`schemas/run-receipt.schema.json`](./schemas/run-receipt.schema.json) |
 | Run envelope | [`schemas/run-envelope.schema.json`](./schemas/run-envelope.schema.json) |
+| `EvidenceIntelligencePacket` | [`schemas/evidence-intelligence-packet.schema.json`](./schemas/evidence-intelligence-packet.schema.json) |
+| `MemeticPressurePacket` | [`schemas/memetic-pressure-packet.schema.json`](./schemas/memetic-pressure-packet.schema.json) |
+| `AuditDeliveryPacket` | [`schemas/audit-delivery-packet.schema.json`](./schemas/audit-delivery-packet.schema.json) |
 
-Also: `EvidenceIntelligencePacket`, `MemeticPressurePacket`, `AuditDeliveryPacket` (profile-defined).
+Anti-overclaim gates: [`references/anti-overclaim-patterns.md`](./references/anti-overclaim-patterns.md).
 
 ---
 
@@ -274,7 +277,7 @@ Memetic strength **cannot** increase promotion readiness when evidence or feasib
 Neon-Genie-Hermes/                 # ← this directory IS the Hermes skill
 ├── SKILL.md                       # Kernel, router, authority, runes
 ├── manifest.json                  # Version, profiles, modes
-├── VERSION                        # 3.2.0
+├── VERSION                        # 3.3.0
 ├── install.sh                     # → ~/.hermes/skills/neon-genie
 ├── QUICKSTART.md
 ├── CHANGELOG.md
@@ -340,7 +343,7 @@ Any proposed change to product intent returns to Neon Genie as a change request.
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.2.0** |
+| Version | **3.3.0** |
 | Authority | `advisory_only` |
 | Default profiles | `core` |
 | Research mode | **proactive** (opt out with `research.enabled=false`) |
@@ -366,6 +369,6 @@ GitHub: [@scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl)
 
 <div align="center">
 
-<sub>Neon Genie v3.2.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.3.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 
 </div>

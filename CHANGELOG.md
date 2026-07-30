@@ -5,6 +5,20 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.3.0] — 2026-07-30
+
+### Added
+
+- Packet schemas: `evidence-intelligence`, `memetic-pressure`, `audit-delivery`
+- `references/anti-overclaim-patterns.md` (gates A–O)
+- Eval cases: memetic promote block, offline fabrication, buyer conflation, authority leakage
+- Thickened profile contracts (triggers, required fields, CLEAR rules, schema pointers)
+
+### Changed
+
+- Profiles expanded for operational clarity without changing mission or authority
+- SKILL output selection links all packet schemas
+
 ## [3.2.0] — 2026-07-30
 
 ### Added

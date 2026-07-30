@@ -1,28 +1,47 @@
 # Core Kernel
 
-## OPEN
+Always loaded. Owns OPEN → ALIGN → ASCEND → CLEAR → SEAL and claim-label discipline.
+
+## Modes
+
+### OPEN
 Resolve request, outcome, actor, current state, evidence, constraints, authority, and requested artifact.
 Detect decision-critical unknowns that research could close.
+Record non-goals and authority ceiling (`advisory_only` unless operator raises).
 
-## ALIGN
+### ALIGN
 1. Merge operator-supplied canonical sources with workspace context (no external KB required to load).
 2. Build evidence hierarchy and non-goals.
 3. **Gap-detect** material claims that would be weak without external facts.
-4. **Research plan + first fetch pass** using host tools (web, docs, academic indexes, registries, public filings, etc.) unless `research: false` / `offline: true`.
+4. **Research plan + first fetch pass** using host tools unless `research: false` / `offline: true`.
 5. Normalize and cite; set novelty, buildability, and success criteria on the refreshed evidence base.
+6. Auto-load `evidence_intelligence` when external facts would change the recommendation.
 
-## ASCEND
+### ASCEND
 Run state-transition, topology, intervention, validation, scoring, and routing functions.
 Re-enter the research loop when new gaps appear mid-ascent and host tools can close them.
+Select specialized profiles only when triggers match (smallest sufficient set).
 
-## CLEAR
+### CLEAR
 Flag unsupported claims, authority leakage, duplicate concepts, hidden dependencies, scope expansion, and uncited “facts.”
+Apply `references/anti-overclaim-patterns.md` gates A–O as relevant.
 Confirm research attempts were logged for remaining `NOT_COMPUTABLE` fields.
 
-## SEAL
+### SEAL
 Emit selected packets plus run receipt, including full source manifest and research log.
+Never grant execution, spending, or publishing authority in sealed packets.
+
+## Claim labels (mandatory on material claims)
+
+| Label | Rule |
+|-------|------|
+| `OBSERVED` | Direct support from cited operator, workspace, or live source |
+| `INFERRED` | Valid inference from evidence (FORECAST-class) |
+| `SPECULATIVE` | Plausible but unproven; not fact |
+| `NOT_COMPUTABLE` | Missing data after research attempt or correct offline skip — never fabricate |
 
 ## Core score axes
+
 - evidence density
 - outcome clarity
 - affected-user clarity
@@ -31,3 +50,30 @@ Emit selected packets plus run receipt, including full source manifest and resea
 - reversibility
 - auditability
 - scope boundedness
+
+Composite score never overrides a mandatory gate failure.
+
+## Core runes
+
+- `RUNE.NG.INTAKE`
+- `RUNE.NG.EVIDENCE.NORMALIZE`
+- `RUNE.NG.RESEARCH.GAP_DETECT`
+- `RUNE.NG.RESEARCH.QUERY_PLAN`
+- `RUNE.NG.RESEARCH.FETCH`
+- `RUNE.NG.RESEARCH.CITE`
+- `RUNE.NG.BLOCKED_TRANSITION`
+- `RUNE.NG.OUTCOME.MODEL`
+- `RUNE.NG.TOPOLOGY`
+- `RUNE.NG.DISCOVER`
+- `RUNE.NG.RECOMBINE`
+- `RUNE.NG.DIFFERENTIATE`
+- `RUNE.NG.SHAPE`
+- `RUNE.NG.SCORE`
+- `RUNE.NG.VALIDATE_PATH`
+- `RUNE.NG.ROUTE`
+- `RUNE.NG.CLEAR_CHECK`
+- `RUNE.NG.SEAL`
+
+## Outputs
+
+Always consider `NeonGenieRunReceipt`. Other packets by profile selection.

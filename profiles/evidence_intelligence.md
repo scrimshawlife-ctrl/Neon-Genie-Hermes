@@ -4,7 +4,12 @@ Proactive research and stakeholder intelligence for grants, boards, philanthropy
 
 **Default:** auto-load when external facts would improve the result — not only when the operator names this profile.
 
+## Triggers
+
+grants, boards, philanthropy, competitive research, current external facts, market facts, standards, auto: material external gap.
+
 ## Runes
+
 - `RUNE.NG.RESEARCH.GAP_DETECT`
 - `RUNE.NG.RESEARCH.QUERY_PLAN`
 - `RUNE.NG.RESEARCH.FETCH`
@@ -34,7 +39,7 @@ Use whichever host tools exist; do not hard-require any single provider:
 | Technical | package registries, API docs, GitHub public repos |
 | Operator / workspace | files, repos, pasted corpora |
 
-If a class is unavailable on the host, skip it and record `tooling_gap` — never invent results.
+If a class is unavailable on the host, skip it and record `tooling_gap` (Gate O) — never invent results.
 
 ## Auto-research protocol
 
@@ -45,9 +50,21 @@ If a class is unavailable on the host, skip it and record `tooling_gap` — neve
 5. Label claims; promote only what is supported.
 6. Stop when additional fetches would not change the recommendation or scorecard.
 
-## Rules
-- Prefer current authoritative primary sources over secondary blogs.
-- Preserve role distinctions and attribution boundaries (person / corporate / foundation / model).
-- Never fabricate familiarity, referrals, giving motives, private knowledge, or offline-only data.
-- Drafting does not authorize sending, applying, or contacting.
-- Competitive and market numbers without a cite are `SPECULATIVE` or `NOT_COMPUTABLE`, not `OBSERVED`.
+## Attribution boundaries
+
+Separate person / company / foundation / model inference. Never fabricate familiarity, referrals, giving motives, or private knowledge.
+
+## Drafting ≠ outreach
+
+Drafting applications, emails, or board lists does **not** authorize sending, applying, or contacting (Gate E).
+
+## Outputs
+
+- `EvidenceIntelligencePacket`
+- `NeonGenieRunReceipt`
+
+Schema: `schemas/evidence-intelligence-packet.schema.json`
+
+## Offline
+
+When `research.enabled=false` / offline: use operator + workspace only; model prior ≤ `SPECULATIVE` (Gate N).

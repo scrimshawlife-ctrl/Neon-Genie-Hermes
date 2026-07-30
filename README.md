@@ -4,7 +4,7 @@
 
 ### Governed Hermes skill for invention, product architecture & opportunity intelligence
 
-[![Version](https://img.shields.io/badge/version-3.1.0-7c3aed?style=for-the-badge)](./neon-genie/manifest.json)
+[![Version](https://img.shields.io/badge/version-3.2.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
 [![Profiles](https://img.shields.io/badge/profiles-11-ec4899?style=for-the-badge)](#profiles)
@@ -79,25 +79,29 @@ Built for **Hermes** custom skills by [Applied Alchemy Labs](https://github.com/
 ### Hermes custom skill
 
 ```bash
-# From this repository root
-cp -R neon-genie /path/to/hermes/custom-skills/
-```
-
-Or clone only what you need:
-
-```bash
 git clone https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes.git
 cd Neon-Genie-Hermes
-cp -R neon-genie "$HERMES_SKILLS_DIR/"
+./install.sh
+# → ~/.hermes/skills/neon-genie
 ```
 
-The skill root is `neon-genie/` (contains `SKILL.md` + `manifest.json`).
+Or copy the **repository root** (this directory — it *is* the skill) into your Hermes skills path.
+
+Validate after install:
+
+```bash
+python scripts/validate_hermes_skill.py
+```
+
+See [QUICKSTART.md](./QUICKSTART.md) for first prompts and offline mode.
 
 > **Requirement:** a Hermes runtime that loads custom skills from a skills directory. Neon Genie is the skill package; Hermes is the host.
 >
-> **Self-contained to load.** No external knowledge base is required.
+> **Self-contained to load.** No external knowledge base is required. Kubrick is a sibling skill, not a dependency.
 >
 > **Proactive research by default.** Neon Genie uses host tools (web search, page fetch, academic indexes such as arXiv when available, docs, registries, public filings, etc.) to close decision-critical gaps. Operator-supplied files still take priority. Set `research.enabled=false` for offline runs.
+>
+> **Migration from ≤3.1:** nested `neon-genie/` package is gone. Install the repo root (or use `./install.sh`), not `cp -R neon-genie …`.
 
 ---
 
@@ -127,7 +131,7 @@ across these systems. Propose a defrag layer only if integration burden
 is below capturable value.
 ```
 
-Request template: [`neon-genie/templates/request.yaml`](./neon-genie/templates/request.yaml)
+Request template: [`templates/request.yaml`](./templates/request.yaml)
 
 ---
 
@@ -190,7 +194,7 @@ Core is always loaded. Additional profiles activate only on trigger match.
 | `audit_delivery` | Client audit, cost of inaction, offer map |
 | `wayfinder_handoff` | Build plan, engineering readiness packet |
 
-Profile contracts live in [`neon-genie/profiles/`](./neon-genie/profiles/).
+Profile contracts live in [`profiles/`](./profiles/).
 
 ---
 
@@ -238,15 +242,15 @@ A run emits one or more of:
 
 | Packet | Schema |
 |--------|--------|
-| `NeonGenieOpportunityPacket` | [`schemas/opportunity-packet.schema.json`](./neon-genie/schemas/opportunity-packet.schema.json) |
-| `NeonGenieProductPacket` | [`schemas/product-packet.schema.json`](./neon-genie/schemas/product-packet.schema.json) |
-| `FragmentationOpportunityPacket` | [`schemas/fragmentation-packet.schema.json`](./neon-genie/schemas/fragmentation-packet.schema.json) |
-| `ZeroOptionPacket` | [`schemas/zero-option-packet.schema.json`](./neon-genie/schemas/zero-option-packet.schema.json) |
-| `AgenticServiceGraph` | [`schemas/agentic-service-graph.schema.json`](./neon-genie/schemas/agentic-service-graph.schema.json) |
-| `CommercialSimulationPacket` | [`schemas/commercial-simulation.schema.json`](./neon-genie/schemas/commercial-simulation.schema.json) |
-| `WayfinderExecutionPacket` | [`schemas/wayfinder-execution-packet.schema.json`](./neon-genie/schemas/wayfinder-execution-packet.schema.json) |
-| `NeonGenieRunReceipt` | [`schemas/run-receipt.schema.json`](./neon-genie/schemas/run-receipt.schema.json) |
-| Run envelope | [`schemas/run-envelope.schema.json`](./neon-genie/schemas/run-envelope.schema.json) |
+| `NeonGenieOpportunityPacket` | [`schemas/opportunity-packet.schema.json`](./schemas/opportunity-packet.schema.json) |
+| `NeonGenieProductPacket` | [`schemas/product-packet.schema.json`](./schemas/product-packet.schema.json) |
+| `FragmentationOpportunityPacket` | [`schemas/fragmentation-packet.schema.json`](./schemas/fragmentation-packet.schema.json) |
+| `ZeroOptionPacket` | [`schemas/zero-option-packet.schema.json`](./schemas/zero-option-packet.schema.json) |
+| `AgenticServiceGraph` | [`schemas/agentic-service-graph.schema.json`](./schemas/agentic-service-graph.schema.json) |
+| `CommercialSimulationPacket` | [`schemas/commercial-simulation.schema.json`](./schemas/commercial-simulation.schema.json) |
+| `WayfinderExecutionPacket` | [`schemas/wayfinder-execution-packet.schema.json`](./schemas/wayfinder-execution-packet.schema.json) |
+| `NeonGenieRunReceipt` | [`schemas/run-receipt.schema.json`](./schemas/run-receipt.schema.json) |
+| Run envelope | [`schemas/run-envelope.schema.json`](./schemas/run-envelope.schema.json) |
 
 Also: `EvidenceIntelligencePacket`, `MemeticPressurePacket`, `AuditDeliveryPacket` (profile-defined).
 
@@ -267,36 +271,42 @@ Memetic strength **cannot** increase promotion readiness when evidence or feasib
 ## Repository layout
 
 ```text
-Neon-Genie-Hermes/
-├── README.md                 # You are here
-├── LICENSE                   # MIT License
-├── docs/assets/hero.jpg      # Banner art
-└── neon-genie/               # ← install this directory
-    ├── SKILL.md              # Kernel, router, authority, runes
-    ├── manifest.json         # Version, profiles, modes
-    ├── README.md             # Package-local install note
-    ├── profiles/             # 11 profile contracts
-    ├── schemas/              # Packet JSON Schemas
-    ├── references/           # Capability map + golden tests
-    ├── templates/            # request.yaml envelope
-    └── tests/golden/         # Fixture expectations
+Neon-Genie-Hermes/                 # ← this directory IS the Hermes skill
+├── SKILL.md                       # Kernel, router, authority, runes
+├── manifest.json                  # Version, profiles, modes
+├── VERSION                        # 3.2.0
+├── install.sh                     # → ~/.hermes/skills/neon-genie
+├── QUICKSTART.md
+├── CHANGELOG.md
+├── README.md                      # You are here
+├── LICENSE
+├── profiles/                      # 11 profile contracts
+├── schemas/                       # Packet JSON Schemas
+├── references/                    # Runtime contract, capability map, golden tests
+├── templates/                     # request.yaml envelope
+├── examples/                      # Operator briefs
+├── evals/                         # Fixtures + rubric
+├── scripts/validate_hermes_skill.py
+└── docs/                          # Roadmap, assets, design specs
 ```
 
 | Path | Purpose |
 |------|---------|
-| [`neon-genie/SKILL.md`](./neon-genie/SKILL.md) | Full skill specification |
-| [`neon-genie/manifest.json`](./neon-genie/manifest.json) | Machine-readable skill metadata |
-| [`neon-genie/profiles/`](./neon-genie/profiles/) | Specialized contracts |
-| [`neon-genie/schemas/`](./neon-genie/schemas/) | Output validation |
-| [`neon-genie/references/CAPABILITY_MAP.md`](./neon-genie/references/CAPABILITY_MAP.md) | Capability surface |
-| [`neon-genie/references/GOLDEN_TESTS.md`](./neon-genie/references/GOLDEN_TESTS.md) | Invariants |
-| [`neon-genie/tests/golden/`](./neon-genie/tests/golden/) | JSON fixtures |
+| [`SKILL.md`](./SKILL.md) | Full skill specification |
+| [`manifest.json`](./manifest.json) | Machine-readable skill metadata |
+| [`QUICKSTART.md`](./QUICKSTART.md) | Install and first prompts |
+| [`profiles/`](./profiles/) | Specialized contracts |
+| [`schemas/`](./schemas/) | Output validation |
+| [`references/hermes-runtime-contract.md`](./references/hermes-runtime-contract.md) | Hermes runtime / authority |
+| [`references/CAPABILITY_MAP.md`](./references/CAPABILITY_MAP.md) | Capability surface |
+| [`references/GOLDEN_TESTS.md`](./references/GOLDEN_TESTS.md) | Invariants |
+| [`evals/cases/`](./evals/cases/) | JSON fixtures |
 
 ---
 
 ## Golden tests
 
-Key invariants (see [`GOLDEN_TESTS.md`](./neon-genie/references/GOLDEN_TESTS.md)):
+Key invariants (see [`GOLDEN_TESTS.md`](./references/GOLDEN_TESTS.md)):
 
 - Same canonical input + profile set → structurally identical output
 - Missing evidence → `NOT_COMPUTABLE`
@@ -330,12 +340,12 @@ Any proposed change to product intent returns to Neon Genie as a change request.
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.1.0** |
+| Version | **3.2.0** |
 | Authority | `advisory_only` |
 | Default profiles | `core` |
 | Research mode | **proactive** (opt out with `research.enabled=false`) |
 
-Version source of truth: [`neon-genie/manifest.json`](./neon-genie/manifest.json) and frontmatter in [`SKILL.md`](./neon-genie/SKILL.md).
+Version source of truth: [`VERSION`](./VERSION), [`manifest.json`](./manifest.json), and frontmatter in [`SKILL.md`](./SKILL.md).
 
 ---
 
@@ -356,6 +366,6 @@ GitHub: [@scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl)
 
 <div align="center">
 
-<sub>Neon Genie v3.1.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.2.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 
 </div>

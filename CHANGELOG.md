@@ -5,6 +5,21 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.11.0] — 2026-07-30
+
+### Added
+
+- Category ownership (Wave P3): `docs/PREMIERE.md` thesis & comparison vs idea agents
+- `docs/DEMO.md` — 10-minute install → check → eval → recipe → learn path
+- `examples/gallery/README.md` — sanitized briefs, packets, transcripts index
+- README short comparison table + premiere/demo nav links
+- RELEASE-CHECKLIST-v3.11
+
+### Changed
+
+- Premiere program P0–P3 marked complete on ROADMAP and design spec
+- Skill validator requires PREMIERE.md, DEMO.md, gallery README
+
 ## [3.10.0] — 2026-07-30
 
 ### Added

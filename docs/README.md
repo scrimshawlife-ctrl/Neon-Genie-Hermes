@@ -6,12 +6,15 @@
 | [../QUICKSTART.md](../QUICKSTART.md) | Install and first prompts |
 | [../SKILL.md](../SKILL.md) | Full skill operating contract |
 | [../CHANGELOG.md](../CHANGELOG.md) | Release history |
+| [PREMIERE.md](./PREMIERE.md) | Premiere thesis & comparison vs idea agents |
+| [DEMO.md](./DEMO.md) | 10-minute install → recipe → ledger demo |
 | [ROADMAP.md](./ROADMAP.md) | Packaging waves 1–6 + Premiere program P0–P3 |
 | [RELEASE-CHECKLIST-v3.5.md](./RELEASE-CHECKLIST-v3.5.md) | Release gates for v3.5 |
 | [RELEASE-CHECKLIST-v3.6.md](./RELEASE-CHECKLIST-v3.6.md) | Release gates for v3.6 |
 | [RELEASE-CHECKLIST-v3.8.md](./RELEASE-CHECKLIST-v3.8.md) | Release gates for v3.8 (Evidence spine) |
 | [RELEASE-CHECKLIST-v3.9.md](./RELEASE-CHECKLIST-v3.9.md) | Release gates for v3.9 (Prose transcripts) |
 | [RELEASE-CHECKLIST-v3.10.md](./RELEASE-CHECKLIST-v3.10.md) | Release gates for v3.10 (Outcome density) |
+| [RELEASE-CHECKLIST-v3.11.md](./RELEASE-CHECKLIST-v3.11.md) | Release gates for v3.11 (Category ownership) |
 | [../references/post-seal-verification.md](../references/post-seal-verification.md) | Post-SEAL outcome checklist |
 | [../references/hermes-runtime-contract.md](../references/hermes-runtime-contract.md) | Hermes runtime / authority / artifacts |
 | [../references/CAPABILITY_MAP.md](../references/CAPABILITY_MAP.md) | Capability surface |

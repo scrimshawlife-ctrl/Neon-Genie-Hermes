@@ -58,7 +58,17 @@ See `docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md`.
 | P0 Evidence spine | shipped **3.8.0** |
 | P1 Prose excellence | shipped **3.9.0** (golden transcripts + `do transcripts`) |
 | P2 Outcome density | shipped **3.10.0** (completion_proof, learn ledger, post-SEAL) |
-| P3 Category ownership | planned |
+| P3 Category ownership | shipped **3.11.0** (`docs/PREMIERE.md`, `docs/DEMO.md`, gallery) |
+
+## Premiere program complete (P0–P3)
+
+Public entry points:
+
+- [PREMIERE.md](./PREMIERE.md) — thesis & comparison  
+- [DEMO.md](./DEMO.md) — 10-minute path  
+- [examples/gallery/](../examples/gallery/) — sanitized exemplars  
+
+Further work is maintenance, corpus depth, and operator feedback — not a new premiere wave.
 
 ## Non-goals (all waves)
 

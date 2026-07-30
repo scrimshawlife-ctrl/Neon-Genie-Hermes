@@ -55,6 +55,9 @@ REQUIRED_PATHS = [
     "examples/packets/sample-opportunity.packet.json",
     "evals/transcripts/README.md",
     "evals/transcripts/rubric.md",
+    "docs/PREMIERE.md",
+    "docs/DEMO.md",
+    "examples/gallery/README.md",
     "install.sh",
     ".github/workflows/hermes-evals.yml",
 ]

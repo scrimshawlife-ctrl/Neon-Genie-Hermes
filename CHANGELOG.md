@@ -11,6 +11,9 @@ and this project uses semantic versioning.
 
 - Docs refresh: README, QUICKSTART, DEMO, ROADMAP aligned to operator surface,
   run-envelope, feedback loop, release automation, and production maturity (3.18–3.23)
+- `distribution_spine` package parity skips standalone leaf installs (Hub /
+  optional-skills) so `do doctor` is green outside the monorepo
+- Catalog submission notes (`docs/CATALOG.md`); official optional PR filed
 
 ## [3.23.0] — 2026-07-30
 

@@ -438,9 +438,15 @@ def sync_hub_package(root: Path, dist: dict[str, Any]) -> Path:
 
 def verify_package_parity(root: Path, dist: dict[str, Any]) -> list[str]:
     errors: list[str] = []
-    pkg_root = root / str((dist.get("hub_package") or {}).get("root") or "skills/neon-genie")
+    pkg_rel = str((dist.get("hub_package") or {}).get("root") or "skills/neon-genie")
+    pkg_root = root / pkg_rel
     if not pkg_root.is_dir():
-        return [f"NG-PKG-013: hub package missing: {pkg_root.relative_to(root)}"]
+        # Standalone leaf install (Hub allowlist tree or optional-skills/<cat>/neon-genie):
+        # no nested monorepo package is expected.
+        skill_md = root / "SKILL.md"
+        if skill_md.is_file() and root.name in {"neon-genie", "skills"}:
+            return []
+        return [f"NG-PKG-013: hub package missing: {pkg_rel}"]
     patterns = list(dist.get("package_parity_globs") or [])
     for rel in expand_globs(root, patterns):
         # skip nested skills path

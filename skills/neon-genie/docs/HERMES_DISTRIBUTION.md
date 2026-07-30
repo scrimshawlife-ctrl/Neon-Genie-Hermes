@@ -91,11 +91,21 @@ hermes skills inspect scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
 
 To appear under **official optional** skills (`hermes skills browse --source official`):
 
-1. Open a PR against [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) adding a slim package under `optional-skills/` (e.g. `optional-skills/product/neon-genie/`).
+1. Open a PR against [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) under `optional-skills/<category>/neon-genie/`.
 2. Follow their skill authoring standards (frontmatter, description, verification).
 3. Expect review for security, scope, and maintenance burden.
 
+**Submitted:** [PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028) — `optional-skills/productivity/neon-genie`
+
+After merge:
+
+```bash
+hermes skills install official/productivity/neon-genie
+```
+
 **Do not** open a PR to put Neon Genie in core **bundled** `skills/` unless Nous asks — it is specialized, not universal.
+
+Full submission notes: [docs/CATALOG.md](./CATALOG.md).
 
 ---
 
@@ -116,6 +126,7 @@ To appear under **official optional** skills (`hermes skills browse --source off
 - [x] Run envelope on every packaging recipe  
 - [x] Tag-driven Release workflow (tarball + sha256)  
 - [x] Branch protection: required check `eval` on `main`  
+- [x] Official optional-skills PR opened ([#75028](https://github.com/NousResearch/hermes-agent/pull/75028))  
 - [ ] Announce on Discord / social with install one-liner (optional)  
 
 ### Hub install vs full package

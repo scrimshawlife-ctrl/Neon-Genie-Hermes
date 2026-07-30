@@ -4,7 +4,7 @@
 
 ### Governed opportunity & product intelligence for Hermes
 
-[![Version](https://img.shields.io/badge/version-3.22.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.23.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -253,6 +253,8 @@ Neon-Genie-Hermes/          ← skill root
 | [docs/PREMIERE.md](./docs/PREMIERE.md) | Why this skill vs idea agents |
 | [docs/ROADMAP.md](./docs/ROADMAP.md) | History + maintenance |
 | [docs/adr/](./docs/adr/) | Architecture decisions |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Dev + release process |
+| [docs/GOVERNANCE.md](./docs/GOVERNANCE.md) | Branch protection + releases |
 | [CHANGELOG.md](./CHANGELOG.md) | Releases |
 
 ---
@@ -262,7 +264,7 @@ Neon-Genie-Hermes/          ← skill root
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.22.0** |
+| Version | **3.23.0** |
 | Authority | `advisory_only` |
 | Research | proactive (opt out: `research.enabled=false`) |
 
@@ -279,5 +281,5 @@ Source of truth: [`VERSION`](./VERSION), [`manifest.json`](./manifest.json), [`S
 ---
 
 <div align="center">
-<sub>Neon Genie v3.22.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.23.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 </div>

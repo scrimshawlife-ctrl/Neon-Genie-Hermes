@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.22.0
+version: 3.23.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -149,6 +149,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/GOLDEN_TESTS.md`
 - `references/VERSION`
 - `references/anti-overclaim-patterns.md`
+- `references/gates.yaml`
 - `references/hermes-runtime-contract.md`
 - `references/manifest.json`
 - `references/post-seal-verification.md`
@@ -195,6 +196,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/recipe_run.py`
 - `scripts/reconcile_learning.py`
 - `scripts/record_learning.py`
+- `scripts/release_check.py`
 - `scripts/route_profiles.py`
 - `scripts/run_fixture_invariants.py`
 - `scripts/run_hermes_evals.py`

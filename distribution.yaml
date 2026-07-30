@@ -80,7 +80,9 @@ hub_support_globs:
   - scripts/test_operator_surface.py
   - scripts/reconcile_learning.py
   - scripts/test_learning_reconcile.py
+  - scripts/release_check.py
   - references/VERSION
+  - references/gates.yaml
   - references/manifest.json
   - references/hermes-runtime-contract.md
   - references/CAPABILITY_MAP.md

@@ -5,6 +5,17 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.23.0] — 2026-07-30
+
+### Added
+
+- **Release automation** (`.github/workflows/release.yml`)
+  - Tag `vX.Y.Z` → release check, full smoke, hub tarball + sha256, GitHub release notes from CHANGELOG
+- **`do release-check`** / `scripts/release_check.py` — version + changelog + dist gate
+- **`references/gates.yaml`** — canonical gate ontology
+- **CONTRIBUTING.md** + **docs/GOVERNANCE.md**
+- Main branch protection: required status check `eval`, no force-push/delete; delete head branch on merge
+
 ## [3.22.0] — 2026-07-30
 
 ### Added

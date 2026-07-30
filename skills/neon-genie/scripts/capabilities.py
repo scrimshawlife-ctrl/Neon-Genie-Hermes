@@ -66,6 +66,7 @@ CLI_JOBS = [
     "dist",
     "learn",
     "reconcile",
+    "release-check",
 ]
 
 
@@ -102,7 +103,9 @@ def build_capabilities() -> dict[str, Any]:
             "behavioral_suite": True,
             "learning_ledger": True,
             "learning_auto_apply": False,
+            "release_automation": True,
         },
+        "gates_registry": "references/gates.yaml",
         "entry_points": {
             "skill_contract": "SKILL.md",
             "run_output": "run-envelope.json",
@@ -111,6 +114,8 @@ def build_capabilities() -> dict[str, Any]:
             "learning_ledger": "out/neon-genie/learning-ledger.jsonl",
             "adrs": "docs/adr/",
             "issue_templates": ".github/ISSUE_TEMPLATE/",
+            "contributing": "CONTRIBUTING.md",
+            "governance": "docs/GOVERNANCE.md",
         },
         "install": {
             "hub": "hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie",

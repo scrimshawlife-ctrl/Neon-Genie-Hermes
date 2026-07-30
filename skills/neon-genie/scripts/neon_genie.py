@@ -85,11 +85,15 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "hermes_runtime_smoke.py",
         "description": "Isolated hub-layout install smoke (+ optional --hermes)",
     },
+    "release-check": {
+        "script": "release_check.py",
+        "description": "Pre-release version/changelog/dist gate",
+    },
 }
 
 # Everyday first in help; aliases for older script-style names
 EVERYDAY = ("doctor", "check", "run", "recipe", "route", "validate", "capabilities")
-VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist")
+VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist", "release-check")
 OUTCOMES = ("receipt", "envelope", "learn", "reconcile")
 
 ALIASES = {

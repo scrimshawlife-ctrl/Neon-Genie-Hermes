@@ -193,6 +193,16 @@ python scripts/neon_genie.py do reconcile \
 Ledger entries are always **PROPOSED** with `auto_apply_forbidden: true`.  
 GitHub intake: issue templates under `.github/ISSUE_TEMPLATE/` (operator outcome, behavior, hub, schema).  
 ADRs: `docs/adr/`.
+
+### Release automation (v3.23+)
+
+```bash
+python scripts/neon_genie.py do release-check
+git tag vX.Y.Z && git push origin vX.Y.Z
+# → Release workflow: smoke + neon-genie-X.Y.Z.tar.gz + sha256 + notes
+```
+
+See [CONTRIBUTING.md](../CONTRIBUTING.md) and [docs/GOVERNANCE.md](./GOVERNANCE.md).
 ---
 
 ## One-liner for users

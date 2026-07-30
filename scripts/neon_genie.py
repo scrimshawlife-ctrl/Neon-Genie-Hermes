@@ -79,6 +79,8 @@ ALIASES = {
     "fragmentation": ("recipe", ["--name", "fragmentation"]),
     "commercial": ("recipe", ["--name", "commercial"]),
     "audit": ("recipe", ["--name", "audit"]),
+    "agentic": ("recipe", ["--name", "agentic"]),
+    "memetic": ("recipe", ["--name", "memetic"]),
 }
 
 

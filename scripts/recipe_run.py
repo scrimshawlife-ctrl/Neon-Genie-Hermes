@@ -491,6 +491,161 @@ def recipe_audit(out: Path) -> int:
     )
 
 
+def recipe_agentic(out: Path) -> int:
+    brief = SKILL_ROOT / "examples" / "agentic.brief.yaml"
+    route = rc.route_request(brief)
+    rc.write_json(out / "profile-route.json", route)
+    profiles = route.get("selected") or ["core", "agentic_services"]
+
+    packet = {
+        "requested_outcome": "Delegated diagnostic workflow without ornamental machine payments",
+        "actions": [
+            {
+                "id": "intake",
+                "actor": "agent",
+                "autonomy": "AUTO_ALLOWED",
+                "description": "Collect operator-supplied brief fields",
+            },
+            {
+                "id": "clarify",
+                "actor": "agent",
+                "autonomy": "USER_CONFIRMATION_REQUIRED",
+                "description": "Clarify scope for subjective consulting work",
+            },
+            {
+                "id": "draft",
+                "actor": "agent",
+                "autonomy": "USER_CONFIRMATION_REQUIRED",
+                "description": "Draft deliverable for human review",
+            },
+            {
+                "id": "deliver",
+                "actor": "human",
+                "autonomy": "QUALIFIED_HUMAN_REQUIRED",
+                "description": "Client-facing delivery / relationship management",
+            },
+        ],
+        "authority_gates": {
+            "default": "USER_CONFIRMATION_REQUIRED",
+            "spend": "PROHIBITED",
+            "machine_settlement": "PROHIBITED_in_this_scaffold",
+        },
+        "exception_paths": [
+            "escalate ambiguous scope to human",
+            "reject x402 when persistent relationship billing is superior",
+        ],
+        "completion_proof": "Payment model decision recorded; no auto-spend paths enabled",
+        "proof_path": [
+            "confirm service is relationship-heavy",
+            "set x402_fit REJECT or redesign for machine-payable units",
+            "human confirms action graph authority gates",
+        ],
+        "x402_fit": "REJECT",
+        "x402_reason": "persistent subjective consulting favors account/subscription billing (Gate F)",
+        "authority": "advisory_only",
+        "grants_execution": False,
+        "promotion_state": "CONCEPTUAL",
+    }
+    packet_path = out / "agentic-service-graph.stub.json"
+    rc.write_json(packet_path, packet)
+    rc.validate_packet(packet_path, "agentic")
+
+    receipt_path = out / "run-receipt.json"
+    rc.build_receipt(
+        receipt_path,
+        profiles,
+        status="PROPOSED",
+        promotion_state="CONCEPTUAL",
+        packets=[packet_path],
+    )
+    return rc.finish(
+        recipe="agentic",
+        brief=brief,
+        out=out,
+        route=route,
+        artifacts=[
+            out / "profile-route.json",
+            packet_path,
+            receipt_path,
+            out / "recipe-summary.json",
+        ],
+        extra={"x402_fit": "REJECT", "gate": "F"},
+    )
+
+
+def recipe_memetic(out: Path) -> int:
+    brief = SKILL_ROOT / "examples" / "memetic.brief.yaml"
+    route = rc.route_request(brief)
+    rc.write_json(out / "profile-route.json", route)
+    profiles = route.get("selected") or ["core", "memetic"]
+
+    packet = {
+        "candidates": [
+            {"name": "Quantum Leverage OS", "type": "name", "status": "pressure_test_only"},
+            {"name": "Bounded Proof Loop", "type": "name", "status": "safer_claim_surface"},
+        ],
+        "pressure_scores": {
+            "Quantum Leverage OS": {
+                "stickiness": 0.9,
+                "claim_defensibility": 0.2,
+                "hype_drift_risk": 0.85,
+            },
+            "Bounded Proof Loop": {
+                "stickiness": 0.55,
+                "claim_defensibility": 0.7,
+                "hype_drift_risk": 0.3,
+            },
+        },
+        "claim_defensibility": {
+            "note": "High stickiness cannot invent feasibility",
+            "evidence_gate": "FAIL",
+        },
+        "hype_drift_risks": [
+            "Name implies capability not evidenced",
+            "Public language may overclaim BUILD_READY",
+        ],
+        "promotion_gate_status": {
+            "memetic_may_raise_promotion": False,
+            "promotion_state_max": "CONCEPTUAL",
+            "gate": "D",
+        },
+        "level99_route": {
+            "status": "optional",
+            "note": "Public-language execution remains downstream; Neon drafts only",
+        },
+        "hooks": ["proof-first", "evidence-bound"],
+        "rejected_candidates": [],
+        "completion_proof": "Evidence/feasibility gates pass independently of name scores",
+        "authority": "advisory_only",
+        "grants_execution": False,
+    }
+    packet_path = out / "memetic-pressure.stub.json"
+    rc.write_json(packet_path, packet)
+    rc.validate_packet(packet_path, "memetic")
+
+    receipt_path = out / "run-receipt.json"
+    rc.build_receipt(
+        receipt_path,
+        profiles,
+        status="PROPOSED",
+        promotion_state="CONCEPTUAL",
+        packets=[packet_path],
+    )
+    return rc.finish(
+        recipe="memetic",
+        brief=brief,
+        out=out,
+        route=route,
+        artifacts=[
+            out / "profile-route.json",
+            packet_path,
+            receipt_path,
+            out / "recipe-summary.json",
+        ],
+        extra={"gate": "D", "memetic_may_raise_promotion": False},
+    )
+
+
 RECIPES: dict[str, RecipeFn] = {
     "product-audit": recipe_product_audit,
     "zero-option": recipe_zero_option,
@@ -498,6 +653,8 @@ RECIPES: dict[str, RecipeFn] = {
     "fragmentation": recipe_fragmentation,
     "commercial": recipe_commercial,
     "audit": recipe_audit,
+    "agentic": recipe_agentic,
+    "memetic": recipe_memetic,
 }
 
 

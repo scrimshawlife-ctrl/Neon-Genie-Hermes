@@ -50,6 +50,14 @@ def main() -> int:
             ["do", "recipe", "--name", "audit", "--out", "out/neon-genie/doctor-audit"],
         ),
         (
+            "recipe smoke: agentic",
+            ["do", "recipe", "--name", "agentic", "--out", "out/neon-genie/doctor-agentic"],
+        ),
+        (
+            "recipe smoke: memetic",
+            ["do", "recipe", "--name", "memetic", "--out", "out/neon-genie/doctor-memetic"],
+        ),
+        (
             "sample opportunity validate",
             [
                 "do",

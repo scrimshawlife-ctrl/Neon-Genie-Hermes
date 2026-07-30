@@ -172,7 +172,7 @@ def main() -> int:
     if r.returncode != 0:
         errors.append(f"do recipe fragmentation failed: {r.stderr or r.stdout}")
 
-    for name in ("commercial", "audit"):
+    for name in ("commercial", "audit", "agentic", "memetic"):
         r = run(
             [
                 "do",

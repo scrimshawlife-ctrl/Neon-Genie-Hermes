@@ -12,6 +12,8 @@ Packaging and brief exemplars safe for demos. **Not** live customer data. **Not*
 | [`../fragmentation.brief.yaml`](../fragmentation.brief.yaml) | Multi-portal friction scan |
 | [`../commercial.brief.yaml`](../commercial.brief.yaml) | Commercial scaffold + buyer request |
 | [`../audit.brief.yaml`](../audit.brief.yaml) | Offline audit delivery scaffold |
+| [`../agentic.brief.yaml`](../agentic.brief.yaml) | Agentic graph; x402 reject scaffold |
+| [`../memetic.brief.yaml`](../memetic.brief.yaml) | Memetic pressure; Gate D cap |
 
 ## Packets
 

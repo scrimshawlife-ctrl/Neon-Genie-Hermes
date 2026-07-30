@@ -40,6 +40,15 @@ CI evals workflow, release checklist, version audit, fixture invariants.
 
 **Status:** shipped as **v3.6.0**.
 
+## Wave 6 — Recipe family + deeper validation (current)
+
+- Multi-recipe dispatcher (product-audit, zero-option variants, fragmentation)
+- Typed packet validation subset + strict authority checks
+- Expanded golden gates (fictional resource, scorecard override ban)
+- Sample packets for offline validation demos
+
+**Status:** shipping as **v3.7.0**.
+
 ## Non-goals (all waves)
 
 - Merging Neon Genie and Kubrick domains

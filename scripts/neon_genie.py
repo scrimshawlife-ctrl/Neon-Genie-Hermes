@@ -49,8 +49,8 @@ INTENTS: dict[str, dict[str, str]] = {
         "description": "Run golden gate eval fixtures against deterministic rules",
     },
     "recipe": {
-        "script": "recipe_product_audit.py",
-        "description": "Run packaging recipe (default product-audit; pass --help)",
+        "script": "recipe_run.py",
+        "description": "Run packaging recipe (product-audit, zero-option, fragmentation, …)",
     },
 }
 
@@ -60,7 +60,9 @@ ALIASES = {
     "route-profiles": ("route", []),
     "build-receipt": ("receipt", []),
     "run-evals": ("eval", []),
-    "product-audit": ("recipe", []),
+    "product-audit": ("recipe", ["--name", "product-audit"]),
+    "zero-option": ("recipe", ["--name", "zero-option"]),
+    "fragmentation": ("recipe", ["--name", "fragmentation"]),
 }
 
 
@@ -86,7 +88,10 @@ def top_help() -> str:
             "  python scripts/neon_genie.py do route --request examples/product-audit.brief.yaml",
             "  python scripts/neon_genie.py do receipt --profiles core,zero_option --out out/receipt.json",
             "  python scripts/neon_genie.py do eval",
-            "  python scripts/neon_genie.py do recipe",
+            "  python scripts/neon_genie.py do recipe --name product-audit",
+            "  python scripts/neon_genie.py do recipe --list",
+            "  python scripts/neon_genie.py do recipe --name zero-option",
+            "  python scripts/neon_genie.py do recipe --name fragmentation",
             "",
             "This CLI does not invent opportunities, run research, or grant execution authority.",
             "",
@@ -137,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
     # Soft legacy alias at top level
     if argv[0] in ALIASES:
         intent, fixed = ALIASES[argv[0]]
-        return run_script(INTENTS[intent]["script"], fixed + argv[1:])
+        return run_script(INTENTS[intent]["script"], list(fixed) + argv[1:])
 
     if argv[0] != "do":
         print(f"Unknown command: {argv[0]}", file=sys.stderr)

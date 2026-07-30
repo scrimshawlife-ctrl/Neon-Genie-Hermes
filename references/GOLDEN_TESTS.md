@@ -32,6 +32,8 @@ Fixtures: `evals/cases/`. Rubric skeleton: `evals/rubric.md`.
 | `evals/cases/offline-no-fabricated-observed.json` | Gate N — offline model prior ≤ SPECULATIVE |
 | `evals/cases/buyer-beneficiary-conflation.json` | Gate C — role conflation fails |
 | `evals/cases/authority-leakage.json` | Gate E — packets do not grant execution |
+| `evals/cases/fictional-resource.json` | Gate G — no invented resources under zero-fiction |
+| `evals/cases/scorecard-cannot-override-gate.json` | Composite score cannot override mandatory gates |
 
 Anti-overclaim catalog: `references/anti-overclaim-patterns.md`.
 

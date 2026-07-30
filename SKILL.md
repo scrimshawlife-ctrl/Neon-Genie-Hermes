@@ -1,12 +1,38 @@
 ---
 name: neon-genie
-version: 3.1.0
+version: 3.2.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
+platforms: [linux, macos, windows]
+tags: [NeonGenie, HermesSkill, OpportunityIntelligence, ProductArchitecture, ZeroOption, WayfinderHandoff, AdvisoryOnly, EvidenceBound]
+triggers:
+  - neon genie
+  - product audit
+  - opportunity mining
+  - blocked transition
+  - fragmentation scan
+  - zero option
+  - first cash
+  - agentic services
+  - x402
+  - commercial simulation
+  - evidence intelligence
+  - wayfinder handoff
+  - wayfinder execution packet
+  - cost of inaction
+  - audit delivery
 ---
 
 # Neon Genie v3
+
+## Hermes skill identity
+
+Neon Genie is a **standalone Hermes skill**. Hermes loads this directory directly and uses `SKILL.md` as the operating contract. No Python package install, Kubrick skill, Wayfinder runtime, or external knowledge base is required to load.
+
+See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy.
+
+**Optional companions:** host research tools, Wayfinder (handoff consumer). Their absence never blocks local advisory work.
 
 ## Mission
 
@@ -233,7 +259,7 @@ Fail closed when:
 
 ## Profile loading
 
-Load the relevant profile files in `profiles/` and follow their local contracts. Profile-specific runes must remain namespaced and must not silently change core outputs.
+Load the relevant profile files in `profiles/` (relative to this skill root) and follow their local contracts. Profile-specific runes must remain namespaced and must not silently change core outputs.
 
 ## Wayfinder contract
 

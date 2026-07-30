@@ -50,6 +50,7 @@ def main() -> int:
         [
         ("golden gate evals", ["do", "eval"]),
         ("golden transcripts", ["do", "transcripts"]),
+        ("behavioral invariants", ["do", "behavioral", "--suite"]),
         ("recipe list", ["do", "recipe", "--list"]),
         (
             "recipe smoke: product-audit",

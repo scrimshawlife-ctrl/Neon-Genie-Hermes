@@ -5,6 +5,19 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.19.0] — 2026-07-30
+
+### Added
+
+- **Behavioral verification suite** (`evals/behavioral/`, `do behavioral`)
+  - Six semantic cases: DataRequest, research attempt, NOT_COMPUTABLE, advisory-only mutation refusal, Gate D, Wayfinder change-control
+  - `scripts/check_behavioral_invariants.py` (`NG-RUNTIME-*` diagnostics)
+- **Isolated runtime smoke** (`do runtime` / `scripts/hermes_runtime_smoke.py`)
+  - Hub-layout install + check + behavioral + doctor without LLM keys
+  - Optional `--hermes` path with isolated `HERMES_HOME`
+- CI steps for behavioral suite and runtime smoke; doctor runs behavioral
+- Dual-path `evals_dir()` prefers layouts that include `cases/`
+
 ## [3.18.0] — 2026-07-30
 
 ### Added

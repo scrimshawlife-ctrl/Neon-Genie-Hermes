@@ -61,11 +61,19 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "distribution_spine.py",
         "description": "Verify/write Hub mirrors + package (distribution.yaml)",
     },
+    "behavioral": {
+        "script": "check_behavioral_invariants.py",
+        "description": "Semantic OPEN→SEAL behavioral suite",
+    },
+    "runtime": {
+        "script": "hermes_runtime_smoke.py",
+        "description": "Isolated hub-layout install smoke (+ optional --hermes)",
+    },
 }
 
 # Everyday first in help; aliases for older script-style names
 EVERYDAY = ("doctor", "check", "recipe", "route", "validate")
-VERIFY = ("eval", "transcripts", "dist")
+VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist")
 OUTCOMES = ("receipt", "learn")
 
 ALIASES = {
@@ -78,6 +86,7 @@ ALIASES = {
     "record-learning": ("learn", []),
     "distribution": ("dist", []),
     "sync-dist": ("dist", ["write"]),
+    "behavior": ("behavioral", ["--suite"]),
     "product-audit": ("recipe", ["--name", "product-audit"]),
     "zero-option": ("recipe", ["--name", "zero-option"]),
     "fragmentation": ("recipe", ["--name", "fragmentation"]),
@@ -202,6 +211,10 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Unknown job: {intent}", file=sys.stderr)
         print("Known:", ", ".join(INTENTS), file=sys.stderr)
         return 2
+
+    # Default flags for suite-style jobs when no args given
+    if intent == "behavioral" and not rest:
+        rest = ["--suite"]
 
     if any(t in {"-h", "--help"} for t in rest):
         sys.stdout.write(intent_help(intent))

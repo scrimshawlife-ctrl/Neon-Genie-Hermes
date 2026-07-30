@@ -79,6 +79,7 @@ Public entry points:
 | **3.16.0** | Hermes Skills Hub tap package (`skills/neon-genie/`) + distribution docs |
 | **3.17.0** | Hub-hardened package: allowlisted mirrors + dual-path resolver so hub install runs `do doctor` |
 | **3.18.0** | Distribution spine: single-source mirrors, generated hub contract, negative packaging tests, OS smoke matrix |
+| **3.19.0** | Live Hermes behavioral verification: semantic invariants + isolated hub runtime smoke |
 
 Further work: live Hermes behavioral evals, run envelope, operator feedback, optional official catalog PR — not a new premiere wave.
 

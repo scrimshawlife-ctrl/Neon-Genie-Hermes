@@ -70,6 +70,8 @@ hub_support_globs:
   - scripts/recipe_common.py
   - scripts/recipe_product_audit.py
   - scripts/distribution_spine.py
+  - scripts/check_behavioral_invariants.py
+  - scripts/hermes_runtime_smoke.py
   - references/VERSION
   - references/manifest.json
   - references/hermes-runtime-contract.md
@@ -87,6 +89,9 @@ hub_support_globs:
   - examples/evals/rubric.md
   - examples/evals/cases/*.json
   - examples/evals/transcripts/*.md
+  - examples/evals/behavioral/README.md
+  - examples/evals/behavioral/cases/*.json
+  - examples/evals/behavioral/transcripts/*.md
 
 hub_support_exclude:
   - scripts/sync_skill_package.sh

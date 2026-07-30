@@ -38,6 +38,13 @@ jobs:
       - name: Golden prose transcripts
         run: python scripts/neon_genie.py do transcripts
 
+      - name: Behavioral semantic suite
+        run: |
+          python scripts/neon_genie.py do behavioral --suite --out out/neon-genie/behavioral-report.json
+
+      - name: Isolated runtime smoke (hub layout)
+        run: python scripts/neon_genie.py do runtime --out out/neon-genie/runtime-smoke
+
       - name: Learning ledger smoke
         run: |
           python scripts/neon_genie.py do learn --class other --summary "ci smoke" --ledger out/neon-genie/learning-ledger.jsonl

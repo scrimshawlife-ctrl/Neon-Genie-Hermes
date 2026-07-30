@@ -47,10 +47,26 @@ def profiles_dir() -> Path:
 
 
 def evals_dir() -> Path:
-    return require_existing(
+    """Prefer a layout that actually contains cases/ (hub may only mirror examples/evals)."""
+    candidates = (
         SKILL_ROOT / "evals",
         SKILL_ROOT / "examples" / "evals",
     )
+    for path in candidates:
+        if (path / "cases").is_dir() or (path / "transcripts").is_dir() or (
+            path / "behavioral"
+        ).is_dir():
+            # Prefer the candidate that has cases when both exist
+            if (path / "cases").is_dir():
+                return path
+    for path in candidates:
+        if path.is_dir():
+            # If only incomplete evals/ exists, fall through to examples/evals
+            if path.name == "evals" and path.parent == SKILL_ROOT:
+                continue
+            return path
+    # Final: any existing, else raise
+    return require_existing(*candidates)
 
 
 def manifest_path() -> Path:

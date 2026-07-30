@@ -136,6 +136,17 @@ As of **v3.18.0**, mirrors + package + SKILL list are driven by **`distribution.
 Scripts resolve either layout via `scripts/paths.py`.
 
 **Still recommended for maintainers:** clone + `./install.sh` (full tree + docs + CI).
+
+### Runtime verification (v3.19+)
+
+```bash
+python scripts/neon_genie.py do behavioral --suite
+python scripts/neon_genie.py do runtime              # hub-layout smoke
+python scripts/neon_genie.py do runtime --hermes     # isolated HERMES_HOME when CLI present
+```
+
+Behavioral cases live under `evals/behavioral/` (mirrored to `examples/evals/behavioral/`).
+They assert **semantic invariants** (OPEN→SEAL, claim labels, DataRequest, authority), not exact prose.
 ---
 
 ## One-liner for users

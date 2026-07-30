@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.18.0
+version: 3.19.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -70,6 +70,7 @@ python scripts/neon_genie.py do <job> [options]
 | `recipe` | Named example (`--list` / `--name`) |
 | `route` / `validate` / `receipt` | Profiles, schema, receipt |
 | `eval` / `transcripts` | Golden tests |
+| `behavioral` / `runtime` | Semantic agent gates + hub install smoke |
 | `learn` | PROPOSED outcome ledger entry |
 
 ```bash
@@ -89,6 +90,19 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/agentic.brief.yaml`
 - `examples/audit.brief.yaml`
 - `examples/commercial.brief.yaml`
+- `examples/evals/behavioral/README.md`
+- `examples/evals/behavioral/cases/memetic-weak-proof.json`
+- `examples/evals/behavioral/cases/private-buyer-datarequest.json`
+- `examples/evals/behavioral/cases/public-market-research.json`
+- `examples/evals/behavioral/cases/repo-mutation-advisory-only.json`
+- `examples/evals/behavioral/cases/wayfinder-change-control.json`
+- `examples/evals/behavioral/cases/zero-resources-not-computable.json`
+- `examples/evals/behavioral/transcripts/01-private-buyer-datarequest.md`
+- `examples/evals/behavioral/transcripts/02-public-market-research.md`
+- `examples/evals/behavioral/transcripts/03-zero-resources-not-computable.md`
+- `examples/evals/behavioral/transcripts/04-repo-mutation-advisory-only.md`
+- `examples/evals/behavioral/transcripts/05-memetic-weak-proof.md`
+- `examples/evals/behavioral/transcripts/06-wayfinder-change-control.md`
 - `examples/evals/cases/authority-leakage.json`
 - `examples/evals/cases/buyer-beneficiary-conflation.json`
 - `examples/evals/cases/completion-proof-present.json`
@@ -162,9 +176,11 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/schemas/zero-option-packet.schema.json`
 - `scripts/audit_release_version.py`
 - `scripts/build_receipt.py`
+- `scripts/check_behavioral_invariants.py`
 - `scripts/check_transcripts.py`
 - `scripts/distribution_spine.py`
 - `scripts/doctor.py`
+- `scripts/hermes_runtime_smoke.py`
 - `scripts/neon_genie.py`
 - `scripts/paths.py`
 - `scripts/recipe_common.py`

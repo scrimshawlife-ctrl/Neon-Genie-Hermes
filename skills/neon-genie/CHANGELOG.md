@@ -5,6 +5,24 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.20.0] — 2026-07-30
+
+### Added
+
+- **Canonical run envelope** (`run-envelope.json`) for every packaging recipe
+  - `schema_id` / `schema_version` (`neon-genie/run-envelope` @ `1.0.0`)
+  - `run_id`, artifact lineage IDs, `content_hash`
+  - `primary_artifact`, `mode_status`, `promotion`, `wayfinder` ingest hints
+  - `do envelope` / `scripts/build_envelope.py` + `scripts/lineage.py`
+- Schema versioning policy: `references/schema-versioning.md`
+- Envelope tests (`scripts/test_run_envelope.py`); doctor validates envelope
+- Validator support for JSON Schema `const` and `pattern`
+
+### Changed
+
+- Expanded `schemas/run-envelope.schema.json` (required entry point for consumers)
+- `recipe_common.finish` always writes and checks the envelope
+
 ## [3.19.0] — 2026-07-30
 
 ### Added

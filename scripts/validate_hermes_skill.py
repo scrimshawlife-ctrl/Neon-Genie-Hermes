@@ -52,6 +52,8 @@ REQUIRED_ANY: list[list[str]] = [
     ["scripts/distribution_spine.py"],
     ["scripts/check_behavioral_invariants.py"],
     ["scripts/hermes_runtime_smoke.py"],
+    ["scripts/lineage.py"],
+    ["scripts/build_envelope.py"],
     ["scripts/validate_hermes_skill.py"],
     ["scripts/neon_genie.py"],
     ["scripts/validate_packet.py"],

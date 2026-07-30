@@ -105,7 +105,31 @@ def finish(
     if extra:
         summary.update(extra)
     write_json(out / "recipe-summary.json", summary)
+
+    # Canonical entry point for downstream consumers (Wayfinder, orchestrators)
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.insert(0, str(SCRIPT_DIR))
+    import build_envelope as be  # noqa: WPS433
+
+    try:
+        env_path = be.write_envelope(
+            out,
+            recipe=recipe,
+            brief=brief,
+            route=route,
+        )
+        # Validate envelope shape (advisory_only enforced in builder + schema)
+        env = json.loads(env_path.read_text(encoding="utf-8"))
+        if env.get("authority") != "advisory_only" or env.get("grants_execution") is True:
+            raise RuntimeError("envelope violated advisory_only")
+        if "run_id" not in env or "primary_artifact" not in env:
+            raise RuntimeError("envelope missing run_id or primary_artifact")
+    except Exception as exc:  # noqa: BLE001
+        print(f"FAIL: run-envelope: {exc}", file=sys.stderr)
+        return 1
+
     print(f"PASS: {recipe} packaging recipe")
     print(f"  profiles: {', '.join(route.get('selected') or [])}")
     print(f"  out: {out}")
+    print(f"  envelope: {env_path.name} ({env.get('run_id')})")
     return 0

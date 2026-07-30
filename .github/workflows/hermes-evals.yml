@@ -80,6 +80,13 @@ jobs:
           python scripts/neon_genie.py do validate --packet examples/packets/sample-opportunity.packet.json --type opportunity
           python scripts/neon_genie.py do validate --packet examples/packets/sample-receipt.packet.json --type receipt --strict-authority
 
+      - name: Run envelope tests
+        run: |
+          python scripts/test_run_envelope.py
+          python scripts/neon_genie.py do recipe --name product-audit --out out/neon-genie/envelope-ci
+          python scripts/neon_genie.py do validate --packet out/neon-genie/envelope-ci/run-envelope.json --type envelope --strict-authority
+          test -f out/neon-genie/envelope-ci/run-envelope.json
+
       - name: Hub-layout smoke (allowlisted files only)
         run: |
           python - <<'PY'

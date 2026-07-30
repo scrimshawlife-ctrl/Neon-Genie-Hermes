@@ -91,6 +91,18 @@ def main() -> int:
                 "opportunity",
             ],
         ),
+        (
+            "run-envelope present after product-audit",
+            [
+                "do",
+                "validate",
+                "--packet",
+                "out/neon-genie/doctor-product-audit/run-envelope.json",
+                "--type",
+                "envelope",
+                "--strict-authority",
+            ],
+        ),
         ]
     )
 

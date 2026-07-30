@@ -45,6 +45,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "build_receipt.py",
         "description": "Build an advisory run receipt",
     },
+    "envelope": {
+        "script": "build_envelope.py",
+        "description": "Build canonical run-envelope.json for a run dir",
+    },
     "eval": {
         "script": "run_hermes_evals.py",
         "description": "Run golden fail-closed gate tests",
@@ -74,13 +78,14 @@ INTENTS: dict[str, dict[str, str]] = {
 # Everyday first in help; aliases for older script-style names
 EVERYDAY = ("doctor", "check", "recipe", "route", "validate")
 VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist")
-OUTCOMES = ("receipt", "learn")
+OUTCOMES = ("receipt", "envelope", "learn")
 
 ALIASES = {
     "validate-skill": ("check", []),
     "validate-packet": ("validate", []),
     "route-profiles": ("route", []),
     "build-receipt": ("receipt", []),
+    "build-envelope": ("envelope", []),
     "run-evals": ("eval", []),
     "check-transcripts": ("transcripts", []),
     "record-learning": ("learn", []),

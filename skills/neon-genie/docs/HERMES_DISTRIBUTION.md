@@ -147,6 +147,24 @@ python scripts/neon_genie.py do runtime --hermes     # isolated HERMES_HOME when
 
 Behavioral cases live under `evals/behavioral/` (mirrored to `examples/evals/behavioral/`).
 They assert **semantic invariants** (OPEN→SEAL, claim labels, DataRequest, authority), not exact prose.
+
+### Run envelope (v3.20+)
+
+Every packaging recipe writes **`run-envelope.json`** beside `run-receipt.json`.
+
+Downstream (Wayfinder, orchestrators) should:
+
+1. Open `run-envelope.json`
+2. Use `primary_artifact.path` for the main packet
+3. Use `receipt_path` / `promotion` / `data_requests` for gates
+4. Use `wayfinder.handoff_path` when present
+
+```bash
+python scripts/neon_genie.py do recipe --name product-audit --out out/neon-genie/demo
+python scripts/neon_genie.py do validate --packet out/neon-genie/demo/run-envelope.json --type envelope
+```
+
+See `references/schema-versioning.md`.
 ---
 
 ## One-liner for users

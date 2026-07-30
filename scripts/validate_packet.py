@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -107,6 +108,13 @@ def validate_schema(instance: Any, schema: dict[str, Any], path: str = "$") -> l
     if "enum" in schema and instance not in schema["enum"]:
         errors.append(f"{path}: value {instance!r} not in enum {schema['enum']}")
 
+    if "const" in schema and instance != schema["const"]:
+        errors.append(f"{path}: expected const {schema['const']!r}, got {instance!r}")
+
+    if isinstance(instance, str) and "pattern" in schema:
+        if not re.search(str(schema["pattern"]), instance):
+            errors.append(f"{path}: string does not match pattern {schema['pattern']}")
+
     if isinstance(instance, str) and "minLength" in schema:
         if len(instance) < int(schema["minLength"]):
             errors.append(f"{path}: string shorter than minLength {schema['minLength']}")
@@ -124,7 +132,10 @@ def validate_schema(instance: Any, schema: dict[str, Any], path: str = "$") -> l
         for key, subschema in props.items():
             if key in instance and isinstance(subschema, dict) and subschema:
                 # Only recurse when subschema has real constraints
-                if any(k in subschema for k in ("type", "required", "properties", "items", "enum")):
+                if any(
+                    k in subschema
+                    for k in ("type", "required", "properties", "items", "enum", "const", "pattern")
+                ):
                     errors.extend(
                         validate_schema(instance[key], subschema, f"{path}.{key}")
                     )

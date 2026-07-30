@@ -72,6 +72,9 @@ hub_support_globs:
   - scripts/distribution_spine.py
   - scripts/check_behavioral_invariants.py
   - scripts/hermes_runtime_smoke.py
+  - scripts/lineage.py
+  - scripts/build_envelope.py
+  - scripts/test_run_envelope.py
   - references/VERSION
   - references/manifest.json
   - references/hermes-runtime-contract.md
@@ -79,6 +82,7 @@ hub_support_globs:
   - references/GOLDEN_TESTS.md
   - references/anti-overclaim-patterns.md
   - references/post-seal-verification.md
+  - references/schema-versioning.md
   - references/profiles/*.md
   - references/schemas/*.json
   - templates/request.yaml

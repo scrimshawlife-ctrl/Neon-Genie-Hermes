@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.19.0
+version: 3.20.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -68,7 +68,7 @@ python scripts/neon_genie.py do <job> [options]
 | `check` | Skill integrity |
 | `dist` | Hub mirrors + package (`verify` / `write`) |
 | `recipe` | Named example (`--list` / `--name`) |
-| `route` / `validate` / `receipt` | Profiles, schema, receipt |
+| `route` / `validate` / `receipt` / `envelope` | Profiles, schema, receipt, run envelope |
 | `eval` / `transcripts` | Golden tests |
 | `behavioral` / `runtime` | Semantic agent gates + hub install smoke |
 | `learn` | PROPOSED outcome ledger entry |
@@ -139,6 +139,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/packets/sample-opportunity.packet.json`
 - `examples/packets/sample-receipt-with-requests.json`
 - `examples/packets/sample-receipt.packet.json`
+- `examples/packets/sample-run-envelope.json`
 - `examples/product-audit.brief.yaml`
 - `examples/zero-option-with-skills.brief.yaml`
 - `examples/zero-option.brief.yaml`
@@ -160,6 +161,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/profiles/product_architecture.md`
 - `references/profiles/wayfinder_handoff.md`
 - `references/profiles/zero_option.md`
+- `references/schema-versioning.md`
 - `references/schemas/agentic-service-graph.schema.json`
 - `references/schemas/audit-delivery-packet.schema.json`
 - `references/schemas/commercial-simulation.schema.json`
@@ -175,12 +177,14 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/schemas/wayfinder-execution-packet.schema.json`
 - `references/schemas/zero-option-packet.schema.json`
 - `scripts/audit_release_version.py`
+- `scripts/build_envelope.py`
 - `scripts/build_receipt.py`
 - `scripts/check_behavioral_invariants.py`
 - `scripts/check_transcripts.py`
 - `scripts/distribution_spine.py`
 - `scripts/doctor.py`
 - `scripts/hermes_runtime_smoke.py`
+- `scripts/lineage.py`
 - `scripts/neon_genie.py`
 - `scripts/paths.py`
 - `scripts/recipe_common.py`

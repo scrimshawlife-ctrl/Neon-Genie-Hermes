@@ -41,6 +41,8 @@ REQUIRED_PATHS = [
     "scripts/build_receipt.py",
     "scripts/run_fixture_invariants.py",
     "scripts/audit_release_version.py",
+    "scripts/run_hermes_evals.py",
+    "scripts/recipe_product_audit.py",
     "install.sh",
     ".github/workflows/hermes-evals.yml",
 ]

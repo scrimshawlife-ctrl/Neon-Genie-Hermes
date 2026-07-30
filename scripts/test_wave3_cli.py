@@ -105,13 +105,21 @@ def main() -> int:
             if rec.get("authority") != "advisory_only":
                 errors.append("receipt must be advisory_only")
 
+    r = run(["do", "eval"])
+    if r.returncode != 0:
+        errors.append(f"do eval failed: {r.stderr or r.stdout}")
+
+    r = run(["do", "recipe", "--out", str(ROOT / "out" / "neon-genie" / "product-audit-test")])
+    if r.returncode != 0:
+        errors.append(f"do recipe failed: {r.stderr or r.stdout}")
+
     if errors:
-        print("FAIL: Wave 3 CLI tests", file=sys.stderr)
+        print("FAIL: packaging CLI tests", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print("PASS: Wave 3 CLI tests")
+    print("PASS: packaging CLI tests")
     return 0
 
 

@@ -5,6 +5,21 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.6.0] — 2026-07-30
+
+### Added
+
+- Golden gate eval runner: `python scripts/neon_genie.py do eval` (`scripts/run_hermes_evals.py`)
+- Product-audit packaging recipe: `python scripts/neon_genie.py do recipe`
+- CLI intents `eval` and `recipe`; aliases `run-evals`, `product-audit`
+- CI runs golden evals + recipe; uploads `out/neon-genie/` artifacts
+- `.gitignore` for generated `out/`
+
+### Notes
+
+- Eval runner enforces packaging-level gate logic against `evals/cases/*` expected fields
+- Recipe emits route + receipt + Wayfinder handoff stub (no product invention)
+
 ## [3.5.0] — 2026-07-30
 
 ### Added

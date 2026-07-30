@@ -27,6 +27,9 @@ jobs:
       - name: Eval fixture invariants
         run: python scripts/run_fixture_invariants.py
 
+      - name: Golden gate evals
+        run: python scripts/neon_genie.py do eval
+
       - name: Release version alignment
         run: python scripts/audit_release_version.py --strict
 
@@ -34,3 +37,12 @@ jobs:
         run: |
           python scripts/neon_genie.py do route --request examples/product-audit.brief.yaml --json
           python scripts/neon_genie.py do route --request examples/zero-option.brief.yaml --json
+
+      - name: Product-audit packaging recipe
+        run: python scripts/neon_genie.py do recipe --out out/neon-genie/product-audit
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: neon-genie-eval-artifacts
+          path: out/neon-genie/

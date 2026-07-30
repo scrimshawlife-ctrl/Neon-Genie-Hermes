@@ -1,20 +1,12 @@
 #!/usr/bin/env python3
-"""Unified packaging CLI for Neon Genie (thin operator surface).
+"""Neon Genie packaging CLI — one command shape for agents and operators.
 
-Primary form:
-  python scripts/neon_genie.py do <intent> [flags]
-
-Intents (packaging only, no product brain):
-  check     Validate skill install integrity
-  validate  Validate a packet against a schema
-  route     Suggest profile set for a request
-  receipt   Build a deterministic run-receipt skeleton
-  eval      Run golden gate eval fixtures
-  recipe    Run a named packaging recipe (e.g. product-audit)
-
-Also:
-  python scripts/neon_genie.py help [intent]
+  python scripts/neon_genie.py do <job> [options]
+  python scripts/neon_genie.py help [job]
   python scripts/neon_genie.py aliases
+
+Jobs are packaging-only (validate, recipe, tests). Product judgment stays
+in Hermes + SKILL.md. Advisory only — never grants spend/execute.
 """
 
 from __future__ import annotations
@@ -27,44 +19,50 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
 PY = sys.executable
 
+# job -> script + short description (plain English for help)
 INTENTS: dict[str, dict[str, str]] = {
+    "doctor": {
+        "script": "doctor.py",
+        "description": "Full smoke suite (start here after install)",
+    },
     "check": {
         "script": "validate_hermes_skill.py",
-        "description": "Validate skill layout, version consistency, and profiles",
-    },
-    "validate": {
-        "script": "validate_packet.py",
-        "description": "Validate packet JSON required fields against a schema",
-    },
-    "route": {
-        "script": "route_profiles.py",
-        "description": "Suggest smallest sufficient profile set from text/request",
-    },
-    "receipt": {
-        "script": "build_receipt.py",
-        "description": "Build advisory run-receipt skeleton with content hashes",
-    },
-    "eval": {
-        "script": "run_hermes_evals.py",
-        "description": "Run golden gate eval fixtures against deterministic rules",
+        "description": "Validate skill install and required files",
     },
     "recipe": {
         "script": "recipe_run.py",
-        "description": "Run packaging recipe (product-audit, zero-option, fragmentation, …)",
+        "description": "Run a named example end-to-end (--list / --name)",
+    },
+    "route": {
+        "script": "route_profiles.py",
+        "description": "Suggest profiles from text or a brief YAML",
+    },
+    "validate": {
+        "script": "validate_packet.py",
+        "description": "Check packet JSON against a schema",
+    },
+    "receipt": {
+        "script": "build_receipt.py",
+        "description": "Build an advisory run receipt",
+    },
+    "eval": {
+        "script": "run_hermes_evals.py",
+        "description": "Run golden fail-closed gate tests",
     },
     "transcripts": {
         "script": "check_transcripts.py",
-        "description": "Validate golden prose transcript structure and rubric markers",
+        "description": "Check golden prose transcript structure",
     },
     "learn": {
         "script": "record_learning.py",
-        "description": "Append PROPOSED learning-ledger observation (never auto-canon)",
-    },
-    "doctor": {
-        "script": "doctor.py",
-        "description": "Full-suite smoke: check, eval, transcripts, key recipes",
+        "description": "Append a PROPOSED outcome to a local ledger",
     },
 }
+
+# Everyday first in help; aliases for older script-style names
+EVERYDAY = ("doctor", "check", "recipe", "route", "validate")
+VERIFY = ("eval", "transcripts")
+OUTCOMES = ("receipt", "learn")
 
 ALIASES = {
     "validate-skill": ("check", []),
@@ -88,37 +86,36 @@ ALIASES = {
 
 def top_help() -> str:
     lines = [
-        "Neon Genie packaging CLI (advisory only)",
+        "Neon Genie CLI — packaging only · advisory only",
         "",
-        "Usage:",
-        "  python scripts/neon_genie.py do <intent> [flags]",
-        "  python scripts/neon_genie.py help [intent]",
-        "  python scripts/neon_genie.py aliases",
+        "  python scripts/neon_genie.py do <job> [options]",
+        "  python scripts/neon_genie.py help [job]",
         "",
-        "Intents:",
+        "Everyday jobs:",
     ]
-    for name, meta in INTENTS.items():
-        lines.append(f"  {name:<10} {meta['description']}")
+    for name in EVERYDAY:
+        lines.append(f"  {name:<12} {INTENTS[name]['description']}")
+    lines.append("")
+    lines.append("Verify / CI:")
+    for name in VERIFY:
+        lines.append(f"  {name:<12} {INTENTS[name]['description']}")
+    lines.append("")
+    lines.append("Outcomes:")
+    for name in OUTCOMES:
+        lines.append(f"  {name:<12} {INTENTS[name]['description']}")
     lines.extend(
         [
             "",
             "Examples:",
-            "  python scripts/neon_genie.py do check",
-            "  python scripts/neon_genie.py do validate --packet p.json --type opportunity",
-            "  python scripts/neon_genie.py do route --request examples/product-audit.brief.yaml",
-            "  python scripts/neon_genie.py do receipt --profiles core,zero_option --out out/receipt.json",
-            "  python scripts/neon_genie.py do eval",
-            "  python scripts/neon_genie.py do recipe --name product-audit",
-            "  python scripts/neon_genie.py do recipe --list",
-            "  python scripts/neon_genie.py do recipe --name zero-option",
-            "  python scripts/neon_genie.py do recipe --name fragmentation",
-            "  python scripts/neon_genie.py do transcripts",
-            "  python scripts/neon_genie.py do learn --class proof_obtained --summary 'first cash' --ledger out/neon-genie/learning-ledger.jsonl",
             "  python scripts/neon_genie.py do doctor",
-            "  python scripts/neon_genie.py do recipe --name commercial",
-            "  python scripts/neon_genie.py do recipe --name audit",
+            "  python scripts/neon_genie.py do recipe --list",
+            "  python scripts/neon_genie.py do recipe --name product-audit --out out/neon-genie/run1",
+            "  python scripts/neon_genie.py do route --text \"zero capital first cash\" --json",
+            "  python scripts/neon_genie.py do validate --packet p.json --type opportunity",
+            "  python scripts/neon_genie.py do eval",
             "",
-            "This CLI does not invent opportunities, run research, or grant execution authority.",
+            "Hermes chat: load the skill and describe the job in plain language (see README).",
+            "This CLI does not invent opportunities or grant execution authority.",
             "",
         ]
     )
@@ -127,13 +124,22 @@ def top_help() -> str:
 
 def intent_help(intent: str) -> str:
     if intent not in INTENTS:
-        return f"Unknown intent: {intent}\n"
+        return f"Unknown job: {intent}\nKnown: {', '.join(INTENTS)}\n"
     meta = INTENTS[intent]
     script = SCRIPT_DIR / meta["script"]
-    # Delegate --help to the underlying script
-    r = subprocess.run([PY, str(script), "--help"], cwd=SKILL_ROOT, capture_output=True, text=True)
+    r = subprocess.run(
+        [PY, str(script), "--help"],
+        cwd=SKILL_ROOT,
+        capture_output=True,
+        text=True,
+    )
     body = r.stdout or r.stderr or ""
-    return f"intent: {intent}\n{meta['description']}\nscript: scripts/{meta['script']}\n\n{body}"
+    return (
+        f"job: {intent}\n"
+        f"{meta['description']}\n"
+        f"script: scripts/{meta['script']}\n\n"
+        f"{body}"
+    )
 
 
 def run_script(script_name: str, argv: list[str]) -> int:
@@ -148,7 +154,7 @@ def run_script(script_name: str, argv: list[str]) -> int:
 def main(argv: list[str] | None = None) -> int:
     argv = list(sys.argv[1:] if argv is None else argv)
 
-    if not argv or argv[0] in {"-h", "--help", "help"} and len(argv) == 1:
+    if not argv or (argv[0] in {"-h", "--help", "help"} and len(argv) == 1):
         sys.stdout.write(top_help())
         return 0
 
@@ -160,22 +166,23 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if argv[0] == "aliases":
-        for alias, (intent, _) in sorted(ALIASES.items()):
-            print(f"  {alias} → do {intent}")
+        for alias, (intent, fixed) in sorted(ALIASES.items()):
+            extra = f" {' '.join(fixed)}" if fixed else ""
+            print(f"  {alias} → do {intent}{extra}")
         return 0
 
-    # Soft legacy alias at top level
     if argv[0] in ALIASES:
         intent, fixed = ALIASES[argv[0]]
         return run_script(INTENTS[intent]["script"], list(fixed) + argv[1:])
 
     if argv[0] != "do":
         print(f"Unknown command: {argv[0]}", file=sys.stderr)
-        print("Use: python scripts/neon_genie.py do <intent> …", file=sys.stderr)
+        print("Use: python scripts/neon_genie.py do <job> …", file=sys.stderr)
+        print("     python scripts/neon_genie.py help", file=sys.stderr)
         return 2
 
     if len(argv) < 2:
-        print("usage: neon_genie.py do <intent> [flags]", file=sys.stderr)
+        print("usage: neon_genie.py do <job> [options]", file=sys.stderr)
         return 2
 
     intent = argv[1]
@@ -185,15 +192,15 @@ def main(argv: list[str] | None = None) -> int:
         sys.stdout.write(top_help())
         return 0
 
-    if any(t in {"-h", "--help"} for t in rest) or intent not in INTENTS:
-        if intent not in INTENTS:
-            print(f"Unknown intent: {intent}", file=sys.stderr)
-            print("Known:", ", ".join(INTENTS), file=sys.stderr)
-            return 2
+    if intent not in INTENTS:
+        print(f"Unknown job: {intent}", file=sys.stderr)
+        print("Known:", ", ".join(INTENTS), file=sys.stderr)
+        return 2
+
+    if any(t in {"-h", "--help"} for t in rest):
         sys.stdout.write(intent_help(intent))
         return 0
 
-    # Strip help-only path already handled; pass flags through
     return run_script(INTENTS[intent]["script"], rest)
 
 

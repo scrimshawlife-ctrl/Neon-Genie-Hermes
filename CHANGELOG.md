@@ -5,6 +5,15 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.15.0] — 2026-07-30
+
+### Changed
+
+- README: plain-English **How to use** (Hermes chat vs CLI), command cheat sheet, agent rules
+- Simplified CLI help: jobs grouped (everyday / verify / outcomes)
+- QUICKSTART aligned with the same command shape
+- SKILL packaging section shortened to the `do <job>` table
+
 ## [3.14.0] — 2026-07-30
 
 ### Added

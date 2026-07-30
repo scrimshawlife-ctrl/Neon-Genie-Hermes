@@ -2,6 +2,8 @@
 
 From zero to a governed packet path. **Advisory only.**
 
+See also: [README — How to use](../README.md#how-to-use) · [PREMIERE.md](./PREMIERE.md)
+
 ## Prerequisites
 
 - Git, Python 3  
@@ -15,19 +17,19 @@ cd Neon-Genie-Hermes
 ./install.sh
 # → ~/.hermes/skills/neon-genie
 
-python scripts/neon_genie.py do check
+python scripts/neon_genie.py do doctor
 ```
 
-Expected: `PASS` at current VERSION.
+Expected: full smoke `PASS` at current VERSION.
 
-## Minute 2–4: Integrity + gates
+## Minute 2–4: Integrity + gates (if you skipped doctor)
 
 ```bash
 python scripts/neon_genie.py do eval
 python scripts/neon_genie.py do transcripts
 ```
 
-Expected: all golden gates and 5 prose transcripts PASS.
+Expected: golden gates and prose transcripts PASS.
 
 ## Minute 4–7: Product-audit recipe
 

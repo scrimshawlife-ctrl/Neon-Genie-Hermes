@@ -81,6 +81,7 @@ Public entry points:
 | **3.18.0** | Distribution spine: single-source mirrors, generated hub contract, negative packaging tests, OS smoke matrix |
 | **3.19.0** | Live Hermes behavioral verification: semantic invariants + isolated hub runtime smoke |
 | **3.20.0** | Canonical run-envelope.json, lineage IDs, schema versioning policy |
+| **3.21.0** | Operator surface: do run, do capabilities, worked example, tighter README |
 
 Further work: live Hermes behavioral evals, run envelope, operator feedback, optional official catalog PR — not a new premiere wave.
 

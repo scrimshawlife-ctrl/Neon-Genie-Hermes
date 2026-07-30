@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.20.0
+version: 3.21.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -66,6 +66,8 @@ python scripts/neon_genie.py do <job> [options]
 |-----|-----|
 | `doctor` | Full smoke after install |
 | `check` | Skill integrity |
+| `run` | Operator packaging run (brief/recipe → envelope) |
+| `capabilities` | Machine-readable skill surface (JSON) |
 | `dist` | Hub mirrors + package (`verify` / `write`) |
 | `recipe` | Named example (`--list` / `--name`) |
 | `route` / `validate` / `receipt` / `envelope` | Profiles, schema, receipt, run envelope |
@@ -179,6 +181,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/audit_release_version.py`
 - `scripts/build_envelope.py`
 - `scripts/build_receipt.py`
+- `scripts/capabilities.py`
 - `scripts/check_behavioral_invariants.py`
 - `scripts/check_transcripts.py`
 - `scripts/distribution_spine.py`
@@ -194,6 +197,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/route_profiles.py`
 - `scripts/run_fixture_invariants.py`
 - `scripts/run_hermes_evals.py`
+- `scripts/run_job.py`
 - `scripts/validate_hermes_skill.py`
 - `scripts/validate_packet.py`
 - `templates/request.yaml`

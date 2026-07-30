@@ -29,6 +29,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "validate_hermes_skill.py",
         "description": "Validate skill install and required files",
     },
+    "run": {
+        "script": "run_job.py",
+        "description": "Operator run: brief/recipe → workspace + envelope",
+    },
     "recipe": {
         "script": "recipe_run.py",
         "description": "Run a named example end-to-end (--list / --name)",
@@ -36,6 +40,10 @@ INTENTS: dict[str, dict[str, str]] = {
     "route": {
         "script": "route_profiles.py",
         "description": "Suggest profiles from text or a brief YAML",
+    },
+    "capabilities": {
+        "script": "capabilities.py",
+        "description": "Machine-readable skill surface (--json)",
     },
     "validate": {
         "script": "validate_packet.py",
@@ -76,7 +84,7 @@ INTENTS: dict[str, dict[str, str]] = {
 }
 
 # Everyday first in help; aliases for older script-style names
-EVERYDAY = ("doctor", "check", "recipe", "route", "validate")
+EVERYDAY = ("doctor", "check", "run", "recipe", "route", "validate", "capabilities")
 VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist")
 OUTCOMES = ("receipt", "envelope", "learn")
 
@@ -92,6 +100,7 @@ ALIASES = {
     "distribution": ("dist", []),
     "sync-dist": ("dist", ["write"]),
     "behavior": ("behavioral", ["--suite"]),
+    "caps": ("capabilities", ["--json"]),
     "product-audit": ("recipe", ["--name", "product-audit"]),
     "zero-option": ("recipe", ["--name", "zero-option"]),
     "fragmentation": ("recipe", ["--name", "fragmentation"]),
@@ -128,8 +137,10 @@ def top_help() -> str:
             "",
             "Examples:",
             "  python scripts/neon_genie.py do doctor",
+            "  python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo",
+            "  python scripts/neon_genie.py do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo",
+            "  python scripts/neon_genie.py do capabilities --json",
             "  python scripts/neon_genie.py do recipe --list",
-            "  python scripts/neon_genie.py do recipe --name product-audit --out out/neon-genie/run1",
             "  python scripts/neon_genie.py do route --text \"zero capital first cash\" --json",
             "  python scripts/neon_genie.py do validate --packet p.json --type opportunity",
             "  python scripts/neon_genie.py do eval",

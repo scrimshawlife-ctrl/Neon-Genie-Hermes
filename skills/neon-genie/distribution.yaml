@@ -75,6 +75,9 @@ hub_support_globs:
   - scripts/lineage.py
   - scripts/build_envelope.py
   - scripts/test_run_envelope.py
+  - scripts/run_job.py
+  - scripts/capabilities.py
+  - scripts/test_operator_surface.py
   - references/VERSION
   - references/manifest.json
   - references/hermes-runtime-contract.md

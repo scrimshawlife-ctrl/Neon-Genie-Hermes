@@ -87,6 +87,11 @@ jobs:
           python scripts/neon_genie.py do validate --packet out/neon-genie/envelope-ci/run-envelope.json --type envelope --strict-authority
           test -f out/neon-genie/envelope-ci/run-envelope.json
 
+      - name: Operator surface (run + capabilities)
+        run: |
+          python scripts/test_operator_surface.py
+          python scripts/neon_genie.py do capabilities --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['authority']=='advisory_only'"
+
       - name: Hub-layout smoke (allowlisted files only)
         run: |
           python - <<'PY'

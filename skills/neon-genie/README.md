@@ -4,7 +4,7 @@
 
 ### Governed opportunity & product intelligence for Hermes
 
-[![Version](https://img.shields.io/badge/version-3.20.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.21.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -41,81 +41,83 @@ It is **not** Kubrick (cinematic), **not** Wayfinder (engineering execution), an
 
 ## How to use
 
-### Option A — Talk to Hermes (normal use)
+### Three-minute path
 
-1. Install the skill ([below](#installation)).
-2. In Hermes, invoke Neon Genie (or say product audit / opportunity / zero option / wayfinder handoff).
-3. Describe the job in plain language: who is stuck, what “done” looks like, constraints, what they already know.
-4. Hermes follows `SKILL.md`: **OPEN → ALIGN → ASCEND → CLEAR → SEAL**.
-5. Treat outputs as **drafts** until you review them. Packets never authorize money or publication.
-
-**Example prompts**
-
-```text
-/neon-genie audit this project using product_architecture, commercial,
-and wayfinder_handoff. Research decision-critical public facts. Request
-private access instead of inventing. Label every material claim.
-Do not modify the repository.
+```bash
+./install.sh                                          # or hermes skills install …
+python scripts/neon_genie.py do doctor                # smoke
+python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
+# open out/neon-genie/demo/run-envelope.json first
 ```
 
-```text
-/neon-genie zero_option: first cash in 7 days from declared skills and
-access only. No fictional resources. Mark unknowns NOT_COMPUTABLE.
-```
+### Talk to Hermes (judgment)
+
+Install → invoke Neon Genie → describe who is stuck and what “done” looks like.  
+Hermes follows **OPEN → ALIGN → ASCEND → CLEAR → SEAL**. Outputs are drafts only.
 
 ```text
-/neon-genie research.enabled=false
-# offline: operator + workspace sources only
+/neon-genie We have an audio continuity tool but no defined buyer.
+What should we charge? Research public comps; request private buyer data;
+do not invent; do not modify the repo.
 ```
 
-Full prompt patterns and missing-data rules: [QUICKSTART.md](./QUICKSTART.md).  
-Worked OPEN→SEAL examples: [evals/transcripts/](./evals/transcripts/).
+Prompts: [QUICKSTART.md](./QUICKSTART.md) · Prose goldens: [evals/transcripts/](./evals/transcripts/) · Behavioral: [evals/behavioral/](./evals/behavioral/)
 
-### Option B — Command line (agents, CI, packaging)
-
-From a clone or install directory, one pattern:
+### Command line (packaging — not a product brain)
 
 ```text
 python scripts/neon_genie.py do <job> [options]
 ```
 
-| Job | Plain English |
-|-----|----------------|
-| `doctor` | **Start here** — run the full smoke suite |
-| `check` | Is the skill install valid? |
-| `recipe` | Run a named example end-to-end (product audit, zero-option, …) |
-| `route` | Which profiles fit this brief/text? |
-| `validate` | Does this packet JSON match its schema? |
-| `receipt` | Build an advisory run receipt (hashes, optional DataRequests) |
-| `eval` | Run golden fail-closed gate tests |
-| `transcripts` | Check golden prose transcript structure |
-| `learn` | Append a PROPOSED outcome note to a local ledger (never auto-canon) |
+| Job | Use |
+|-----|-----|
+| `doctor` | Full smoke |
+| `run` | **Operator path** — brief/recipe → workspace + `run-envelope.json` |
+| `capabilities` | Machine-readable surface (`--json`) for orchestrators |
+| `recipe` / `route` / `validate` | Examples, profile routing, schema check |
+| `receipt` / `envelope` | Receipt + canonical envelope |
+| `eval` / `transcripts` / `behavioral` | Gates and semantic suites |
+| `learn` | PROPOSED outcome ledger (never auto-canon) |
 
 ```bash
-python scripts/neon_genie.py help          # list jobs
-python scripts/neon_genie.py help recipe   # job-specific help
-python scripts/neon_genie.py do doctor     # full smoke
+python scripts/neon_genie.py help
+python scripts/neon_genie.py do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo
+python scripts/neon_genie.py do capabilities --json
 ```
 
-Packaging CLI does **not** invent opportunities. It validates, routes, recipes, and tests. Creative judgment stays in Hermes + `SKILL.md`.
+---
 
-### A simple path: idea → packet → check
+## Worked example (before → after)
+
+**Input**
+
+> “We have an audio continuity tool but no defined buyer.”
+
+**What Neon Genie does**
+
+| Step | Result |
+|------|--------|
+| OPEN | Product category known; buyer missing |
+| ALIGN | Public research allowed; **DataRequest** for private buyer/budget authority |
+| ASCEND | Claims labeled; firm price is `NOT_COMPUTABLE` without buyer |
+| CLEAR | Gate Q (private gap) blocks promotion past CONCEPTUAL |
+| SEAL | Packets + receipt + **`run-envelope.json`** — still `advisory_only` |
+
+**You should see**
+
+- Product boundary clarified (draft)  
+- Buyer marked **NOT_COMPUTABLE** until evidence  
+- Open `DataRequest` (blocks promotion)  
+- Testable diagnostic offer only after roles exist  
+- Wayfinder handoff **blocked** until buyer evidence (or explicit waive)  
+- **No** repo mutation, spend, or publish  
+
+Reproduce packaging scaffold:
 
 ```bash
-# 1. Install
-./install.sh
-
-# 2. Smoke the install
-python scripts/neon_genie.py do doctor
-
-# 3. Run a sample job
-python scripts/neon_genie.py do recipe --name product-audit --out out/neon-genie/demo
-
-# 4. Inspect out/neon-genie/demo/
-#    profile-route, product stub, DataRequests, receipt — all advisory
+python scripts/neon_genie.py do run --recipe commercial --out out/neon-genie/audio-buyer
+# or full Hermes session using the prompt above
 ```
-
-Ten-minute walkthrough: [docs/DEMO.md](./docs/DEMO.md).
 
 ---
 
@@ -168,28 +170,21 @@ python scripts/neon_genie.py do check
 ```bash
 # Everyday
 python scripts/neon_genie.py do doctor
-python scripts/neon_genie.py do recipe --list
-python scripts/neon_genie.py do recipe --name product-audit --out out/neon-genie/run1
-python scripts/neon_genie.py do recipe --name zero-option --out out/neon-genie/zero
+python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/run1
+python scripts/neon_genie.py do run --brief examples/zero-option.brief.yaml --out out/neon-genie/zero
+python scripts/neon_genie.py do capabilities --json
 
-# Briefs & routing
-python scripts/neon_genie.py do route --request examples/product-audit.brief.yaml --json
-python scripts/neon_genie.py do route --text "first cash zero capital"
-
-# Packets
-python scripts/neon_genie.py do validate --packet path/to/packet.json --type opportunity
-python scripts/neon_genie.py do validate --packet path/to/receipt.json --type receipt --strict-authority
+# Routing & validation
+python scripts/neon_genie.py do route --text "first cash zero capital" --json
+python scripts/neon_genie.py do validate --packet out/neon-genie/run1/run-envelope.json --type envelope
 
 # Quality / CI
-python scripts/neon_genie.py do check
-python scripts/neon_genie.py do eval
-python scripts/neon_genie.py do transcripts
+python scripts/neon_genie.py do check && python scripts/neon_genie.py do eval
+python scripts/neon_genie.py do behavioral --suite
 
-# After a real outcome (local only)
-python scripts/neon_genie.py do learn \
-  --class proof_obtained \
-  --summary "first paid diagnostic booked" \
-  --ledger out/neon-genie/learning-ledger.jsonl
+# After a real outcome (local only, PROPOSED)
+python scripts/neon_genie.py do learn --class proof_obtained \
+  --summary "first paid diagnostic booked" --ledger out/neon-genie/learning-ledger.jsonl
 ```
 
 ### Recipes (`do recipe --name …`)
@@ -211,77 +206,40 @@ Briefs live in [`examples/`](./examples/). Gallery index: [`examples/gallery/`](
 
 ---
 
-## For agents (Hermes / automation)
-
-**Prefer conversation** for product/opportunity work: load the skill, follow `SKILL.md`, use host research tools, emit labeled packets.
-
-**Use the CLI** when you need deterministic packaging:
+## For agents
 
 | Goal | Command |
 |------|---------|
-| Verify install before a run | `do check` or `do doctor` |
-| Scaffold an example packet set | `do recipe --name <name> --out <dir>` |
-| Choose profiles from text/brief | `do route --text "…" --json` |
-| Schema-check a packet | `do validate --packet … --type …` |
-| CI / regression | `do eval` + `do transcripts` |
-| Record operator-reported outcome | `do learn …` (PROPOSED only) |
+| Discover surface | `do capabilities --json` |
+| Verify install | `do doctor` |
+| Packaging workspace | `do run --brief …` or `--recipe …` |
+| Resume a run | open `run-envelope.json` first |
+| CI | `do eval` · `do behavioral` · `do dist verify` |
 
-**Rules agents must keep**
+**Rules:** no model-prior as `OBSERVED`; public→research / private→`DataRequest`; no spend/publish/mutate; Wayfinder must not rewrite product intent; `TESTABLE`+ needs `completion_proof`.
 
-1. Never treat model prior as `OBSERVED`.  
-2. Public gap → attempt research; private gap → `DataRequest`; then `NOT_COMPUTABLE` if still missing.  
-3. No spend, publish, contact, or repo mutation without separate authorization.  
-4. Wayfinder handoffs must not rewrite product intent.  
-5. `TESTABLE`+ packets need `completion_proof`.
+Contract: [`references/hermes-runtime-contract.md`](./references/hermes-runtime-contract.md) · Schemas: [`references/schema-versioning.md`](./references/schema-versioning.md)
 
-Runtime contract: [`references/hermes-runtime-contract.md`](./references/hermes-runtime-contract.md).
+### How it works (short)
 
----
+**OPEN → ALIGN → ASCEND → CLEAR → SEAL.** Missing data: **find → request → NOT_COMPUTABLE**.
 
-## How it works (short)
+Neon Genie owns *what/why/user/boundary/proof*. Wayfinder owns *decomposition/milestones/status*  
+(`product_intent_changes_require_neon_genie_review: true`).
 
-Always: **OPEN → ALIGN → ASCEND → CLEAR → SEAL**.
-
-Missing data: **find** (public) → **request** (private) → **`NOT_COMPUTABLE`**.
-
-| Mode | Does |
-|------|------|
-| OPEN | Resolve request, actor, state, constraints, artifact |
-| ALIGN | Sources, gaps, research plan / first fetch |
-| ASCEND | Topology, thesis, intervention, score, route |
-| CLEAR | Fail-closed gates, authority leaks, uncited facts |
-| SEAL | Packets + receipt (DataRequests, research log) |
-
-Profiles (loaded as needed): `core`, `product_architecture`, `opportunity_mining`, `fragmentation`, `zero_option`, `agentic_services`, `commercial`, `evidence_intelligence`, `memetic`, `audit_delivery`, `wayfinder_handoff` — see [`profiles/`](./profiles/).
-
-**Promotion:** composite scores never override gate failures. Memetic strength never raises readiness past evidence fail.
-
-**Wayfinder:** Neon Genie owns *what/why/user/boundary/proof*. Wayfinder owns *decomposition/milestones/status*.  
-`product_intent_changes_require_neon_genie_review: true`
-
----
-
-## Authority & safety
-
-**May:** research, infer, generate, compare, score, model, audit, specify, route, draft, recommend.
-
-**May not** (without explicit downstream auth): spend, submit, contact, publish, modify repos, irreversible execute, promote to canon, present forecasts as facts, mutate runtime state.
-
-`manifest.json` → `"authority": "advisory_only"`
+**Authority:** `advisory_only` — may research/draft/recommend; may not spend, publish, contact, or mutate repos.
 
 ---
 
 ## Repository layout
 
 ```text
-Neon-Genie-Hermes/          ← skill root (install this tree)
-├── SKILL.md                # Hermes operating contract
-├── install.sh
+Neon-Genie-Hermes/          ← skill root
+├── SKILL.md                # operating contract
+├── distribution.yaml       # Hub mirror single source
 ├── scripts/neon_genie.py   # do <job>
-├── profiles/  schemas/  references/  templates/
-├── examples/               # briefs + gallery
-├── evals/                  # gate fixtures + prose transcripts
-└── docs/                   # DEMO, PREMIERE, ROADMAP
+├── profiles/ schemas/ references/ examples/ evals/
+└── docs/
 ```
 
 | Doc | Purpose |
@@ -299,7 +257,7 @@ Neon-Genie-Hermes/          ← skill root (install this tree)
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.20.0** |
+| Version | **3.21.0** |
 | Authority | `advisory_only` |
 | Research | proactive (opt out: `research.enabled=false`) |
 
@@ -316,5 +274,5 @@ Source of truth: [`VERSION`](./VERSION), [`manifest.json`](./manifest.json), [`S
 ---
 
 <div align="center">
-<sub>Neon Genie v3.20.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.21.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 </div>

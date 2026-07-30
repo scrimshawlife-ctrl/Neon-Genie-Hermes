@@ -5,6 +5,22 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.21.0] — 2026-07-30
+
+### Added
+
+- **`do run`** — operator packaging path (`scripts/run_job.py`)
+  - `--recipe` / `--brief` / `--text` → workspace + receipt + envelope
+  - Auto-recipe from brief profiles; `--no-auto-recipe` for scaffold-only
+  - Writes `HERMES_NEXT.md` (judgment stays in SKILL.md)
+- **`do capabilities --json`** — machine-readable surface for orchestrators
+- Operator surface tests (`scripts/test_operator_surface.py`)
+- README worked example (audio tool / missing buyer) + compressed operator docs
+
+### Changed
+
+- CLI help lists `run` and `capabilities` in everyday jobs
+
 ## [3.20.0] — 2026-07-30
 
 ### Added

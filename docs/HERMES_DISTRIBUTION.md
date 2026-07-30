@@ -165,6 +165,17 @@ python scripts/neon_genie.py do validate --packet out/neon-genie/demo/run-envelo
 ```
 
 See `references/schema-versioning.md`.
+
+### Operator surface (v3.21+)
+
+```bash
+python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
+python scripts/neon_genie.py do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo
+python scripts/neon_genie.py do capabilities --json
+```
+
+`do run` is packaging-only: route → recipe/scaffold → receipt → **envelope**.  
+Product judgment remains Hermes + `SKILL.md` (`HERMES_NEXT.md` in the out dir).
 ---
 
 ## One-liner for users

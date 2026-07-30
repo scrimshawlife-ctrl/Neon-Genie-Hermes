@@ -26,11 +26,11 @@ python scripts/neon_genie.py do check | validate | route | receipt
 
 **Status:** shipped as **v3.4.0**.
 
-## Wave 4 — Release maturity (current)
+## Wave 4 — Release maturity
 
 CI evals workflow, release checklist, version audit, fixture invariants.
 
-**Status:** shipping as **v3.5.0**.
+**Status:** shipped as **v3.5.0**.
 
 ## Non-goals (all waves)
 

@@ -50,9 +50,7 @@ Neon Genie is a **standalone Hermes skill**. Hermes loads this directory directl
 
 See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy.
 
-Profile contracts: `references/profiles/` (hub) or `profiles/` (full install).  
-Packet schemas: `references/schemas/` (hub) or `schemas/` (full install).  
-Golden tests: `examples/evals/` (hub) or `evals/` (full install).
+Profile contracts, packet schemas, and golden tests ship as hub mirrors (see **Hermes Hub support files** below) and as root `profiles/`, `schemas/`, `evals/` on full install.
 
 **Optional companions:** host research tools, Wayfinder (handoff consumer). Their absence never blocks local advisory work.
 
@@ -78,7 +76,7 @@ python scripts/neon_genie.py help
 python scripts/neon_genie.py do doctor
 ```
 
-See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/`. Post-SEAL: `references/post-seal-verification.md`.
+See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`.
 
 ### Hermes Hub support files
 
@@ -177,7 +175,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/evals/transcripts/08-evidence-intelligence.md`
 - `examples/evals/transcripts/09-opportunity-mining.md`
 
-Full tree also keeps root `schemas/`, `profiles/`, `evals/`, `VERSION`, and `manifest.json` for clone/`./install.sh` installs (scripts resolve either layout via `scripts/paths.py`).
+Full tree also keeps root schemas, profiles, evals, VERSION, and manifest for clone/`./install.sh` installs (scripts resolve either layout via `scripts/paths.py`).
 
 ## Mission
 
@@ -445,7 +443,7 @@ Also apply anti-overclaim gates A–R in `references/anti-overclaim-patterns.md`
 
 ## Profile loading
 
-Load the relevant profile files in `references/profiles/` (or `profiles/` on full installs) and follow their local contracts. Profile-specific runes must remain namespaced and must not silently change core outputs.
+Load the relevant profile markdown contracts (hub mirror files listed below, or root profiles on full install) and follow their local contracts. Profile-specific runes must remain namespaced and must not silently change core outputs.
 
 ## Wayfinder contract
 

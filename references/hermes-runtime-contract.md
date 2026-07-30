@@ -44,11 +44,18 @@ No external dependencies. Full OPEN → ALIGN → ASCEND → CLEAR → SEAL advi
 
 ### Tier 1 — Standard-library helpers
 
-Install validation, path checks, version consistency, and basic JSON operations use Python's standard library only.
+Install validation, path checks, version consistency, profile routing suggestions, packet required-field checks, and receipt hashing use Python's standard library only.
 
 ```bash
+python scripts/neon_genie.py do check
+python scripts/neon_genie.py do validate --packet path.json --type opportunity
+python scripts/neon_genie.py do route --request templates/request.yaml
+python scripts/neon_genie.py do receipt --profiles core --out ./out/neon-genie/receipt.json
+# equivalent direct entry:
 python scripts/validate_hermes_skill.py
 ```
+
+These helpers never invent opportunities, never run host research, and never grant execution authority.
 
 ### Tier 2 — Optional local dependencies
 

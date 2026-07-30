@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.3.0
+version: 3.4.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
@@ -33,6 +33,19 @@ Neon Genie is a **standalone Hermes skill**. Hermes loads this directory directl
 See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy. Profile contracts live in `profiles/`; packet schemas in `schemas/`.
 
 **Optional companions:** host research tools, Wayfinder (handoff consumer). Their absence never blocks local advisory work.
+
+## Packaging CLI (thin)
+
+Deterministic packaging helpers only — not a product-reasoning engine:
+
+```bash
+python scripts/neon_genie.py do check
+python scripts/neon_genie.py do validate --packet path.json --type opportunity
+python scripts/neon_genie.py do route --text "zero capital first cash"
+python scripts/neon_genie.py do receipt --profiles core,zero_option --out receipt.json
+```
+
+Intents: `check` · `validate` · `route` · `receipt`. See `QUICKSTART.md`.
 
 ## Mission
 

@@ -85,7 +85,26 @@ Public entry points:
 | **3.22.0** | Feedback loop: issue templates, learn↔run_id reconcile, ADRs |
 | **3.23.0** | Release automation, branch protection, gates.yaml registry, CONTRIBUTING |
 
-Further work: live Hermes behavioral evals, run envelope, operator feedback, optional official catalog PR — not a new premiere wave.
+## Production maturity (3.18–3.23) — complete
+
+| Theme | Shipped |
+|-------|---------|
+| Distribution spine | `distribution.yaml`, mirrors, generated Hub support list |
+| Runtime proof | Behavioral suite + hub-layout smoke (no LLM keys required) |
+| Artifact protocol | Mandatory `run-envelope.json`, lineage IDs, schema versioning |
+| Operator surface | `do run`, `do capabilities`, worked README example |
+| Feedback loop | Issue templates, learn↔run_id reconcile, ADRs |
+| Governance | Tag-driven Release workflow, branch protection, CONTRIBUTING |
+
+Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md)
+
+### Optional later (not blocking)
+
+- Live multi-turn Hermes LLM evals (needs API keys / host tools in CI)
+- Official Nous `optional-skills/` PR (only if desired)
+- Discord/social announce with install one-liner
+- Profile capability-contract router (beyond keyword routing)
+- Required PR reviews when collaborators join
 
 ## Non-goals (all waves)
 

@@ -111,7 +111,12 @@ To appear under **official optional** skills (`hermes skills browse --source off
 - [x] `hermes skills inspect` — listed (skills.sh / community)  
 - [x] `hermes skills install …` — security scan SAFE, installs as community  
 - [x] Tap registered: `hermes skills tap add scrimshawlife-ctrl/Neon-Genie-Hermes`  
-- [ ] Announce on Discord / social with install one-liner  
+- [x] `distribution.yaml` + spine verify (Hub mirrors / package parity)  
+- [x] Behavioral suite + hub-layout runtime smoke  
+- [x] Run envelope on every packaging recipe  
+- [x] Tag-driven Release workflow (tarball + sha256)  
+- [x] Branch protection: required check `eval` on `main`  
+- [ ] Announce on Discord / social with install one-liner (optional)  
 
 ### Hub install vs full package
 

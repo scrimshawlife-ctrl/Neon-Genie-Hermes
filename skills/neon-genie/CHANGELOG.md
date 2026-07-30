@@ -5,6 +5,13 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [Unreleased]
+
+### Changed
+
+- Docs refresh: README, QUICKSTART, DEMO, ROADMAP aligned to operator surface,
+  run-envelope, feedback loop, release automation, and production maturity (3.18–3.23)
+
 ## [3.23.0] — 2026-07-30
 
 ### Added

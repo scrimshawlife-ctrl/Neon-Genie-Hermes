@@ -74,13 +74,15 @@ python scripts/neon_genie.py do <job> [options]
 | `eval` / `transcripts` | Golden tests |
 | `behavioral` / `runtime` | Semantic agent gates + hub install smoke |
 | `learn` / `reconcile` | PROPOSED ledger entry; link entries to run_id |
+| `release-check` | Pre-release version / changelog / dist gate |
 
 ```bash
 python scripts/neon_genie.py help
 python scripts/neon_genie.py do doctor
+python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
 ```
 
-See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`.
+See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`. Gate ontology: `references/gates.yaml`.
 
 ### Hermes Hub support files
 
@@ -285,10 +287,14 @@ Run receipt must list `data_requests`, `open_blocking_requests`, and `research_a
 Opportunity, product, and zero-option packets at `TESTABLE` or higher require **`completion_proof`** (externally checkable) and should include a **`proof_path`**. After SEAL, follow `references/post-seal-verification.md`. Record real outcomes with:
 
 ```bash
-python scripts/neon_genie.py do learn --class proof_obtained --summary "..." --ledger out/neon-genie/learning-ledger.jsonl
+python scripts/neon_genie.py do learn --class proof_obtained --summary "..." \
+  --envelope out/neon-genie/demo/run-envelope.json \
+  --ledger out/neon-genie/learning-ledger.jsonl
+python scripts/neon_genie.py do reconcile --ledger out/neon-genie/learning-ledger.jsonl \
+  --runs-root out/neon-genie
 ```
 
-Learning ledger entries are `PROPOSED` / `OBSERVATION` only — never auto-canon.
+Learning ledger entries are `PROPOSED` / `OBSERVATION` only — never auto-canon. Prefer linking via `--envelope` / `run_id`.
 
 ## Default operating sequence
 

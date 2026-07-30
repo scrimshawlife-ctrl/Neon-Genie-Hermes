@@ -13,7 +13,7 @@
 
 **Turn weak signals and blocked transitions into evidence-bound, testable product and opportunity packets — without inventing facts or granting spend/execute rights.**
 
-[How to use](#how-to-use) · [Install](#installation) · [Commands](#command-cheat-sheet) · [Demo](./docs/DEMO.md) · [Premiere](./docs/PREMIERE.md)
+[How to use](#how-to-use) · [Install](#installation) · [Commands](#command-cheat-sheet) · [Demo](./docs/DEMO.md) · [Premiere](./docs/PREMIERE.md) · [Contributing](./CONTRIBUTING.md)
 
 </div>
 
@@ -78,11 +78,13 @@ python scripts/neon_genie.py do <job> [options]
 | `receipt` / `envelope` | Receipt + canonical envelope |
 | `eval` / `transcripts` / `behavioral` | Gates and semantic suites |
 | `learn` / `reconcile` | PROPOSED ledger + run_id linkage (never auto-canon) |
+| `dist` / `release-check` | Hub mirrors; pre-release gate before tagging |
 
 ```bash
 python scripts/neon_genie.py help
 python scripts/neon_genie.py do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo
 python scripts/neon_genie.py do capabilities --json
+python scripts/neon_genie.py do release-check   # maintainers, before git tag
 ```
 
 ---
@@ -178,9 +180,11 @@ python scripts/neon_genie.py do capabilities --json
 python scripts/neon_genie.py do route --text "first cash zero capital" --json
 python scripts/neon_genie.py do validate --packet out/neon-genie/run1/run-envelope.json --type envelope
 
-# Quality / CI
+# Quality / CI / release
 python scripts/neon_genie.py do check && python scripts/neon_genie.py do eval
 python scripts/neon_genie.py do behavioral --suite
+python scripts/neon_genie.py do dist verify
+python scripts/neon_genie.py do release-check
 
 # After a real outcome (local only, PROPOSED) — link to envelope run_id
 python scripts/neon_genie.py do learn --class proof_obtained \
@@ -219,6 +223,7 @@ Briefs live in [`examples/`](./examples/). Gallery index: [`examples/gallery/`](
 | Packaging workspace | `do run --brief …` or `--recipe …` |
 | Resume a run | open `run-envelope.json` first |
 | CI | `do eval` · `do behavioral` · `do dist verify` |
+| Ship a version | `do release-check` → tag `vX.Y.Z` → Release workflow |
 
 **Rules:** no model-prior as `OBSERVED`; public→research / private→`DataRequest`; no spend/publish/mutate; Wayfinder must not rewrite product intent; `TESTABLE`+ needs `completion_proof`.
 
@@ -238,12 +243,14 @@ Neon Genie owns *what/why/user/boundary/proof*. Wayfinder owns *decomposition/mi
 ## Repository layout
 
 ```text
-Neon-Genie-Hermes/          ← skill root
+Neon-Genie-Hermes/          ← skill root (also full install tree)
 ├── SKILL.md                # operating contract
 ├── distribution.yaml       # Hub mirror single source
 ├── scripts/neon_genie.py   # do <job>
+├── skills/neon-genie/      # tap / Hub package (generated)
 ├── profiles/ schemas/ references/ examples/ evals/
-└── docs/
+├── docs/ adr/ GOVERNANCE   # design + process
+└── .github/                # CI, release, issue templates
 ```
 
 | Doc | Purpose |

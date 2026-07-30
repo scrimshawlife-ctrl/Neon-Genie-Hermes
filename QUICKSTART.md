@@ -46,6 +46,9 @@ python scripts/neon_genie.py do learn \
   --class proof_obtained \
   --summary "first paid diagnostic booked" \
   --ledger out/neon-genie/learning-ledger.jsonl
+
+# Full packaging smoke
+python scripts/neon_genie.py do doctor
 ```
 
 Post-SEAL checklist: `references/post-seal-verification.md`.  

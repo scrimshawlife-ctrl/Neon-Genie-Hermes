@@ -17,6 +17,8 @@ They are **not** execution authority.
 | `zero-option.brief.yaml` | Empty skills/access → honest `NOT_COMPUTABLE` |
 | `zero-option-with-skills.brief.yaml` | Declared skills → micro-loop stub |
 | `fragmentation.brief.yaml` | Multi-portal friction / defrag scan |
+| `commercial.brief.yaml` | Pricing scaffold + buyer DataRequest |
+| `audit.brief.yaml` | Offline audit diagnostic package |
 
 ## Sample packets
 
@@ -33,6 +35,9 @@ python scripts/neon_genie.py do recipe --name product-audit
 python scripts/neon_genie.py do recipe --name zero-option
 python scripts/neon_genie.py do recipe --name zero-option-executable
 python scripts/neon_genie.py do recipe --name fragmentation
+python scripts/neon_genie.py do recipe --name commercial
+python scripts/neon_genie.py do recipe --name audit
+python scripts/neon_genie.py do doctor
 ```
 
-Request envelope: `templates/request.yaml`.
+Request envelope: `templates/request.yaml`. Gallery: `examples/gallery/`.

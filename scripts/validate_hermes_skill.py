@@ -58,6 +58,9 @@ REQUIRED_PATHS = [
     "docs/PREMIERE.md",
     "docs/DEMO.md",
     "examples/gallery/README.md",
+    "examples/commercial.brief.yaml",
+    "examples/audit.brief.yaml",
+    "scripts/doctor.py",
     "install.sh",
     ".github/workflows/hermes-evals.yml",
 ]

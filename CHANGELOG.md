@@ -5,6 +5,19 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.12.0] — 2026-07-30
+
+### Added
+
+- Corpus depth: `commercial` and `audit` packaging recipes + briefs
+- `do doctor` full-suite operator smoke (`scripts/doctor.py`)
+- Gallery/examples index updates for new recipes
+
+### Changed
+
+- CI runs commercial/audit recipes and doctor suite
+- ROADMAP maintenance section documents 3.12.0
+
 ## [3.11.0] — 2026-07-30
 
 ### Added

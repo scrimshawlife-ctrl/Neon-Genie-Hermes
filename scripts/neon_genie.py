@@ -60,6 +60,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "record_learning.py",
         "description": "Append PROPOSED learning-ledger observation (never auto-canon)",
     },
+    "doctor": {
+        "script": "doctor.py",
+        "description": "Full-suite smoke: check, eval, transcripts, key recipes",
+    },
 }
 
 ALIASES = {
@@ -73,6 +77,8 @@ ALIASES = {
     "product-audit": ("recipe", ["--name", "product-audit"]),
     "zero-option": ("recipe", ["--name", "zero-option"]),
     "fragmentation": ("recipe", ["--name", "fragmentation"]),
+    "commercial": ("recipe", ["--name", "commercial"]),
+    "audit": ("recipe", ["--name", "audit"]),
 }
 
 
@@ -104,6 +110,9 @@ def top_help() -> str:
             "  python scripts/neon_genie.py do recipe --name fragmentation",
             "  python scripts/neon_genie.py do transcripts",
             "  python scripts/neon_genie.py do learn --class proof_obtained --summary 'first cash' --ledger out/neon-genie/learning-ledger.jsonl",
+            "  python scripts/neon_genie.py do doctor",
+            "  python scripts/neon_genie.py do recipe --name commercial",
+            "  python scripts/neon_genie.py do recipe --name audit",
             "",
             "This CLI does not invent opportunities, run research, or grant execution authority.",
             "",

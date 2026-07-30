@@ -53,6 +53,11 @@ jobs:
           python scripts/neon_genie.py do recipe --name zero-option --out out/neon-genie/zero-option
           python scripts/neon_genie.py do recipe --name zero-option-executable --out out/neon-genie/zero-option-executable
           python scripts/neon_genie.py do recipe --name fragmentation --out out/neon-genie/fragmentation
+          python scripts/neon_genie.py do recipe --name commercial --out out/neon-genie/commercial
+          python scripts/neon_genie.py do recipe --name audit --out out/neon-genie/audit
+
+      - name: Doctor suite
+        run: python scripts/neon_genie.py do doctor
 
       - name: Sample packet validation
         run: |

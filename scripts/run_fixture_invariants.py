@@ -26,6 +26,8 @@ REQUIRED_CASES = {
     "private-gap-must-request.json",
     "private-gap-request-open.json",
     "private-gap-silent-invent.json",
+    "completion-proof-required.json",
+    "completion-proof-present.json",
 }
 
 

@@ -11,6 +11,7 @@
     "conflict_scan",
     "experience_architecture",
     "validation_path",
+    "completion_proof",
     "promotion_state"
   ],
   "properties": {
@@ -22,7 +23,13 @@
     "conflict_scan": {},
     "experience_architecture": {},
     "validation_path": {},
-    "promotion_state": {}
+    "completion_proof": {
+      "description": "Externally checkable acceptance criteria for the product intent"
+    },
+    "promotion_state": {},
+    "proof_path": {
+      "description": "Ordered eng/operator steps to obtain completion_proof"
+    }
   },
   "additionalProperties": true
 }

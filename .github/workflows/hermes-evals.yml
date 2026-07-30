@@ -33,6 +33,11 @@ jobs:
       - name: Golden prose transcripts
         run: python scripts/neon_genie.py do transcripts
 
+      - name: Learning ledger smoke
+        run: |
+          python scripts/neon_genie.py do learn --class other --summary "ci smoke" --ledger out/neon-genie/learning-ledger.jsonl
+          test -s out/neon-genie/learning-ledger.jsonl
+
       - name: Release version alignment
         run: python scripts/audit_release_version.py --strict
 

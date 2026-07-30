@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.9.0
+version: 3.10.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
@@ -46,10 +46,11 @@ python scripts/neon_genie.py do receipt --profiles core,zero_option --out receip
 python scripts/neon_genie.py do eval
 python scripts/neon_genie.py do recipe
 python scripts/neon_genie.py do transcripts
+python scripts/neon_genie.py do learn --class proof_failed --summary "no cash in 7d" --ledger out/neon-genie/learning-ledger.jsonl
 ```
 
-Intents: `check` · `validate` · `route` · `receipt` · `eval` · `recipe` · `transcripts`. See `QUICKSTART.md`.  
-Golden prose: `evals/transcripts/`.
+Intents: `check` · `validate` · `route` · `receipt` · `eval` · `recipe` · `transcripts` · `learn`. See `QUICKSTART.md`.  
+Golden prose: `evals/transcripts/`. Post-SEAL: `references/post-seal-verification.md`.
 
 ## Mission
 
@@ -124,6 +125,14 @@ Priority when a material fact is missing:
 ### SEAL
 
 Run receipt must list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `schemas/run-receipt.schema.json`.
+
+Opportunity, product, and zero-option packets at `TESTABLE` or higher require **`completion_proof`** (externally checkable) and should include a **`proof_path`**. After SEAL, follow `references/post-seal-verification.md`. Record real outcomes with:
+
+```bash
+python scripts/neon_genie.py do learn --class proof_obtained --summary "..." --ledger out/neon-genie/learning-ledger.jsonl
+```
+
+Learning ledger entries are `PROPOSED` / `OBSERVATION` only — never auto-canon.
 
 ## Default operating sequence
 
@@ -349,4 +358,4 @@ Every run should record:
 - output hash;
 - human review status.
 
-Neon Genie must become harder to impress over time by learning from failed opportunities, brittle integrations, buyer failures, distribution failures, and anti-capture failures.
+Neon Genie must become harder to impress over time by learning from failed opportunities, brittle integrations, buyer failures, distribution failures, and anti-capture failures. Capture those as append-only learning ledger observations (`schemas/learning-ledger-entry.schema.json`, `do learn`) with `canon_status: PROPOSED` only — never auto-apply to the skill corpus.

@@ -42,6 +42,8 @@ Fixtures: `evals/cases/`. Rubric skeleton: `evals/rubric.md`.
 | `evals/cases/private-gap-must-request.json` | Gate Q — private gap without DataRequest → GATE_FAIL |
 | `evals/cases/private-gap-request-open.json` | Gate Q — open DataRequest caps promotion → PASS |
 | `evals/cases/private-gap-silent-invent.json` | Gate R — private OBSERVED without request → GATE_FAIL |
+| `evals/cases/completion-proof-required.json` | PROOF — TESTABLE+ needs completion_proof |
+| `evals/cases/completion-proof-present.json` | PROOF — pass when proof present |
 
 Anti-overclaim catalog: `references/anti-overclaim-patterns.md`.
 

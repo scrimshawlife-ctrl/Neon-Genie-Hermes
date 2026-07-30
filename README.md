@@ -4,7 +4,7 @@
 
 ### Governed Hermes skill for invention, product architecture & opportunity intelligence
 
-[![Version](https://img.shields.io/badge/version-3.9.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.10.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -78,6 +78,7 @@ Built for **Hermes** custom skills by [Applied Alchemy Labs](https://github.com/
 - **Evidence Request Protocol** — find public facts, request private facts, refuse silent invent
 - **Golden gate evals** — packaging-level fail-closed checks (`do eval`)
 - **Golden transcripts** — prose OPEN→SEAL exemplars under `evals/transcripts/`
+- **Outcome density** — `completion_proof` + `proof_path` on core packets; post-SEAL checklist; learning ledger (`do learn`)
 
 ---
 
@@ -286,7 +287,7 @@ Memetic strength **cannot** increase promotion readiness when evidence or feasib
 Neon-Genie-Hermes/                 # ← this directory IS the Hermes skill
 ├── SKILL.md                       # Kernel, router, authority, runes
 ├── manifest.json                  # Version, profiles, modes
-├── VERSION                        # 3.9.0
+├── VERSION                        # 3.10.0
 ├── install.sh                     # → ~/.hermes/skills/neon-genie
 ├── QUICKSTART.md
 ├── CHANGELOG.md
@@ -352,7 +353,7 @@ Any proposed change to product intent returns to Neon Genie as a change request.
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.9.0** |
+| Version | **3.10.0** |
 | Authority | `advisory_only` |
 | Default profiles | `core` |
 | Research mode | **proactive** (opt out with `research.enabled=false`) |
@@ -378,6 +379,6 @@ GitHub: [@scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl)
 
 <div align="center">
 
-<sub>Neon Genie v3.9.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.10.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 
 </div>

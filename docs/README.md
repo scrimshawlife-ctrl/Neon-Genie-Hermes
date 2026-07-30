@@ -11,6 +11,8 @@
 | [RELEASE-CHECKLIST-v3.6.md](./RELEASE-CHECKLIST-v3.6.md) | Release gates for v3.6 |
 | [RELEASE-CHECKLIST-v3.8.md](./RELEASE-CHECKLIST-v3.8.md) | Release gates for v3.8 (Evidence spine) |
 | [RELEASE-CHECKLIST-v3.9.md](./RELEASE-CHECKLIST-v3.9.md) | Release gates for v3.9 (Prose transcripts) |
+| [RELEASE-CHECKLIST-v3.10.md](./RELEASE-CHECKLIST-v3.10.md) | Release gates for v3.10 (Outcome density) |
+| [../references/post-seal-verification.md](../references/post-seal-verification.md) | Post-SEAL outcome checklist |
 | [../references/hermes-runtime-contract.md](../references/hermes-runtime-contract.md) | Hermes runtime / authority / artifacts |
 | [../references/CAPABILITY_MAP.md](../references/CAPABILITY_MAP.md) | Capability surface |
 | [../references/GOLDEN_TESTS.md](../references/GOLDEN_TESTS.md) | Eval invariants |

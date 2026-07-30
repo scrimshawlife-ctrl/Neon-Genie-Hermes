@@ -63,6 +63,7 @@ def main() -> int:
             "system_topology": {},
             "opportunity_thesis": {},
             "validation_path": {},
+            "completion_proof": "first paid outcome within 14 days",
             "scorecard": {},
             "promotion_state": "TESTABLE",
         }
@@ -112,6 +113,25 @@ def main() -> int:
     r = run(["do", "transcripts"])
     if r.returncode != 0:
         errors.append(f"do transcripts failed: {r.stderr or r.stdout}")
+
+    with tempfile.TemporaryDirectory() as tmp2:
+        ledger = Path(tmp2) / "learning-ledger.jsonl"
+        r = run(
+            [
+                "do",
+                "learn",
+                "--class",
+                "proof_obtained",
+                "--summary",
+                "test proof",
+                "--ledger",
+                str(ledger),
+            ]
+        )
+        if r.returncode != 0:
+            errors.append(f"do learn failed: {r.stderr or r.stdout}")
+        elif not ledger.is_file():
+            errors.append("do learn did not create ledger")
 
     r = run(
         [

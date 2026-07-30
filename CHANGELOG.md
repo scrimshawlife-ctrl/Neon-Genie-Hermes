@@ -5,6 +5,21 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.10.0] — 2026-07-30
+
+### Added
+
+- Outcome density (Wave P2): `completion_proof` required on opportunity/product/zero-option schemas
+- `proof_path` property on those packets; recipes emit proof paths
+- Learning ledger: `schemas/learning-ledger-entry.schema.json`, `do learn` / `record_learning.py` (PROPOSED only)
+- `references/post-seal-verification.md` checklist
+- Golden evals: completion-proof required/present (16 total)
+
+### Changed
+
+- SKILL SEAL/memory doctrine ties packets to proof + ledger
+- Docs/ROADMAP premiere P2 marked shipping
+
 ## [3.9.0] — 2026-07-30
 
 ### Added
@@ -16,7 +31,7 @@ and this project uses semantic versioning.
 
 ### Changed
 
-- ROADMAP: P0 shipped, P1 shipping as 3.9.0
+- ROADMAP: P0 shipped, P1 shipped as 3.9.0
 - Premiere design spec: P0 success criteria checked off
 
 ## [3.8.0] — 2026-07-30

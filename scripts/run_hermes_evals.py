@@ -129,6 +129,37 @@ def eval_authority_leakage(inp: dict[str, Any]) -> dict[str, Any]:
     return {"status": "PASS", "gate": "E", "grants_execution": False}
 
 
+def eval_fictional_resource(inp: dict[str, Any]) -> dict[str, Any]:
+    constraints = [str(c).lower() for c in (inp.get("constraints") or [])]
+    no_fiction = any("no fictional" in c or "zero fiction" in c for c in constraints)
+    invented = inp.get("invented_resources") or []
+    if no_fiction and invented:
+        return {
+            "status": "GATE_FAIL",
+            "gate": "G",
+            "reason": "Fictional resources declared under zero-fiction constraints",
+        }
+    return {"status": "PASS", "gate": "G", "reason": "no fictional resource violation"}
+
+
+def eval_scorecard_cannot_override_gate(inp: dict[str, Any]) -> dict[str, Any]:
+    gate_fail = str(inp.get("mandatory_gate") or "").upper() == "FAIL"
+    score = float(inp.get("composite_score") or 0.0)
+    if gate_fail:
+        return {
+            "status": "GATE_FAIL",
+            "promotion_blocked": True,
+            "reason": "Composite score cannot override mandatory gate failure",
+            "composite_score_ignored": score,
+        }
+    return {
+        "status": "PASS",
+        "promotion_blocked": False,
+        "reason": "no mandatory gate failure",
+        "composite_score_ignored": None,
+    }
+
+
 EVALUATORS: dict[str, EvalFn] = {
     "zero-option.json": eval_zero_option,
     "x402-misfit.json": eval_x402_misfit,
@@ -137,6 +168,8 @@ EVALUATORS: dict[str, EvalFn] = {
     "offline-no-fabricated-observed.json": eval_offline_no_fabricated_observed,
     "buyer-beneficiary-conflation.json": eval_buyer_beneficiary_conflation,
     "authority-leakage.json": eval_authority_leakage,
+    "fictional-resource.json": eval_fictional_resource,
+    "scorecard-cannot-override-gate.json": eval_scorecard_cannot_override_gate,
 }
 
 

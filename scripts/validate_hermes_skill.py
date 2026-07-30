@@ -42,7 +42,12 @@ REQUIRED_PATHS = [
     "scripts/run_fixture_invariants.py",
     "scripts/audit_release_version.py",
     "scripts/run_hermes_evals.py",
+    "scripts/recipe_run.py",
+    "scripts/recipe_common.py",
     "scripts/recipe_product_audit.py",
+    "examples/fragmentation.brief.yaml",
+    "examples/zero-option-with-skills.brief.yaml",
+    "examples/packets/sample-opportunity.packet.json",
     "install.sh",
     ".github/workflows/hermes-evals.yml",
 ]

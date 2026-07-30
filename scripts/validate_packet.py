@@ -1,9 +1,18 @@
 #!/usr/bin/env python3
 """Validate a JSON packet against a Neon Genie schema (stdlib only).
 
+Supports a practical JSON Schema subset:
+  - type (object/array/string/number/integer/boolean/null)
+  - required
+  - properties (recursive)
+  - items (for arrays)
+  - enum
+  - minLength / minItems (when present)
+
 Usage:
   python scripts/validate_packet.py --packet path.json --type opportunity
   python scripts/validate_packet.py --packet path.json --schema schemas/opportunity-packet.schema.json
+  python scripts/validate_packet.py --packet path.json --type receipt --strict-authority
 """
 
 from __future__ import annotations
@@ -12,6 +21,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
@@ -38,22 +48,107 @@ PACKET_TYPE_TO_SCHEMA = {
 }
 
 
-def load_json(path: Path) -> object:
+def load_json(path: Path) -> Any:
     try:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, UnicodeError, json.JSONDecodeError) as exc:
         raise SystemExit(f"FAIL: cannot read JSON {path}: {exc}") from exc
 
 
-def validate_required(instance: object, schema: dict) -> list[str]:
-    """Minimal JSON Schema subset: type object + required keys present."""
+def type_name(value: Any) -> str:
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return "boolean"
+    if isinstance(value, int) and not isinstance(value, bool):
+        return "integer"
+    if isinstance(value, float):
+        return "number"
+    if isinstance(value, str):
+        return "string"
+    if isinstance(value, list):
+        return "array"
+    if isinstance(value, dict):
+        return "object"
+    return type(value).__name__
+
+
+def type_matches(value: Any, expected: str) -> bool:
+    actual = type_name(value)
+    if expected == "number":
+        return actual in {"number", "integer"}
+    if expected == "integer":
+        return actual == "integer"
+    return actual == expected
+
+
+def validate_schema(instance: Any, schema: dict[str, Any], path: str = "$") -> list[str]:
     errors: list[str] = []
-    if schema.get("type") == "object":
-        if not isinstance(instance, dict):
-            return [f"expected object, got {type(instance).__name__}"]
-        for key in schema.get("required") or []:
+    if not isinstance(schema, dict):
+        return [f"{path}: schema must be object"]
+
+    expected_type = schema.get("type")
+    if isinstance(expected_type, str):
+        if not type_matches(instance, expected_type):
+            errors.append(
+                f"{path}: expected type {expected_type}, got {type_name(instance)}"
+            )
+            return errors
+    elif isinstance(expected_type, list):
+        if not any(type_matches(instance, t) for t in expected_type if isinstance(t, str)):
+            errors.append(
+                f"{path}: expected one of {expected_type}, got {type_name(instance)}"
+            )
+            return errors
+
+    if "enum" in schema and instance not in schema["enum"]:
+        errors.append(f"{path}: value {instance!r} not in enum {schema['enum']}")
+
+    if isinstance(instance, str) and "minLength" in schema:
+        if len(instance) < int(schema["minLength"]):
+            errors.append(f"{path}: string shorter than minLength {schema['minLength']}")
+
+    if isinstance(instance, list) and "minItems" in schema:
+        if len(instance) < int(schema["minItems"]):
+            errors.append(f"{path}: array shorter than minItems {schema['minItems']}")
+
+    if isinstance(instance, dict) and schema.get("type", "object") in ("object", None, ["object"]):
+        required = schema.get("required") or []
+        for key in required:
             if key not in instance:
-                errors.append(f"missing required property: {key}")
+                errors.append(f"{path}: missing required property: {key}")
+        props = schema.get("properties") or {}
+        for key, subschema in props.items():
+            if key in instance and isinstance(subschema, dict) and subschema:
+                # Only recurse when subschema has real constraints
+                if any(k in subschema for k in ("type", "required", "properties", "items", "enum")):
+                    errors.extend(
+                        validate_schema(instance[key], subschema, f"{path}.{key}")
+                    )
+
+    if isinstance(instance, list) and isinstance(schema.get("items"), dict):
+        item_schema = schema["items"]
+        if item_schema:
+            for i, item in enumerate(instance):
+                errors.extend(validate_schema(item, item_schema, f"{path}[{i}]"))
+
+    return errors
+
+
+def authority_checks(instance: Any) -> list[str]:
+    """Extra advisory guards when --strict-authority is set."""
+    errors: list[str] = []
+    if not isinstance(instance, dict):
+        return errors
+    if instance.get("grants_execution") is True:
+        errors.append("authority: grants_execution must not be true")
+    if instance.get("authority") in {"execute", "execution", "spend", "publish"}:
+        errors.append(f"authority: forbidden authority value {instance.get('authority')!r}")
+    auth = instance.get("authority")
+    if isinstance(auth, dict):
+        for k in ("execution", "spending", "publishing"):
+            if auth.get(k) is True:
+                errors.append(f"authority.{k} must not be true in advisory packets")
     return errors
 
 
@@ -66,6 +161,11 @@ def main(argv: list[str] | None = None) -> int:
         help=f"Packet type alias: {', '.join(sorted(set(PACKET_TYPE_TO_SCHEMA)))}",
     )
     parser.add_argument("--schema", type=Path, help="Explicit schema path")
+    parser.add_argument(
+        "--strict-authority",
+        action="store_true",
+        help="Fail if packet claims execution/spend/publish authority",
+    )
     args = parser.parse_args(argv)
 
     if not args.packet.is_file():
@@ -96,14 +196,17 @@ def main(argv: list[str] | None = None) -> int:
         print("FAIL: schema root must be an object", file=sys.stderr)
         return 1
 
-    errors = validate_required(packet, schema)
+    errors = validate_schema(packet, schema)
+    if args.strict_authority:
+        errors.extend(authority_checks(packet))
+
     if errors:
         print(f"FAIL: {args.packet} vs {schema_path.name}", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         return 1
 
-    print(f"PASS: packet validates required fields against {schema_path.name}")
+    print(f"PASS: packet validates against {schema_path.name}")
     return 0
 
 

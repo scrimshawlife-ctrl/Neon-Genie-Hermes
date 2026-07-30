@@ -19,6 +19,8 @@ REQUIRED_CASES = {
     "offline-no-fabricated-observed.json",
     "buyer-beneficiary-conflation.json",
     "authority-leakage.json",
+    "fictional-resource.json",
+    "scorecard-cannot-override-gate.json",
 }
 
 
@@ -62,6 +64,14 @@ def main() -> int:
             exp = data.get("expected") or {}
             if exp.get("memetic_may_raise_promotion") is not False:
                 errors.append("memetic-cannot-promote.json must forbid promotion raise")
+        if path.name == "fictional-resource.json":
+            exp = data.get("expected") or {}
+            if exp.get("gate") != "G":
+                errors.append("fictional-resource.json expected.gate must be G")
+        if path.name == "scorecard-cannot-override-gate.json":
+            exp = data.get("expected") or {}
+            if exp.get("promotion_blocked") is not True:
+                errors.append("scorecard-cannot-override-gate.json must block promotion")
 
     if errors:
         print("FAIL: fixture invariants", file=sys.stderr)

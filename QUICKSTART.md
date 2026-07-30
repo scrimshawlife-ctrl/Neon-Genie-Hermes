@@ -35,7 +35,15 @@ python scripts/neon_genie.py help
 Packaging only — does not invent opportunities or grant execution authority.
 
 `do eval` runs golden gate fixtures under `evals/cases/`.  
-`do recipe` runs the product-audit packaging sample (route → receipt → handoff stub).
+
+```bash
+python scripts/neon_genie.py do recipe --list
+python scripts/neon_genie.py do recipe --name product-audit
+python scripts/neon_genie.py do recipe --name zero-option
+python scripts/neon_genie.py do recipe --name zero-option-executable
+python scripts/neon_genie.py do recipe --name fragmentation
+python scripts/neon_genie.py do validate --packet examples/packets/sample-receipt.packet.json --type receipt --strict-authority
+```
 
 Restart Hermes or reload skills after install.
 

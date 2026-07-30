@@ -109,9 +109,71 @@ def main() -> int:
     if r.returncode != 0:
         errors.append(f"do eval failed: {r.stderr or r.stdout}")
 
-    r = run(["do", "recipe", "--out", str(ROOT / "out" / "neon-genie" / "product-audit-test")])
+    r = run(
+        [
+            "do",
+            "recipe",
+            "--name",
+            "product-audit",
+            "--out",
+            str(ROOT / "out" / "neon-genie" / "product-audit-test"),
+        ]
+    )
     if r.returncode != 0:
-        errors.append(f"do recipe failed: {r.stderr or r.stdout}")
+        errors.append(f"do recipe product-audit failed: {r.stderr or r.stdout}")
+
+    r = run(
+        [
+            "do",
+            "recipe",
+            "--name",
+            "zero-option",
+            "--out",
+            str(ROOT / "out" / "neon-genie" / "zero-option-test"),
+        ]
+    )
+    if r.returncode != 0:
+        errors.append(f"do recipe zero-option failed: {r.stderr or r.stdout}")
+
+    r = run(
+        [
+            "do",
+            "recipe",
+            "--name",
+            "fragmentation",
+            "--out",
+            str(ROOT / "out" / "neon-genie" / "fragmentation-test"),
+        ]
+    )
+    if r.returncode != 0:
+        errors.append(f"do recipe fragmentation failed: {r.stderr or r.stdout}")
+
+    r = run(
+        [
+            "do",
+            "validate",
+            "--packet",
+            str(ROOT / "examples" / "packets" / "sample-opportunity.packet.json"),
+            "--type",
+            "opportunity",
+        ]
+    )
+    if r.returncode != 0:
+        errors.append(f"validate sample opportunity failed: {r.stderr or r.stdout}")
+
+    r = run(
+        [
+            "do",
+            "validate",
+            "--packet",
+            str(ROOT / "examples" / "packets" / "sample-receipt.packet.json"),
+            "--type",
+            "receipt",
+            "--strict-authority",
+        ]
+    )
+    if r.returncode != 0:
+        errors.append(f"validate sample receipt failed: {r.stderr or r.stdout}")
 
     if errors:
         print("FAIL: packaging CLI tests", file=sys.stderr)

@@ -5,6 +5,22 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.7.0] — 2026-07-30
+
+### Added
+
+- Multi-recipe runner: `do recipe --name product-audit|zero-option|zero-option-executable|fragmentation`
+- `scripts/recipe_common.py`, `scripts/recipe_run.py`
+- Briefs: `fragmentation.brief.yaml`, `zero-option-with-skills.brief.yaml`
+- Sample packets under `examples/packets/`
+- Deeper packet validator (typed JSON Schema subset + `--strict-authority`)
+- Eval cases: `fictional-resource`, `scorecard-cannot-override-gate`
+
+### Changed
+
+- `do recipe` defaults to multi-recipe dispatcher (product-audit still default name)
+- CI runs all packaging recipes + sample packet validation
+
 ## [3.6.0] — 2026-07-30
 
 ### Added

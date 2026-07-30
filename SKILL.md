@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.10.0
+version: 3.11.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT

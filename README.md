@@ -4,7 +4,7 @@
 
 ### Governed Hermes skill for invention, product architecture & opportunity intelligence
 
-[![Version](https://img.shields.io/badge/version-3.10.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.11.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -16,7 +16,7 @@
 
 **Convert weak signals, blocked transitions, and incomplete products into evidence-bound, externally testable opportunity systems.**
 
-[Installation](#installation) · [Quick start](#quick-start) · [How it works](#how-it-works) · [Profiles](#profiles) · [Outputs](#output-packets) · [Docs](#repository-layout)
+[Installation](#installation) · [Quick start](#quick-start) · [Premiere](./docs/PREMIERE.md) · [Demo](./docs/DEMO.md) · [How it works](#how-it-works) · [Profiles](#profiles) · [Outputs](#output-packets) · [Docs](#repository-layout)
 
 </div>
 
@@ -59,7 +59,11 @@ Most “idea → product” agents invent freely and overclaim. Neon Genie is th
 
 Built for **Hermes** custom skills by [Applied Alchemy Labs](https://github.com/scrimshawlife-ctrl) / Zero State.
 
-**Premiere program:** governed opportunity intelligence that wins on trust density, outcome usefulness, and category clarity — see [docs/ROADMAP.md](./docs/ROADMAP.md) and the [premiere design](./docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md).
+**Premiere program:** governed opportunity intelligence that wins on trust density, outcome usefulness, and category clarity.
+
+- Thesis & comparison: **[docs/PREMIERE.md](./docs/PREMIERE.md)**  
+- 10-minute demo: **[docs/DEMO.md](./docs/DEMO.md)**  
+- Roadmap: [docs/ROADMAP.md](./docs/ROADMAP.md) · Design: [premiere program](./docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md)
 
 ---
 
@@ -79,6 +83,18 @@ Built for **Hermes** custom skills by [Applied Alchemy Labs](https://github.com/
 - **Golden gate evals** — packaging-level fail-closed checks (`do eval`)
 - **Golden transcripts** — prose OPEN→SEAL exemplars under `evals/transcripts/`
 - **Outcome density** — `completion_proof` + `proof_path` on core packets; post-SEAL checklist; learning ledger (`do learn`)
+- **Category surface** — premiere thesis, 10-minute demo, example gallery
+
+### Neon Genie vs idea agents (short)
+
+| | Idea / product chat | Neon Genie |
+|--|---------------------|------------|
+| Missing data | Fills in | Find / **DataRequest** / `NOT_COMPUTABLE` |
+| Claims | Unlabeled confidence | `OBSERVED` · `INFERRED` · `SPECULATIVE` · `NOT_COMPUTABLE` |
+| Authority | Often implies action | **Advisory only** |
+| Eng handoff | Unstable intent | Wayfinder freeze + change control |
+
+Full comparison: [docs/PREMIERE.md](./docs/PREMIERE.md).
 
 ---
 
@@ -287,7 +303,7 @@ Memetic strength **cannot** increase promotion readiness when evidence or feasib
 Neon-Genie-Hermes/                 # ← this directory IS the Hermes skill
 ├── SKILL.md                       # Kernel, router, authority, runes
 ├── manifest.json                  # Version, profiles, modes
-├── VERSION                        # 3.10.0
+├── VERSION                        # 3.11.0
 ├── install.sh                     # → ~/.hermes/skills/neon-genie
 ├── QUICKSTART.md
 ├── CHANGELOG.md
@@ -353,7 +369,7 @@ Any proposed change to product intent returns to Neon Genie as a change request.
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.10.0** |
+| Version | **3.11.0** |
 | Authority | `advisory_only` |
 | Default profiles | `core` |
 | Research mode | **proactive** (opt out with `research.enabled=false`) |
@@ -379,6 +395,6 @@ GitHub: [@scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl)
 
 <div align="center">
 
-<sub>Neon Genie v3.10.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.11.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 
 </div>

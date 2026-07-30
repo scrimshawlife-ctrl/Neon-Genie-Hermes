@@ -12,7 +12,7 @@
 
 Define a multi-wave program to make **Neon Genie** the premiere Hermes skill of its type: **governed opportunity and product intelligence** (not cinematic engineering, not generic ideation chat, not execution runtime).
 
-This document is a **program design**. Waves **P0–P2** are shipped (v3.8–3.10). **Wave P3 (Category ownership)** remains the next implementable unit.
+This document is a **program design**. Waves **P0–P3** are shipped (v3.8–3.11). The premiere program is complete; further work is maintenance and corpus depth.
 
 ---
 
@@ -194,6 +194,8 @@ Existing packaging CLI (`do check|validate|route|receipt|eval|recipe`) supports 
 - 10-minute demo path: install → recipe → transcript
 - Comparison table; README positioning
 - Optional sanitized public example gallery
+
+**P3 status:** shipped as **3.11.0** (`docs/PREMIERE.md`, `docs/DEMO.md`, `examples/gallery/`).
 
 ---
 

@@ -2,6 +2,8 @@
 
 Governed Hermes skill for invention, product architecture, and opportunity intelligence. **Advisory only.**
 
+**New here?** [10-minute demo](./docs/DEMO.md) · [Why premiere](./docs/PREMIERE.md) · [Example gallery](./examples/gallery/README.md)
+
 ## Install
 
 From a clone of this repository:

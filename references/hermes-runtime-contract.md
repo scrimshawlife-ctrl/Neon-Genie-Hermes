@@ -86,6 +86,19 @@ Host research tools and Wayfinder are optional extensions. Their absence cannot 
 - Model prior without fetch is at most `SPECULATIVE`.
 - Missing tooling or failed fetch → `NOT_COMPUTABLE` with attempted query — never fabricate `OBSERVED` claims.
 
+### Evidence Request Protocol
+
+When a material fact is missing, follow **find → request → NOT_COMPUTABLE**:
+
+1. **Find** — public (or likely-public) gaps: attempt host research; cite or drop.
+2. **Request** — operator/private gaps or undeclared access: emit a `DataRequest` (`schemas/data-request.schema.json`) instead of inventing.
+3. **NOT_COMPUTABLE** — only after find was attempted (or correctly skipped offline) and/or a DataRequest is open or unanswered.
+4. **Never** mark model prior as `OBSERVED`.
+
+Required DataRequest fields: `field`, `why_decision_critical`, `sensitivity` (`public`|`operator`|`private`), `suggested_source`, `blocks_promotion`, `status` (`open`|`satisfied`|`waived`).
+
+CLEAR fails on Gates P (skip find), Q (skip request), and R (silent private invent). SEAL receipts list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty). Full protocol: `SKILL.md` § Evidence Request Protocol; anti-overclaim gates A–R: `references/anti-overclaim-patterns.md`.
+
 ## Authority
 
 Neon Genie authority is **advisory_only** (`manifest.json`).

@@ -21,6 +21,11 @@ Use alongside mandatory gates in `SKILL.md`. Labels: `OBSERVED` · `INFERRED` ·
 | **M — Duplicate subsystem** | New concept copies existing capability without wrapper classification | Classify wrapper vs duplicate; reject silent duplicates |
 | **N — Offline fabrication** | Offline mode still emits `OBSERVED` from model prior | Cap at `SPECULATIVE`; log research skipped |
 | **O — Tooling gap denial** | Host lacks a research tool class but packet pretends coverage | Record `tooling_gap`; partial answer only |
+| **P — Skip find** | Public gap, tools available, no research attempt, claim still asserted or NC without attempt | Run research loop or record attempt failure |
+| **Q — Skip request** | Private/operator gap is decision-critical and no DataRequest | Emit DataRequest; block promotion if needed |
+| **R — Silent private invent** | Private fact as OBSERVED without source/request | Downgrade; emit request or NOT_COMPUTABLE |
+
+Gates **A–R** apply during CLEAR. See Evidence Request Protocol in `SKILL.md`.
 
 ## Scorecard rule
 

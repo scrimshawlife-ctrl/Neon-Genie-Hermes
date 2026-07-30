@@ -44,15 +44,18 @@ If a class is unavailable on the host, skip it and record `tooling_gap` (Gate O)
 ## Auto-research protocol
 
 1. List decision-critical questions.
-2. Map each to source class + query.
-3. Fetch in usefulness order (primary → secondary).
-4. Normalize into evidence items with URL/path, title, date, snippet, retrieval time.
-5. Label claims; promote only what is supported.
-6. Stop when additional fetches would not change the recommendation or scorecard.
+2. Map each to source class + query; classify sensitivity (`public` | `operator` | `private`).
+3. **Find** public/likely-public gaps via host tools (usefulness order: primary → secondary).
+4. **Request** operator/private gaps (or undeclared access) with a `DataRequest` (`schemas/data-request.schema.json`) — do not invent or scrape private systems.
+5. Normalize into evidence items with URL/path, title, date, snippet, retrieval time.
+6. Label claims; promote only what is supported. `NOT_COMPUTABLE` only after find and/or request as appropriate.
+7. Stop when additional fetches would not change the recommendation or scorecard.
+
+Open DataRequests with `blocks_promotion: true` block promotion until satisfied or waived (Gates P–R in `references/anti-overclaim-patterns.md`).
 
 ## Attribution boundaries
 
-Separate person / company / foundation / model inference. Never fabricate familiarity, referrals, giving motives, or private knowledge.
+Separate person / company / foundation / model inference. Never fabricate familiarity, referrals, giving motives, or private knowledge. Private decision-critical facts require a `DataRequest` (Gate Q), not silent invent as `OBSERVED` (Gate R).
 
 ## Drafting ≠ outreach
 

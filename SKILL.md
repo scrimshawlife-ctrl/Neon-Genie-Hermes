@@ -1,6 +1,6 @@
 ---
 name: neon-genie
-version: 3.8.0
+version: 3.9.0
 description: Governed invention, product architecture, opportunity intelligence, fragmentation mining, Zero-State execution design, agentic service decomposition, commercial simulation, and Wayfinder handoff. Proactive research by default.
 author: Applied Alchemy Labs / Zero State
 license: MIT
@@ -45,9 +45,11 @@ python scripts/neon_genie.py do route --text "zero capital first cash"
 python scripts/neon_genie.py do receipt --profiles core,zero_option --out receipt.json
 python scripts/neon_genie.py do eval
 python scripts/neon_genie.py do recipe
+python scripts/neon_genie.py do transcripts
 ```
 
-Intents: `check` · `validate` · `route` · `receipt` · `eval` · `recipe`. See `QUICKSTART.md`.
+Intents: `check` · `validate` · `route` · `receipt` · `eval` · `recipe` · `transcripts`. See `QUICKSTART.md`.  
+Golden prose: `evals/transcripts/`.
 
 ## Mission
 

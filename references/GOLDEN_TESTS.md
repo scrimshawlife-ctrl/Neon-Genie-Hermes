@@ -54,3 +54,13 @@ python scripts/run_hermes_evals.py --json
 ```
 
 Each case is evaluated by deterministic gate logic in `scripts/run_hermes_evals.py` and compared to its `expected` object (subset match).
+
+## Golden prose transcripts
+
+Full OPEN→SEAL exemplars (labels, DataRequests, fail-closed CLEAR, advisory SEAL):
+
+```bash
+python scripts/neon_genie.py do transcripts
+```
+
+Index: `evals/transcripts/README.md`. Rubric: `evals/transcripts/rubric.md`.

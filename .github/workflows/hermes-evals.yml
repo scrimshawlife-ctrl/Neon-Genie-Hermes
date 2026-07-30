@@ -30,6 +30,9 @@ jobs:
       - name: Golden gate evals
         run: python scripts/neon_genie.py do eval
 
+      - name: Golden prose transcripts
+        run: python scripts/neon_genie.py do transcripts
+
       - name: Release version alignment
         run: python scripts/audit_release_version.py --strict
 

@@ -162,17 +162,22 @@ Existing packaging CLI (`do check|validate|route|receipt|eval|recipe`) supports 
 
 **Success criteria (P0):**
 
-- [ ] Doctrine states find → request → NOT_COMPUTABLE explicitly
-- [ ] `DataRequest` schema exists and is referenced from SKILL/CLEAR
-- [ ] Receipt guidance includes open data requests
-- [ ] New golden evals pass in CI via `do eval`
-- [ ] No domain merge with Kubrick; authority remains `advisory_only`
+- [x] Doctrine states find → request → NOT_COMPUTABLE explicitly
+- [x] `DataRequest` schema exists and is referenced from SKILL/CLEAR
+- [x] Receipt guidance includes open data requests
+- [x] New golden evals pass in CI via `do eval` (14/14 at v3.8.0)
+- [x] No domain merge with Kubrick; authority remains `advisory_only`
+
+**P0 status:** shipped as **v3.8.0**.
 
 ### Wave P1 — Prose excellence
 
 - 3–5 golden transcripts (markdown) covering: zero-option empty, product audit, fragmentation, commercial missing buyer, offline audit
 - Transcript rubric: labels, research log, DataRequests, SEAL shape, no authority leakage
 - Profile depth only where transcripts reveal holes
+- Structural transcript checker (`do transcripts` / `scripts/check_transcripts.py`)
+
+**P1 status:** shipped as **v3.9.0** (`evals/transcripts/`, `do transcripts`).
 
 ### Wave P2 — Outcome density
 

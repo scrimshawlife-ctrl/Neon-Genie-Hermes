@@ -57,6 +57,8 @@ jobs:
           python scripts/neon_genie.py do recipe --name audit --out out/neon-genie/audit
           python scripts/neon_genie.py do recipe --name agentic --out out/neon-genie/agentic
           python scripts/neon_genie.py do recipe --name memetic --out out/neon-genie/memetic
+          python scripts/neon_genie.py do recipe --name evidence --out out/neon-genie/evidence
+          python scripts/neon_genie.py do recipe --name opportunity --out out/neon-genie/opportunity
 
       - name: Doctor suite
         run: python scripts/neon_genie.py do doctor

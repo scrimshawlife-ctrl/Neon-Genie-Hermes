@@ -81,6 +81,8 @@ ALIASES = {
     "audit": ("recipe", ["--name", "audit"]),
     "agentic": ("recipe", ["--name", "agentic"]),
     "memetic": ("recipe", ["--name", "memetic"]),
+    "evidence": ("recipe", ["--name", "evidence"]),
+    "opportunity": ("recipe", ["--name", "opportunity"]),
 }
 
 

@@ -5,6 +5,19 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.5.0] — 2026-07-30
+
+### Added
+
+- GitHub Actions: `.github/workflows/hermes-evals.yml` (check, CLI tests, fixtures, version audit)
+- `scripts/run_fixture_invariants.py`
+- `scripts/audit_release_version.py`
+- `docs/RELEASE-CHECKLIST-v3.5.md`
+
+### Changed
+
+- Roadmap Wave 4 marked shipped
+
 ## [3.4.0] — 2026-07-30
 
 ### Added

@@ -1,0 +1,36 @@
+name: Hermes Skill Evals
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Skill integrity (do check)
+        run: python scripts/neon_genie.py do check
+
+      - name: Wave 3 packaging CLI regression
+        run: python scripts/test_wave3_cli.py
+
+      - name: Eval fixture invariants
+        run: python scripts/run_fixture_invariants.py
+
+      - name: Release version alignment
+        run: python scripts/audit_release_version.py --strict
+
+      - name: Route smoke (examples)
+        run: |
+          python scripts/neon_genie.py do route --request examples/product-audit.brief.yaml --json
+          python scripts/neon_genie.py do route --request examples/zero-option.brief.yaml --json

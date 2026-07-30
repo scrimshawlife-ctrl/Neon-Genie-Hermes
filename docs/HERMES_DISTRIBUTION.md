@@ -100,8 +100,22 @@ To appear under **official optional** skills (`hermes skills browse --source off
 - [x] `skills.sh.json` grouping  
 - [x] Install path documented (`./install.sh` + `hermes skills install …`)  
 - [x] `do doctor` / `do check` pass  
-- [ ] Run `hermes skills inspect` after push  
+- [x] `hermes skills inspect` — listed (skills.sh / community)  
+- [x] `hermes skills install …` — security scan SAFE, installs as community  
+- [x] Tap registered: `hermes skills tap add scrimshawlife-ctrl/Neon-Genie-Hermes`  
 - [ ] Announce on Discord / social with install one-liner  
+
+### Hub install vs full package
+
+Hermes Hub only copies **explicitly path-referenced** files under  
+`references/`, `templates/`, `scripts/`, `assets/`, `examples/`  
+(security allowlist). A hub install therefore brings the agent contract  
+(`SKILL.md` + key refs + `scripts/neon_genie.py`), not the full schemas/profiles/evals tree.
+
+**Full packaging skill (doctor, recipes, schemas):** use clone + `./install.sh`  
+(or rsync `skills/neon-genie/` into `~/.hermes/skills/neon-genie`).
+
+**Agent contract only:** hub one-liner is enough for Hermes to load Neon Genie doctrine.
 
 ---
 

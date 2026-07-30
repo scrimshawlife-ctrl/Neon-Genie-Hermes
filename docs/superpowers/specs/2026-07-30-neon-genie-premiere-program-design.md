@@ -12,7 +12,7 @@
 
 Define a multi-wave program to make **Neon Genie** the premiere Hermes skill of its type: **governed opportunity and product intelligence** (not cinematic engineering, not generic ideation chat, not execution runtime).
 
-This document is a **program design**. Only **Wave P0 (Evidence spine)** is the first implementable unit after planning. Waves P1–P3 remain roadmap until P0 ships.
+This document is a **program design**. Waves **P0–P2** are shipped (v3.8–3.10). **Wave P3 (Category ownership)** remains the next implementable unit.
 
 ---
 
@@ -185,6 +185,8 @@ Existing packaging CLI (`do check|validate|route|receipt|eval|recipe`) supports 
 - Append-only local learning ledger format (PROPOSED observations only; never auto-canon)
 - Post-seal verification checklist
 - Recipes emit proof paths, not only structural stubs
+
+**P2 status:** shipped as **3.10.0** (`completion_proof`, `do learn`, `references/post-seal-verification.md`).
 
 ### Wave P3 — Category ownership
 

@@ -37,6 +37,16 @@ Packaging only — does not invent opportunities or grant execution authority.
 
 `do eval` runs golden gate fixtures under `evals/cases/`.  
 `do transcripts` checks golden prose exemplars under `evals/transcripts/`.  
+`do learn` appends outcome observations to a local learning ledger (PROPOSED only).
+
+```bash
+python scripts/neon_genie.py do learn \
+  --class proof_obtained \
+  --summary "first paid diagnostic booked" \
+  --ledger out/neon-genie/learning-ledger.jsonl
+```
+
+Post-SEAL checklist: `references/post-seal-verification.md`.  
 
 ```bash
 python scripts/neon_genie.py do recipe --list

@@ -58,8 +58,16 @@ def recipe_product_audit(out: Path) -> int:
         "conflict_scan": {"status": "PROPOSED", "conflicts": []},
         "experience_architecture": "operator CLI + Hermes skill prose",
         "validation_path": ["do check", "do eval", "human review"],
+        "completion_proof": "Operator accepts product packet + handoff stub in review without intent rewrite",
+        "proof_path": [
+            "human reviews product-packet.stub.json",
+            "confirm open DataRequests listed",
+            "optional: satisfy access request then re-score integration",
+            "append learning ledger on real outcome",
+        ],
         "promotion_state": "SPEC_COMPLETE",
         "authority": "advisory_only",
+        "post_seal_checklist": "references/post-seal-verification.md",
     }
     product_path = out / "product-packet.stub.json"
     rc.write_json(product_path, product_stub)
@@ -120,6 +128,11 @@ def recipe_zero_option(out: Path) -> int:
         "system_state": "NOT_COMPUTABLE",
         "status": "NOT_COMPUTABLE",
         "reason": "No executable capabilities or access supplied",
+        "completion_proof": "NOT_COMPUTABLE: no skills/access to prove first cash",
+        "proof_path": [
+            "declare skills and access",
+            "re-run zero-option-executable recipe or Hermes zero_option profile",
+        ],
         "authority": "advisory_only",
         "grants_execution": False,
     }
@@ -176,6 +189,13 @@ def recipe_zero_option_executable(out: Path) -> int:
             "result": "cash or documented refusal",
             "reinforcement": "log outcome; no fictional pipeline",
         },
+        "completion_proof": "Paid engagement booked or written refusal within 7 days",
+        "proof_path": [
+            "list warm contacts from declared access",
+            "send one bounded paid diagnostic offer",
+            "record cash or refusal",
+            "append learning ledger (proof_obtained or proof_failed)",
+        ],
         "status": "PROPOSED",
         "authority": "advisory_only",
         "grants_execution": False,
@@ -237,6 +257,13 @@ def recipe_fragmentation(out: Path) -> int:
         "scorecard": {
             "integration_feasibility": "NOT_COMPUTABLE_without_access"
         },
+        "completion_proof": "Measured friction reduction after access inventory OR explicit reject (burden > value)",
+        "proof_path": [
+            "satisfy access DataRequest",
+            "measure handoff time tax",
+            "compare integration burden vs capturable value",
+            "promote only if net positive",
+        ],
         "status": "PROPOSED",
         "promotion_state": "MAPPED",
         "authority": "advisory_only",

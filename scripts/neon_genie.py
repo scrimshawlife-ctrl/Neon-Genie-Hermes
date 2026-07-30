@@ -56,6 +56,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "check_transcripts.py",
         "description": "Validate golden prose transcript structure and rubric markers",
     },
+    "learn": {
+        "script": "record_learning.py",
+        "description": "Append PROPOSED learning-ledger observation (never auto-canon)",
+    },
 }
 
 ALIASES = {
@@ -65,6 +69,7 @@ ALIASES = {
     "build-receipt": ("receipt", []),
     "run-evals": ("eval", []),
     "check-transcripts": ("transcripts", []),
+    "record-learning": ("learn", []),
     "product-audit": ("recipe", ["--name", "product-audit"]),
     "zero-option": ("recipe", ["--name", "zero-option"]),
     "fragmentation": ("recipe", ["--name", "fragmentation"]),
@@ -98,6 +103,7 @@ def top_help() -> str:
             "  python scripts/neon_genie.py do recipe --name zero-option",
             "  python scripts/neon_genie.py do recipe --name fragmentation",
             "  python scripts/neon_genie.py do transcripts",
+            "  python scripts/neon_genie.py do learn --class proof_obtained --summary 'first cash' --ledger out/neon-genie/learning-ledger.jsonl",
             "",
             "This CLI does not invent opportunities, run research, or grant execution authority.",
             "",

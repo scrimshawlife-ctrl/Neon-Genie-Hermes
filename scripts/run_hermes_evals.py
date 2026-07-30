@@ -225,6 +225,27 @@ def eval_private_gap_silent_invent(inp: dict[str, Any]) -> dict[str, Any]:
     return {"status": "PASS", "gate": "R"}
 
 
+def eval_completion_proof(inp: dict[str, Any]) -> dict[str, Any]:
+    has_proof = bool(inp.get("has_completion_proof") or inp.get("completion_proof"))
+    promo = str(inp.get("promotion_state") or "RAW_SIGNAL")
+    high = promo in {
+        "TESTABLE",
+        "SERVICE_FIRST",
+        "SERVICE_PROVEN",
+        "SPEC_COMPLETE",
+        "WAYFINDER_READY",
+        "BUILD_READY",
+        "CANON_CANDIDATE",
+    }
+    if high and not has_proof:
+        return {
+            "status": "GATE_FAIL",
+            "gate": "PROOF",
+            "reason": "completion_proof required before TESTABLE or higher promotion",
+        }
+    return {"status": "PASS", "gate": "PROOF"}
+
+
 EVALUATORS: dict[str, EvalFn] = {
     "zero-option.json": eval_zero_option,
     "x402-misfit.json": eval_x402_misfit,
@@ -240,6 +261,8 @@ EVALUATORS: dict[str, EvalFn] = {
     "private-gap-must-request.json": eval_private_gap_must_request,
     "private-gap-request-open.json": eval_private_gap_must_request,
     "private-gap-silent-invent.json": eval_private_gap_silent_invent,
+    "completion-proof-required.json": eval_completion_proof,
+    "completion-proof-present.json": eval_completion_proof,
 }
 
 

@@ -57,7 +57,7 @@ See `docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md`.
 |------|--------|
 | P0 Evidence spine | shipped **3.8.0** |
 | P1 Prose excellence | shipped **3.9.0** (golden transcripts + `do transcripts`) |
-| P2 Outcome density | planned |
+| P2 Outcome density | shipped **3.10.0** (completion_proof, learn ledger, post-SEAL) |
 | P3 Category ownership | planned |
 
 ## Non-goals (all waves)

@@ -41,51 +41,148 @@ It is **not** Kubrick (cinematic), **not** Wayfinder (engineering execution), an
 
 ## How to use
 
-### Three-minute path
+There are two ways to use Neon Genie. **Most people should use Hermes chat.**  
+The command line is for install checks, sample runs, and automation.
+
+### 1. Install (once)
+
+**Option A — Hermes Skills Hub (recommended)**
 
 ```bash
-./install.sh                                          # or hermes skills install …
-python scripts/neon_genie.py do doctor                # smoke
-python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
-# open out/neon-genie/demo/run-envelope.json first
+hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
 ```
 
-### Talk to Hermes (judgment)
+Then reload or restart Hermes so it picks up the skill.
 
-Install → invoke Neon Genie → describe who is stuck and what “done” looks like.  
-Hermes follows **OPEN → ALIGN → ASCEND → CLEAR → SEAL**. Outputs are drafts only.
+**Option B — Clone this repo**
+
+```bash
+git clone https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes.git
+cd Neon-Genie-Hermes
+./install.sh
+# installs into ~/.hermes/skills/neon-genie
+```
+
+Check that the install works:
+
+```bash
+python ~/.hermes/skills/neon-genie/scripts/neon_genie.py do doctor
+# or, from a clone:
+python scripts/neon_genie.py do doctor
+```
+
+You want a final line that says the doctor passed. If it fails, the skill files are incomplete or the path is wrong.
+
+More install detail: [Installation](#installation) · [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md)
+
+---
+
+### 2. Everyday use in Hermes (plain English)
+
+This is the normal path.
+
+1. **Start Hermes** (desktop or CLI) with Neon Genie installed.
+2. **Ask for Neon Genie** by name, or describe a product/opportunity problem so the skill loads  
+   (triggers include: product audit, opportunity mining, zero option, wayfinder handoff).
+3. **Say what you need in ordinary language.** Include:
+   - Who is stuck (person, team, customer)
+   - What “done” looks like
+   - What you already know (links, notes, constraints)
+   - What you do **not** want (e.g. do not invent a buyer; do not change the repo)
+4. **Let Hermes work through the steps.** Neon Genie always runs in order:  
+   understand request → gather evidence → build the answer → check gates → seal outputs.
+5. **Treat everything as a draft.** Neon Genie can recommend. It cannot spend money, publish, email people, or change git history.
+
+**Example things to say**
 
 ```text
-/neon-genie We have an audio continuity tool but no defined buyer.
-What should we charge? Research public comps; request private buyer data;
-do not invent; do not modify the repo.
+Use Neon Genie. We have an audio continuity tool but no defined buyer.
+What should we charge? Research public competitors if you can. If you need
+private facts (who pays, who authorizes budget), ask me with a DataRequest
+instead of inventing. Label every important claim. Do not modify the repo.
 ```
 
-Prompts: [QUICKSTART.md](./QUICKSTART.md) · Prose goldens: [evals/transcripts/](./evals/transcripts/) · Behavioral: [evals/behavioral/](./evals/behavioral/)
+```text
+Use Neon Genie zero-option: I need first cash in 7 days with no capital.
+Only use skills and access I explicitly declare. Do not invent customers,
+credentials, or money. If you cannot compute an answer, say NOT_COMPUTABLE.
+```
 
-### Command line (packaging — not a product brain)
+```text
+Use Neon Genie offline: research.enabled=false
+Only use what I paste and what is already in this workspace.
+```
+
+**What good output looks like**
+
+- Claims labeled **OBSERVED** (with a source), **INFERRED**, **SPECULATIVE**, or **NOT_COMPUTABLE**
+- Missing private facts asked for as a **DataRequest**, not filled in with guesses
+- Clear product or opportunity packet(s) and a short run summary
+- Still **advisory only** — no “I will merge the PR” / “I will charge the card”
+
+**What to do with the files**
+
+If a packaging run wrote a folder (see below), open **`run-envelope.json` first**.  
+That file points at the main packet, the receipt, and any open data requests.
+
+More prompt patterns: [QUICKSTART.md](./QUICKSTART.md) · Worked chat examples: [evals/transcripts/](./evals/transcripts/)
+
+---
+
+### 3. Command-line helpers (optional)
+
+Use these when you want a **sample run on disk**, CI checks, or automation.  
+This CLI does **not** invent product strategy by itself — it packages, validates, and runs examples.
+
+**One pattern**
 
 ```text
 python scripts/neon_genie.py do <job> [options]
 ```
 
-| Job | Use |
-|-----|-----|
-| `doctor` | Full smoke |
-| `run` | **Operator path** — brief/recipe → workspace + `run-envelope.json` |
-| `capabilities` | Machine-readable surface (`--json`) for orchestrators |
-| `recipe` / `route` / `validate` | Examples, profile routing, schema check |
-| `receipt` / `envelope` | Receipt + canonical envelope |
-| `eval` / `transcripts` / `behavioral` | Gates and semantic suites |
-| `learn` / `reconcile` | PROPOSED ledger + run_id linkage (never auto-canon) |
-| `dist` / `release-check` | Hub mirrors; pre-release gate before tagging |
+From a clone, `cd` into the repo first. From a Hub install, use the full path under `~/.hermes/skills/neon-genie/`.
+
+| In plain English | Command |
+|------------------|---------|
+| Check the install | `do doctor` |
+| Run a named sample end-to-end | `do run --recipe product-audit --out out/neon-genie/demo` |
+| Run from a short YAML brief | `do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo` |
+| See what the skill can do (JSON) | `do capabilities --json` |
+| List sample recipes | `do recipe --list` |
+| Suggest profiles from text | `do route --text "first cash zero capital" --json` |
+| Check a packet or envelope file | `do validate --packet path/to/file.json --type envelope` |
+| Record a real outcome later | `do learn --class proof_obtained --summary "…" --envelope out/…/run-envelope.json` |
 
 ```bash
+# Typical first CLI session (from a clone)
 python scripts/neon_genie.py help
-python scripts/neon_genie.py do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo
-python scripts/neon_genie.py do capabilities --json
-python scripts/neon_genie.py do release-check   # maintainers, before git tag
+python scripts/neon_genie.py do doctor
+python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
+# then open: out/neon-genie/demo/run-envelope.json
 ```
+
+**After a packaging run, look for**
+
+| File | Meaning |
+|------|---------|
+| `run-envelope.json` | **Start here** — index of the whole run |
+| `run-receipt.json` | Status, profiles, open data requests |
+| `*-packet*.json` / handoff stubs | Draft product/opportunity content |
+| `HERMES_NEXT.md` | Reminder that real judgment is in Hermes + `SKILL.md` |
+
+Full command list: [Command cheat sheet](#command-cheat-sheet) · 10-minute walkthrough: [docs/DEMO.md](./docs/DEMO.md)
+
+---
+
+### 4. Rules of the road (so you are not surprised)
+
+| Rule | Meaning |
+|------|---------|
+| Evidence-bound | Important claims must be labeled; no silent guessing |
+| Find or request | Public facts → research if tools allow; private facts → ask you; else **NOT_COMPUTABLE** |
+| Advisory only | Neon Genie will not spend, publish, contact targets, or change your repo |
+| Smallest profiles | Only loads the skill “modes” the job needs (`core` is always on) |
+| Wayfinder handoff | Neon Genie decides *what* and *why*; engineering tools decide *how to build* — product intent stays frozen unless Neon Genie reviews a change |
 
 ---
 
@@ -123,20 +220,22 @@ python scripts/neon_genie.py do run --recipe commercial --out out/neon-genie/aud
 
 ---
 
-## Installation
+## Installation (detail)
 
 ### Hermes Skills Hub (recommended)
 
 ```bash
-# One-liner install (GitHub path)
-hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
-
-# Or subscribe as a tap, then install
-hermes skills tap add scrimshawlife-ctrl/Neon-Genie-Hermes
 hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
 ```
 
-Inspect first: `hermes skills inspect scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie`
+Optional: inspect first, or add the whole tap:
+
+```bash
+hermes skills inspect scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills tap add scrimshawlife-ctrl/Neon-Genie-Hermes
+```
+
+Reload or restart Hermes after install.
 
 ### Clone + local install
 
@@ -145,54 +244,57 @@ git clone https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes.git
 cd Neon-Genie-Hermes
 ./install.sh
 # → ~/.hermes/skills/neon-genie
+
+python scripts/neon_genie.py do doctor
 ```
 
-Or copy the skill package / repo root into your Hermes skills directory.
+### Notes
 
-Then:
-
-```bash
-python scripts/neon_genie.py do check
-# or: python ~/.hermes/skills/neon-genie/scripts/neon_genie.py do doctor
-# reload / restart Hermes
-```
-
-**Notes**
-
-- Needs a Hermes runtime that loads custom skills.  
-- No external knowledge base required to load.  
-- Research uses host tools when available; use offline mode when not.  
-- Sibling skill: [Kubrick](https://github.com/scrimshawlife-ctrl/Kubrick) (cinematic) — not a dependency.  
-- Distribution & catalog paths: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md)
+- You need Hermes (or another agent that loads this skill folder).  
+- No external knowledge base is required just to load the skill.  
+- Research uses tools Hermes already has (search, fetch, etc.) when available.  
+- For offline-only work, say `research.enabled=false`.  
+- Sibling skill: [Kubrick](https://github.com/scrimshawlife-ctrl/Kubrick) for cinematic work — not required here.  
+- Catalog / tap docs: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md) · [docs/CATALOG.md](./docs/CATALOG.md)
 
 ---
 
 ## Command cheat sheet
 
+Run from a **clone** of this repo (or prefix with `~/.hermes/skills/neon-genie/` after Hub install).
+
 ```bash
-# Everyday
+# Check install
 python scripts/neon_genie.py do doctor
+
+# Sample end-to-end runs (write files under out/)
 python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/run1
 python scripts/neon_genie.py do run --brief examples/zero-option.brief.yaml --out out/neon-genie/zero
+# Open run-envelope.json in that folder first
+
+# What can this skill do? (for agents / orchestrators)
 python scripts/neon_genie.py do capabilities --json
 
-# Routing & validation
+# Suggest profiles from free text
 python scripts/neon_genie.py do route --text "first cash zero capital" --json
+
+# Check a finished envelope
 python scripts/neon_genie.py do validate --packet out/neon-genie/run1/run-envelope.json --type envelope
 
-# Quality / CI / release
-python scripts/neon_genie.py do check && python scripts/neon_genie.py do eval
+# Quality gates (CI-style)
+python scripts/neon_genie.py do check
+python scripts/neon_genie.py do eval
 python scripts/neon_genie.py do behavioral --suite
-python scripts/neon_genie.py do dist verify
-python scripts/neon_genie.py do release-check
 
-# After a real outcome (local only, PROPOSED) — link to envelope run_id
+# After a real-world outcome (local note only — never auto-updates the skill)
 python scripts/neon_genie.py do learn --class proof_obtained \
   --summary "first paid diagnostic booked" \
   --envelope out/neon-genie/run1/run-envelope.json \
   --ledger out/neon-genie/learning-ledger.jsonl
-python scripts/neon_genie.py do reconcile --ledger out/neon-genie/learning-ledger.jsonl \
-  --runs-root out/neon-genie
+
+# Maintainers: before tagging a release
+python scripts/neon_genie.py do dist verify
+python scripts/neon_genie.py do release-check
 ```
 
 ### Recipes (`do recipe --name …`)

@@ -176,6 +176,23 @@ python scripts/neon_genie.py do capabilities --json
 
 `do run` is packaging-only: route → recipe/scaffold → receipt → **envelope**.  
 Product judgment remains Hermes + `SKILL.md` (`HERMES_NEXT.md` in the out dir).
+
+### Learning feedback loop (v3.22+)
+
+```bash
+# After a real outcome, link to the envelope run_id
+python scripts/neon_genie.py do learn --class proof_obtained \
+  --summary "…" --envelope out/neon-genie/demo/run-envelope.json
+
+# Reconcile ledger → envelopes (orphans / unlinked / routing quality)
+python scripts/neon_genie.py do reconcile \
+  --ledger out/neon-genie/learning-ledger.jsonl \
+  --runs-root out/neon-genie --json
+```
+
+Ledger entries are always **PROPOSED** with `auto_apply_forbidden: true`.  
+GitHub intake: issue templates under `.github/ISSUE_TEMPLATE/` (operator outcome, behavior, hub, schema).  
+ADRs: `docs/adr/`.
 ---
 
 ## One-liner for users

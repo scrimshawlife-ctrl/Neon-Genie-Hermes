@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.21.0
+version: 3.22.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -73,7 +73,7 @@ python scripts/neon_genie.py do <job> [options]
 | `route` / `validate` / `receipt` / `envelope` | Profiles, schema, receipt, run envelope |
 | `eval` / `transcripts` | Golden tests |
 | `behavioral` / `runtime` | Semantic agent gates + hub install smoke |
-| `learn` | PROPOSED outcome ledger entry |
+| `learn` / `reconcile` | PROPOSED ledger entry; link entries to run_id |
 
 ```bash
 python scripts/neon_genie.py help
@@ -193,6 +193,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/recipe_common.py`
 - `scripts/recipe_product_audit.py`
 - `scripts/recipe_run.py`
+- `scripts/reconcile_learning.py`
 - `scripts/record_learning.py`
 - `scripts/route_profiles.py`
 - `scripts/run_fixture_invariants.py`

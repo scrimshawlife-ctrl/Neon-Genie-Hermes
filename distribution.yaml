@@ -78,6 +78,8 @@ hub_support_globs:
   - scripts/run_job.py
   - scripts/capabilities.py
   - scripts/test_operator_surface.py
+  - scripts/reconcile_learning.py
+  - scripts/test_learning_reconcile.py
   - references/VERSION
   - references/manifest.json
   - references/hermes-runtime-contract.md

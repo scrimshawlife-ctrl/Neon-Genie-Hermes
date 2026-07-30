@@ -92,6 +92,10 @@ jobs:
           python scripts/test_operator_surface.py
           python scripts/neon_genie.py do capabilities --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['authority']=='advisory_only'"
 
+      - name: Learning ledger reconcile
+        run: |
+          python scripts/test_learning_reconcile.py
+
       - name: Hub-layout smoke (allowlisted files only)
         run: |
           python - <<'PY'

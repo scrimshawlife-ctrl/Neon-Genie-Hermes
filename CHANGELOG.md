@@ -5,6 +5,18 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.22.0] — 2026-07-30
+
+### Added
+
+- **Feedback loop**
+  - GitHub issue templates: behavior, hub install, operator outcome, schema proposal
+  - `do learn --run-id` / `--envelope` + routing/gate quality fields
+  - `do reconcile` — link learning ledger entries to `run_id` envelopes
+  - Classes: `false_route`, `false_gate`
+  - ADRs under `docs/adr/` (authority, skill brain, hub mirrors, Wayfinder, claims)
+- Learning reconcile tests; policy: never auto-apply to canon
+
 ## [3.21.0] — 2026-07-30
 
 ### Added

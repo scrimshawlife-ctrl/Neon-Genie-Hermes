@@ -82,6 +82,7 @@ Public entry points:
 | **3.19.0** | Live Hermes behavioral verification: semantic invariants + isolated hub runtime smoke |
 | **3.20.0** | Canonical run-envelope.json, lineage IDs, schema versioning policy |
 | **3.21.0** | Operator surface: do run, do capabilities, worked example, tighter README |
+| **3.22.0** | Feedback loop: issue templates, learn↔run_id reconcile, ADRs |
 
 Further work: live Hermes behavioral evals, run envelope, operator feedback, optional official catalog PR — not a new premiere wave.
 

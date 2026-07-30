@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Distribution & Hub install docs
+    url: https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/blob/main/docs/HERMES_DISTRIBUTION.md
+    about: Install paths, taps, and hub layout
+  - name: Schema versioning policy
+    url: https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/blob/main/references/schema-versioning.md
+    about: Envelope and packet schema compatibility

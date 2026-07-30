@@ -69,6 +69,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "record_learning.py",
         "description": "Append a PROPOSED outcome to a local ledger",
     },
+    "reconcile": {
+        "script": "reconcile_learning.py",
+        "description": "Reconcile learning ledger entries to run_id envelopes",
+    },
     "dist": {
         "script": "distribution_spine.py",
         "description": "Verify/write Hub mirrors + package (distribution.yaml)",
@@ -86,7 +90,7 @@ INTENTS: dict[str, dict[str, str]] = {
 # Everyday first in help; aliases for older script-style names
 EVERYDAY = ("doctor", "check", "run", "recipe", "route", "validate", "capabilities")
 VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist")
-OUTCOMES = ("receipt", "envelope", "learn")
+OUTCOMES = ("receipt", "envelope", "learn", "reconcile")
 
 ALIASES = {
     "validate-skill": ("check", []),

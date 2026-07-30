@@ -4,7 +4,7 @@
 
 ### Governed opportunity & product intelligence for Hermes
 
-[![Version](https://img.shields.io/badge/version-3.21.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.22.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -77,7 +77,7 @@ python scripts/neon_genie.py do <job> [options]
 | `recipe` / `route` / `validate` | Examples, profile routing, schema check |
 | `receipt` / `envelope` | Receipt + canonical envelope |
 | `eval` / `transcripts` / `behavioral` | Gates and semantic suites |
-| `learn` | PROPOSED outcome ledger (never auto-canon) |
+| `learn` / `reconcile` | PROPOSED ledger + run_id linkage (never auto-canon) |
 
 ```bash
 python scripts/neon_genie.py help
@@ -182,9 +182,13 @@ python scripts/neon_genie.py do validate --packet out/neon-genie/run1/run-envelo
 python scripts/neon_genie.py do check && python scripts/neon_genie.py do eval
 python scripts/neon_genie.py do behavioral --suite
 
-# After a real outcome (local only, PROPOSED)
+# After a real outcome (local only, PROPOSED) — link to envelope run_id
 python scripts/neon_genie.py do learn --class proof_obtained \
-  --summary "first paid diagnostic booked" --ledger out/neon-genie/learning-ledger.jsonl
+  --summary "first paid diagnostic booked" \
+  --envelope out/neon-genie/run1/run-envelope.json \
+  --ledger out/neon-genie/learning-ledger.jsonl
+python scripts/neon_genie.py do reconcile --ledger out/neon-genie/learning-ledger.jsonl \
+  --runs-root out/neon-genie
 ```
 
 ### Recipes (`do recipe --name …`)
@@ -248,6 +252,7 @@ Neon-Genie-Hermes/          ← skill root
 | [docs/DEMO.md](./docs/DEMO.md) | 10-minute path |
 | [docs/PREMIERE.md](./docs/PREMIERE.md) | Why this skill vs idea agents |
 | [docs/ROADMAP.md](./docs/ROADMAP.md) | History + maintenance |
+| [docs/adr/](./docs/adr/) | Architecture decisions |
 | [CHANGELOG.md](./CHANGELOG.md) | Releases |
 
 ---
@@ -257,7 +262,7 @@ Neon-Genie-Hermes/          ← skill root
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.21.0** |
+| Version | **3.22.0** |
 | Authority | `advisory_only` |
 | Research | proactive (opt out: `research.enabled=false`) |
 
@@ -274,5 +279,5 @@ Source of truth: [`VERSION`](./VERSION), [`manifest.json`](./manifest.json), [`S
 ---
 
 <div align="center">
-<sub>Neon Genie v3.21.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.22.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 </div>

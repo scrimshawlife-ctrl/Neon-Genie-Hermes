@@ -5,7 +5,10 @@ Never auto-applies to skill corpus or canon.
 
 Usage:
   python scripts/record_learning.py --class proof_failed --summary "No cash in 7 days" \\
-    --ledger out/neon-genie/learning-ledger.jsonl
+    --ledger out/neon-genie/learning-ledger.jsonl --run-id ng_run_abc
+
+  python scripts/record_learning.py --class buyer_failure --summary "…" \\
+    --envelope out/neon-genie/demo/run-envelope.json
 """
 
 from __future__ import annotations
@@ -16,6 +19,7 @@ import sys
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
@@ -29,8 +33,17 @@ CLASSES = {
     "proof_obtained",
     "proof_failed",
     "data_request_satisfied",
+    "false_route",
+    "false_gate",
     "other",
 }
+
+
+def load_envelope(path: Path) -> dict[str, Any]:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"FAIL: NG-LEARN-001: cannot read envelope {path}: {exc}") from exc
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -49,7 +62,18 @@ def main(argv: list[str] | None = None) -> int:
         default=Path("out/neon-genie/learning-ledger.jsonl"),
         help="Append-only JSONL path (default out/neon-genie/learning-ledger.jsonl)",
     )
-    parser.add_argument("--source-run", default="", help="Receipt or run id/path")
+    parser.add_argument(
+        "--run-id",
+        default="",
+        help="Canonical run_id from run-envelope.json (preferred linkage)",
+    )
+    parser.add_argument(
+        "--envelope",
+        type=Path,
+        default=None,
+        help="Path to run-envelope.json — extracts run_id, profiles, recipe",
+    )
+    parser.add_argument("--source-run", default="", help="Legacy: receipt path or free text")
     parser.add_argument(
         "--profiles",
         default="",
@@ -60,23 +84,74 @@ def main(argv: list[str] | None = None) -> int:
         default="",
         help="Comma-separated related gate ids",
     )
+    parser.add_argument(
+        "--routing-quality",
+        default="",
+        choices=["", "correct", "over_routed", "under_routed", "wrong_profile", "n/a"],
+        help="Optional routing quality feedback",
+    )
+    parser.add_argument(
+        "--gate-quality",
+        default="",
+        choices=["", "correct_fail_closed", "false_positive_block", "false_negative_allowed", "n/a"],
+        help="Optional gate quality feedback",
+    )
     args = parser.parse_args(argv)
 
-    entry = {
+    run_id = args.run_id.strip()
+    source_run = args.source_run.strip()
+    profiles = [p.strip() for p in args.profiles.split(",") if p.strip()]
+    recipe = None
+    envelope_path = None
+
+    if args.envelope is not None:
+        ep = args.envelope if args.envelope.is_absolute() else Path.cwd() / args.envelope
+        if not ep.is_file():
+            # try skill-root relative
+            alt = SKILL_ROOT / args.envelope
+            ep = alt if alt.is_file() else ep
+        if not ep.is_file():
+            print(f"FAIL: NG-LEARN-002: envelope not found: {args.envelope}", file=sys.stderr)
+            return 1
+        env = load_envelope(ep)
+        envelope_path = str(ep)
+        run_id = run_id or str(env.get("run_id") or "")
+        if not profiles:
+            profiles = list(env.get("resolved_profiles") or env.get("selected_profiles") or [])
+        recipe = (env.get("request") or {}).get("recipe")
+        if not source_run:
+            source_run = run_id or envelope_path
+
+    if not source_run:
+        source_run = run_id or "unspecified"
+
+    entry: dict[str, Any] = {
         "entry_id": f"ll-{uuid.uuid4().hex[:12]}",
         "observed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "source_run": args.source_run or "unspecified",
+        "source_run": source_run,
+        "run_id": run_id or None,
         "observation_class": args.obs_class,
         "summary": args.summary,
-        "related_profiles": [p.strip() for p in args.profiles.split(",") if p.strip()],
+        "related_profiles": profiles,
         "related_gates": [g.strip() for g in args.gates.split(",") if g.strip()],
         "evidence_refs": [],
         "canon_status": "PROPOSED",
         "authority": "advisory_only",
         "auto_apply_forbidden": True,
+        "skill": "neon-genie",
     }
+    if recipe:
+        entry["recipe"] = recipe
+    if envelope_path:
+        entry["envelope_path"] = envelope_path
+    if args.routing_quality:
+        entry["routing_quality"] = args.routing_quality
+    if args.gate_quality:
+        entry["gate_quality"] = args.gate_quality
+    # Drop null run_id for cleaner JSONL when missing
+    if not entry.get("run_id"):
+        entry.pop("run_id", None)
 
-    # Validate required keys against schema contract
     for key in (
         "entry_id",
         "observed_at",
@@ -87,8 +162,15 @@ def main(argv: list[str] | None = None) -> int:
         "authority",
     ):
         if not entry.get(key):
-            print(f"FAIL: missing {key}", file=sys.stderr)
+            print(f"FAIL: NG-LEARN-003: missing {key}", file=sys.stderr)
             return 1
+
+    if entry.get("canon_status") not in {"PROPOSED", "OBSERVATION"}:
+        print("FAIL: NG-LEARN-004: canon_status must be PROPOSED or OBSERVATION", file=sys.stderr)
+        return 1
+    if entry.get("auto_apply_forbidden") is not True:
+        print("FAIL: NG-LEARN-005: auto_apply_forbidden must be true", file=sys.stderr)
+        return 1
 
     ledger: Path = args.ledger
     if not ledger.is_absolute():
@@ -100,6 +182,8 @@ def main(argv: list[str] | None = None) -> int:
     print("PASS: learning ledger entry appended")
     print(f"  ledger: {ledger}")
     print(f"  entry_id: {entry['entry_id']}")
+    if entry.get("run_id"):
+        print(f"  run_id: {entry['run_id']}")
     print(f"  class: {entry['observation_class']}")
     print("  canon_status: PROPOSED (never auto-applied)")
     return 0

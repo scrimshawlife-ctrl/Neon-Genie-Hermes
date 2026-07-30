@@ -77,6 +77,7 @@ Public entry points:
 | **3.14.0** | Evidence + opportunity recipes; transcripts 08–09 (10 recipes, 9 goldens) |
 | **3.15.0** | README How to use; simplified `do <job>` help for agents & users |
 | **3.16.0** | Hermes Skills Hub tap package (`skills/neon-genie/`) + distribution docs |
+| **3.17.0** | Hub-hardened package: allowlisted mirrors + dual-path resolver so hub install runs `do doctor` |
 
 Further work: live Hermes hardening, operator feedback, optional official catalog PR — not a new premiere wave.
 

@@ -5,6 +5,24 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.17.0] — 2026-07-30
+
+### Added
+
+- Hub-hardened layout: mirrors under allowlisted dirs
+  - `references/schemas/`, `references/profiles/`
+  - `examples/evals/` (cases + transcripts)
+  - `references/VERSION`, `references/manifest.json`
+- `scripts/paths.py` dual-path resolver (full tree or hub mirrors)
+- Explicit **Hermes Hub support files** index in `SKILL.md` so hub install pulls scripts, schemas, profiles, recipes, and golden tests
+- `sync_skill_package.sh` refreshes hub mirrors before packaging
+
+### Changed
+
+- Packaging scripts resolve schemas/profiles/evals/manifest/VERSION via dual paths
+- `validate_hermes_skill.py` accepts hub layout (skips full-tree-only docs/CI paths)
+- Schema/profile path docs prefer `references/…` for hub portability
+
 ## [3.16.0] — 2026-07-30
 
 ### Added

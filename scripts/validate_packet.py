@@ -25,7 +25,10 @@ from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
-SCHEMAS = SKILL_ROOT / "schemas"
+
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
 
 PACKET_TYPE_TO_SCHEMA = {
     "opportunity": "opportunity-packet.schema.json",
@@ -181,10 +184,23 @@ def main(argv: list[str] | None = None) -> int:
             print(f"FAIL: unknown packet type: {args.packet_type}", file=sys.stderr)
             print(f"  known: {', '.join(sorted(set(PACKET_TYPE_TO_SCHEMA)))}", file=sys.stderr)
             return 1
-        schema_path = SCHEMAS / name
+        try:
+            schema_path = ng_paths.schema_file(name)
+        except FileNotFoundError as exc:
+            print(f"FAIL: {exc}", file=sys.stderr)
+            return 1
     else:
         print("FAIL: provide --type or --schema", file=sys.stderr)
         return 1
+
+    # Allow --schema schemas/foo.json even on hub layout (references/schemas/)
+    if args.schema and not schema_path.is_file():
+        alt = str(args.schema).replace("\\", "/")
+        if alt.startswith("schemas/"):
+            try:
+                schema_path = ng_paths.schema_file(Path(alt).name)
+            except FileNotFoundError:
+                pass
 
     if not schema_path.is_file():
         print(f"FAIL: schema not found: {schema_path}", file=sys.stderr)

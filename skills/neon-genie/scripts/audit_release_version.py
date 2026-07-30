@@ -42,23 +42,27 @@ def main(argv: list[str] | None = None) -> int:
     errors: list[str] = []
     warnings: list[str] = []
 
-    version_path = SKILL_ROOT / "VERSION"
-    if not version_path.is_file():
-        errors.append("VERSION missing")
-        version = ""
-    else:
+    if str(SCRIPT_DIR) not in sys.path:
+        sys.path.insert(0, str(SCRIPT_DIR))
+    import paths as ng_paths  # noqa: E402
+
+    try:
+        version_path = ng_paths.version_path()
         version = version_path.read_text(encoding="utf-8").strip()
         if not re.fullmatch(r"\d+\.\d+\.\d+", version):
             errors.append(f"VERSION not semver X.Y.Z: {version!r}")
+    except (OSError, FileNotFoundError):
+        errors.append("VERSION missing (also tried references/VERSION)")
+        version = ""
 
     skill_v = frontmatter_version((SKILL_ROOT / "SKILL.md").read_text(encoding="utf-8"))
     if skill_v != version:
         errors.append(f"SKILL.md version {skill_v!r} != VERSION {version!r}")
 
     try:
-        manifest = json.loads((SKILL_ROOT / "manifest.json").read_text(encoding="utf-8"))
+        manifest = json.loads(ng_paths.manifest_path().read_text(encoding="utf-8"))
         man_v = str(manifest.get("version", ""))
-    except (OSError, json.JSONDecodeError) as exc:
+    except (OSError, json.JSONDecodeError, FileNotFoundError) as exc:
         errors.append(f"manifest.json unreadable: {exc}")
         man_v = ""
     if man_v != version:

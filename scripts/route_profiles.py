@@ -19,7 +19,9 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
-MANIFEST = SKILL_ROOT / "manifest.json"
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
 
 # Trigger phrases aligned with SKILL.md profile_router (case-insensitive substring).
 PROFILE_TRIGGERS: dict[str, tuple[str, ...]] = {
@@ -191,11 +193,12 @@ def main(argv: list[str] | None = None) -> int:
     selected = list(dict.fromkeys(["core"] + preferred + triggered))
 
     known: list[str] = []
-    if MANIFEST.is_file():
-        try:
-            known = list(json.loads(MANIFEST.read_text(encoding="utf-8")).get("profiles") or [])
-        except json.JSONDecodeError:
-            known = []
+    try:
+        known = list(
+            json.loads(ng_paths.manifest_path().read_text(encoding="utf-8")).get("profiles") or []
+        )
+    except (OSError, json.JSONDecodeError, FileNotFoundError):
+        known = []
     if known:
         unknown = [p for p in selected if p not in known]
         selected = [p for p in selected if p in known]

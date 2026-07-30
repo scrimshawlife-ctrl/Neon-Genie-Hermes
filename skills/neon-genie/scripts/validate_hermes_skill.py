@@ -3,6 +3,9 @@
 
 Uses only the Python standard library. Run from any working directory:
     python scripts/validate_hermes_skill.py
+
+Supports full tree (schemas/, profiles/, evals/) and Hermes hub layout
+(references/schemas/, references/profiles/, examples/evals/).
 """
 
 from __future__ import annotations
@@ -15,60 +18,86 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
+
 SKILL_FILE = SKILL_ROOT / "SKILL.md"
-VERSION_FILE = SKILL_ROOT / "VERSION"
-MANIFEST_FILE = SKILL_ROOT / "manifest.json"
 
 REQUIRED_FRONTMATTER = {"name", "description", "version", "author"}
-REQUIRED_PATHS = [
-    "SKILL.md",
+
+# Paths that must exist either at full-tree location or hub mirror.
+# Each entry is a list of candidate relative paths (first existing wins).
+REQUIRED_ANY: list[list[str]] = [
+    ["SKILL.md"],
+    ["manifest.json", "references/manifest.json"],
+    ["VERSION", "references/VERSION"],
+    ["references/hermes-runtime-contract.md"],
+    ["references/CAPABILITY_MAP.md"],
+    ["references/GOLDEN_TESTS.md"],
+    ["references/anti-overclaim-patterns.md"],
+    ["references/post-seal-verification.md"],
+    ["profiles", "references/profiles"],
+    ["schemas", "references/schemas"],
+    ["schemas/data-request.schema.json", "references/schemas/data-request.schema.json"],
+    [
+        "schemas/learning-ledger-entry.schema.json",
+        "references/schemas/learning-ledger-entry.schema.json",
+    ],
+    ["templates/request.yaml"],
+    ["evals", "examples/evals"],
+    ["evals/rubric.md", "examples/evals/rubric.md"],
+    ["examples/README.md"],
+    ["scripts/paths.py"],
+    ["scripts/validate_hermes_skill.py"],
+    ["scripts/neon_genie.py"],
+    ["scripts/validate_packet.py"],
+    ["scripts/route_profiles.py"],
+    ["scripts/build_receipt.py"],
+    ["scripts/run_fixture_invariants.py"],
+    ["scripts/audit_release_version.py"],
+    ["scripts/run_hermes_evals.py"],
+    ["scripts/check_transcripts.py"],
+    ["scripts/record_learning.py"],
+    ["scripts/recipe_run.py"],
+    ["scripts/recipe_common.py"],
+    ["scripts/recipe_product_audit.py"],
+    ["scripts/doctor.py"],
+    ["examples/fragmentation.brief.yaml"],
+    ["examples/zero-option-with-skills.brief.yaml"],
+    ["examples/packets/sample-opportunity.packet.json"],
+    ["evals/transcripts/README.md", "examples/evals/transcripts/README.md"],
+    ["evals/transcripts/rubric.md", "examples/evals/transcripts/rubric.md"],
+    ["examples/gallery/README.md"],
+    ["examples/commercial.brief.yaml"],
+    ["examples/audit.brief.yaml"],
+    ["examples/agentic.brief.yaml"],
+    ["examples/memetic.brief.yaml"],
+    ["examples/evidence.brief.yaml"],
+    ["examples/opportunity.brief.yaml"],
+    [
+        "evals/transcripts/06-agentic-x402-misfit.md",
+        "examples/evals/transcripts/06-agentic-x402-misfit.md",
+    ],
+    [
+        "evals/transcripts/07-memetic-cannot-promote.md",
+        "examples/evals/transcripts/07-memetic-cannot-promote.md",
+    ],
+    [
+        "evals/transcripts/08-evidence-intelligence.md",
+        "examples/evals/transcripts/08-evidence-intelligence.md",
+    ],
+    [
+        "evals/transcripts/09-opportunity-mining.md",
+        "examples/evals/transcripts/09-opportunity-mining.md",
+    ],
+]
+
+# Full-tree only (skipped on hub layout)
+FULL_ONLY: list[str] = [
     "QUICKSTART.md",
-    "manifest.json",
-    "VERSION",
-    "references/hermes-runtime-contract.md",
-    "references/CAPABILITY_MAP.md",
-    "references/GOLDEN_TESTS.md",
-    "profiles",
-    "schemas",
-    "schemas/data-request.schema.json",
-    "templates/request.yaml",
-    "evals",
-    "evals/rubric.md",
-    "examples/README.md",
-    "scripts/validate_hermes_skill.py",
-    "scripts/neon_genie.py",
-    "scripts/validate_packet.py",
-    "scripts/route_profiles.py",
-    "scripts/build_receipt.py",
-    "scripts/run_fixture_invariants.py",
-    "scripts/audit_release_version.py",
-    "scripts/run_hermes_evals.py",
-    "scripts/check_transcripts.py",
-    "scripts/record_learning.py",
-    "references/post-seal-verification.md",
-    "schemas/learning-ledger-entry.schema.json",
-    "scripts/recipe_run.py",
-    "scripts/recipe_common.py",
-    "scripts/recipe_product_audit.py",
-    "examples/fragmentation.brief.yaml",
-    "examples/zero-option-with-skills.brief.yaml",
-    "examples/packets/sample-opportunity.packet.json",
-    "evals/transcripts/README.md",
-    "evals/transcripts/rubric.md",
     "docs/PREMIERE.md",
     "docs/DEMO.md",
-    "examples/gallery/README.md",
-    "examples/commercial.brief.yaml",
-    "examples/audit.brief.yaml",
-    "examples/agentic.brief.yaml",
-    "examples/memetic.brief.yaml",
-    "evals/transcripts/06-agentic-x402-misfit.md",
-    "evals/transcripts/07-memetic-cannot-promote.md",
-    "evals/transcripts/08-evidence-intelligence.md",
-    "evals/transcripts/09-opportunity-mining.md",
-    "examples/evidence.brief.yaml",
-    "examples/opportunity.brief.yaml",
-    "scripts/doctor.py",
     "install.sh",
     ".github/workflows/hermes-evals.yml",
 ]
@@ -111,6 +140,14 @@ def referenced_relative_paths(text: str) -> set[str]:
     return candidates
 
 
+def resolve_any(candidates: list[str]) -> Path | None:
+    for rel in candidates:
+        path = SKILL_ROOT / rel
+        if path.exists():
+            return path
+    return None
+
+
 def validate_python(path: Path) -> list[str]:
     errors: list[str] = []
     try:
@@ -129,6 +166,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     errors: list[str] = []
+    hub = ng_paths.is_hub_layout()
 
     if not SKILL_FILE.is_file():
         print("FAIL: SKILL.md missing", file=sys.stderr)
@@ -148,20 +186,19 @@ def main(argv: list[str] | None = None) -> int:
         errors.append("Frontmatter name must be 'neon-genie'")
 
     version_fm = frontmatter.get("version", "")
-    if not VERSION_FILE.is_file():
-        errors.append("VERSION file missing")
+    try:
+        version_file = ng_paths.version_path().read_text(encoding="utf-8").strip()
+    except (OSError, FileNotFoundError):
+        errors.append("VERSION missing (also tried references/VERSION)")
         version_file = ""
-    else:
-        version_file = VERSION_FILE.read_text(encoding="utf-8").strip()
 
     manifest: dict = {}
-    if not MANIFEST_FILE.is_file():
-        errors.append("manifest.json missing")
-    else:
-        try:
-            manifest = json.loads(MANIFEST_FILE.read_text(encoding="utf-8"))
-        except json.JSONDecodeError as exc:
-            errors.append(f"manifest.json invalid JSON: {exc}")
+    try:
+        manifest = json.loads(ng_paths.manifest_path().read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        errors.append("manifest.json missing (also tried references/manifest.json)")
+    except json.JSONDecodeError as exc:
+        errors.append(f"manifest.json invalid JSON: {exc}")
 
     version_manifest = str(manifest.get("version", ""))
     if version_file and version_fm and version_file != version_fm:
@@ -177,26 +214,49 @@ def main(argv: list[str] | None = None) -> int:
             f"SKILL frontmatter version ({version_fm}) != manifest.json version ({version_manifest})"
         )
 
-    for relative in REQUIRED_PATHS:
-        path = SKILL_ROOT / relative
-        if not path.exists():
-            errors.append(f"Missing required path: {relative}")
+    for candidates in REQUIRED_ANY:
+        if resolve_any(candidates) is None:
+            errors.append(f"Missing required path (any of): {', '.join(candidates)}")
+
+    if not hub:
+        for relative in FULL_ONLY:
+            if not (SKILL_ROOT / relative).exists():
+                errors.append(f"Missing required path: {relative}")
 
     profiles = manifest.get("profiles") or []
     if not isinstance(profiles, list) or not profiles:
         errors.append("manifest.json profiles must be a non-empty list")
     else:
-        for name in profiles:
-            p = SKILL_ROOT / "profiles" / f"{name}.md"
-            if not p.is_file():
-                errors.append(
-                    f"Profile listed in manifest but missing: profiles/{name}.md"
-                )
+        try:
+            pdir = ng_paths.profiles_dir()
+        except FileNotFoundError:
+            pdir = None
+            errors.append("profiles/ missing (also tried references/profiles/)")
+        if pdir is not None:
+            for name in profiles:
+                p = pdir / f"{name}.md"
+                if not p.is_file():
+                    errors.append(f"Profile listed in manifest but missing: {name}.md")
 
+    # Hub-allowlisted references in SKILL.md must exist when listed as concrete files
     for rel in sorted(referenced_relative_paths(skill_text)):
         target = SKILL_ROOT / rel
-        if not target.exists():
-            errors.append(f"SKILL.md references missing path: {rel}")
+        if target.exists():
+            continue
+        # Dual-path fallbacks for historical root paths
+        alts = []
+        if rel.startswith("schemas/"):
+            alts.append(SKILL_ROOT / "references" / rel)
+        elif rel.startswith("profiles/"):
+            alts.append(SKILL_ROOT / "references" / rel)
+        elif rel.startswith("evals/"):
+            alts.append(SKILL_ROOT / "examples" / rel)
+        if any(a.exists() for a in alts):
+            continue
+        # Directory-style refs like profiles/ are ok if dual-path dir exists
+        if rel.rstrip("/").endswith(("profiles", "schemas", "evals")):
+            continue
+        errors.append(f"SKILL.md references missing path: {rel}")
 
     scripts_dir = SKILL_ROOT / "scripts"
     if scripts_dir.is_dir():
@@ -225,6 +285,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print("PASS: Neon Genie skill validation")
     print(f"  root: {SKILL_ROOT}")
+    print(f"  layout: {'hub' if hub else 'full'}")
     print(f"  version: {version_file or version_fm or version_manifest}")
     return 0
 

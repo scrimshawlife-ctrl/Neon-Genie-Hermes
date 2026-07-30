@@ -4,7 +4,7 @@
 
 ### Governed opportunity & product intelligence for Hermes
 
-[![Version](https://img.shields.io/badge/version-3.16.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.17.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -299,7 +299,7 @@ Neon-Genie-Hermes/          ← skill root (install this tree)
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.16.0** |
+| Version | **3.17.0** |
 | Authority | `advisory_only` |
 | Research | proactive (opt out: `research.enabled=false`) |
 
@@ -316,5 +316,5 @@ Source of truth: [`VERSION`](./VERSION), [`manifest.json`](./manifest.json), [`S
 ---
 
 <div align="center">
-<sub>Neon Genie v3.16.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.17.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 </div>

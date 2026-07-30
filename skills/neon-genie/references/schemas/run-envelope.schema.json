@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NeonGenieRunEnvelope",
+  "type": "object",
+  "required": [
+    "run_id",
+    "selected_profiles",
+    "request",
+    "outputs",
+    "receipt"
+  ],
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "selected_profiles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "request": {
+      "type": "object"
+    },
+    "canonical_sources": {
+      "type": "array"
+    },
+    "assumptions": {
+      "type": "array"
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "receipt": {
+      "type": "object"
+    }
+  }
+}

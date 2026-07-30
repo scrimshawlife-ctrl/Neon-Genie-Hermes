@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Learning Ledger Entry",
+  "type": "object",
+  "required": [
+    "entry_id",
+    "observed_at",
+    "source_run",
+    "observation_class",
+    "summary",
+    "canon_status",
+    "authority"
+  ],
+  "properties": {
+    "entry_id": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "minLength": 1 },
+    "source_run": { "type": "string" },
+    "observation_class": {
+      "type": "string",
+      "enum": [
+        "failed_opportunity",
+        "brittle_integration",
+        "buyer_failure",
+        "distribution_failure",
+        "anti_capture_failure",
+        "proof_obtained",
+        "proof_failed",
+        "data_request_satisfied",
+        "other"
+      ]
+    },
+    "summary": { "type": "string", "minLength": 1 },
+    "related_profiles": { "type": "array" },
+    "related_gates": { "type": "array" },
+    "evidence_refs": { "type": "array" },
+    "canon_status": {
+      "type": "string",
+      "enum": ["PROPOSED", "OBSERVATION"]
+    },
+    "authority": {
+      "type": "string",
+      "enum": ["advisory_only"]
+    },
+    "auto_apply_forbidden": { "type": "boolean" }
+  },
+  "additionalProperties": true
+}

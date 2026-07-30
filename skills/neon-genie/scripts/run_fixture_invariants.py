@@ -9,7 +9,19 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
-CASES = SKILL_ROOT / "evals" / "cases"
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
+
+
+def _cases_dir() -> Path:
+    try:
+        return ng_paths.evals_dir() / "cases"
+    except FileNotFoundError:
+        return SKILL_ROOT / "evals" / "cases"
+
+
+CASES = _cases_dir()
 
 REQUIRED_CASES = {
     "zero-option.json",

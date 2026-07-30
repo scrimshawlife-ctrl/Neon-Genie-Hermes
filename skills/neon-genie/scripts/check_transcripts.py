@@ -15,7 +15,19 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
-DEFAULT_DIR = SKILL_ROOT / "evals" / "transcripts"
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
+
+
+def _default_transcripts_dir() -> Path:
+    try:
+        return ng_paths.evals_dir() / "transcripts"
+    except FileNotFoundError:
+        return SKILL_ROOT / "evals" / "transcripts"
+
+
+DEFAULT_DIR = _default_transcripts_dir()
 
 REQUIRED_SECTIONS = ("## OPEN", "## ALIGN", "## ASCEND", "## CLEAR", "## SEAL")
 REQUIRED_FRONTMATTER = ("id:", "scenario:", "profiles:", "research_mode:", "expected_promotion_max:")

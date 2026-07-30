@@ -19,7 +19,9 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
-VERSION_FILE = SKILL_ROOT / "VERSION"
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -119,7 +121,10 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         requests_list = load_data_requests(args.data_requests)
 
-    version = VERSION_FILE.read_text(encoding="utf-8").strip() if VERSION_FILE.is_file() else "unknown"
+    try:
+        version = ng_paths.version_path().read_text(encoding="utf-8").strip()
+    except (OSError, FileNotFoundError):
+        version = "unknown"
     material = {
         "skill": "neon-genie",
         "version": version,

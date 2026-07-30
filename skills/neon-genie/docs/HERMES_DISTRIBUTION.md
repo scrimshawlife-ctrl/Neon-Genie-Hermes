@@ -109,13 +109,23 @@ To appear under **official optional** skills (`hermes skills browse --source off
 
 Hermes Hub only copies **explicitly path-referenced** files under  
 `references/`, `templates/`, `scripts/`, `assets/`, `examples/`  
-(security allowlist). A hub install therefore brings the agent contract  
-(`SKILL.md` + key refs + `scripts/neon_genie.py`), not the full schemas/profiles/evals tree.
+(security allowlist).
 
-**Full packaging skill (doctor, recipes, schemas):** use clone + `./install.sh`  
-(or rsync `skills/neon-genie/` into `~/.hermes/skills/neon-genie`).
+As of **v3.17.0**, Neon Genie ships **hub mirrors** of the packaging tree:
 
-**Agent contract only:** hub one-liner is enough for Hermes to load Neon Genie doctrine.
+| Full install | Hub mirror (allowlisted) |
+|--------------|--------------------------|
+| `schemas/` | `references/schemas/` |
+| `profiles/` | `references/profiles/` |
+| `evals/` | `examples/evals/` |
+| `VERSION`, `manifest.json` | `references/VERSION`, `references/manifest.json` |
+
+`SKILL.md` lists every required support path under those dirs so  
+`hermes skills install …` pulls a **working packaging CLI** (`do doctor` green).
+
+Scripts resolve either layout via `scripts/paths.py`.
+
+**Still recommended for maintainers:** clone + `./install.sh` (full tree + docs + CI).
 
 ---
 

@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.16.0
+version: 3.17.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -48,7 +48,11 @@ triggers:
 
 Neon Genie is a **standalone Hermes skill**. Hermes loads this directory directly and uses `SKILL.md` as the operating contract. No Python package install, Kubrick skill, Wayfinder runtime, or external knowledge base is required to load.
 
-See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy. Profile contracts live in `profiles/`; packet schemas in `schemas/`.
+See `references/hermes-runtime-contract.md` for path, artifact, authority, and dependency policy.
+
+Profile contracts: `references/profiles/` (hub) or `profiles/` (full install).  
+Packet schemas: `references/schemas/` (hub) or `schemas/` (full install).  
+Golden tests: `examples/evals/` (hub) or `evals/` (full install).
 
 **Optional companions:** host research tools, Wayfinder (handoff consumer). Their absence never blocks local advisory work.
 
@@ -74,7 +78,106 @@ python scripts/neon_genie.py help
 python scripts/neon_genie.py do doctor
 ```
 
-See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `evals/transcripts/`. Post-SEAL: `references/post-seal-verification.md`.
+See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/`. Post-SEAL: `references/post-seal-verification.md`.
+
+### Hermes Hub support files
+
+Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files under allowlisted dirs (`references/`, `templates/`, `scripts/`, `assets/`, `examples/`). The list below is the install contract for a working packaging CLI after hub install:
+
+- `scripts/paths.py`
+- `scripts/neon_genie.py`
+- `scripts/doctor.py`
+- `scripts/validate_hermes_skill.py`
+- `scripts/validate_packet.py`
+- `scripts/route_profiles.py`
+- `scripts/build_receipt.py`
+- `scripts/run_fixture_invariants.py`
+- `scripts/audit_release_version.py`
+- `scripts/run_hermes_evals.py`
+- `scripts/check_transcripts.py`
+- `scripts/record_learning.py`
+- `scripts/recipe_run.py`
+- `scripts/recipe_common.py`
+- `scripts/recipe_product_audit.py`
+- `references/VERSION`
+- `references/manifest.json`
+- `references/hermes-runtime-contract.md`
+- `references/CAPABILITY_MAP.md`
+- `references/GOLDEN_TESTS.md`
+- `references/anti-overclaim-patterns.md`
+- `references/post-seal-verification.md`
+- `references/profiles/core.md`
+- `references/profiles/product_architecture.md`
+- `references/profiles/opportunity_mining.md`
+- `references/profiles/fragmentation.md`
+- `references/profiles/zero_option.md`
+- `references/profiles/agentic_services.md`
+- `references/profiles/commercial.md`
+- `references/profiles/evidence_intelligence.md`
+- `references/profiles/memetic.md`
+- `references/profiles/audit_delivery.md`
+- `references/profiles/wayfinder_handoff.md`
+- `references/schemas/data-request.schema.json`
+- `references/schemas/opportunity-packet.schema.json`
+- `references/schemas/product-packet.schema.json`
+- `references/schemas/fragmentation-packet.schema.json`
+- `references/schemas/zero-option-packet.schema.json`
+- `references/schemas/agentic-service-graph.schema.json`
+- `references/schemas/commercial-simulation.schema.json`
+- `references/schemas/evidence-intelligence-packet.schema.json`
+- `references/schemas/memetic-pressure-packet.schema.json`
+- `references/schemas/audit-delivery-packet.schema.json`
+- `references/schemas/wayfinder-execution-packet.schema.json`
+- `references/schemas/run-receipt.schema.json`
+- `references/schemas/run-envelope.schema.json`
+- `references/schemas/learning-ledger-entry.schema.json`
+- `templates/request.yaml`
+- `examples/README.md`
+- `examples/product-audit.brief.yaml`
+- `examples/zero-option.brief.yaml`
+- `examples/zero-option-with-skills.brief.yaml`
+- `examples/fragmentation.brief.yaml`
+- `examples/commercial.brief.yaml`
+- `examples/audit.brief.yaml`
+- `examples/agentic.brief.yaml`
+- `examples/memetic.brief.yaml`
+- `examples/evidence.brief.yaml`
+- `examples/opportunity.brief.yaml`
+- `examples/packets/sample-opportunity.packet.json`
+- `examples/packets/sample-receipt.packet.json`
+- `examples/packets/sample-receipt-with-requests.json`
+- `examples/packets/sample-data-request.json`
+- `examples/gallery/README.md`
+- `examples/evals/rubric.md`
+- `examples/evals/cases/zero-option.json`
+- `examples/evals/cases/x402-misfit.json`
+- `examples/evals/cases/wayfinder-change-control.json`
+- `examples/evals/cases/memetic-cannot-promote.json`
+- `examples/evals/cases/offline-no-fabricated-observed.json`
+- `examples/evals/cases/buyer-beneficiary-conflation.json`
+- `examples/evals/cases/authority-leakage.json`
+- `examples/evals/cases/fictional-resource.json`
+- `examples/evals/cases/scorecard-cannot-override-gate.json`
+- `examples/evals/cases/public-gap-must-attempt-research.json`
+- `examples/evals/cases/public-gap-research-attempted.json`
+- `examples/evals/cases/private-gap-must-request.json`
+- `examples/evals/cases/private-gap-request-open.json`
+- `examples/evals/cases/private-gap-silent-invent.json`
+- `examples/evals/cases/completion-proof-required.json`
+- `examples/evals/cases/completion-proof-present.json`
+- `examples/evals/transcripts/README.md`
+- `examples/evals/transcripts/rubric.md`
+- `examples/evals/transcripts/01-zero-option-empty.md`
+- `examples/evals/transcripts/02-product-audit.md`
+- `examples/evals/transcripts/03-fragmentation.md`
+- `examples/evals/transcripts/04-commercial-missing-buyer.md`
+- `examples/evals/transcripts/05-offline-audit.md`
+- `examples/evals/transcripts/06-agentic-x402-misfit.md`
+- `examples/evals/transcripts/07-memetic-cannot-promote.md`
+- `examples/evals/transcripts/08-evidence-intelligence.md`
+- `examples/evals/transcripts/09-opportunity-mining.md`
+
+Full tree also keeps root `schemas/`, `profiles/`, `evals/`, `VERSION`, and `manifest.json` for clone/`./install.sh` installs (scripts resolve either layout via `scripts/paths.py`).
 
 ## Mission
 
@@ -130,7 +233,7 @@ GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
 Priority when a material fact is missing:
 
 1. **Find** — if sensitivity is public (or unknown-but-likely-public) and host tools can run, attempt research; cite or drop.
-2. **Request** — if sensitivity is operator/private or access is undeclared, emit a `DataRequest` (`schemas/data-request.schema.json`) instead of inventing.
+2. **Request** — if sensitivity is operator/private or access is undeclared, emit a `DataRequest` (`references/schemas/data-request.schema.json`) instead of inventing.
 3. **NOT_COMPUTABLE** — only after find was attempted (or correctly skipped offline) and/or a DataRequest is open or unanswered.
 4. **Never** mark model prior as `OBSERVED`.
 
@@ -148,7 +251,7 @@ Priority when a material fact is missing:
 
 ### SEAL
 
-Run receipt must list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `schemas/run-receipt.schema.json`.
+Run receipt must list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `references/schemas/run-receipt.schema.json`.
 
 Opportunity, product, and zero-option packets at `TESTABLE` or higher require **`completion_proof`** (externally checkable) and should include a **`proof_path`**. After SEAL, follow `references/post-seal-verification.md`. Record real outcomes with:
 
@@ -287,17 +390,17 @@ Neon Genie may not, without explicit downstream authorization:
 
 A run emits one or more of:
 
-- `NeonGenieOpportunityPacket` → `schemas/opportunity-packet.schema.json`
-- `NeonGenieProductPacket` → `schemas/product-packet.schema.json`
-- `FragmentationOpportunityPacket` → `schemas/fragmentation-packet.schema.json`
-- `ZeroOptionPacket` → `schemas/zero-option-packet.schema.json`
-- `AgenticServiceGraph` → `schemas/agentic-service-graph.schema.json`
-- `CommercialSimulationPacket` → `schemas/commercial-simulation.schema.json`
-- `EvidenceIntelligencePacket` → `schemas/evidence-intelligence-packet.schema.json`
-- `MemeticPressurePacket` → `schemas/memetic-pressure-packet.schema.json`
-- `AuditDeliveryPacket` → `schemas/audit-delivery-packet.schema.json`
-- `WayfinderExecutionPacket` → `schemas/wayfinder-execution-packet.schema.json`
-- `NeonGenieRunReceipt` → `schemas/run-receipt.schema.json`
+- `NeonGenieOpportunityPacket` → `references/schemas/opportunity-packet.schema.json`
+- `NeonGenieProductPacket` → `references/schemas/product-packet.schema.json`
+- `FragmentationOpportunityPacket` → `references/schemas/fragmentation-packet.schema.json`
+- `ZeroOptionPacket` → `references/schemas/zero-option-packet.schema.json`
+- `AgenticServiceGraph` → `references/schemas/agentic-service-graph.schema.json`
+- `CommercialSimulationPacket` → `references/schemas/commercial-simulation.schema.json`
+- `EvidenceIntelligencePacket` → `references/schemas/evidence-intelligence-packet.schema.json`
+- `MemeticPressurePacket` → `references/schemas/memetic-pressure-packet.schema.json`
+- `AuditDeliveryPacket` → `references/schemas/audit-delivery-packet.schema.json`
+- `WayfinderExecutionPacket` → `references/schemas/wayfinder-execution-packet.schema.json`
+- `NeonGenieRunReceipt` → `references/schemas/run-receipt.schema.json`
 
 Anti-overclaim gates: `references/anti-overclaim-patterns.md`.
 
@@ -342,7 +445,7 @@ Also apply anti-overclaim gates A–R in `references/anti-overclaim-patterns.md`
 
 ## Profile loading
 
-Load the relevant profile files in `profiles/` (relative to this skill root) and follow their local contracts. Profile-specific runes must remain namespaced and must not silently change core outputs.
+Load the relevant profile files in `references/profiles/` (or `profiles/` on full installs) and follow their local contracts. Profile-specific runes must remain namespaced and must not silently change core outputs.
 
 ## Wayfinder contract
 
@@ -382,4 +485,4 @@ Every run should record:
 - output hash;
 - human review status.
 
-Neon Genie must become harder to impress over time by learning from failed opportunities, brittle integrations, buyer failures, distribution failures, and anti-capture failures. Capture those as append-only learning ledger observations (`schemas/learning-ledger-entry.schema.json`, `do learn`) with `canon_status: PROPOSED` only — never auto-apply to the skill corpus.
+Neon Genie must become harder to impress over time by learning from failed opportunities, brittle integrations, buyer failures, distribution failures, and anti-capture failures. Capture those as append-only learning ledger observations (`references/schemas/learning-ledger-entry.schema.json`, `do learn`) with `canon_status: PROPOSED` only — never auto-apply to the skill corpus.

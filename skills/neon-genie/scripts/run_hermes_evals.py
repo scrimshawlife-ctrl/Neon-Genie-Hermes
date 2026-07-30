@@ -20,7 +20,9 @@ from typing import Any, Callable
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 SKILL_ROOT = SCRIPT_DIR.parent
-CASES_DIR = SKILL_ROOT / "evals" / "cases"
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+import paths as ng_paths  # noqa: E402
 
 EvalFn = Callable[[dict[str, Any]], dict[str, Any]]
 
@@ -320,21 +322,26 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--json", action="store_true", help="Emit JSON report")
     args = parser.parse_args(argv)
 
-    if not CASES_DIR.is_dir():
-        print("FAIL: evals/cases missing", file=sys.stderr)
+    try:
+        cases_dir = ng_paths.evals_dir() / "cases"
+    except FileNotFoundError as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        return 1
+    if not cases_dir.is_dir():
+        print("FAIL: evals/cases missing (also tried examples/evals/cases)", file=sys.stderr)
         return 1
 
     if args.case:
         paths: list[Path] = []
         for c in args.case:
             name = c if c.endswith(".json") else f"{c}.json"
-            p = CASES_DIR / name
+            p = cases_dir / name
             if not p.is_file():
                 print(f"FAIL: case not found: {name}", file=sys.stderr)
                 return 1
             paths.append(p)
     else:
-        paths = sorted(CASES_DIR.glob("*.json"))
+        paths = sorted(cases_dir.glob("*.json"))
 
     results: list[dict[str, Any]] = []
     failed = 0

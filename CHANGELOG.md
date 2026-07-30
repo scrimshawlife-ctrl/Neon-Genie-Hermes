@@ -5,6 +5,18 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.4.0] — 2026-07-30
+
+### Added
+
+- Thin packaging CLI: `python scripts/neon_genie.py do <check|validate|route|receipt>`
+- `scripts/validate_packet.py`, `route_profiles.py`, `build_receipt.py`
+- `scripts/test_wave3_cli.py` regression harness
+
+### Notes
+
+- CLI is packaging-only (no product brain, no research, no execution authority)
+
 ## [3.3.0] — 2026-07-30
 
 ### Added

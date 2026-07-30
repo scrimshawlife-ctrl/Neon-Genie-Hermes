@@ -8,21 +8,23 @@ Installable skill root, Hermes runtime contract, `install.sh`, VERSION/CHANGELOG
 
 **Status:** shipped as **v3.2.0**.
 
-## Wave 2 — Domain depth (current)
+## Wave 2 — Domain depth
 
 - Thicken profile contracts
 - Fill missing packet schemas (`EvidenceIntelligencePacket`, `MemeticPressurePacket`, `AuditDeliveryPacket`)
 - Richer golden/eval cases and anti-overclaim references
 
-**Status:** shipping as **v3.3.0** on `feat/ops-shell-wave1`.
+**Status:** shipped as **v3.3.0**.
 
-## Wave 3 — Thin operator surface
+## Wave 3 — Thin operator surface (current)
 
 Optional packaging CLI only (no product brain in Python):
 
 ```text
-neon-genie do check | validate | route | receipt
+python scripts/neon_genie.py do check | validate | route | receipt
 ```
+
+**Status:** shipping as **v3.4.0**.
 
 ## Wave 4 — Release maturity
 

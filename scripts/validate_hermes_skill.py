@@ -35,6 +35,10 @@ REQUIRED_PATHS = [
     "evals/rubric.md",
     "examples/README.md",
     "scripts/validate_hermes_skill.py",
+    "scripts/neon_genie.py",
+    "scripts/validate_packet.py",
+    "scripts/route_profiles.py",
+    "scripts/build_receipt.py",
     "install.sh",
 ]
 
@@ -85,7 +89,14 @@ def validate_python(path: Path) -> list[str]:
     return errors
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if any(a in {"-h", "--help"} for a in argv):
+        print("Validate Neon Genie as a portable Hermes skill (stdlib only).")
+        print("Usage: python scripts/validate_hermes_skill.py")
+        print("Exit 0 on PASS; non-zero on FAIL with reasons on stderr.")
+        return 0
+
     errors: list[str] = []
 
     if not SKILL_FILE.is_file():

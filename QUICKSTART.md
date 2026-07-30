@@ -16,10 +16,21 @@ Or copy the **repository root** (not a nested package) into your Hermes skills d
 Validate:
 
 ```bash
-python scripts/validate_hermes_skill.py
+python scripts/neon_genie.py do check
 # after install:
-python ~/.hermes/skills/neon-genie/scripts/validate_hermes_skill.py
+python ~/.hermes/skills/neon-genie/scripts/neon_genie.py do check
 ```
+
+### Packaging CLI (optional)
+
+```bash
+python scripts/neon_genie.py do route --text "product audit wayfinder handoff"
+python scripts/neon_genie.py do validate --packet ./packet.json --type product
+python scripts/neon_genie.py do receipt --profiles core,product_architecture --out receipt.json
+python scripts/neon_genie.py help
+```
+
+Packaging only — does not invent opportunities or grant execution authority.
 
 Restart Hermes or reload skills after install.
 

@@ -68,7 +68,13 @@ Public entry points:
 - [DEMO.md](./DEMO.md) — 10-minute path  
 - [examples/gallery/](../examples/gallery/) — sanitized exemplars  
 
-Further work is maintenance, corpus depth, and operator feedback — not a new premiere wave.
+## Maintenance / corpus depth
+
+| Release | Focus |
+|---------|--------|
+| **3.12.0** | Commercial + audit recipes; `do doctor` full-suite smoke |
+
+Further work: more transcripts, live Hermes hardening, operator feedback — not a new premiere wave.
 
 ## Non-goals (all waves)
 

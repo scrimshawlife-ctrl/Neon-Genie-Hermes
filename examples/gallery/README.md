@@ -10,6 +10,8 @@ Packaging and brief exemplars safe for demos. **Not** live customer data. **Not*
 | [`../zero-option.brief.yaml`](../zero-option.brief.yaml) | Empty skills → honest NOT_COMPUTABLE |
 | [`../zero-option-with-skills.brief.yaml`](../zero-option-with-skills.brief.yaml) | Declared skills → micro-loop stub |
 | [`../fragmentation.brief.yaml`](../fragmentation.brief.yaml) | Multi-portal friction scan |
+| [`../commercial.brief.yaml`](../commercial.brief.yaml) | Commercial scaffold + buyer request |
+| [`../audit.brief.yaml`](../audit.brief.yaml) | Offline audit delivery scaffold |
 
 ## Packets
 

@@ -172,6 +172,20 @@ def main() -> int:
     if r.returncode != 0:
         errors.append(f"do recipe fragmentation failed: {r.stderr or r.stdout}")
 
+    for name in ("commercial", "audit"):
+        r = run(
+            [
+                "do",
+                "recipe",
+                "--name",
+                name,
+                "--out",
+                str(ROOT / "out" / "neon-genie" / f"{name}-test"),
+            ]
+        )
+        if r.returncode != 0:
+            errors.append(f"do recipe {name} failed: {r.stderr or r.stdout}")
+
     r = run(
         [
             "do",

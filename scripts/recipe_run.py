@@ -296,11 +296,208 @@ def recipe_fragmentation(out: Path) -> int:
     )
 
 
+def recipe_commercial(out: Path) -> int:
+    brief = SKILL_ROOT / "examples" / "commercial.brief.yaml"
+    route = rc.route_request(brief)
+    rc.write_json(out / "profile-route.json", route)
+    profiles = route.get("selected") or ["core", "commercial"]
+
+    data_req = {
+        "request_id": "dr-buyer-budget",
+        "field": "buyer_budget_authority",
+        "why_decision_critical": "Cannot separate buyer vs beneficiary or set firm price without budget authority",
+        "sensitivity": "private",
+        "suggested_source": "Operator CRM or stakeholder interview notes",
+        "blocks_promotion": True,
+        "status": "open",
+    }
+    data_requests = [data_req]
+    rc.write_json(out / "data-requests.json", data_requests)
+
+    packet = {
+        "buyer_map": {
+            "user": "NOT_COMPUTABLE_until_declared",
+            "beneficiary": "NOT_COMPUTABLE_until_declared",
+            "buyer": "NOT_COMPUTABLE_until_declared",
+            "payer": "NOT_COMPUTABLE_until_declared",
+            "authorizer": "NOT_COMPUTABLE_until_declared",
+            "risk_bearer": "NOT_COMPUTABLE_until_declared",
+            "note": "Gate C: do not collapse roles without evidence",
+        },
+        "pricing_model": {
+            "status": "PROPOSED_SCAFFOLD",
+            "shape": "fixed diagnostic fee + optional follow-on",
+            "firm_price": "NOT_COMPUTABLE",
+            "label": "SPECULATIVE without buyer + cite",
+        },
+        "cost_scenarios": {
+            "conservative": "NOT_COMPUTABLE",
+            "balanced": "NOT_COMPUTABLE",
+            "aggressive": "NOT_COMPUTABLE",
+        },
+        "revenue_scenarios": {
+            "conservative": "NOT_COMPUTABLE",
+            "balanced": "NOT_COMPUTABLE",
+            "aggressive": "NOT_COMPUTABLE",
+        },
+        "distribution": {
+            "primary": "warm network / existing relationships",
+            "label": "SPECULATIVE until operator confirms access",
+        },
+        "risks": [
+            "buyer/beneficiary conflation",
+            "fabricated market size",
+            "pricing without completion proof",
+        ],
+        "completion_proof": "Named buyer + accepted price band OR honest NOT_COMPUTABLE after DataRequest",
+        "proof_path": [
+            "satisfy buyer_budget_authority DataRequest",
+            "separate commercial roles with evidence",
+            "cite public pricing comps or mark SPECULATIVE",
+            "append learning ledger on first sale attempt",
+        ],
+        "authority": "advisory_only",
+        "grants_execution": False,
+        "promotion_state": "CONCEPTUAL",
+    }
+    packet_path = out / "commercial-simulation.stub.json"
+    rc.write_json(packet_path, packet)
+    rc.validate_packet(packet_path, "commercial")
+
+    receipt_path = out / "run-receipt.json"
+    rc.build_receipt(
+        receipt_path,
+        profiles,
+        status="PROPOSED",
+        promotion_state="CONCEPTUAL",
+        not_computable="buyer_map,firm_price,revenue_scenarios",
+        packets=[packet_path],
+        data_requests=data_requests,
+    )
+    return rc.finish(
+        recipe="commercial",
+        brief=brief,
+        out=out,
+        route=route,
+        artifacts=[
+            out / "profile-route.json",
+            packet_path,
+            out / "data-requests.json",
+            receipt_path,
+            out / "recipe-summary.json",
+        ],
+        extra={"outcome": "SCAFFOLD_WITH_DATA_REQUEST", "gate": "C"},
+    )
+
+
+def recipe_audit(out: Path) -> int:
+    brief = SKILL_ROOT / "examples" / "audit.brief.yaml"
+    route = rc.route_request(brief)
+    rc.write_json(out / "profile-route.json", route)
+    profiles = route.get("selected") or ["core", "audit_delivery"]
+
+    data_req = {
+        "request_id": "dr-coi-metrics",
+        "field": "measured_cost_of_inaction_inputs",
+        "why_decision_critical": "Quantitative COI needs operator metrics; inventing $ is Gate J",
+        "sensitivity": "operator",
+        "suggested_source": "Operator incident logs, time-loss estimates, revenue impact notes",
+        "blocks_promotion": False,
+        "status": "open",
+    }
+    data_requests = [data_req]
+    rc.write_json(out / "data-requests.json", data_requests)
+
+    packet = {
+        "current_state": {
+            "summary": "Fragmented tools; limited operator notes in this exemplar",
+            "label": "OBSERVED_from_request_only",
+        },
+        "observed_gaps": [
+            "unclear cost of inaction",
+            "no quantified remediation ROI",
+            "authority boundaries for implementation not declared",
+        ],
+        "cost_of_inaction": {
+            "qualitative": "Delay preserves coordination tax and decision fog",
+            "quantified_usd": "NOT_COMPUTABLE",
+            "label": "qualitative only under offline / missing metrics",
+        },
+        "target_state": {
+            "summary": "Legible diagnostic package for human go/no-go",
+        },
+        "intervention_sequence": [
+            "map current state from operator files",
+            "list gaps with claim labels",
+            "define validation gates",
+            "optional implementation offer (non-coercive)",
+        ],
+        "validation_gates": [
+            "no fabricated dollar COI",
+            "offline prior not marked OBSERVED",
+            "diagnosis does not authorize contact or spend",
+        ],
+        "evidence_manifest": {
+            "operator_supplied": [],
+            "live_research": "skipped_offline",
+        },
+        "authority_boundaries": {
+            "authority": "advisory_only",
+            "grants_execution": False,
+            "may_contact_client": False,
+        },
+        "implementation_offer": {
+            "status": "optional_scaffold",
+            "note": "Offer map only; operator decides",
+        },
+        "completion_proof": "Stakeholder accepts diagnostic package as decision input without unauthorized outreach",
+        "proof_path": [
+            "human reviews audit packet",
+            "optionally supply COI metrics DataRequest",
+            "re-run online for external comps if needed",
+            "ledger outcome after client decision",
+        ],
+        "not_computable_fields": ["quantified_cost_of_inaction"],
+        "authority": "advisory_only",
+        "grants_execution": False,
+    }
+    packet_path = out / "audit-delivery.stub.json"
+    rc.write_json(packet_path, packet)
+    rc.validate_packet(packet_path, "audit")
+
+    receipt_path = out / "run-receipt.json"
+    rc.build_receipt(
+        receipt_path,
+        profiles,
+        status="PROPOSED",
+        promotion_state="TESTABLE",
+        not_computable="quantified_cost_of_inaction",
+        packets=[packet_path],
+        data_requests=data_requests,
+    )
+    return rc.finish(
+        recipe="audit",
+        brief=brief,
+        out=out,
+        route=route,
+        artifacts=[
+            out / "profile-route.json",
+            packet_path,
+            out / "data-requests.json",
+            receipt_path,
+            out / "recipe-summary.json",
+        ],
+        extra={"outcome": "OFFLINE_DIAGNOSTIC_SCAFFOLD", "research": "offline"},
+    )
+
+
 RECIPES: dict[str, RecipeFn] = {
     "product-audit": recipe_product_audit,
     "zero-option": recipe_zero_option,
     "zero-option-executable": recipe_zero_option_executable,
     "fragmentation": recipe_fragmentation,
+    "commercial": recipe_commercial,
+    "audit": recipe_audit,
 }
 
 

@@ -46,13 +46,26 @@ You should see:
 
 Open the product stub and receipt; note **no execution authority**.
 
-## Minute 7–9: Zero-option honesty
+## Minute 7–8: Zero-option honesty
 
 ```bash
 python scripts/neon_genie.py do recipe --name zero-option --out out/neon-genie/demo-zero
 ```
 
 Empty skills/access → honest **`NOT_COMPUTABLE`**, not invented capabilities.
+
+Optional recipes:
+
+```bash
+python scripts/neon_genie.py do recipe --name commercial --out out/neon-genie/demo-commercial
+python scripts/neon_genie.py do recipe --name audit --out out/neon-genie/demo-audit
+```
+
+## Minute 8–9: Full doctor smoke (optional)
+
+```bash
+python scripts/neon_genie.py do doctor
+```
 
 ## Minute 9–10: Record an outcome (ledger)
 

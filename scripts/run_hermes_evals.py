@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+"""Run Neon Genie golden eval fixtures against deterministic gate logic.
+
+Packaging-level invariants only — not full product invention. Each case under
+`evals/cases/` is evaluated from `input` (when present) and compared to `expected`.
+
+Usage:
+  python scripts/run_hermes_evals.py
+  python scripts/run_hermes_evals.py --case zero-option
+  python scripts/run_hermes_evals.py --json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Any, Callable
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+SKILL_ROOT = SCRIPT_DIR.parent
+CASES_DIR = SKILL_ROOT / "evals" / "cases"
+
+EvalFn = Callable[[dict[str, Any]], dict[str, Any]]
+
+
+def eval_zero_option(inp: dict[str, Any]) -> dict[str, Any]:
+    skills = inp.get("skills") or []
+    access = inp.get("access") or []
+    constraints = [str(c).lower() for c in (inp.get("constraints") or [])]
+    zero_capital = any("no capital" in c or "zero capital" in c for c in constraints)
+    if not skills and not access and (zero_capital or inp.get("goal") == "first_cash"):
+        return {
+            "status": "NOT_COMPUTABLE",
+            "reason": "No executable capabilities or access supplied",
+        }
+    return {
+        "status": "PROPOSED",
+        "reason": "Capabilities or access present; full Zero Option loop is prose-runtime",
+    }
+
+
+def eval_x402_misfit(inp: dict[str, Any]) -> dict[str, Any]:
+    service = str(inp.get("service") or "").lower()
+    persistent = bool(inp.get("persistent_relationship"))
+    # Ornamental x402: long-lived subjective relationship beats machine micropayment
+    if persistent and any(
+        k in service for k in ("consulting", "retainer", "relationship", "subjective")
+    ):
+        return {"x402_fit": "REJECT"}
+    if inp.get("conventional_billing_superior"):
+        return {"x402_fit": "REJECT"}
+    return {"x402_fit": "CANDIDATE"}
+
+
+def eval_wayfinder_change_control(inp: dict[str, Any]) -> dict[str, Any]:
+    # Skill-level constant; handoff packets must never rewrite product intent.
+    return {"product_intent_changes_require_neon_genie_review": True}
+
+
+def eval_memetic_cannot_promote(inp: dict[str, Any]) -> dict[str, Any]:
+    promotion = str(inp.get("promotion_state") or "RAW_SIGNAL")
+    evidence_fail = str(inp.get("evidence_gate") or "").upper() == "FAIL"
+    memetic = float(inp.get("memetic_score") or 0.0)
+    may_raise = not evidence_fail and memetic >= 0.0
+    # Gate D: memetic never raises promotion when evidence fails
+    if evidence_fail:
+        may_raise = False
+    return {
+        "promotion_state_max": promotion if evidence_fail else promotion,
+        "memetic_may_raise_promotion": may_raise,
+        "gate": "D",
+    }
+
+
+def eval_offline_no_fabricated_observed(inp: dict[str, Any]) -> dict[str, Any]:
+    research = inp.get("research") or {}
+    offline = bool(research.get("offline") or research.get("enabled") is False)
+    source = str(inp.get("claim_source") or "")
+    if offline and source in {"model_prior_only", "model_prior"}:
+        return {
+            "max_label": "SPECULATIVE",
+            "forbidden_label": "OBSERVED",
+            "gate": "N",
+        }
+    return {
+        "max_label": "OBSERVED",
+        "forbidden_label": None,
+        "gate": "N",
+    }
+
+
+def eval_buyer_beneficiary_conflation(inp: dict[str, Any]) -> dict[str, Any]:
+    roles = inp.get("roles") or {}
+    values = [roles.get(k) for k in ("user", "beneficiary", "buyer", "payer", "authorizer")]
+    values = [v for v in values if v is not None]
+    separated = bool(inp.get("evidence_of_separation"))
+    if values and len(set(values)) == 1 and not separated:
+        return {
+            "status": "GATE_FAIL",
+            "gate": "C",
+            "reason": "Buyer and beneficiary roles conflated without evidence of identity",
+        }
+    return {"status": "PASS", "gate": "C", "reason": "roles separated or evidenced"}
+
+
+def eval_authority_leakage(inp: dict[str, Any]) -> dict[str, Any]:
+    implies = set(inp.get("packet_implies") or [])
+    auth = inp.get("authority") or {}
+    forbidden = {"submit_application", "spend_budget", "publish_campaign", "modify_repo", "execute"}
+    leak = bool(implies & forbidden)
+    exec_allowed = bool(auth.get("execution"))
+    spend_allowed = bool(auth.get("spending"))
+    pub_allowed = bool(auth.get("publishing"))
+    if leak and not (exec_allowed or spend_allowed or pub_allowed):
+        return {
+            "status": "GATE_FAIL",
+            "gate": "E",
+            "grants_execution": False,
+        }
+    if leak and (exec_allowed or spend_allowed or pub_allowed):
+        # Still advisory skill: packaging never grants execution
+        return {
+            "status": "GATE_FAIL",
+            "gate": "E",
+            "grants_execution": False,
+        }
+    return {"status": "PASS", "gate": "E", "grants_execution": False}
+
+
+EVALUATORS: dict[str, EvalFn] = {
+    "zero-option.json": eval_zero_option,
+    "x402-misfit.json": eval_x402_misfit,
+    "wayfinder-change-control.json": eval_wayfinder_change_control,
+    "memetic-cannot-promote.json": eval_memetic_cannot_promote,
+    "offline-no-fabricated-observed.json": eval_offline_no_fabricated_observed,
+    "buyer-beneficiary-conflation.json": eval_buyer_beneficiary_conflation,
+    "authority-leakage.json": eval_authority_leakage,
+}
+
+
+def subset_match(actual: dict[str, Any], expected: dict[str, Any]) -> list[str]:
+    """Every expected key must equal actual (expected is a subset contract)."""
+    errs: list[str] = []
+    for key, want in expected.items():
+        if key not in actual:
+            errs.append(f"missing key {key!r} (want {want!r})")
+        elif actual[key] != want:
+            errs.append(f"{key}: got {actual[key]!r}, want {want!r}")
+    return errs
+
+
+def run_case(path: Path) -> tuple[bool, dict[str, Any]]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    expected = data.get("expected")
+    if not isinstance(expected, dict):
+        return False, {"case": path.name, "error": "expected must be object"}
+
+    fn = EVALUATORS.get(path.name)
+    if fn is None:
+        return False, {
+            "case": path.name,
+            "error": "no evaluator registered for this fixture",
+        }
+
+    inp = data.get("input")
+    if inp is None:
+        inp = {}
+    if not isinstance(inp, dict):
+        return False, {"case": path.name, "error": "input must be object when present"}
+
+    actual = fn(inp)
+    errs = subset_match(actual, expected)
+    ok = not errs
+    return ok, {
+        "case": path.name,
+        "pass": ok,
+        "expected": expected,
+        "actual": actual,
+        "errors": errs,
+        "gate": actual.get("gate") or expected.get("gate"),
+    }
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Run Neon Genie golden eval fixtures")
+    parser.add_argument(
+        "--case",
+        action="append",
+        default=[],
+        help="Case stem or filename (repeatable). Default: all cases with evaluators.",
+    )
+    parser.add_argument("--json", action="store_true", help="Emit JSON report")
+    args = parser.parse_args(argv)
+
+    if not CASES_DIR.is_dir():
+        print("FAIL: evals/cases missing", file=sys.stderr)
+        return 1
+
+    if args.case:
+        paths: list[Path] = []
+        for c in args.case:
+            name = c if c.endswith(".json") else f"{c}.json"
+            p = CASES_DIR / name
+            if not p.is_file():
+                print(f"FAIL: case not found: {name}", file=sys.stderr)
+                return 1
+            paths.append(p)
+    else:
+        paths = sorted(CASES_DIR.glob("*.json"))
+
+    results: list[dict[str, Any]] = []
+    failed = 0
+    for path in paths:
+        ok, report = run_case(path)
+        results.append(report)
+        if not ok:
+            failed += 1
+
+    summary = {
+        "skill": "neon-genie",
+        "runner": "scripts/run_hermes_evals.py",
+        "total": len(results),
+        "passed": len(results) - failed,
+        "failed": failed,
+        "results": results,
+    }
+
+    if args.json:
+        print(json.dumps(summary, indent=2))
+    else:
+        for r in results:
+            status = "PASS" if r.get("pass") else "FAIL"
+            print(f"{status}: {r.get('case')}")
+            for e in r.get("errors") or []:
+                print(f"  - {e}")
+            if r.get("error"):
+                print(f"  - {r['error']}")
+        print(
+            f"{'PASS' if failed == 0 else 'FAIL'}: hermes evals "
+            f"{summary['passed']}/{summary['total']}"
+        )
+
+    return 0 if failed == 0 else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

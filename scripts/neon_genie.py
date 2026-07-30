@@ -4,11 +4,13 @@
 Primary form:
   python scripts/neon_genie.py do <intent> [flags]
 
-Intents (Wave 3 — packaging only, no product brain):
+Intents (packaging only, no product brain):
   check     Validate skill install integrity
   validate  Validate a packet against a schema
   route     Suggest profile set for a request
   receipt   Build a deterministic run-receipt skeleton
+  eval      Run golden gate eval fixtures
+  recipe    Run a named packaging recipe (e.g. product-audit)
 
 Also:
   python scripts/neon_genie.py help [intent]
@@ -42,6 +44,14 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "build_receipt.py",
         "description": "Build advisory run-receipt skeleton with content hashes",
     },
+    "eval": {
+        "script": "run_hermes_evals.py",
+        "description": "Run golden gate eval fixtures against deterministic rules",
+    },
+    "recipe": {
+        "script": "recipe_product_audit.py",
+        "description": "Run packaging recipe (default product-audit; pass --help)",
+    },
 }
 
 ALIASES = {
@@ -49,6 +59,8 @@ ALIASES = {
     "validate-packet": ("validate", []),
     "route-profiles": ("route", []),
     "build-receipt": ("receipt", []),
+    "run-evals": ("eval", []),
+    "product-audit": ("recipe", []),
 }
 
 
@@ -73,6 +85,8 @@ def top_help() -> str:
             "  python scripts/neon_genie.py do validate --packet p.json --type opportunity",
             "  python scripts/neon_genie.py do route --request examples/product-audit.brief.yaml",
             "  python scripts/neon_genie.py do receipt --profiles core,zero_option --out out/receipt.json",
+            "  python scripts/neon_genie.py do eval",
+            "  python scripts/neon_genie.py do recipe",
             "",
             "This CLI does not invent opportunities, run research, or grant execution authority.",
             "",

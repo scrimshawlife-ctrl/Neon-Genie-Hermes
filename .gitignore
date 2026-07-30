@@ -1,0 +1,8 @@
+# Generated packaging outputs
+out/
+*.pyc
+__pycache__/
+.Python
+.venv/
+venv/
+.DS_Store

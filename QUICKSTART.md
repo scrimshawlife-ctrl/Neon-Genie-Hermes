@@ -27,10 +27,15 @@ python ~/.hermes/skills/neon-genie/scripts/neon_genie.py do check
 python scripts/neon_genie.py do route --text "product audit wayfinder handoff"
 python scripts/neon_genie.py do validate --packet ./packet.json --type product
 python scripts/neon_genie.py do receipt --profiles core,product_architecture --out receipt.json
+python scripts/neon_genie.py do eval
+python scripts/neon_genie.py do recipe
 python scripts/neon_genie.py help
 ```
 
 Packaging only — does not invent opportunities or grant execution authority.
+
+`do eval` runs golden gate fixtures under `evals/cases/`.  
+`do recipe` runs the product-audit packaging sample (route → receipt → handoff stub).
 
 Restart Hermes or reload skills after install.
 

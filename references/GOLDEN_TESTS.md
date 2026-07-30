@@ -34,3 +34,13 @@ Fixtures: `evals/cases/`. Rubric skeleton: `evals/rubric.md`.
 | `evals/cases/authority-leakage.json` | Gate E — packets do not grant execution |
 
 Anti-overclaim catalog: `references/anti-overclaim-patterns.md`.
+
+## Runner
+
+```bash
+python scripts/neon_genie.py do eval
+# or
+python scripts/run_hermes_evals.py --json
+```
+
+Each case is evaluated by deterministic gate logic in `scripts/run_hermes_evals.py` and compared to its `expected` object (subset match).

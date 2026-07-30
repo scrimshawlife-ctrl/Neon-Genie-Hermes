@@ -32,6 +32,14 @@ CI evals workflow, release checklist, version audit, fixture invariants.
 
 **Status:** shipped as **v3.5.0**.
 
+## Wave 5 — Executable evals + recipes (current)
+
+- Deterministic golden gate runner (`do eval`) comparing case `expected` to gate logic
+- Product-audit packaging recipe (`do recipe`) for first operator path
+- CI artifacts from recipe output
+
+**Status:** shipping as **v3.6.0**.
+
 ## Non-goals (all waves)
 
 - Merging Neon Genie and Kubrick domains

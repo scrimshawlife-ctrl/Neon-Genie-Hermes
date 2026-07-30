@@ -17,6 +17,7 @@
 | [RELEASE-CHECKLIST-v3.11.md](./RELEASE-CHECKLIST-v3.11.md) | Release gates for v3.11 (Category ownership) |
 | [RELEASE-CHECKLIST-v3.12.md](./RELEASE-CHECKLIST-v3.12.md) | Release gates for v3.12 (Corpus depth) |
 | [RELEASE-CHECKLIST-v3.13.md](./RELEASE-CHECKLIST-v3.13.md) | Release gates for v3.13 (agentic/memetic) |
+| [RELEASE-CHECKLIST-v3.14.md](./RELEASE-CHECKLIST-v3.14.md) | Release gates for v3.14 (evidence/opportunity) |
 | [../references/post-seal-verification.md](../references/post-seal-verification.md) | Post-SEAL outcome checklist |
 | [../references/hermes-runtime-contract.md](../references/hermes-runtime-contract.md) | Hermes runtime / authority / artifacts |
 | [../references/CAPABILITY_MAP.md](../references/CAPABILITY_MAP.md) | Capability surface |

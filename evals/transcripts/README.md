@@ -15,6 +15,8 @@ These are **not** live model outputs. They are skill-contract goldens: labels, r
 | `05-offline-audit.md` | Client audit offline | core, audit_delivery | No OBSERVED from model prior (Gate N) |
 | `06-agentic-x402-misfit.md` | Agentic + x402 on consulting | core, agentic_services | Gate F ornamental x402 REJECT |
 | `07-memetic-cannot-promote.md` | Viral name, weak evidence | core, memetic | Gate D memetic cannot promote |
+| `08-evidence-intelligence.md` | Public find + private CRM | core, evidence_intelligence | Find/request + claim ledger |
+| `09-opportunity-mining.md` | First-cash blocked transition | core, opportunity_mining | Thesis + completion_proof + DataRequest |
 
 ## Rubric
 

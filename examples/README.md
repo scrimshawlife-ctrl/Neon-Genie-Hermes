@@ -21,6 +21,8 @@ They are **not** execution authority.
 | `audit.brief.yaml` | Offline audit diagnostic package |
 | `agentic.brief.yaml` | Agentic graph + x402 misfit |
 | `memetic.brief.yaml` | Name pressure without promotion override |
+| `evidence.brief.yaml` | Evidence intelligence find/request scaffold |
+| `opportunity.brief.yaml` | Opportunity mining with completion proof |
 
 ## Sample packets
 
@@ -41,6 +43,8 @@ python scripts/neon_genie.py do recipe --name commercial
 python scripts/neon_genie.py do recipe --name audit
 python scripts/neon_genie.py do recipe --name agentic
 python scripts/neon_genie.py do recipe --name memetic
+python scripts/neon_genie.py do recipe --name evidence
+python scripts/neon_genie.py do recipe --name opportunity
 python scripts/neon_genie.py do doctor
 ```
 

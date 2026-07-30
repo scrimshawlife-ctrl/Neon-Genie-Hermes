@@ -5,6 +5,19 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.14.0] — 2026-07-30
+
+### Added
+
+- Recipes: `evidence` (find/request scaffold) and `opportunity` (blocked transition + completion_proof)
+- Briefs: `examples/evidence.brief.yaml`, `examples/opportunity.brief.yaml`
+- Transcripts 08–09 (9 total goldens)
+- Doctor/CI cover evidence + opportunity
+
+### Changed
+
+- Full profile-adjacent recipe surface (10 recipes)
+
 ## [3.13.0] — 2026-07-30
 
 ### Added

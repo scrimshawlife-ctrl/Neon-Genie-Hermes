@@ -14,6 +14,8 @@ Packaging and brief exemplars safe for demos. **Not** live customer data. **Not*
 | [`../audit.brief.yaml`](../audit.brief.yaml) | Offline audit delivery scaffold |
 | [`../agentic.brief.yaml`](../agentic.brief.yaml) | Agentic graph; x402 reject scaffold |
 | [`../memetic.brief.yaml`](../memetic.brief.yaml) | Memetic pressure; Gate D cap |
+| [`../evidence.brief.yaml`](../evidence.brief.yaml) | Evidence intelligence scaffold |
+| [`../opportunity.brief.yaml`](../opportunity.brief.yaml) | Opportunity + completion proof |
 
 ## Packets
 

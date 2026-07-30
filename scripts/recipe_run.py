@@ -646,6 +646,187 @@ def recipe_memetic(out: Path) -> int:
     )
 
 
+def recipe_evidence(out: Path) -> int:
+    brief = SKILL_ROOT / "examples" / "evidence.brief.yaml"
+    route = rc.route_request(brief)
+    rc.write_json(out / "profile-route.json", route)
+    profiles = route.get("selected") or ["core", "evidence_intelligence"]
+
+    data_req = {
+        "request_id": "dr-crm-conversion",
+        "field": "crm_pipeline_conversion",
+        "why_decision_critical": "Private conversion rates required for non-speculative commercial scenarios",
+        "sensitivity": "private",
+        "suggested_source": "Operator CRM export (no private scraping)",
+        "blocks_promotion": True,
+        "status": "open",
+    }
+    data_requests = [data_req]
+    rc.write_json(out / "data-requests.json", data_requests)
+
+    packet = {
+        "decision_questions": [
+            "Who are public competitors and what do they publish on pricing?",
+            "What private conversion rates apply to our pipeline?",
+        ],
+        "query_plan": [
+            {
+                "question": "public competitor positioning",
+                "source_class": "open_web",
+                "status": "planned_or_tool_dependent",
+            },
+            {
+                "question": "CRM conversion",
+                "source_class": "operator_private",
+                "status": "data_request",
+            },
+        ],
+        "evidence_items": [],
+        "claim_ledger": [
+            {
+                "claim": "Public comps require host fetch + cite for OBSERVED",
+                "label": "SPECULATIVE_until_cited",
+            },
+            {
+                "claim": "Private conversion rate",
+                "label": "NOT_COMPUTABLE",
+                "data_request": "dr-crm-conversion",
+            },
+        ],
+        "tooling_gaps": [],
+        "attribution_boundaries": {
+            "person": [],
+            "company": [],
+            "foundation": [],
+            "model_prior": "SPECULATIVE_only",
+        },
+        "research_log": [
+            {
+                "query": "public competitor pricing for declared category",
+                "outcome": "tool_dependent_packaging_scaffold",
+            }
+        ],
+        "not_computable_fields": ["crm_pipeline_conversion", "uncited_market_size"],
+        "competitive_scan": {"status": "scaffold", "items": []},
+        "completion_proof": "Cited public evidence items + satisfied CRM DataRequest or waiver",
+        "authority": "advisory_only",
+        "grants_execution": False,
+    }
+    packet_path = out / "evidence-intelligence.stub.json"
+    rc.write_json(packet_path, packet)
+    rc.validate_packet(packet_path, "evidence")
+
+    receipt_path = out / "run-receipt.json"
+    rc.build_receipt(
+        receipt_path,
+        profiles,
+        status="PROPOSED",
+        promotion_state="TESTABLE",
+        not_computable="crm_pipeline_conversion,uncited_market_size",
+        packets=[packet_path],
+        data_requests=data_requests,
+    )
+    return rc.finish(
+        recipe="evidence",
+        brief=brief,
+        out=out,
+        route=route,
+        artifacts=[
+            out / "profile-route.json",
+            packet_path,
+            out / "data-requests.json",
+            receipt_path,
+            out / "recipe-summary.json",
+        ],
+        extra={"outcome": "EVIDENCE_SCAFFOLD_WITH_REQUEST"},
+    )
+
+
+def recipe_opportunity(out: Path) -> int:
+    brief = SKILL_ROOT / "examples" / "opportunity.brief.yaml"
+    route = rc.route_request(brief)
+    rc.write_json(out / "profile-route.json", route)
+    profiles = route.get("selected") or ["core", "opportunity_mining"]
+
+    data_req = {
+        "request_id": "dr-skills-buyer",
+        "field": "declared_skills_access_and_buyer",
+        "why_decision_critical": "Cannot invent capabilities or economic buyer",
+        "sensitivity": "operator",
+        "suggested_source": "Operator inventory of skills, access, and who pays",
+        "blocks_promotion": True,
+        "status": "open",
+    }
+    data_requests = [data_req]
+    rc.write_json(out / "data-requests.json", data_requests)
+
+    packet = {
+        "blocked_transition": {
+            "from": "idea without buyer",
+            "to": "testable paid diagnostic booked",
+        },
+        "outcome_model": {
+            "success": "first cash or documented refusal",
+            "failure": "silence with invented pipeline",
+        },
+        "system_topology": {
+            "actors": ["operator", "buyer_unknown"],
+            "systems": ["outreach", "delivery"],
+        },
+        "opportunity_thesis": (
+            "Warm-network micro-audit may convert if skills/access exist; "
+            "do not invent network or capital"
+        ),
+        "validation_path": [
+            "declare skills/access/buyer",
+            "offer one bounded diagnostic",
+            "track invoice or no",
+        ],
+        "completion_proof": "first paid diagnostic invoice or signed SOW within 14 days",
+        "proof_path": [
+            "satisfy DataRequest for skills/access/buyer",
+            "send bounded offer to declared warm contacts only",
+            "record cash or refusal",
+            "ledger proof_obtained or proof_failed",
+        ],
+        "scorecard": {
+            "evidence_density": "low_until_request_satisfied",
+            "outcome_clarity": "high_if_proof_defined",
+        },
+        "promotion_state": "TESTABLE",
+        "authority": "advisory_only",
+        "grants_execution": False,
+    }
+    packet_path = out / "opportunity-packet.stub.json"
+    rc.write_json(packet_path, packet)
+    rc.validate_packet(packet_path, "opportunity")
+
+    receipt_path = out / "run-receipt.json"
+    rc.build_receipt(
+        receipt_path,
+        profiles,
+        status="PROPOSED",
+        promotion_state="TESTABLE",
+        not_computable="buyer,capabilities_until_declared",
+        packets=[packet_path],
+        data_requests=data_requests,
+    )
+    return rc.finish(
+        recipe="opportunity",
+        brief=brief,
+        out=out,
+        route=route,
+        artifacts=[
+            out / "profile-route.json",
+            packet_path,
+            out / "data-requests.json",
+            receipt_path,
+            out / "recipe-summary.json",
+        ],
+        extra={"outcome": "OPPORTUNITY_WITH_PROOF_AND_REQUEST"},
+    )
+
+
 RECIPES: dict[str, RecipeFn] = {
     "product-audit": recipe_product_audit,
     "zero-option": recipe_zero_option,
@@ -655,6 +836,8 @@ RECIPES: dict[str, RecipeFn] = {
     "audit": recipe_audit,
     "agentic": recipe_agentic,
     "memetic": recipe_memetic,
+    "evidence": recipe_evidence,
+    "opportunity": recipe_opportunity,
 }
 
 

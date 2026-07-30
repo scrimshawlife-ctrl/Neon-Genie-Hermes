@@ -49,6 +49,17 @@ CI evals workflow, release checklist, version audit, fixture invariants.
 
 **Status:** shipped as **v3.7.0**.
 
+## Premiere program (post packaging waves)
+
+See `docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md`.
+
+| Wave | Status |
+|------|--------|
+| P0 Evidence spine | shipping 3.8.0 |
+| P1 Prose excellence | planned |
+| P2 Outcome density | planned |
+| P3 Category ownership | planned |
+
 ## Non-goals (all waves)
 
 - Merging Neon Genie and Kubrick domains

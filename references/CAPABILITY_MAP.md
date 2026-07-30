@@ -14,7 +14,10 @@
 12. Audit-first delivery packages
 13. Wayfinder execution handoff
 14. Failure memory, registries, provenance, and deterministic receipts
-15. Anti-overclaim CLEAR gates (A–O) with eval fixtures
+15. Anti-overclaim CLEAR gates (A–R) with eval fixtures
 16. Full packet schema surface (including evidence, memetic, audit)
+17. Evidence Request Protocol — find public, request private (`DataRequest`), then `NOT_COMPUTABLE`
+18. Receipt evidence fields (`data_requests`, `open_blocking_requests`, `research_attempts`)
 
 Packet schemas: `schemas/`. Profile contracts: `profiles/`. Gates: `references/anti-overclaim-patterns.md`.
+DataRequest: `schemas/data-request.schema.json`.

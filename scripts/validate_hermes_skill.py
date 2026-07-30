@@ -30,6 +30,7 @@ REQUIRED_PATHS = [
     "references/GOLDEN_TESTS.md",
     "profiles",
     "schemas",
+    "schemas/data-request.schema.json",
     "templates/request.yaml",
     "evals",
     "evals/rubric.md",

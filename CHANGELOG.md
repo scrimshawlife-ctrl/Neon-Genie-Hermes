@@ -5,6 +5,23 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.8.0] — 2026-07-30
+
+### Added
+
+- Evidence Request Protocol: find public → request private → only then `NOT_COMPUTABLE`
+- `schemas/data-request.schema.json` and `examples/packets/sample-data-request.json`
+- Anti-overclaim gates **P–R** (skip-find, skip-request, silent private invent)
+- Receipt evidence fields: `data_requests`, `open_blocking_requests`, `research_attempts`, `evidence_protocol`
+- `build_receipt.py --data-requests`; product-audit recipe surfaces open DataRequests
+- Golden evals: public-gap find (P), private-gap request (Q), silent invent (R) — 14 total cases
+- Premiere program roadmap section (P0–P3)
+
+### Changed
+
+- Skill doctrine, Hermes runtime contract, and CAPABILITY_MAP gates **A–R**
+- Skill validator requires `schemas/data-request.schema.json`
+
 ## [3.7.0] — 2026-07-30
 
 ### Added

@@ -51,6 +51,7 @@ def build_receipt(
     promotion_state: str = "RAW_SIGNAL",
     not_computable: str = "",
     packets: list[Path] | None = None,
+    data_requests: list | None = None,
 ) -> None:
     args = [
         "do",
@@ -68,6 +69,10 @@ def build_receipt(
         args.extend(["--not-computable", not_computable])
     for p in packets or []:
         args.extend(["--packet", str(p)])
+    if data_requests:
+        dr_path = out_path.parent / "_data_requests.json"
+        write_json(dr_path, data_requests)
+        args.extend(["--data-requests", str(dr_path)])
     r = run_cli(args)
     if r.returncode != 0:
         raise RuntimeError(r.stderr or r.stdout or "receipt failed")

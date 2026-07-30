@@ -34,6 +34,41 @@ def sha256_text(text: str) -> str:
     return sha256_bytes(text.encode("utf-8"))
 
 
+DATA_REQUEST_REQUIRED = (
+    "field",
+    "why_decision_critical",
+    "sensitivity",
+    "suggested_source",
+    "blocks_promotion",
+    "status",
+)
+
+
+def load_data_requests(path: Path) -> list[dict]:
+    """Load one DataRequest object or an array of DataRequests; validate required keys."""
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise SystemExit(f"FAIL: cannot read data-requests {path}: {exc}") from exc
+
+    if isinstance(raw, dict):
+        requests_list = [raw]
+    elif isinstance(raw, list):
+        requests_list = raw
+    else:
+        raise SystemExit(f"FAIL: --data-requests must be a JSON object or array: {path}")
+
+    for i, req in enumerate(requests_list):
+        if not isinstance(req, dict):
+            raise SystemExit(f"FAIL: data-requests[{i}] must be an object")
+        missing = [k for k in DATA_REQUEST_REQUIRED if k not in req]
+        if missing:
+            raise SystemExit(
+                f"FAIL: data-requests[{i}] missing required keys: {', '.join(missing)}"
+            )
+    return requests_list
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build Neon Genie run receipt skeleton")
     parser.add_argument(
@@ -59,6 +94,11 @@ def main(argv: list[str] | None = None) -> int:
         default="",
         help="Comma-separated NOT_COMPUTABLE field names",
     )
+    parser.add_argument(
+        "--data-requests",
+        type=Path,
+        help="JSON file: one DataRequest object or array of DataRequests",
+    )
     args = parser.parse_args(argv)
 
     profiles = [p.strip() for p in args.profiles.split(",") if p.strip()]
@@ -71,6 +111,13 @@ def main(argv: list[str] | None = None) -> int:
             print(f"FAIL: packet not found: {path}", file=sys.stderr)
             return 1
         packet_hashes[str(path)] = sha256_file(path)
+
+    requests_list: list[dict] = []
+    if args.data_requests is not None:
+        if not args.data_requests.is_file():
+            print(f"FAIL: data-requests not found: {args.data_requests}", file=sys.stderr)
+            return 1
+        requests_list = load_data_requests(args.data_requests)
 
     version = VERSION_FILE.read_text(encoding="utf-8").strip() if VERSION_FILE.is_file() else "unknown"
     material = {
@@ -87,6 +134,18 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     nc = [x.strip() for x in args.not_computable.split(",") if x.strip()]
+
+    open_blocking = [
+        r
+        for r in requests_list
+        if r.get("status") == "open" and r.get("blocks_promotion") is True
+    ]
+
+    note = "Packaging receipt only. Does not authorize spend, publish, or execution."
+    if open_blocking and args.status == "PROPOSED":
+        note += (
+            " Open blocking data requests present; do not promote until satisfied or waived."
+        )
 
     receipt = {
         "status": args.status,
@@ -108,7 +167,11 @@ def main(argv: list[str] | None = None) -> int:
         "packet_hashes": packet_hashes,
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "generator": "scripts/build_receipt.py",
-        "note": "Packaging receipt only. Does not authorize spend, publish, or execution.",
+        "note": note,
+        "data_requests": requests_list,
+        "open_blocking_requests": open_blocking,
+        "research_attempts": [],
+        "evidence_protocol": "find_request_not_computable",
     }
 
     text = json.dumps(receipt, indent=2) + "\n"

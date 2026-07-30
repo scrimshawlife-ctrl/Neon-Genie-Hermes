@@ -52,6 +52,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "recipe_run.py",
         "description": "Run packaging recipe (product-audit, zero-option, fragmentation, …)",
     },
+    "transcripts": {
+        "script": "check_transcripts.py",
+        "description": "Validate golden prose transcript structure and rubric markers",
+    },
 }
 
 ALIASES = {
@@ -60,6 +64,7 @@ ALIASES = {
     "route-profiles": ("route", []),
     "build-receipt": ("receipt", []),
     "run-evals": ("eval", []),
+    "check-transcripts": ("transcripts", []),
     "product-audit": ("recipe", ["--name", "product-audit"]),
     "zero-option": ("recipe", ["--name", "zero-option"]),
     "fragmentation": ("recipe", ["--name", "fragmentation"]),
@@ -92,6 +97,7 @@ def top_help() -> str:
             "  python scripts/neon_genie.py do recipe --list",
             "  python scripts/neon_genie.py do recipe --name zero-option",
             "  python scripts/neon_genie.py do recipe --name fragmentation",
+            "  python scripts/neon_genie.py do transcripts",
             "",
             "This CLI does not invent opportunities, run research, or grant execution authority.",
             "",

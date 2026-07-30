@@ -109,6 +109,10 @@ def main() -> int:
     if r.returncode != 0:
         errors.append(f"do eval failed: {r.stderr or r.stdout}")
 
+    r = run(["do", "transcripts"])
+    if r.returncode != 0:
+        errors.append(f"do transcripts failed: {r.stderr or r.stdout}")
+
     r = run(
         [
             "do",

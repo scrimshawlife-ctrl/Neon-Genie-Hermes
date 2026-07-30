@@ -5,6 +5,20 @@ All notable changes to Neon Genie are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses semantic versioning.
 
+## [3.9.0] — 2026-07-30
+
+### Added
+
+- Golden prose transcripts (`evals/transcripts/`) for five premiere scenarios
+- Transcript rubric + structural checker: `do transcripts` / `scripts/check_transcripts.py`
+- CI step for transcript checks
+- Docs: premiere positioning in README, RELEASE-CHECKLIST-v3.8/v3.9, docs index
+
+### Changed
+
+- ROADMAP: P0 shipped, P1 shipping as 3.9.0
+- Premiere design spec: P0 success criteria checked off
+
 ## [3.8.0] — 2026-07-30
 
 ### Added

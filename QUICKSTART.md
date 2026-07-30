@@ -28,6 +28,7 @@ python scripts/neon_genie.py do route --text "product audit wayfinder handoff"
 python scripts/neon_genie.py do validate --packet ./packet.json --type product
 python scripts/neon_genie.py do receipt --profiles core,product_architecture --out receipt.json
 python scripts/neon_genie.py do eval
+python scripts/neon_genie.py do transcripts
 python scripts/neon_genie.py do recipe
 python scripts/neon_genie.py help
 ```
@@ -35,6 +36,7 @@ python scripts/neon_genie.py help
 Packaging only — does not invent opportunities or grant execution authority.
 
 `do eval` runs golden gate fixtures under `evals/cases/`.  
+`do transcripts` checks golden prose exemplars under `evals/transcripts/`.  
 
 ```bash
 python scripts/neon_genie.py do recipe --list
@@ -71,7 +73,16 @@ access only. No fictional resources. Mark unknowns NOT_COMPUTABLE.
 /neon-genie ... research.enabled=false
 ```
 
-Example briefs: `examples/`. Request envelope: `templates/request.yaml`.
+Example briefs: `examples/`. Request envelope: `templates/request.yaml`.  
+Golden prose exemplars: `evals/transcripts/` (how a full OPEN→SEAL run should look).
+
+## Missing data
+
+1. **Find** public / fetchable facts via host research tools.
+2. **Request** private or operator-held facts with a `DataRequest` (never invent).
+3. Only then **`NOT_COMPUTABLE`** — with attempted query and/or open request id.
+
+Schema: `schemas/data-request.schema.json`. Sample: `examples/packets/sample-data-request.json`.
 
 ## How it runs
 
@@ -80,12 +91,6 @@ OPEN → ALIGN → ASCEND → CLEAR → SEAL
 ```
 
 Core is always loaded. Other profiles load on trigger match. Research is proactive by default when host tools can close gaps.
-
-## Missing data
-
-1. Neon tries to **find** public facts (research).
-2. If private, it **requests** via DataRequest (does not invent).
-3. Only then `NOT_COMPUTABLE`.
 
 ## Profiles
 

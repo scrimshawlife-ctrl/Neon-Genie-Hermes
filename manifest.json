@@ -12,7 +12,8 @@
     "evidence_intelligence",
     "memetic",
     "audit_delivery",
-    "wayfinder_handoff"
+    "wayfinder_handoff",
+    "capital_sprint"
   ],
   "default_profiles": [
     "core"

@@ -9,6 +9,8 @@ and this project uses semantic versioning.
 
 ### Added
 
+- **Abraxas pivot** — this repo declared canonical Hermes packaging skill for Neon Genie
+  (`docs/ABRAXAS_PIVOT.md`, `references/abraxas-binding.md`); Abraxas keeps invention umbrella only
 - **Privacy-by-construction runtime** (`scripts/privacy_runtime.py`, contract 1.0.0)
   - Fail-closed defaults: `local_only`, repository telemetry disabled, host/provider
     retention `NOT_COMPUTABLE`

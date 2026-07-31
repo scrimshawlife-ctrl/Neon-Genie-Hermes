@@ -88,6 +88,7 @@ hub_support_globs:
   - references/manifest.json
   - references/hermes-runtime-contract.md
   - references/privacy-contract.md
+  - references/abraxas-binding.md
   - references/CAPABILITY_MAP.md
   - references/GOLDEN_TESTS.md
   - references/anti-overclaim-patterns.md

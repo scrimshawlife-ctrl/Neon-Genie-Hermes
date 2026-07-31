@@ -163,6 +163,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/CAPABILITY_MAP.md`
 - `references/GOLDEN_TESTS.md`
 - `references/VERSION`
+- `references/abraxas-binding.md`
 - `references/anti-overclaim-patterns.md`
 - `references/gates.yaml`
 - `references/hermes-runtime-contract.md`

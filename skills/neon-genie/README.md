@@ -34,12 +34,14 @@ Neon Genie is a **Hermes skill** (this repo root is the skill). It helps you:
 
 It is **not** Kubrick (cinematic), **not** Wayfinder (engineering execution), and **not** a free-form idea generator.
 
+**Abraxas pivot:** this repo is the **canonical Hermes packaging skill** for Neon Genie. Abraxas-v2.0 keeps the invention umbrella (`abx-neon-genie`) and routes packaging/Hub work here — see [docs/ABRAXAS_PIVOT.md](./docs/ABRAXAS_PIVOT.md).
+
 | Principle | In practice |
 |-----------|-------------|
 | Evidence-bound | Claims are `OBSERVED` · `INFERRED` · `SPECULATIVE` · `NOT_COMPUTABLE` |
 | Find or request | Public facts → research. Private facts → `DataRequest`. Never invent. |
 | Advisory only | May draft and recommend. May **not** spend, publish, contact, or mutate repos. |
-| Smallest profiles | Loads only the contracts the job needs (`core` always). |
+| Smallest profiles | Loads only the contracts the job needs (`core` + `privacy` always). |
 
 ---
 

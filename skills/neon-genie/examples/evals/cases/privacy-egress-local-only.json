@@ -1,0 +1,14 @@
+{
+  "input": {
+    "privacy_mode": "local_only",
+    "payload": "public market size",
+    "destination": "example.com",
+    "purpose": "public research",
+    "host_tools_available": true
+  },
+  "expected": {
+    "egress_decision": "BLOCK",
+    "external_actions": [],
+    "reason": "local_only repository boundary blocks Neon-Genie-initiated egress"
+  }
+}

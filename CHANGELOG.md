@@ -7,6 +7,20 @@ and this project uses semantic versioning.
 
 ## [Unreleased]
 
+### Added
+
+- **Privacy-by-construction runtime** (`scripts/privacy_runtime.py`, contract 1.0.0)
+  - Fail-closed defaults: `local_only`, repository telemetry disabled, host/provider
+    retention `NOT_COMPUTABLE`
+  - Egress decisions: `ALLOW` · `REDACT_THEN_ALLOW` · `REQUEST_CONSENT` · `BLOCK`
+  - Purpose-bound consent records only (global privacy disable forbidden)
+  - `REDACT_THEN_ALLOW` produces minimized `safe_query` without persisting private source
+  - External actions require provider, tool_class, destination, purpose, source_class,
+    classification, decision, redaction_status, UTC `recorded_at`
+  - Brief/recipe `privacy:` config flows into receipt, envelope, and learning ledger
+  - `do privacy --json` diagnostics; profile `privacy` on all routed runs
+  - Unit tests, golden evals, behavioral fixtures, and sample packets/schemas
+
 ### Changed
 
 - Docs refresh: README, QUICKSTART, DEMO, ROADMAP aligned to operator surface,

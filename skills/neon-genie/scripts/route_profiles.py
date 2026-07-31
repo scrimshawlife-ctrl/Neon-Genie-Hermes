@@ -190,7 +190,7 @@ def main(argv: list[str] | None = None) -> int:
 
     triggered = match_profiles(text)
     # Prefer explicit preferred_profiles when present
-    selected = list(dict.fromkeys(["core"] + preferred + triggered))
+    selected = list(dict.fromkeys(["core", "privacy"] + preferred + triggered))
 
     known: list[str] = []
     try:
@@ -214,7 +214,7 @@ def main(argv: list[str] | None = None) -> int:
         notes.append(f"ignored unknown profiles: {', '.join(unknown)}")
 
     result = {
-        "default": ["core"],
+        "default": ["core", "privacy"],
         "preferred_profiles": preferred,
         "triggered": [p for p in triggered if p != "core"],
         "selected": selected,

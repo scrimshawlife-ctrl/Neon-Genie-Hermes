@@ -25,6 +25,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "doctor.py",
         "description": "Full smoke suite (start here after install)",
     },
+    "privacy": {
+        "script": "privacy_diagnostics.py",
+        "description": "Show resolved repository privacy boundary (--json)",
+    },
     "check": {
         "script": "validate_hermes_skill.py",
         "description": "Validate skill install and required files",

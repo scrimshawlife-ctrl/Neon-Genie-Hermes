@@ -19,6 +19,10 @@
 
 ---
 
+## Privacy
+
+Private by construction: Neon Genie does not operate an advertising profile, silently enable repository telemetry, or train a model on your content. Runs default to **`local_only`** and write to the output path you choose. External research and model calls occur through host tools (provider retention is `NOT_COMPUTABLE` here). Briefs may set `privacy.mode` and **purpose-bound consents only** — there is no global privacy-disable switch. Inspect with `python scripts/neon_genie.py do privacy --json` and the run receipt’s `external_actions`. See [PRIVACY.md](./PRIVACY.md).
+
 ## What it is
 
 Neon Genie is a **Hermes skill** (this repo root is the skill). It helps you:

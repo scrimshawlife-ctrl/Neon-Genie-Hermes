@@ -154,6 +154,7 @@ def run_scaffold(
             status="PROPOSED",
             promotion_state="RAW_SIGNAL",
             packets=packets or None,
+            brief=brief,
         )
     except RuntimeError as exc:
         return fail("NG-PKG-021", f"receipt failed: {exc}")

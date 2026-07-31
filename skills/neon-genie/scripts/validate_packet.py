@@ -49,6 +49,8 @@ PACKET_TYPE_TO_SCHEMA = {
     "receipt": "run-receipt.schema.json",
     "run_receipt": "run-receipt.schema.json",
     "envelope": "run-envelope.schema.json",
+    "privacy": "privacy-context.schema.json",
+    "privacy_context": "privacy-context.schema.json",
 }
 
 

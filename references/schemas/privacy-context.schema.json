@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/schemas/privacy-context.schema.json",
+  "title": "Neon Genie Privacy Context",
+  "type": "object",
+  "required": ["contract_version", "mode", "telemetry", "training_use", "retention", "egress", "redaction"],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {"type": "string", "const": "1.0.0"},
+    "mode": {"enum": ["local_only", "external_research_allowed", "custom"]},
+    "telemetry": {"enum": ["disabled", "opted_in"]},
+    "training_use": {"const": "none_by_neon_genie"},
+    "retention": {"type": "object", "required": ["artifact_path", "automatic_expiry"], "additionalProperties": false, "properties": {"artifact_path": {"type": "string", "minLength": 1}, "automatic_expiry": {"type": ["string", "null"]}}},
+    "egress": {"type": "object", "required": ["allowed", "approved_domains", "approved_tool_classes"], "additionalProperties": false, "properties": {"allowed": {"type": "boolean"}, "approved_domains": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "approved_tool_classes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}}},
+    "redaction": {"type": "object", "required": ["enabled", "blocked_categories"], "additionalProperties": false, "properties": {"enabled": {"type": "boolean"}, "blocked_categories": {"type": "array", "items": {"enum": ["credentials", "secrets", "government_ids", "financial_accounts", "private_contact_lists", "health_records"]}, "uniqueItems": true}}},
+    "data_sources_used": {"type": "array", "items": {"enum": ["operator_input", "workspace_private", "public_web", "provider_model"]}, "uniqueItems": true},
+    "external_actions": {"type": "array", "items": {"type": "object", "required": ["provider", "destination", "purpose", "redaction_status"], "additionalProperties": false, "properties": {"provider": {"type": "string", "minLength": 1}, "destination": {"type": "string", "minLength": 1}, "purpose": {"type": "string", "minLength": 1}, "redaction_status": {"enum": ["not_required", "redacted", "blocked", "not_computable"]}, "timestamp": {"type": "string", "format": "date-time"}}}},
+    "privacy_warnings": {"type": "array", "items": {"type": "string"}},
+    "deletion_instructions": {"type": "string"}
+  },
+  "allOf": [{"if": {"properties": {"mode": {"const": "local_only"}}, "required": ["mode"]}, "then": {"properties": {"egress": {"properties": {"allowed": {"const": false}}}}}}]
+}

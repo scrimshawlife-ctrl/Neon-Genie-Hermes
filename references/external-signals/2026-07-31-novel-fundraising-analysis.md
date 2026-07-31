@@ -16,145 +16,202 @@ Key public sources (non-exhaustive):
 
 | Source | Type | Role |
 |--------|------|------|
-| Fundraise Up Agentic Giving category launch + product notes | Category definition + product | Navigation → delegation shift |
-| CharityEngine Copilot launch | Product | Voice-driven executable fundraising agent |
-| Blackbaud Agents for Good expansion | Product + metrics | Development Agent performance; new agents |
-| Moore SimioAccelerate expansion | Product | Planned giving, DAF, sustainer, major-donor modeling |
-| Forbes / Founders Pledge / Coefficient Giving coverage | Capital & cohort signals | AI-linked philanthropy wave |
-| Philanthropy.com / Tiltify-linked analysis | Channel shift | Creator / streamer / Discord-native fundraising |
-| M+R, Givebutter, sector benchmarks | Trend data | Recurring, mobile, peer-to-peer, retention |
-| Fundraising.AI / Virtuous reports | Adoption vs impact | Capacity and effectiveness gap |
+| Fundraise Up — Agentic Giving category | Category / product | Navigation → delegation shift |
+| CharityEngine Copilot | Product launch | Voice-driven executable agent on unified data |
+| Moore SimioCloud / Ensemble Vantage / SimioAccelerate | Predictive + agentic | Ensemble acquisition; planned giving, DAF, major modeling |
+| Bloomerang + Dataro | Product / guide | Daily next-action scores inside CRM |
+| Virtuous Insights | Platform | Retention / reactivation / acquisition score lifts |
+| Blackbaud Raiser's Edge NXT Strategy Assistant, Development Agent | Platform + metrics | Benchmarks; capacity-multiplying agents |
+| DonorPerfect predictive / generative / agentic overview | Practitioner guide | Stack roles for major-gift workflows |
+| Virtuous / Fundraising.AI 2026 report | Survey | Adoption vs impact gap |
+| AI persuasion fundraising experiments | Research | Conversion vs human canvassers |
+| AI-linked philanthropy coverage (Founders Pledge, lab-employee campaigns) | Macro capital | New donor pools |
+| Creator / streamer / Discord fundraising analyses | Channel shift | Digital-native participation under-counted by classic metrics |
 
 **Doctrine reminder:**  
-This is a structured snapshot of emerging fundraising models, category definitions, product launches, and capital/cohort shifts. It is operator-supplied evidence. Category announcements and published metrics = OBSERVED. Opportunity theses = SPECULATIVE until blocked-transition, buyer, and completion-proof analysis are applied. Neon Genie remains advisory only.
+Operator-supplied evidence. Category announcements, product launches, and published benchmarks = OBSERVED. Vendor lift claims = directional. Opportunity theses = SPECULATIVE until blocked-transition, buyer, and completion-proof analysis are applied.
 
 ---
 
-## 1. Agentic Giving — New Category Definition
+## 1. Analytical Shift: Dashboards → Predictions → Actions → Agents
 
 ### OBSERVED
-In late July 2026, Fundraise Up formally named **Agentic Giving** as a new category: the shift from navigation to delegation.  
-- Today: donor arrives at website → finds form → completes gift.  
-- Tomorrow: donor states intent to a trusted AI assistant → assistant discovers, evaluates, and completes (or proposes) the gift.  
-In the advanced form, the donor never visits a website or opens a form.
-
-Implication stated by the category authors: organizations with inconsistent or unclear information will not rank lower — they will be left out entirely. Agent-readable campaign, impact, and trust data become a prerequisite for visibility.
-
-### INFERRED
-Fundraising optimization for twenty years optimized the post-arrival experience. The new bottleneck is pre-arrival discoverability and trustworthy completion by agents acting on donor intent. This is a structural, not incremental, change.
-
-### Signal classes
-technology frontier · economic friction · institutional friction
-
-**Maps to Isenberg:** #02 (spend/gift controls), #07 (voice/agent interface), #12 (enablement), #03 (judgment / impact evaluation).
-
----
-
-## 2. Executable Fundraising Agents (Staff-Side)
-
-### OBSERVED
-Multiple platforms are shipping agents that do not only recommend but execute multi-step fundraising work under human oversight:
-
-- **CharityEngine Copilot** — Voice-driven agentic platform on a unified native data model. Examples: “Launch a win-back campaign for donors at risk of lapsing,” “Build a multichannel campaign for LYBUNT donors,” “Draft a grant proposal using last year’s outcomes.”
-- **Blackbaud Agents for Good** — Development Agent reported reply rates 76× industry average, higher open rates, and attributable gift size +39%. Expansion to Data Health Agent and others.
-- **Moore SimioAccelerate** — Agentic platform expanded with planned giving, DAF, sustainer, and major-donor modeling; reported lifts in response rates, major-donor conversion, and average gift size in enterprise deployments.
+- Classic RFM / LYBUNT dashboards are table stakes. Fundraisers report wanting clear recommendations, not more reports (e.g. ~62% in one 2026 guide).
+- Predictive donor intelligence now surfaces near-term scores inside the CRM: likelihood to give, lapse risk, upgrade readiness, suggested ask, monthly conversion potential.
+- Agentic systems go further: draft, segment, launch campaigns, update records, and queue multi-step tasks under human control.
+- Stack roles are crystallizing:  
+  - **Predictive** — who / when / how much  
+  - **Generative** — what to say  
+  - **Agentic** — how and when to execute  
 
 ### INFERRED
-The differentiation is moving from “AI that answers” to “AI that acts inside a complete donor picture.” Platforms with fragmented data (acquisition-stitched stacks) are structurally disadvantaged relative to unified native models.
+Novel value is no longer another scorecard. It is closed-loop systems that turn prediction into timed action with measurable lift, plus legibility to *donor-side* agents (Agentic Giving).
 
 ### Signal classes
 economic friction · technology frontier · repeated workarounds
 
 ---
 
-## 3. AI-Linked Philanthropy Wave & New Donor Cohorts
+## 2. Agentic Giving — Donor-Side Analysis & Discovery
 
 ### OBSERVED
-- Projections of large AI-linked philanthropic capital (tens of billions annually in some estimates) as wealth from foundation-model companies and employees is committed.
-- Founders Pledge new pledged value accelerated sharply (hundreds of millions → multi-billion range in recent periods).
-- Concrete campaigns have already drawn significant new money from AI lab employees into causes that previously had little overlap (e.g., anti-factory-farming efforts raising millions with majority first-time donors from AI ranks).
-- Concepts such as “public venture” incubators for highly capitalized nonprofits with corporate-level compensation and clear metrics are being discussed by early AI-wealth philanthropists.
+- **Agentic Giving** named as a category (Fundraise Up, late July 2026): donor states intent to an AI assistant; assistant discovers, evaluates, and completes or proposes the gift. Shift from navigation to delegation.
+- Organizations with inconsistent or unclear public information risk exclusion from agent ranking, not merely lower rank.
+- Infrastructure work is underway so assistants can understand current campaigns and move from confirmed intent to secure, authorized donation.
 
 ### INFERRED
-A new high-capacity, digitally native, impact-oriented donor cohort is forming. Traditional nonprofit discovery and stewardship channels are poorly matched to this cohort’s defaults (agent-mediated, high-transparency, outcome-oriented).
+Fundraising analysis must expand upstream of the CRM: impact claims, campaign cards, verifiable outcomes, and structured data that external agents can trust become competitive surface. Optimization only of the post-arrival form is incomplete.
 
-### Signal classes
-economic friction · human friction · technology frontier
+**Maps to Isenberg:** #02, #07, #12, #03.
 
 ---
 
-## 4. Creator / Streamer / Digital-Native Channels
+## 3. Retention as Highest-ROI Analytical Surface
 
 ### OBSERVED
-Large-scale fundraising is occurring outside traditional nonprofit metrics and channels: multi-day streamer marathons, long-form creator vlogs, Discord-native campaigns, and peer networks that do not appear in classic household-giving surveys. Individual campaigns have moved tens of millions of dollars in days or weeks. Traditional reports that track household participation rates systematically under-count this activity.
+- Sector benchmark: average nonprofit retains ~43% of donors year-over-year.
+- Illustrative lift: 43% → 55% for an org with 2,000 donors estimated at ~$36k additional annual revenue without new acquisition; mid-size programs see larger absolute gains.
+- Predictive retention / lapse agents that score by history, engagement, and upgrade potential and trigger personalized outreach are the clearest early ROI use case cited across practitioner sources.
+- Multi-score models (Virtuous-style) claim material lifts on retention, reactivation, and acquisition relative to baseline selection.
 
 ### INFERRED
-The donor base is not only shrinking in classic household terms; it is migrating into participation forms that existing measurement and cultivation systems do not see well. Nonprofits that treat creator/streamer channels as edge cases will miss a material and growing share of new participation.
+For capacity-constrained nonprofits, retention analysis that drives timed intervention outperforms pure acquisition modeling on cost and mission continuity. Completion proof is measurable (retention rate, revenue from retained cohort).
 
 ### Signal classes
-economic friction · institutional friction · unused capacity
+economic friction · human friction
 
 ---
 
-## 5. Peer-to-Peer + AI Coaching
+## 4. Ensemble Acquisition & Full-Journey Modeling
 
 ### OBSERVED
-The long-standing “zero-dollar fundraiser” problem (majority of registered peer-to-peer participants raise nothing beyond their own registration) is being addressed with AI coaching that helps supporters write stories, track progress, and hit milestones. Early-access results from at least one major platform show the share of fundraisers raising at least one gift nearly doubling. Tap-to-donate and in-person instant posting to the donor record are being layered onto the same conversion-optimized infrastructure.
+- Next-generation acquisition tools (e.g. Moore SimioAudience Ensemble Vantage) combine multiple predictive models, large cross-organization donation graphs (billions of records, tens of thousands of signals per constituent), and continuous learning from campaign performance.
+- Platforms expand beyond single-gift propensity to planned giving, DAF, sustainer, and major-donor modeling across the upgrade journey.
+- Vendor-reported enterprise outcomes: response rate lifts up to ~85%, major-donor and average-gift increases in the tens of percent — treat as directional, not independently audited.
+
+### INFERRED
+Novel analysis increasingly depends on (a) scale of third-party philanthropic signal graphs and (b) first-party unified activity history. Siloed stacks degrade model quality and agent reliability.
+
+---
+
+## 5. Unified Data as Prerequisite
+
+### OBSERVED
+- Platforms with a single native data model (donations, events, email, advocacy, volunteer, payments) argue agentic AI can only “see the complete donor picture” when interactions are not fragmented across synced systems.
+- Large advancement teams invest in unified activity histories (CRM + web + email + events + ads) before applying advanced personalization.
+
+### INFERRED
+Unique analytical advantage accrues to whoever owns or can cleanly compose the full supporter graph. Bolt-on AI on fragmented data yields weaker predictions and weaker agents.
 
 ### Signal classes
-economic friction · repeated workarounds · technology frontier
+technology frontier · institutional friction
 
 ---
 
-## 6. Structural Backdrop (Not Novel, but Conditioning)
+## 6. Mid-Level Donor Gap & Capacity Multiplication
 
 ### OBSERVED
-- Recurring giving continues to outpace one-time and is treated as core infrastructure rather than a campaign tactic. Retention of recurring donors remains dramatically higher than one-time.
-- Overall dollars raised can rise while the number of classic donors falls — concentration and migration effects.
-- Non-cash / asset-based giving (stock, DAF, crypto, private-company shares) is accelerating, especially among high-capacity and AI-wealth cohorts.
-- Average nonprofit donor retention remains low (~43% year-over-year in widely cited benchmarks); modest lifts produce material revenue without new acquisition.
+- Major gifts drove much of recent revenue growth; mid-level donors remain under-engaged relative to potential.
+- Agentic “Development Agents” are positioned as capacity multipliers (e.g. staff focused on top 10k alumni; agent cultivates residual long-tail pool).
+- Strategy assistants combine peer benchmarks (revenue growth, sustainer performance, active donor growth, revenue per donor) with next-best-action guidance.
 
-These conditions amplify the value of any novel model that improves retention, unlocks new cohorts, or makes nonprofits discoverable and giftable by agents.
-
----
-
-## 7. Highest-Density Novel Opportunity Surfaces
-
-| Rank | Surface | Description | Relative Novelty / Density |
-|------|---------|-------------|----------------------------|
-| 1 | **Agentic Giving infrastructure** | Agent-readable impact, campaign, and trust data + secure intent-to-completion flows | Very High (category just named) |
-| 2 | **Executable staff-side fundraising agents** | Multi-step campaign, retention, and grant agents that act inside unified data | High (shipping now; differentiation still open) |
-| 3 | **AI-cohort cultivation systems** | Discovery, stewardship, and impact reporting tuned to AI-wealth / Founders-Pledge-style donors | High |
-| 4 | **Creator / streamer / Discord-native pipelines** | Tools and services that make nonprofits legible and fundable inside digital-native participation forms | High |
-| 5 | **AI-coached peer-to-peer that solves zero-dollar** | Coaching + conversion infrastructure that materially raises the share of active fundraisers | Medium–High |
-| 6 | **Agent-readable impact / transparency layer** | Structured, verifiable outcome objects that donor agents and human donors can trust | High (prerequisite for 1) |
+### INFERRED
+Novel analysis that systematically surfaces and prioritizes mid-level and long-tail supporters under agent stewardship is still thin relative to major-gift tooling.
 
 ---
 
-## 8. Explicit Non-Whitespace / Crowded Notes
+## 7. Executable Staff-Side Fundraising Agents
 
-- Generic “AI writes your appeal” content generation is saturated.
-- Basic online donation-form optimization remains competitive but is no longer the frontier.
-- Pure recurring-giving program design is well-understood; the novel edge is agent-mediated upgrade and retention action.
-- Crypto acceptance alone is no longer novel; the edge is seamless non-cash / DAF / private-share flows for new wealth cohorts.
+### OBSERVED
+- **CharityEngine Copilot** — Voice-driven; launches win-back and LYBUNT campaigns, drafts grants, acts inside unified data.
+- **Blackbaud Agents for Good** — Development Agent with strong reported engagement and gift-size metrics; expansion to data-health and related agents.
+- **Moore SimioAccelerate** — Agentic upgrade journeys across planned giving, DAF, sustainer, major.
+
+### INFERRED
+Differentiation is moving from “AI that answers” to “AI that acts inside a complete donor picture.” Fragmented stacks are structurally disadvantaged.
 
 ---
 
-## 9. Relation to Existing Corpus
+## 8. AI-Linked Philanthropy Wave & New Cohorts
 
-- Extends `2026-07-31-nonprofit-agentic-surfaces.md` (Agentic Giving and fundraising agents were already ranked high).
-- Depends on `2026-07-31-nonprofit-ai-governance.md` (agentic fundraising without boundaries, identity, and audit will fail board and donor trust tests).
-- Maps cleanly to Isenberg #02, #07, #12, #03 and to the broader agentic infrastructure trust layer.
+### OBSERVED
+- Projections of large AI-linked philanthropic flows as foundation-model wealth and founder pledges commit.
+- Founders Pledge pledged value accelerated sharply into multi-billion range in recent periods.
+- Concrete campaigns have drawn significant first-time gifts from AI lab employees into causes with little prior overlap.
+
+### INFERRED
+A high-capacity, digitally native, impact-oriented cohort is forming. Traditional discovery and stewardship channels are poorly matched to agent-mediated, high-transparency defaults.
+
+---
+
+## 9. Creator / Streamer / Digital-Native Channels
+
+### OBSERVED
+Large-scale fundraising occurs outside classic household metrics: streamer marathons, creator vlogs, Discord-native campaigns. Traditional participation surveys systematically under-count this activity.
+
+### INFERRED
+The donor base is migrating into forms that existing measurement and cultivation systems see poorly. Treating these channels as edge cases misses a material and growing share of participation.
+
+---
+
+## 10. Peer-to-Peer + AI Coaching
+
+### OBSERVED
+The “zero-dollar fundraiser” problem (majority of registered P2P participants raise nothing beyond registration) is being attacked with AI coaching for stories, progress, and milestones. Early results from at least one major platform show the share raising at least one gift nearly doubling. Tap-to-donate and instant posting to the donor record layer onto the same infrastructure.
+
+---
+
+## 11. Persuasion Evidence & Governance Constraint
+
+### OBSERVED
+- Field experiments report AI outperforming professional human fundraisers on donation rate and amount in specific canvassing-style settings (order-of-magnitude claims in one study; context-specific).
+- Donors increasingly describe giving as values-driven, not primarily transactional.
+
+### INFERRED
+Optimization without disclosure, anti-manipulation constraints, and audit will collide with sector ethics frameworks and board fiduciary duty. Novel analysis must be governance-aware (cross-ref nonprofit AI governance file).
+
+---
+
+## 12. Highest-Density Novel Opportunity Surfaces
+
+| Rank | Surface | Description | Primary Isenberg map | Relative density |
+|------|---------|-------------|----------------------|------------------|
+| 1 | **Closed-loop retention agents** | Lapse prediction → timed personalized action with measurable lift on ~43% baseline | #03, #07, #12 | High |
+| 2 | **Agentic Giving legibility layer** | Structured impact/campaign data so donor agents can discover, trust, and complete gifts | #02, #07, #12 | Very High |
+| 3 | **Mid-level / long-tail stewardship agents** | Capacity multiplication beyond major-gift focus | #12, #16 | High |
+| 4 | **Executable staff-side agents on unified data** | Multi-step campaign, retention, grant agents that act | #07, #12 | High |
+| 5 | **AI-cohort cultivation systems** | Stewardship tuned to AI-wealth / Founders-Pledge-style donors | — | High |
+| 6 | **Creator / streamer / Discord-native pipelines** | Make nonprofits legible and fundable inside digital-native forms | — | High |
+| 7 | **Governance-aware optimization** | Analysis embedding disclosure, anti-manipulation, audit | Governance corpus | High (underserved) |
+| 8 | **AI-coached P2P that solves zero-dollar** | Coaching + conversion that raises share of active fundraisers | — | Medium–High |
+
+---
+
+## 13. Explicit Non-Novel / Crowded Notes
+
+- Static RFM and basic LYBUNT reporting alone.
+- Generic “AI writes your appeal” without CRM-closed-loop action.
+- Single-score wealth screening without propensity or next-best-action integration.
+- Dashboards that require interpretation rather than action.
+- Crypto acceptance alone; pure recurring-program design without agent-mediated upgrade/retention.
+
+---
+
+## 14. Relation to Existing Corpus
+
+- Extends `2026-07-31-nonprofit-agentic-surfaces.md` (Agentic Giving and fundraising agents ranked high).
+- Depends on `2026-07-31-nonprofit-ai-governance.md` (agentic fundraising without boundaries, identity, and audit fails board and donor trust tests).
+- Maps to Isenberg #02, #07, #12, #03 and the broader agentic trust layer.
 
 ---
 
 ## Usage Guidance for Neon Genie
 
-1. Treat this file as operator-supplied evidence. Reference it under `canonical_sources` or as workspace context.
-2. Category announcements, product launches, and published performance claims = **OBSERVED** (with normal skepticism on vendor metrics). Opportunity theses = **SPECULATIVE** until further evidence density, buyer separation, and completion-proof analysis.
-3. Recommended first mining targets: surfaces 1, 2, 3, and 6 in section 7.
-4. Gates still apply: concrete affected user (donor or nonprofit buyer), economic/mission buyer separation, and externally checkable completion proof required before promotion past CONCEPTUAL / TESTABLE.
-5. Research public corroboration (competing products, regulatory notes for charitable solicitation and data, willingness-to-pay) when decision-critical. Private facts → DataRequest.
+1. Treat as operator-supplied evidence under `canonical_sources` or workspace context.
+2. Benchmarks, category definitions, product launches = **OBSERVED**. Vendor lifts and opportunity theses = **SPECULATIVE** / directional until validated.
+3. Recommended first mining targets: closed-loop retention; Agentic Giving legibility; mid-level stewardship; governance-aware optimization.
+4. Gates still apply: concrete buyer, completion proof (retention, revenue, gift completion), separation of analysis from pure content generation.
+5. Cross-reference nonprofit governance file when any agent acts on donors or beneficiaries.
 
 ## Related Profiles
 
@@ -170,4 +227,4 @@ Static external-signal snapshot. Do not auto-promote any opportunity thesis to c
 
 ---
 
-*Generated as structured unique/novel fundraising analysis from public sources on 2026-07-31 for Neon Genie reference use.*
+*Expanded unique/novel fundraising analysis corpus from public sources on 2026-07-31 for Neon Genie reference use.*

@@ -12,6 +12,7 @@ These files are **reference only**. They are not part of the distributed Hub ski
 | [2026-07-31-agentic-infrastructure-trends.md](./2026-07-31-agentic-infrastructure-trends.md) | 2026-07-31 | Agentic infrastructure readiness, spend rails (x402), trust/escrow gaps, MCP 2026-07-28, orchestration consolidation | #02, #07, #17 |
 | [2026-07-31-vc-whitespace-agentic.md](./2026-07-31-vc-whitespace-agentic.md) | 2026-07-31 | VC capital concentration vs whitespace in agentic infrastructure and adjacent surfaces | #02, #07, #17 |
 | [2026-07-31-isenberg-17-agents-hiring-agents.md](./2026-07-31-isenberg-17-agents-hiring-agents.md) | 2026-07-31 | Deep dive on agents hiring agents — escrow, reputation, dispute, identity primitives | #17 |
+| [2026-07-31-nonprofit-agentic-surfaces.md](./2026-07-31-nonprofit-agentic-surfaces.md) | 2026-07-31 | Nonprofit sector × agentic AI — adoption gap, Agentic Giving, governance, capacity | #02, #07, #12, #03 |
 
 ## Usage
 

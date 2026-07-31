@@ -1,0 +1,34 @@
+request_id: "example-capital-sprint-001"
+requested_outcome: "Time-bounded capital sprint packet with impact object and completion proof design"
+target_user: "operator supporting a membership-heavy 501(c)(3) with a hard fundraising deadline"
+current_state: "gift funnel weak relative to membership/program revenue; annual fund page underperforming"
+desired_state: "CapitalSprintPacket with 7/14/30 design, warm-network map, message frames, and proof checklist"
+constraints:
+  - "advisory_only"
+  - "no private org names in shared outputs"
+  - "dues are not donations — separate in every frame"
+canonical_sources:
+  - "references/external-signals/2026-07-31-novel-fundraising-analysis.md"
+  - "references/external-signals/2026-07-31-agentic-giving-substrate.md"
+  - "references/external-signals/2026-07-31-nonprofit-ai-governance.md"
+  - "references/external-signals/2026-07-31-isenberg-02-agent-spend-controls.md"
+preferred_profiles:
+  - capital_sprint
+  - evidence_intelligence
+  - commercial
+requested_outputs:
+  - CapitalSprintPacket
+  - NeonGenieRunReceipt
+research:
+  enabled: true
+  offline: false
+  max_fetches: null
+  focus:
+    - "public donation rail patterns only; no private donor lists"
+authority:
+  research: true
+  drafting: true
+  execution: false
+  spending: false
+  publishing: false
+human_review_required: true

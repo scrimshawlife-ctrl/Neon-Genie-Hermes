@@ -94,6 +94,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/README.md`
 - `examples/agentic.brief.yaml`
 - `examples/audit.brief.yaml`
+- `examples/capital-sprint.brief.yaml`
 - `examples/commercial.brief.yaml`
 - `examples/evals/behavioral/README.md`
 - `examples/evals/behavioral/cases/memetic-weak-proof.json`
@@ -170,6 +171,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/privacy-contract.md`
 - `references/profiles/agentic_services.md`
 - `references/profiles/audit_delivery.md`
+- `references/profiles/capital_sprint.md`
 - `references/profiles/commercial.md`
 - `references/profiles/core.md`
 - `references/profiles/evidence_intelligence.md`
@@ -183,6 +185,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/schema-versioning.md`
 - `references/schemas/agentic-service-graph.schema.json`
 - `references/schemas/audit-delivery-packet.schema.json`
+- `references/schemas/capital-sprint-packet.schema.json`
 - `references/schemas/commercial-simulation.schema.json`
 - `references/schemas/data-request.schema.json`
 - `references/schemas/evidence-intelligence-packet.schema.json`

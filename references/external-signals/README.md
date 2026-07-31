@@ -15,6 +15,7 @@ These files are **reference only**. They are not part of the distributed Hub ski
 | [2026-07-31-nonprofit-agentic-surfaces.md](./2026-07-31-nonprofit-agentic-surfaces.md) | 2026-07-31 | Nonprofit sector × agentic AI — adoption gap, Agentic Giving, governance, capacity | #02, #07, #12, #03 |
 | [2026-07-31-nonprofit-ai-governance.md](./2026-07-31-nonprofit-ai-governance.md) | 2026-07-31 | Nonprofit AI governance frameworks — missing middle, AWS four-pillar, operational tooling | Institutional / #02-adjacent |
 | [2026-07-31-novel-fundraising-analysis.md](./2026-07-31-novel-fundraising-analysis.md) | 2026-07-31 | Unique & novel fundraising — Agentic Giving, executable agents, AI-philanthropy wave, creator channels | #02, #07, #12, #03 |
+| [2026-07-31-creator-economy-donation-mechanics.md](./2026-07-31-creator-economy-donation-mechanics.md) | 2026-07-31 | Creator economy donation mechanics — native tips, direct jars, charity routing, fees, crypto | Creator × #02/#07 |
 
 ## Usage
 

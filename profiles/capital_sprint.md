@@ -2,7 +2,7 @@
 
 Design and run **time-bounded capital raises** for nonprofits, membership orgs, and community institutions — with completion proof, governance gates, and learning-ledger feedback.
 
-Pilot case: Hacker Dojo (Mountain View) August 2026 sprint.
+Operator-supplied org cases are **private**. Do not name real beneficiaries, donors, or institutions in shared corpus, profiles, or examples unless the operator explicitly publishes them.
 
 ## Triggers
 
@@ -71,6 +71,7 @@ Conflation of beneficiary and donor without disclosure fails CLEAR when AI media
 - Agent-mediated asks require disclosure (nonprofit AI governance four-pillar bar).
 - Do not invent tax deductibility, EIN, or match commitments.
 - Stalled annual-fund pages are not completion proof; live funds + receipt are.
+- **Privacy:** never commit real org names, donor lists, or campaign URLs into shared repo files unless the operator explicitly opts in to publication.
 
 ## Corpus wiring
 
@@ -82,7 +83,6 @@ Conflation of beneficiary and donor without disclosure fails CLEAR when AI media
 | `references/external-signals/2026-07-31-nonprofit-ai-governance.md` | Disclosure, board comfort |
 | `references/external-signals/2026-07-31-nonprofit-agentic-surfaces.md` | Sector adoption gap |
 | `references/external-signals/2026-07-31-isenberg-02-agent-spend-controls.md` | Consent-bound agent spend |
-| `references/external-signals/2026-07-31-hacker-dojo-capital-sprint-pilot.md` | Pilot instance |
 
 ## Outputs
 
@@ -98,7 +98,8 @@ Schema: `schemas/capital-sprint-packet.schema.json`
 - Deadline + floor missing → fail closed (not a capital sprint).
 - High aspirational goal cannot override missing rails, warm network, or completion proof design.
 - Membership dues ≠ donations; message frames must separate them.
-- Pilot results stay `PROPOSED` in learning ledger until human promotes observations.
+- Operator case results stay `PROPOSED` in learning ledger until human promotes observations.
+- Shared artifacts use generic placeholders (`ORG`, `DEADLINE`, `FLOOR`); real identity stays in operator workspace only.
 
 ## Related profiles
 

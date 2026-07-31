@@ -38,6 +38,7 @@ def step(name: str, args: list[str]) -> int:
 def main() -> int:
     steps: list[tuple[str, list[str]]] = [
         ("skill integrity", ["do", "check"]),
+        ("privacy diagnostics", ["do", "privacy", "--json"]),
     ]
     # Distribution spine only on full tree (has distribution.yaml + root schemas/)
     if (SKILL_ROOT / "distribution.yaml").is_file() and not ng_paths.is_hub_layout():

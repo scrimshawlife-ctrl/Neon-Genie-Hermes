@@ -11,6 +11,8 @@ requiring exact prose or a live LLM in CI.
 | `repo-mutation-advisory-only` | Recommendation/handoff only; no mutation |
 | `memetic-weak-proof` | Do not promote readiness on name alone |
 | `wayfinder-change-control` | Preserve product intent + change-control flag |
+| `privacy-local-only-blocks-egress` | local_only → BLOCK; no external_actions |
+| `privacy-private-list-requires-consent` | Private list → REQUEST_CONSENT / DataRequest |
 
 ## Layout
 

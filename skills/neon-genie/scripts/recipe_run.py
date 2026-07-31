@@ -96,6 +96,7 @@ def recipe_product_audit(out: Path) -> int:
         promotion_state="SPEC_COMPLETE",
         packets=[product_path, handoff_path],
         data_requests=data_requests,
+        brief=brief,
     )
     return rc.finish(
         recipe="product-audit",
@@ -148,6 +149,7 @@ def recipe_zero_option(out: Path) -> int:
         promotion_state="NOT_COMPUTABLE",
         not_computable="capabilities,access,opportunities",
         packets=[packet_path],
+        brief=brief,
     )
     return rc.finish(
         recipe="zero-option",
@@ -211,6 +213,7 @@ def recipe_zero_option_executable(out: Path) -> int:
         status="PROPOSED",
         promotion_state="TESTABLE",
         packets=[packet_path],
+        brief=brief,
     )
     return rc.finish(
         recipe="zero-option-executable",
@@ -281,6 +284,7 @@ def recipe_fragmentation(out: Path) -> int:
         promotion_state="MAPPED",
         not_computable="critical_integration_access",
         packets=[packet_path],
+        brief=brief,
     )
     return rc.finish(
         recipe="fragmentation",
@@ -373,6 +377,7 @@ def recipe_commercial(out: Path) -> int:
         not_computable="buyer_map,firm_price,revenue_scenarios",
         packets=[packet_path],
         data_requests=data_requests,
+        brief=brief,
     )
     return rc.finish(
         recipe="commercial",
@@ -474,6 +479,7 @@ def recipe_audit(out: Path) -> int:
         not_computable="quantified_cost_of_inaction",
         packets=[packet_path],
         data_requests=data_requests,
+        brief=brief,
     )
     return rc.finish(
         recipe="audit",
@@ -557,6 +563,7 @@ def recipe_agentic(out: Path) -> int:
         status="PROPOSED",
         promotion_state="CONCEPTUAL",
         packets=[packet_path],
+        brief=brief,
     )
     return rc.finish(
         recipe="agentic",
@@ -630,6 +637,7 @@ def recipe_memetic(out: Path) -> int:
         status="PROPOSED",
         promotion_state="CONCEPTUAL",
         packets=[packet_path],
+        brief=brief,
     )
     return rc.finish(
         recipe="memetic",
@@ -725,6 +733,7 @@ def recipe_evidence(out: Path) -> int:
         not_computable="crm_pipeline_conversion,uncited_market_size",
         packets=[packet_path],
         data_requests=data_requests,
+        brief=brief,
     )
     return rc.finish(
         recipe="evidence",
@@ -810,6 +819,7 @@ def recipe_opportunity(out: Path) -> int:
         not_computable="buyer,capabilities_until_declared",
         packets=[packet_path],
         data_requests=data_requests,
+        brief=brief,
     )
     return rc.finish(
         recipe="opportunity",

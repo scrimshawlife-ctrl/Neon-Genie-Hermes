@@ -1,0 +1,38 @@
+{
+  "contract_version": "1.0.0",
+  "mode": "local_only",
+  "telemetry": "disabled",
+  "training_use": "none_by_neon_genie",
+  "retention": {
+    "artifact_path": "out/neon-genie/example",
+    "automatic_expiry": null,
+    "host_provider_retention": "NOT_COMPUTABLE",
+    "repository_retention": "operator_selected_output_path"
+  },
+  "egress": {
+    "allowed": false,
+    "approved_domains": [],
+    "approved_tool_classes": []
+  },
+  "redaction": {
+    "enabled": true,
+    "blocked_categories": ["credentials", "secrets", "government_ids", "private_keys"]
+  },
+  "consents": [],
+  "data_sources_used": [],
+  "external_actions": [],
+  "privacy_warnings": [],
+  "deletion_instructions": "Delete the operator-selected output directory: out/neon-genie/example.",
+  "unknowns": {
+    "host_providers": "NOT_COMPUTABLE",
+    "provider_retention": "NOT_COMPUTABLE",
+    "provider_processing": "NOT_COMPUTABLE"
+  },
+  "learning_ledger": {
+    "location": "local_operator_selected_path",
+    "default_path": "out/neon-genie/learning-ledger.jsonl",
+    "auto_apply_forbidden": true,
+    "ships_with_skill": false,
+    "disclosure": "Learning ledger entries are local operator artifacts under the chosen output path; they are never auto-applied to the skill corpus and must not contain raw secrets or private source payloads."
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "consent_id": "consent_example_public_market",
+  "scope": "purpose_bound",
+  "purpose": "public market research for pricing band",
+  "destinations": ["example.com"],
+  "categories_allowed": ["public_query"],
+  "categories_denied": ["credentials", "secrets", "private_keys", "private_customer_list"],
+  "source_class": "operator_explicit",
+  "issued_at": "2026-01-01T00:00:00Z",
+  "expires_at": null,
+  "revoked": false
+}

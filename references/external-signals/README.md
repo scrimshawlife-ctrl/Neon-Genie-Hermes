@@ -10,6 +10,7 @@ These files are **reference only**. They are not part of the distributed Hub ski
 |------|------|-------|----------------------|
 | [2026-07-31-gregisenberg-opportunities.md](./2026-07-31-gregisenberg-opportunities.md) | 2026-07-31 | 26 market opportunity theses from @gregisenberg | Full list |
 | [2026-07-31-agentic-infrastructure-trends.md](./2026-07-31-agentic-infrastructure-trends.md) | 2026-07-31 | Agentic infrastructure readiness, spend rails (x402), trust/escrow gaps, MCP 2026-07-28, orchestration consolidation | #02, #07, #17 |
+| [2026-07-31-vc-whitespace-agentic.md](./2026-07-31-vc-whitespace-agentic.md) | 2026-07-31 | VC capital concentration vs whitespace in agentic infrastructure and adjacent surfaces | #02, #07, #17 |
 
 ## Usage
 

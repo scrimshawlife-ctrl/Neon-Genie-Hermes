@@ -89,11 +89,15 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "release_check.py",
         "description": "Pre-release version/changelog/dist gate",
     },
+    "privacy": {
+        "script": "privacy_report.py",
+        "description": "Privacy contract, telemetry, and preflight status",
+    },
 }
 
 # Everyday first in help; aliases for older script-style names
 EVERYDAY = ("doctor", "check", "run", "recipe", "route", "validate", "capabilities")
-VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist", "release-check")
+VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist", "release-check", "privacy")
 OUTCOMES = ("receipt", "envelope", "learn", "reconcile")
 
 ALIASES = {

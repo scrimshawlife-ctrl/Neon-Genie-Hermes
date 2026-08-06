@@ -178,11 +178,27 @@ def test_route_includes_privacy() -> None:
     print("PASS: route includes privacy")
 
 
+def test_do_privacy_json() -> None:
+    r = subprocess.run(
+        [PY, str(SCRIPT_DIR / "neon_genie.py"), "do", "privacy", "--json"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert r.returncode == 0, r.stderr + r.stdout
+    data = json.loads(r.stdout)
+    assert data["telemetry_status"] == "disabled"
+    assert data["preflight_self_test"] == "pass"
+    assert data["wayfinder_required"] is False
+    print("PASS: do privacy --json")
+
+
 def main() -> int:
     test_receipt_includes_privacy_fields()
     test_validate_rejects_local_only_with_sent_action()
     test_validate_rejects_telemetry_enabled()
     test_route_includes_privacy()
+    test_do_privacy_json()
     return 0
 
 

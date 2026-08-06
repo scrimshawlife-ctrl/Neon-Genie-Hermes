@@ -82,7 +82,7 @@ python scripts/neon_genie.py do doctor
 python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
 ```
 
-See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`. Gate ontology: `references/gates.yaml`.
+See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`. Gate ontology: `references/gates.yaml`. Privacy contract: root `PRIVACY.md` and hub mirror `references/PRIVACY.md`; always-on profile `profiles/privacy.md`.
 
 ### Hermes Hub support files
 
@@ -242,10 +242,12 @@ Run research during `ALIGN` and again in `ASCEND` whenever any of these hold:
 ### Research loop
 
 ```text
-GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
+GAP_DETECT → QUERY_PLAN → PRIVACY_EGRESS_CHECK → FETCH (host tools) → NORMALIZE → CITE
   → LABEL (OBSERVED | INFERRED | SPECULATIVE | NOT_COMPUTABLE)
   → RE-SCORE → (repeat until usefulness plateaus or budget/tooling ends)
 ```
+
+Before every host research/tool send: classify → minimize → `RUNE.PRIVACY_EGRESS_CHECK` → only then FETCH. Outcomes: `ALLOW` | `REDACT_THEN_ALLOW` | `REQUEST_CONSENT` | `BLOCK`. Log attempts in receipt `external_actions`. See `profiles/privacy.md` and `references/PRIVACY.md`.
 
 ### Research rules
 
@@ -257,7 +259,7 @@ GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
 - **Freshness** — prefer primary/current sources; note retrieval time for volatile facts.
 - **Attribution boundaries** — separate person / company / foundation / model inference.
 - **Authority unchanged** — research may draft; it may not submit, contact, spend, publish, or mutate repos.
-- **Privacy** — do not probe private systems without declared access; public + operator-granted only; request private facts via `DataRequest`.
+- **Privacy** — do not probe private systems without declared access; public + operator-granted only; request private facts via `DataRequest`. Run egress check before host tools; credentials never leave; private/operator egress needs consent.
 
 ## Evidence Request Protocol
 
@@ -279,10 +281,13 @@ Priority when a material fact is missing:
 - Private decision-critical gap + no DataRequest → fail (Gate Q)
 - Private/unknown fact labeled OBSERVED from model prior without source → fail (Gate R)
 - Open DataRequests with `blocks_promotion: true` cap promotion until satisfied or waived
+- CLEAR order: authority → evidence P–R → privacy S–Y → remaining anti-overclaim
 
 ### SEAL
 
 Run receipt must list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `references/schemas/run-receipt.schema.json`.
+
+Privacy provenance (Gate Y / `RUNE.PRIVACY_SEAL_PROVENANCE`) is also required: `privacy_mode`, `privacy_contract_version`, `data_sources_used`, `external_actions`, `artifact_paths`, `telemetry_status` (`disabled`), `retention_statement`, `privacy_warnings`, `deletion_instructions`, `redaction`, `research_policy`. Contract: `PRIVACY.md` / `references/PRIVACY.md`.
 
 Opportunity, product, and zero-option packets at `TESTABLE` or higher require **`completion_proof`** (externally checkable) and should include a **`proof_path`**. After SEAL, follow `references/post-seal-verification.md`. Record real outcomes with:
 
@@ -322,6 +327,9 @@ Determine the smallest sufficient profile set. **Additionally auto-load** `evide
 ```yaml
 profile_router:
   core: always
+  privacy:
+    triggers: [always]
+    default_when: always_with_core
   product_architecture:
     triggers: [product audit, app design, game design, system design, feature coherence]
   opportunity_mining:
@@ -360,7 +368,7 @@ SIGNAL
 → BLOCKED TRANSITION
 → OUTCOME MODEL
 → EVIDENCE GAPS
-→ RESEARCH LOOP (host tools)
+→ RESEARCH LOOP (PRIVACY_EGRESS_CHECK → host tools)
 → SYSTEM TOPOLOGY
 → OPPORTUNITY THESIS
 → INTERVENTION
@@ -392,6 +400,10 @@ SIGNAL
 - `RUNE.NG.ROUTE`
 - `RUNE.NG.CLEAR_CHECK`
 - `RUNE.NG.SEAL`
+- `RUNE.PRIVACY_CLASSIFY`
+- `RUNE.PRIVACY_MINIMIZE`
+- `RUNE.PRIVACY_EGRESS_CHECK`
+- `RUNE.PRIVACY_SEAL_PROVENANCE`
 
 ## Authority boundaries
 
@@ -437,7 +449,7 @@ A run emits one or more of:
 - `WayfinderExecutionPacket` → `references/schemas/wayfinder-execution-packet.schema.json`
 - `NeonGenieRunReceipt` → `references/schemas/run-receipt.schema.json`
 
-Anti-overclaim gates: `references/anti-overclaim-patterns.md`.
+Anti-overclaim gates: `references/anti-overclaim-patterns.md`. Privacy: `PRIVACY.md`, `references/PRIVACY.md`, `profiles/privacy.md`.
 
 ## Promotion ladder
 
@@ -474,9 +486,16 @@ Fail closed when:
 - missing data is fabricated instead of marked `NOT_COMPUTABLE` after research was attempted (or correctly skipped under offline mode);
 - public fetchable facts are skipped without a research attempt (Gate P);
 - private decision-critical facts lack a `DataRequest` (Gate Q);
-- private facts are silently invented as `OBSERVED` without source or request (Gate R).
+- private facts are silently invented as `OBSERVED` without source or request (Gate R);
+- external action sent with unknown/empty destination (Gate S);
+- offline / `LOCAL_ONLY` / research disabled but external send recorded (Gate T);
+- credential or secret-like payload would be or was sent (Gate U);
+- private/operator egress without consent reference (Gate V);
+- absolute privacy claim without matching mode and evidence (Gate W);
+- telemetry status is not `disabled` (Gate X);
+- SEAL without required privacy provenance fields (Gate Y).
 
-Also apply anti-overclaim gates A–R in `references/anti-overclaim-patterns.md` during CLEAR.
+Also apply anti-overclaim gates A–R and privacy gates S–Y in `references/anti-overclaim-patterns.md` during CLEAR. Registry: `references/gates.yaml`.
 
 ## Profile loading
 

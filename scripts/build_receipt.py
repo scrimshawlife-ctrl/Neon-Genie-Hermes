@@ -106,6 +106,12 @@ def main(argv: list[str] | None = None) -> int:
     profiles = [p.strip() for p in args.profiles.split(",") if p.strip()]
     if "core" not in profiles:
         profiles = ["core"] + profiles
+    if "privacy" not in profiles:
+        # keep core first; insert privacy immediately after core
+        if profiles and profiles[0] == "core":
+            profiles = ["core", "privacy"] + [p for p in profiles[1:] if p != "privacy"]
+        else:
+            profiles = ["privacy"] + profiles
 
     packet_hashes: dict[str, str] = {}
     for path in args.packet:
@@ -152,6 +158,7 @@ def main(argv: list[str] | None = None) -> int:
             " Open blocking data requests present; do not promote until satisfied or waived."
         )
 
+    artifact_paths = [str(p) for p in args.packet] if args.packet else []
     receipt = {
         "status": args.status,
         "profiles_loaded": profiles,
@@ -177,6 +184,29 @@ def main(argv: list[str] | None = None) -> int:
         "open_blocking_requests": open_blocking,
         "research_attempts": [],
         "evidence_protocol": "find_request_not_computable",
+        "privacy_mode": "LOCAL_ONLY",
+        "privacy_contract_version": "1.0.0",
+        "data_sources_used": ["operator_input"],
+        "external_actions": [],
+        "artifact_paths": artifact_paths,
+        "telemetry_status": "disabled",
+        "retention_statement": (
+            "Neon-Genie-owned artifacts live only under operator-selected paths "
+            "listed in artifact_paths; delete those paths to remove them. "
+            "Host/provider retention is outside this skill."
+        ),
+        "privacy_warnings": [],
+        "deletion_instructions": (
+            "Remove the directories/files listed in artifact_paths "
+            "(and any explicit learning-ledger path). "
+            "Uninstalling the skill does not delete prior run outputs."
+        ),
+        "redaction": {
+            "enabled": True,
+            "blocked_categories": [],
+            "events": [],
+        },
+        "research_policy": {"enabled": False, "offline": True},
     }
 
     text = json.dumps(receipt, indent=2) + "\n"

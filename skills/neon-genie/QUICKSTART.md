@@ -37,6 +37,11 @@ Reload Hermes after install.
 4. Expect labeled claims and fail-closed gaps.
 5. Open **`run-envelope.json`** first when resuming a packaging workspace.
 
+**Privacy notice:** Packaging runs default to `privacy_mode: LOCAL_ONLY` (no Neon-initiated external research; telemetry off; artifacts under your `--out` path).
+Hermes chat may research unless you set `research.enabled=false` / offline.
+Neon records egress on the run receipt; it does not rewrite host or model-provider retention.
+See [PRIVACY.md](./PRIVACY.md). Run `python scripts/neon_genie.py do privacy` for a local report.
+
 ```text
 /neon-genie audit this project using product_architecture, commercial,
 and wayfinder_handoff. Research public decision-critical facts. Request

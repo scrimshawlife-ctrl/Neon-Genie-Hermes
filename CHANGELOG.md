@@ -7,13 +7,21 @@ and this project uses semantic versioning.
 
 ## [Unreleased]
 
+## [3.24.0] — 2026-08-06
+
+### Added
+
+- **Privacy-by-construction spine** (issue #15)
+  - `PRIVACY.md` + `references/PRIVACY.md`, ADR 0006
+  - Always-on `privacy` profile; gates S–Y; egress rune doctrine
+  - Receipt privacy provenance; run-envelope **1.1.0** `privacy` summary
+  - `scripts/privacy_preflight.py`, `do privacy`, doctor hooks
+  - Behavioral privacy cases; packaging validation NG-PRIV-*
+
 ### Changed
 
-- Docs refresh: README, QUICKSTART, DEMO, ROADMAP aligned to operator surface,
-  run-envelope, feedback loop, release automation, and production maturity (3.18–3.23)
-- `distribution_spine` package parity skips standalone leaf installs (Hub /
-  optional-skills) so `do doctor` is green outside the monorepo
-- Catalog submission notes (`docs/CATALOG.md`); official optional PR filed
+- Profile router always co-loads `privacy` with `core`
+- Schema versioning: envelope 1.1.0
 
 ## [3.23.0] — 2026-07-30
 

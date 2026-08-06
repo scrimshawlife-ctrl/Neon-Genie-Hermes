@@ -4,9 +4,10 @@
 
 ### Governed opportunity & product intelligence for Hermes
 
-[![Version](https://img.shields.io/badge/version-3.23.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.24.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#authority--safety)
+[![Privacy](https://img.shields.io/badge/privacy-by%20construction-a855f7?style=for-the-badge)](./PRIVACY.md)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
 
 <img src="docs/assets/hero.jpg" alt="Neon Genie — luminous lamp on a dark network grid" width="920" />
@@ -36,6 +37,23 @@ It is **not** Kubrick (cinematic), **not** Wayfinder (engineering execution), an
 | Find or request | Public facts → research. Private facts → `DataRequest`. Never invent. |
 | Advisory only | May draft and recommend. May **not** spend, publish, contact, or mutate repos. |
 | Smallest profiles | Loads only the contracts the job needs (`core` always). |
+
+---
+
+## Privacy & Data Handling
+
+**Private by construction (repository guarantees):** Neon Genie does not enable
+repository telemetry, does not train models on your content, and writes artifacts
+only under operator-selected output paths. Offline / `research.enabled=false`
+means this skill initiates no external research.
+
+**Host boundary:** Hermes, model providers, and search tools have their own
+policies. Neon records egress on the run receipt when research runs; it cannot
+rewrite vendor retention. See [PRIVACY.md](./PRIVACY.md).
+
+```bash
+python scripts/neon_genie.py do privacy
+```
 
 ---
 
@@ -373,7 +391,7 @@ Neon-Genie-Hermes/          ← skill root (also full install tree)
 | Field | Value |
 |-------|-------|
 | Skill | `neon-genie` |
-| Version | **3.23.0** |
+| Version | **3.24.0** |
 | Authority | `advisory_only` |
 | Research | proactive (opt out: `research.enabled=false`) |
 
@@ -390,5 +408,5 @@ Source of truth: [`VERSION`](./VERSION), [`manifest.json`](./manifest.json), [`S
 ---
 
 <div align="center">
-<sub>Neon Genie v3.23.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
+<sub>Neon Genie v3.24.0 · OPEN → ALIGN → ASCEND → CLEAR → SEAL · advisory only</sub>
 </div>

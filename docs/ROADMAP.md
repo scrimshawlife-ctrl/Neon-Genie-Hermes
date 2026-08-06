@@ -84,6 +84,7 @@ Public entry points:
 | **3.21.0** | Operator surface: do run, do capabilities, worked example, tighter README |
 | **3.22.0** | Feedback loop: issue templates, learn↔run_id reconcile, ADRs |
 | **3.23.0** | Release automation, branch protection, gates.yaml registry, CONTRIBUTING |
+| **3.24.0** | Privacy-by-construction spine (issue #15) |
 
 ## Production maturity (3.18–3.23) — complete
 
@@ -96,7 +97,15 @@ Public entry points:
 | Feedback loop | Issue templates, learn↔run_id reconcile, ADRs |
 | Governance | Tag-driven Release workflow, branch protection, CONTRIBUTING |
 
-Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md)
+## Privacy spine (3.24.0) — W1 complete
+
+| Theme | Shipped |
+|-------|---------|
+| Privacy-by-construction | `PRIVACY.md`, ADR 0006, always-on `privacy` profile, gates S–Y, preflight, `do privacy` |
+
+**Next:** W2 Outcomes ∥ W3 Judgment (parallel per program design; interfaces frozen in W1 fields only).
+
+Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md) · [PRIVACY](../PRIVACY.md)
 
 ### Optional later (not blocking)
 

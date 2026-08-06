@@ -34,7 +34,11 @@ def test_recipe_emits_envelope() -> None:
         assert env_path.is_file(), "run-envelope.json missing"
         env = json.loads(env_path.read_text(encoding="utf-8"))
         assert env["schema_id"] == "neon-genie/run-envelope"
-        assert env["schema_version"] == "1.0.0"
+        assert env["schema_version"] == "1.1.0"
+        assert "privacy" in env
+        assert env["privacy"]["telemetry_status"] == "disabled"
+        assert env["privacy"]["receipt_privacy_complete"] is True
+        assert env["privacy"]["privacy_mode"] == "LOCAL_ONLY"
         assert env["authority"] == "advisory_only"
         assert env["grants_execution"] is False
         assert env["run_id"].startswith("ng_run_")

@@ -96,6 +96,10 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/commercial.brief.yaml`
 - `examples/evals/behavioral/README.md`
 - `examples/evals/behavioral/cases/memetic-weak-proof.json`
+- `examples/evals/behavioral/cases/privacy-api-key-block.json`
+- `examples/evals/behavioral/cases/privacy-offline-no-send.json`
+- `examples/evals/behavioral/cases/privacy-private-list-consent.json`
+- `examples/evals/behavioral/cases/privacy-unknown-retention-claim.json`
 - `examples/evals/behavioral/cases/private-buyer-datarequest.json`
 - `examples/evals/behavioral/cases/public-market-research.json`
 - `examples/evals/behavioral/cases/repo-mutation-advisory-only.json`
@@ -107,6 +111,10 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/evals/behavioral/transcripts/04-repo-mutation-advisory-only.md`
 - `examples/evals/behavioral/transcripts/05-memetic-weak-proof.md`
 - `examples/evals/behavioral/transcripts/06-wayfinder-change-control.md`
+- `examples/evals/behavioral/transcripts/07-privacy-offline-no-send.md`
+- `examples/evals/behavioral/transcripts/08-privacy-api-key-block.md`
+- `examples/evals/behavioral/transcripts/09-privacy-private-list-consent.md`
+- `examples/evals/behavioral/transcripts/10-privacy-unknown-retention-claim.md`
 - `examples/evals/cases/authority-leakage.json`
 - `examples/evals/cases/buyer-beneficiary-conflation.json`
 - `examples/evals/cases/completion-proof-present.json`
@@ -149,6 +157,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/zero-option.brief.yaml`
 - `references/CAPABILITY_MAP.md`
 - `references/GOLDEN_TESTS.md`
+- `references/PRIVACY.md`
 - `references/VERSION`
 - `references/anti-overclaim-patterns.md`
 - `references/gates.yaml`
@@ -163,6 +172,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/profiles/fragmentation.md`
 - `references/profiles/memetic.md`
 - `references/profiles/opportunity_mining.md`
+- `references/profiles/privacy.md`
 - `references/profiles/product_architecture.md`
 - `references/profiles/wayfinder_handoff.md`
 - `references/profiles/zero_option.md`
@@ -193,6 +203,8 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/lineage.py`
 - `scripts/neon_genie.py`
 - `scripts/paths.py`
+- `scripts/privacy_preflight.py`
+- `scripts/privacy_report.py`
 - `scripts/recipe_common.py`
 - `scripts/recipe_product_audit.py`
 - `scripts/recipe_run.py`

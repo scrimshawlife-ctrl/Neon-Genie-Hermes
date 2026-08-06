@@ -18,6 +18,8 @@
 16. Full packet schema surface (including evidence, memetic, audit)
 17. Evidence Request Protocol — find public, request private (`DataRequest`), then `NOT_COMPUTABLE`
 18. Receipt evidence fields (`data_requests`, `open_blocking_requests`, `research_attempts`)
+19. Privacy-by-construction provenance, egress gates S–Y, offline mode, secret preflight
 
 Packet schemas: `schemas/`. Profile contracts: `profiles/`. Gates: `references/anti-overclaim-patterns.md`.
 DataRequest: `schemas/data-request.schema.json`.
+Privacy: `PRIVACY.md` / `references/PRIVACY.md`, `profiles/privacy.md`, `scripts/privacy_preflight.py`.

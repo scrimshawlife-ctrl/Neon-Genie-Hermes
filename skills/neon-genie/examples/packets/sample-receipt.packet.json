@@ -11,5 +11,20 @@
   "promotion_state": "TESTABLE",
   "human_review_required": true,
   "authority": "advisory_only",
-  "grants_execution": false
+  "grants_execution": false,
+  "privacy_mode": "LOCAL_ONLY",
+  "privacy_contract_version": "1.0.0",
+  "data_sources_used": ["operator_input"],
+  "external_actions": [],
+  "artifact_paths": [],
+  "telemetry_status": "disabled",
+  "retention_statement": "Neon-Genie-owned artifacts live only under operator-selected paths listed in artifact_paths; delete those paths to remove them. Host/provider retention is outside this skill.",
+  "privacy_warnings": [],
+  "deletion_instructions": "Remove the directories/files listed in artifact_paths (and any explicit learning-ledger path). Uninstalling the skill does not delete prior run outputs.",
+  "redaction": {
+    "enabled": true,
+    "blocked_categories": [],
+    "events": []
+  },
+  "research_policy": {"enabled": false, "offline": true}
 }

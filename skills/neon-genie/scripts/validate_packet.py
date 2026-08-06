@@ -166,6 +166,59 @@ def authority_checks(instance: Any) -> list[str]:
     return errors
 
 
+def _schema_version_ge(version: Any, minimum: str) -> bool:
+    """True if version is a semver string >= minimum (major.minor.patch)."""
+    if not isinstance(version, str):
+        return False
+
+    def parts(v: str) -> tuple[int, int, int] | None:
+        bits = v.split(".")
+        if len(bits) != 3:
+            return None
+        try:
+            return int(bits[0]), int(bits[1]), int(bits[2])
+        except ValueError:
+            return None
+
+    left = parts(version)
+    right = parts(minimum)
+    if left is None or right is None:
+        return version == minimum
+    return left >= right
+
+
+def check_privacy_rules(data: dict[str, Any], packet_type: str) -> list[str]:
+    """Privacy gates NG-PRIV-001..004 for receipt and envelope packets."""
+    errors: list[str] = []
+    if not isinstance(data, dict):
+        return errors
+
+    key = (packet_type or "").strip().lower().replace(" ", "_")
+    if key in {"receipt", "run_receipt"}:
+        tel = data.get("telemetry_status")
+        if tel is not None and tel != "disabled":
+            errors.append("NG-PRIV-002: telemetry_status must be 'disabled'")
+        if data.get("privacy_mode") == "LOCAL_ONLY":
+            for i, act in enumerate(data.get("external_actions") or []):
+                if isinstance(act, dict) and act.get("sent") is True:
+                    errors.append(
+                        f"NG-PRIV-003: external_actions[{i}].sent true under LOCAL_ONLY"
+                    )
+    if key in {"envelope"}:
+        priv = data.get("privacy") or {}
+        if _schema_version_ge(data.get("schema_version"), "1.1.0") and not data.get(
+            "privacy"
+        ):
+            errors.append("NG-PRIV-004: envelope 1.1.0 requires privacy object")
+        tel = priv.get("telemetry_status") if isinstance(priv, dict) else None
+        if tel is not None and tel != "disabled":
+            errors.append("NG-PRIV-001: privacy.telemetry_status must be 'disabled'")
+        # also if top-level ever appears
+        if data.get("telemetry_status") not in (None, "disabled"):
+            errors.append("NG-PRIV-001: telemetry_status must be 'disabled'")
+    return errors
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Validate Neon Genie packet JSON")
     parser.add_argument("--packet", required=True, type=Path, help="Path to packet JSON")
@@ -226,6 +279,17 @@ def main(argv: list[str] | None = None) -> int:
     errors = validate_schema(packet, schema)
     if args.strict_authority:
         errors.extend(authority_checks(packet))
+
+    # Privacy gates (NG-PRIV-001..004) for receipt/envelope when type is known
+    if args.packet_type and isinstance(packet, dict):
+        errors.extend(check_privacy_rules(packet, args.packet_type))
+    elif not args.packet_type and isinstance(packet, dict):
+        # Infer from schema filename when --schema was used alone
+        name = schema_path.name.lower()
+        if name in {"run-receipt.schema.json"}:
+            errors.extend(check_privacy_rules(packet, "receipt"))
+        elif name in {"run-envelope.schema.json"}:
+            errors.extend(check_privacy_rules(packet, "envelope"))
 
     if errors:
         print(f"FAIL: {args.packet} vs {schema_path.name}", file=sys.stderr)

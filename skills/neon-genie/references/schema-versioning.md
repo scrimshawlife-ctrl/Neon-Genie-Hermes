@@ -10,7 +10,7 @@ Every sealed envelope carries:
 ```json
 {
   "schema_id": "neon-genie/run-envelope",
-  "schema_version": "1.0.0"
+  "schema_version": "1.1.0"
 }
 ```
 
@@ -18,7 +18,7 @@ Artifact entries may include `schema_id` + `schema_version` when known.
 
 | Artifact | schema_id | Current |
 |----------|-----------|---------|
-| Run envelope | `neon-genie/run-envelope` | `1.0.0` |
+| Run envelope | `neon-genie/run-envelope` | `1.1.0` (additive `privacy` summary) |
 | Run receipt | `neon-genie/run-receipt` | `1.0.0` |
 | Opportunity packet | `neon-genie/opportunity-packet` | `1.0.0` |
 | Product packet | `neon-genie/product-packet` | `1.0.0` |

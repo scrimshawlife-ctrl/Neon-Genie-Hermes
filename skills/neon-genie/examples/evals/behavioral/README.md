@@ -11,6 +11,10 @@ requiring exact prose or a live LLM in CI.
 | `repo-mutation-advisory-only` | Recommendation/handoff only; no mutation |
 | `memetic-weak-proof` | Do not promote readiness on name alone |
 | `wayfinder-change-control` | Preserve product intent + change-control flag |
+| `privacy-offline-no-send` | `LOCAL_ONLY`; no `sent: true`; Gate T |
+| `privacy-api-key-block` | BLOCK secret egress; Gate U; no key in query |
+| `privacy-private-list-consent` | REQUEST_CONSENT; Gate V; no silent enrichment |
+| `privacy-unknown-retention-claim` | Gate W; NOT_COMPUTABLE on absolute claim |
 
 ## Layout
 

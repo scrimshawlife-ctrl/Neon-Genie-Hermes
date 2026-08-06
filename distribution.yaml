@@ -35,6 +35,9 @@ mirrors:
   - kind: file
     source: VERSION
     destination: references/VERSION
+  - kind: file
+    source: PRIVACY.md
+    destination: references/PRIVACY.md
 
 hub_package:
   root: skills/neon-genie
@@ -81,6 +84,8 @@ hub_support_globs:
   - scripts/reconcile_learning.py
   - scripts/test_learning_reconcile.py
   - scripts/release_check.py
+  - scripts/privacy_preflight.py
+  - scripts/privacy_report.py
   - references/VERSION
   - references/gates.yaml
   - references/manifest.json
@@ -90,6 +95,7 @@ hub_support_globs:
   - references/anti-overclaim-patterns.md
   - references/post-seal-verification.md
   - references/schema-versioning.md
+  - references/PRIVACY.md
   - references/profiles/*.md
   - references/schemas/*.json
   - templates/request.yaml

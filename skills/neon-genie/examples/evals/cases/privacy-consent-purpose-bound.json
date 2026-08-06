@@ -1,0 +1,19 @@
+{
+  "input": {
+    "privacy_mode": "external_research_allowed",
+    "payload_class": "private_email_list",
+    "destination": "crm.example.com",
+    "purpose": "crm enrichment research",
+    "consent": {
+      "scope": "purpose_bound",
+      "purpose": "crm enrichment research",
+      "categories_allowed": ["private_email_list", "private_customer_list"]
+    }
+  },
+  "expected": {
+    "without_consent": "REQUEST_CONSENT",
+    "with_purpose_bound_consent": "REDACT_THEN_ALLOW",
+    "global_disable_consent": "rejected",
+    "private_source_persisted": false
+  }
+}

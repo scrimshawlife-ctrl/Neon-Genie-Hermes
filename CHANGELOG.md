@@ -11,17 +11,19 @@ and this project uses semantic versioning.
 
 ### Added
 
-- **Privacy-by-construction spine** (issue #15)
-  - `PRIVACY.md` + `references/PRIVACY.md`, ADR 0006
-  - Always-on `privacy` profile; gates S–Y; egress rune doctrine
-  - Receipt privacy provenance; run-envelope **1.1.0** `privacy` summary
-  - `scripts/privacy_preflight.py`, `do privacy`, doctor hooks
-  - Behavioral privacy cases; packaging validation NG-PRIV-*
+- **Privacy-by-construction spine + runtime** (issue #15 + #17)
+  - `PRIVACY.md` + `references/PRIVACY.md`, ADR 0006, gates S–Y doctrine
+  - Always-on `privacy` profile; egress rune doctrine
+  - Runtime engine `scripts/privacy_runtime.py` (contract 1.0.0): fail-closed
+    `local_only` defaults, purpose-bound consents, `REDACT_THEN_ALLOW` safe queries
+  - Receipt/envelope privacy provenance; packaging validation NG-PRIV-*
+  - Deterministic preflight helpers; `do privacy --json` diagnostics
+  - Behavioral privacy cases + golden evals; sample privacy-context packets
 
 ### Changed
 
 - Profile router always co-loads `privacy` with `core`
-- Schema versioning: envelope 1.1.0
+- Brief/recipe `privacy:` config flows into receipt, envelope, and learning ledger
 
 ## [3.23.0] — 2026-07-30
 

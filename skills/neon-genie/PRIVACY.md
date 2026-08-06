@@ -205,3 +205,24 @@ Questions, corrections, and privacy incidents related to this skill:
 - Prefer labeling privacy contract gaps clearly so `privacy_contract_version` can bump when semantics change.
 
 Related docs: ADR [0006 — Privacy by construction](docs/adr/0006-privacy-by-construction.md), ADR [0004 — Wayfinder boundary](docs/adr/0004-neon-genie-wayfinder-boundary.md), design spec `docs/superpowers/specs/2026-08-06-neon-genie-privacy-spine-design.md`.
+
+## 14. Runtime engine & purpose-bound consent (integrated #17)
+
+Packaging runs use `scripts/privacy_runtime.py` with fail-closed defaults (`local_only`,
+telemetry `disabled`). There is **no** global privacy-disable switch; overrides are
+**purpose-bound consent records** only.
+
+Briefs/recipes may carry a `privacy:` section that flows into receipts, envelopes,
+and learning-ledger disclosures. Diagnostics:
+
+```bash
+python scripts/neon_genie.py do privacy --json
+python scripts/test_privacy_runtime.py
+```
+
+Mode vocabulary in the runtime/context schema uses lowercase (`local_only`,
+`external_research_allowed`, `custom`). Doctrine docs may also use uppercase
+aliases (`LOCAL_ONLY`, …); packaging receipts follow the runtime schema.
+
+See also: `references/privacy-contract.md`, `schemas/privacy-context.schema.json`.
+

@@ -13,7 +13,8 @@
     "evidence_intelligence",
     "memetic",
     "audit_delivery",
-    "wayfinder_handoff"
+    "wayfinder_handoff",
+    "capital_sprint"
   ],
   "default_profiles": [
     "core",
@@ -34,8 +35,8 @@
   ],
   "authority": "advisory_only",
   "research": {
-    "mode": "proactive",
-    "default": true,
+    "mode": "local_only",
+    "default": false,
     "offline_opt_out": true,
     "source_priority": [
       "operator_supplied",

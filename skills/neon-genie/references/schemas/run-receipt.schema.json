@@ -24,26 +24,28 @@
       "type": "string",
       "enum": ["find_request_not_computable"]
     },
-    "privacy_mode": {
-      "type": "string",
-      "enum": ["LOCAL_ONLY", "EXTERNAL_RESEARCH_ALLOWED", "UNKNOWN_HOST_BOUNDARY"]
-    },
-    "privacy_contract_version": { "type": "string" },
-    "data_sources_used": {
+    "privacy": { "$ref": "privacy-context.schema.json" },
+    "privacy_mode": { "enum": ["local_only", "external_research_allowed", "custom"] },
+    "external_actions": {
       "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["operator_input", "workspace_private", "public_web", "provider_model"]
-      }
+      "description": "Enumerated host egress actions; each requires provider, tool_class, destination, purpose, source_class, classification, decision, redaction_status, recorded_at"
     },
-    "external_actions": { "type": "array" },
-    "artifact_paths": { "type": "array", "items": { "type": "string" } },
-    "telemetry_status": { "type": "string", "const": "disabled" },
-    "retention_statement": { "type": "string" },
-    "privacy_warnings": { "type": "array" },
+    "artifact_paths": { "type": "array" },
+    "telemetry_status": { "const": "disabled" },
     "deletion_instructions": { "type": "string" },
-    "redaction": { "type": "object" },
-    "research_policy": { "type": "object" }
+    "privacy_unknowns": {
+      "type": "object",
+      "properties": {
+        "host_providers": { "const": "NOT_COMPUTABLE" },
+        "provider_retention": { "const": "NOT_COMPUTABLE" },
+        "provider_processing": { "const": "NOT_COMPUTABLE" }
+      },
+      "additionalProperties": true
+    },
+    "learning_ledger_disclosure": { "type": "string" },
+    "retention_statement": { "type": "string" },
+    "privacy_warnings": { "type": "array", "items": { "type": "string" } },
+    "data_sources_used": { "type": "array" }
   },
   "additionalProperties": true
 }

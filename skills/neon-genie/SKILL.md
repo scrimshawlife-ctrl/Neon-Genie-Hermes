@@ -65,6 +65,7 @@ python scripts/neon_genie.py do <job> [options]
 | Job | Use |
 |-----|-----|
 | `doctor` | Full smoke after install |
+| `privacy` | Resolved repository privacy boundary (`--json`) |
 | `check` | Skill integrity |
 | `run` | Operator packaging run (brief/recipe → envelope) |
 | `capabilities` | Machine-readable skill surface (JSON) |
@@ -93,12 +94,15 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/README.md`
 - `examples/agentic.brief.yaml`
 - `examples/audit.brief.yaml`
+- `examples/capital-sprint.brief.yaml`
 - `examples/commercial.brief.yaml`
 - `examples/evals/behavioral/README.md`
 - `examples/evals/behavioral/cases/memetic-weak-proof.json`
 - `examples/evals/behavioral/cases/privacy-api-key-block.json`
+- `examples/evals/behavioral/cases/privacy-local-only-blocks-egress.json`
 - `examples/evals/behavioral/cases/privacy-offline-no-send.json`
 - `examples/evals/behavioral/cases/privacy-private-list-consent.json`
+- `examples/evals/behavioral/cases/privacy-private-list-requires-consent.json`
 - `examples/evals/behavioral/cases/privacy-unknown-retention-claim.json`
 - `examples/evals/behavioral/cases/private-buyer-datarequest.json`
 - `examples/evals/behavioral/cases/public-market-research.json`
@@ -111,8 +115,10 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/evals/behavioral/transcripts/04-repo-mutation-advisory-only.md`
 - `examples/evals/behavioral/transcripts/05-memetic-weak-proof.md`
 - `examples/evals/behavioral/transcripts/06-wayfinder-change-control.md`
+- `examples/evals/behavioral/transcripts/07-privacy-local-only-blocks-egress.md`
 - `examples/evals/behavioral/transcripts/07-privacy-offline-no-send.md`
 - `examples/evals/behavioral/transcripts/08-privacy-api-key-block.md`
+- `examples/evals/behavioral/transcripts/08-privacy-private-list-requires-consent.md`
 - `examples/evals/behavioral/transcripts/09-privacy-private-list-consent.md`
 - `examples/evals/behavioral/transcripts/10-privacy-unknown-retention-claim.md`
 - `examples/evals/cases/authority-leakage.json`
@@ -122,6 +128,9 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/evals/cases/fictional-resource.json`
 - `examples/evals/cases/memetic-cannot-promote.json`
 - `examples/evals/cases/offline-no-fabricated-observed.json`
+- `examples/evals/cases/privacy-consent-purpose-bound.json`
+- `examples/evals/cases/privacy-egress-local-only.json`
+- `examples/evals/cases/privacy-secret-blocks-egress.json`
 - `examples/evals/cases/private-gap-must-request.json`
 - `examples/evals/cases/private-gap-request-open.json`
 - `examples/evals/cases/private-gap-silent-invent.json`
@@ -148,10 +157,14 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/memetic.brief.yaml`
 - `examples/opportunity.brief.yaml`
 - `examples/packets/sample-data-request.json`
+- `examples/packets/sample-external-action.json`
 - `examples/packets/sample-opportunity.packet.json`
+- `examples/packets/sample-privacy-context.json`
+- `examples/packets/sample-purpose-bound-consent.json`
 - `examples/packets/sample-receipt-with-requests.json`
 - `examples/packets/sample-receipt.packet.json`
 - `examples/packets/sample-run-envelope.json`
+- `examples/privacy-external-research.brief.yaml`
 - `examples/product-audit.brief.yaml`
 - `examples/zero-option-with-skills.brief.yaml`
 - `examples/zero-option.brief.yaml`
@@ -164,8 +177,10 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/hermes-runtime-contract.md`
 - `references/manifest.json`
 - `references/post-seal-verification.md`
+- `references/privacy-contract.md`
 - `references/profiles/agentic_services.md`
 - `references/profiles/audit_delivery.md`
+- `references/profiles/capital_sprint.md`
 - `references/profiles/commercial.md`
 - `references/profiles/core.md`
 - `references/profiles/evidence_intelligence.md`
@@ -179,6 +194,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/schema-versioning.md`
 - `references/schemas/agentic-service-graph.schema.json`
 - `references/schemas/audit-delivery-packet.schema.json`
+- `references/schemas/capital-sprint-packet.schema.json`
 - `references/schemas/commercial-simulation.schema.json`
 - `references/schemas/data-request.schema.json`
 - `references/schemas/evidence-intelligence-packet.schema.json`
@@ -186,6 +202,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/schemas/learning-ledger-entry.schema.json`
 - `references/schemas/memetic-pressure-packet.schema.json`
 - `references/schemas/opportunity-packet.schema.json`
+- `references/schemas/privacy-context.schema.json`
 - `references/schemas/product-packet.schema.json`
 - `references/schemas/run-envelope.schema.json`
 - `references/schemas/run-receipt.schema.json`
@@ -203,8 +220,10 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/lineage.py`
 - `scripts/neon_genie.py`
 - `scripts/paths.py`
+- `scripts/privacy_diagnostics.py`
 - `scripts/privacy_preflight.py`
 - `scripts/privacy_report.py`
+- `scripts/privacy_runtime.py`
 - `scripts/recipe_common.py`
 - `scripts/recipe_product_audit.py`
 - `scripts/recipe_run.py`

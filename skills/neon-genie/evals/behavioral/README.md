@@ -15,6 +15,8 @@ requiring exact prose or a live LLM in CI.
 | `privacy-api-key-block` | BLOCK secret egress; Gate U; no key in query |
 | `privacy-private-list-consent` | REQUEST_CONSENT; Gate V; no silent enrichment |
 | `privacy-unknown-retention-claim` | Gate W; NOT_COMPUTABLE on absolute claim |
+| `privacy-local-only-blocks-egress` | local_only → BLOCK; no external_actions |
+| `privacy-private-list-requires-consent` | Private list → REQUEST_CONSENT / DataRequest |
 
 ## Layout
 

@@ -1,0 +1,14 @@
+{
+  "provider": "host",
+  "tool_class": "web_search",
+  "destination": "example.com",
+  "purpose": "public market research for pricing band",
+  "source_class": "public_research",
+  "classification": "public",
+  "decision": "ALLOW",
+  "egress_decision": "ALLOW",
+  "redaction_status": "not_required",
+  "recorded_at": "2026-07-31T12:00:00Z",
+  "safe_query": "developer tools SaaS public pricing examples 2026",
+  "private_source_persisted": false
+}

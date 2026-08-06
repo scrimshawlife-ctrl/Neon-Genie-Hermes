@@ -49,6 +49,8 @@ PACKET_TYPE_TO_SCHEMA = {
     "receipt": "run-receipt.schema.json",
     "run_receipt": "run-receipt.schema.json",
     "envelope": "run-envelope.schema.json",
+    "privacy": "privacy-context.schema.json",
+    "privacy_context": "privacy-context.schema.json",
 }
 
 
@@ -187,19 +189,29 @@ def _schema_version_ge(version: Any, minimum: str) -> bool:
     return left >= right
 
 
+# Required privacy provenance on SEALED receipts (privacy-runtime / #17 shape)
 PRIVACY_RECEIPT_KEYS = (
     "privacy_mode",
-    "privacy_contract_version",
-    "data_sources_used",
     "external_actions",
     "artifact_paths",
     "telemetry_status",
     "retention_statement",
     "privacy_warnings",
     "deletion_instructions",
-    "redaction",
-    "research_policy",
 )
+
+_LOCAL_MODES = frozenset({"LOCAL_ONLY", "local_only"})
+
+
+def _action_sent(act: dict) -> bool:
+    """True when an external_action records a successful outbound send."""
+    if act.get("sent") is True:
+        return True
+    # privacy_runtime uses decision + may omit sent
+    dec = str(act.get("decision") or "").upper()
+    if dec in {"ALLOW", "REDACT_THEN_ALLOW"} and act.get("recorded_at"):
+        return True
+    return False
 
 
 def check_privacy_rules(data: dict[str, Any], packet_type: str) -> list[str]:
@@ -211,10 +223,10 @@ def check_privacy_rules(data: dict[str, Any], packet_type: str) -> list[str]:
     key = (packet_type or "").strip().lower().replace(" ", "_")
     if key in {"receipt", "run_receipt"}:
         tel = data.get("telemetry_status")
-        if tel is not None and tel != "disabled":
+        if tel is not None and str(tel).lower() not in {"disabled"}:
             errors.append("NG-PRIV-002: telemetry_status must be 'disabled'")
 
-        # Gate Y: SEALED receipts require full privacy provenance (NG-PRIV-005)
+        # Gate Y: SEALED receipts require privacy provenance (NG-PRIV-005)
         status = data.get("status")
         if isinstance(status, str) and status.upper() == "SEALED":
             for field in PRIVACY_RECEIPT_KEYS:
@@ -222,41 +234,45 @@ def check_privacy_rules(data: dict[str, Any], packet_type: str) -> list[str]:
                     errors.append(
                         f"NG-PRIV-005: SEALED receipt missing required privacy field: {field}"
                     )
-            if tel is not None and tel != "disabled":
-                # already NG-PRIV-002; Gate Y also requires disabled when present
-                pass
+            if "privacy" not in data and "privacy_mode" not in data:
+                errors.append("NG-PRIV-005: SEALED receipt missing privacy context")
 
-        # Gate T: no successful external send under LOCAL_ONLY / research disabled / offline
+        # Gate T: no successful external send under local_only / research disabled
         rp = data.get("research_policy") if isinstance(data.get("research_policy"), dict) else {}
+        priv = data.get("privacy") if isinstance(data.get("privacy"), dict) else {}
+        egress = priv.get("egress") if isinstance(priv.get("egress"), dict) else {}
+        mode = data.get("privacy_mode") or priv.get("mode")
         offline_or_disabled = (
-            data.get("privacy_mode") == "LOCAL_ONLY"
+            mode in _LOCAL_MODES
             or rp.get("enabled") is False
             or rp.get("offline") is True
+            or egress.get("allowed") is False
         )
         if offline_or_disabled:
             for i, act in enumerate(data.get("external_actions") or []):
-                if isinstance(act, dict) and act.get("sent") is True:
-                    reason = "LOCAL_ONLY"
-                    if data.get("privacy_mode") != "LOCAL_ONLY":
-                        if rp.get("enabled") is False:
-                            reason = "research_policy.enabled=false"
-                        elif rp.get("offline") is True:
-                            reason = "research_policy.offline=true"
+                if isinstance(act, dict) and _action_sent(act):
                     errors.append(
-                        f"NG-PRIV-003: external_actions[{i}].sent true under {reason}"
+                        f"NG-PRIV-003: external_actions[{i}] recorded send under local/offline mode"
                     )
     if key in {"envelope"}:
         priv = data.get("privacy") or {}
-        if _schema_version_ge(data.get("schema_version"), "1.1.0") and not data.get(
-            "privacy"
-        ):
-            errors.append("NG-PRIV-004: envelope 1.1.0 requires privacy object")
-        tel = priv.get("telemetry_status") if isinstance(priv, dict) else None
-        if tel is not None and tel != "disabled":
-            errors.append("NG-PRIV-001: privacy.telemetry_status must be 'disabled'")
-        # also if top-level ever appears
+        # Envelope may nest privacy-context (#17) or summary object
+        if isinstance(priv, dict):
+            tel = priv.get("telemetry_status") or priv.get("telemetry")
+            if tel is not None and str(tel).lower() not in {"disabled"}:
+                errors.append("NG-PRIV-001: privacy telemetry must be 'disabled'")
         if data.get("telemetry_status") not in (None, "disabled"):
             errors.append("NG-PRIV-001: telemetry_status must be 'disabled'")
+        # Require privacy block when present on envelopes that include privacy_mode top-level
+        if data.get("privacy_mode") in _LOCAL_MODES or (
+            isinstance(priv, dict) and priv.get("mode") in _LOCAL_MODES
+        ):
+            # if top-level external_actions exist with sent, fail
+            for i, act in enumerate(data.get("external_actions") or []):
+                if isinstance(act, dict) and _action_sent(act):
+                    errors.append(
+                        f"NG-PRIV-003: envelope external_actions[{i}] send under local_only"
+                    )
     return errors
 
 

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "neon-genie/run-envelope/1.1.0",
+  "$id": "neon-genie/run-envelope/1.0.0",
   "title": "NeonGenieRunEnvelope",
   "description": "Canonical entry point for a Neon Genie packaging or sealed run. Downstream consumers (Wayfinder, orchestrators) should open this file first.",
   "type": "object",
@@ -16,8 +16,7 @@
     "artifacts",
     "promotion",
     "receipt",
-    "generator",
-    "privacy"
+    "generator"
   ],
   "properties": {
     "schema_id": {
@@ -147,6 +146,12 @@
     "receipt_path": {
       "type": "string"
     },
+    "privacy": { "$ref": "privacy-context.schema.json" },
+    "privacy_mode": { "enum": ["local_only", "external_research_allowed", "custom"] },
+    "external_actions": { "type": "array" },
+    "artifact_paths": { "type": "array" },
+    "telemetry_status": { "const": "disabled" },
+    "deletion_instructions": { "type": "string" },
     "content_hash": {
       "type": "string",
       "description": "sha256 of envelope body without content_hash field"
@@ -179,30 +184,7 @@
       "description": "Deprecated alias for artifacts (v0 compatibility)"
     },
     "canonical_sources": { "type": "array" },
-    "assumptions": { "type": "array" },
-    "privacy": {
-      "type": "object",
-      "required": [
-        "privacy_mode",
-        "privacy_contract_version",
-        "telemetry_status",
-        "research_enabled",
-        "external_action_count",
-        "receipt_privacy_complete"
-      ],
-      "properties": {
-        "privacy_mode": {
-          "type": "string",
-          "enum": ["LOCAL_ONLY", "EXTERNAL_RESEARCH_ALLOWED", "UNKNOWN_HOST_BOUNDARY"]
-        },
-        "privacy_contract_version": { "type": "string" },
-        "telemetry_status": { "type": "string", "const": "disabled" },
-        "research_enabled": { "type": "boolean" },
-        "external_action_count": { "type": "integer", "minimum": 0 },
-        "receipt_privacy_complete": { "type": "boolean" }
-      },
-      "additionalProperties": false
-    }
+    "assumptions": { "type": "array" }
   },
   "additionalProperties": true
 }

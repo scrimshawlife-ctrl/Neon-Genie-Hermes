@@ -2,6 +2,8 @@
 
 From zero to a governed packet path. **Advisory only.**
 
+Packaging examples are `local_only`; receipts declare external actions explicitly and host/provider retention remains `NOT_COMPUTABLE`.
+
 See also: [README — How to use](../README.md#how-to-use) · [PREMIERE.md](./PREMIERE.md)
 
 ## Prerequisites

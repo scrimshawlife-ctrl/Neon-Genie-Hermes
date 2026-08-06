@@ -35,25 +35,10 @@ def step(name: str, args: list[str]) -> int:
     return 0
 
 
-def privacy_preflight_step() -> int:
-    """Explicit canned-secret block check (complements do privacy report)."""
-    print("==> privacy preflight self-test")
-    if str(SCRIPT_DIR) not in sys.path:
-        sys.path.insert(0, str(SCRIPT_DIR))
-    import privacy_preflight as pp
-
-    r = pp.preflight("Authorization: Bearer sk-doctorSelfTestKey00000001")
-    if r["safe_for_egress"]:
-        print("FAIL: expected BLOCK on canned secret", file=sys.stderr)
-        return 1
-    print("OK: privacy preflight self-test")
-    return 0
-
-
 def main() -> int:
     steps: list[tuple[str, list[str]]] = [
         ("skill integrity", ["do", "check"]),
-        ("privacy report", ["do", "privacy"]),
+        ("privacy diagnostics", ["do", "privacy", "--json"]),
     ]
     # Distribution spine only on full tree (has distribution.yaml + root schemas/)
     if (SKILL_ROOT / "distribution.yaml").is_file() and not ng_paths.is_hub_layout():
@@ -126,11 +111,6 @@ def main() -> int:
         code = step(name, args)
         if code != 0:
             return code
-        # Explicit preflight after privacy report (do privacy already embeds a self-test)
-        if name == "privacy report":
-            code = privacy_preflight_step()
-            if code != 0:
-                return code
 
     print("")
     print("PASS: neon-genie doctor (all smokes green)")

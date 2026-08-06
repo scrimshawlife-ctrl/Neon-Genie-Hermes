@@ -59,6 +59,8 @@ hub_package:
 hub_support_globs:
   - scripts/paths.py
   - scripts/neon_genie.py
+  - scripts/privacy_runtime.py
+  - scripts/privacy_diagnostics.py
   - scripts/doctor.py
   - scripts/validate_hermes_skill.py
   - scripts/validate_packet.py
@@ -90,6 +92,7 @@ hub_support_globs:
   - references/gates.yaml
   - references/manifest.json
   - references/hermes-runtime-contract.md
+  - references/privacy-contract.md
   - references/CAPABILITY_MAP.md
   - references/GOLDEN_TESTS.md
   - references/anti-overclaim-patterns.md

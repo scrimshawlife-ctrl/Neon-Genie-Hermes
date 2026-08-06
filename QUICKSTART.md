@@ -2,6 +2,8 @@
 
 Governed Hermes skill for opportunity and product intelligence. **Advisory only.**
 
+**Privacy:** runs default to `local_only`; inspect with `python scripts/neon_genie.py do privacy --json`. Briefs may set `privacy.mode` and purpose-bound consents only (never a global disable). Host/provider retention is `NOT_COMPUTABLE`. See [PRIVACY.md](./PRIVACY.md).
+
 **Paths:** [How to use (README)](./README.md#how-to-use) · [10-minute demo](./docs/DEMO.md) · [Premiere thesis](./docs/PREMIERE.md) · [Distribution](./docs/HERMES_DISTRIBUTION.md)
 
 ---

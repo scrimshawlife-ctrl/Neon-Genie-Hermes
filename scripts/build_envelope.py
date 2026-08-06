@@ -26,12 +26,41 @@ import lineage  # noqa: E402
 import paths as ng_paths  # noqa: E402
 
 ENVELOPE_SCHEMA_ID = "neon-genie/run-envelope"
-ENVELOPE_SCHEMA_VERSION = "1.0.0"
+ENVELOPE_SCHEMA_VERSION = "1.1.0"
+PRIVACY_RECEIPT_KEYS = (
+    "privacy_mode",
+    "privacy_contract_version",
+    "data_sources_used",
+    "external_actions",
+    "artifact_paths",
+    "telemetry_status",
+    "retention_statement",
+    "privacy_warnings",
+    "deletion_instructions",
+    "redaction",
+    "research_policy",
+)
 SKIP_NAMES = {
     "run-envelope.json",
     "_data_requests.json",
     ".gitkeep",
 }
+
+
+def privacy_summary(receipt: dict[str, Any]) -> dict[str, Any]:
+    rp = receipt.get("research_policy") or {}
+    actions = receipt.get("external_actions") or []
+    complete = all(k in receipt for k in PRIVACY_RECEIPT_KEYS)
+    if receipt.get("telemetry_status") != "disabled":
+        complete = False
+    return {
+        "privacy_mode": receipt.get("privacy_mode") or "UNKNOWN_HOST_BOUNDARY",
+        "privacy_contract_version": receipt.get("privacy_contract_version") or "1.0.0",
+        "telemetry_status": "disabled",
+        "research_enabled": bool(rp.get("enabled", False)),
+        "external_action_count": len(actions) if isinstance(actions, list) else 0,
+        "receipt_privacy_complete": complete,
+    }
 
 
 def _load(path: Path) -> Any:
@@ -233,6 +262,7 @@ def build_envelope(
         },
         "canonical_sources": receipt.get("canonical_sources") or [],
         "assumptions": receipt.get("assumptions") or [],
+        "privacy": privacy_summary(receipt),
     }
 
     # content_hash over body without content_hash

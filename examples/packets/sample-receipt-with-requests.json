@@ -38,5 +38,20 @@
   ],
   "research_attempts": [],
   "evidence_protocol": "find_request_not_computable",
-  "note": "Packaging receipt only. Does not authorize spend, publish, or execution. Open blocking data requests present; do not promote until satisfied or waived."
+  "note": "Packaging receipt only. Does not authorize spend, publish, or execution. Open blocking data requests present; do not promote until satisfied or waived.",
+  "privacy_mode": "LOCAL_ONLY",
+  "privacy_contract_version": "1.0.0",
+  "data_sources_used": ["operator_input"],
+  "external_actions": [],
+  "artifact_paths": [],
+  "telemetry_status": "disabled",
+  "retention_statement": "Neon-Genie-owned artifacts live only under operator-selected paths listed in artifact_paths; delete those paths to remove them. Host/provider retention is outside this skill.",
+  "privacy_warnings": [],
+  "deletion_instructions": "Remove the directories/files listed in artifact_paths (and any explicit learning-ledger path). Uninstalling the skill does not delete prior run outputs.",
+  "redaction": {
+    "enabled": true,
+    "blocked_categories": [],
+    "events": []
+  },
+  "research_policy": {"enabled": false, "offline": true}
 }

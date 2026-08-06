@@ -1,6 +1,6 @@
 {
   "schema_id": "neon-genie/run-envelope",
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "run_id": "ng_run_c1314d748580",
   "request_id": "ng_req_e6eec9a7b872",
   "skill": "neon-genie",
@@ -214,5 +214,13 @@
   },
   "canonical_sources": [],
   "assumptions": [],
+  "privacy": {
+    "privacy_mode": "LOCAL_ONLY",
+    "privacy_contract_version": "1.0.0",
+    "telemetry_status": "disabled",
+    "research_enabled": false,
+    "external_action_count": 0,
+    "receipt_privacy_complete": true
+  },
   "content_hash": "sha256:13a1832002a280b2d51e95fb7ce7300bb0145bcb58d33eb2b106cc4436d6df2b"
 }

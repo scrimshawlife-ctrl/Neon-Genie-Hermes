@@ -10,7 +10,7 @@ Every sealed envelope carries:
 ```json
 {
   "schema_id": "neon-genie/run-envelope",
-  "schema_version": "1.1.0"
+  "schema_version": "1.0.0"
 }
 ```
 
@@ -18,15 +18,38 @@ Artifact entries may include `schema_id` + `schema_version` when known.
 
 | Artifact | schema_id | Current |
 |----------|-----------|---------|
-| Run envelope | `neon-genie/run-envelope` | `1.1.0` (additive `privacy` summary) |
-| Run receipt | `neon-genie/run-receipt` | `1.0.0` |
+| Run envelope | `neon-genie/run-envelope` | `1.0.0` |
+| Run receipt | `neon-genie/run-receipt` | `1.0.0` (+ privacy provenance fields) |
+| Privacy context | `neon-genie/privacy-context` (file `privacy-context.schema.json`) | `1.0.0` |
 | Opportunity packet | `neon-genie/opportunity-packet` | `1.0.0` |
 | Product packet | `neon-genie/product-packet` | `1.0.0` |
 | Wayfinder handoff | `neon-genie/wayfinder-execution-packet` | `1.0.0` |
+| Capital sprint packet | `neon-genie/capital-sprint-packet` | `1.0.0` |
 
 JSON Schema files remain flat under `schemas/*.schema.json` (mirrored to
 `references/schemas/`). Directory-per-version trees may be introduced later
 without breaking envelope discovery.
+
+## Privacy on envelopes and receipts (3.24.0+)
+
+As of skill **3.24.0**, packaging always co-loads the `privacy` profile and emits
+privacy provenance via `scripts/privacy_runtime.py`:
+
+- **Receipt:** top-level fields such as `privacy_mode` (`local_only` default),
+  `external_actions`, `telemetry_status: disabled`, plus nested `privacy`
+  object conforming to `privacy-context.schema.json`.
+- **Envelope:** includes the same privacy context (and often top-level
+  `privacy_mode`) so consumers that open `run-envelope.json` first see the
+  boundary without digging.
+
+Envelope `schema_version` remains **1.0.0**; privacy is carried as optional
+additive properties under the existing envelope major (not a separate 1.1.0
+summary-only object). Packaging validation enforces dual-enforcement gates
+`NG-PRIV-*` (telemetry off, no successful send under `local_only`, sealed
+provenance completeness).
+
+Machine-facing summary: `references/privacy-contract.md`. Human contract:
+root `PRIVACY.md` / hub `references/PRIVACY.md`.
 
 ## Compatibility rules
 
@@ -36,22 +59,6 @@ without breaking envelope discovery.
 | Tighten validation of optional data | **minor** if still optional |
 | New required field / rename / type change | **major** (1.x → 2.0.0) |
 | Remove field | **major** |
-
-### Exception — envelope `1.1.0` privacy (W1 privacy spine)
-
-Envelope schema version **1.1.0** intentionally treats the top-level `privacy`
-summary object as **required** for packaging emission and validation, while
-shipping as a **minor** bump (not 2.0.0). Rationale:
-
-- Skill package **3.24.0+** always co-loads the privacy profile and emits
-  envelope `schema_version: 1.1.0` with a `privacy` object on every packaging run.
-- Pre-3.24 consumers and older sample envelopes may lack `privacy`; treat that
-  as a transitional gap, not a supported long-term shape.
-- Packaging CLI validation (`NG-PRIV-004`) fails when `schema_version >= 1.1.0`
-  and `privacy` is missing. Current packaging always writes `1.1.0`.
-
-This is a documented one-time exception for the privacy spine; future *required*
-fields still follow the major-bump rule above.
 
 ## Support window
 
@@ -72,7 +79,6 @@ When a major envelope change ships:
 
 1. Open `run-envelope.json` in the run directory.
 2. Read `primary_artifact.path` for the main packet.
-3. Read `receipt_path` / `receipt` for gates and DataRequests.
-4. If `wayfinder.handoff_path` is set, load that packet for execution planning.
-5. Refuse execution if `authority != advisory_only` or `grants_execution == true`
-   when originating from Neon Genie.
+3. Read `receipt_path` / `receipt` for gates, DataRequests, and privacy provenance.
+4. If `wayfinder.handoff_path` is set, load that packet for execution planning
+   (Wayfinder runtime remains **optional**).

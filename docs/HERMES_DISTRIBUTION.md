@@ -210,6 +210,19 @@ Ledger entries are always **PROPOSED** with `auto_apply_forbidden: true`.
 GitHub intake: issue templates under `.github/ISSUE_TEMPLATE/` (operator outcome, behavior, hub, schema).  
 ADRs: `docs/adr/`.
 
+### Privacy (v3.24+)
+
+Hub installs include the privacy contract and runtime surface via `distribution.yaml`
+mirrors (`references/PRIVACY.md`, `privacy-context` schema, `privacy_runtime` /
+`privacy_diagnostics` scripts). Operators:
+
+```bash
+python scripts/neon_genie.py do privacy --json
+python scripts/neon_genie.py do doctor   # runs privacy diagnostics
+```
+
+See [PRIVACY.md](../PRIVACY.md) and [references/privacy-contract.md](../references/privacy-contract.md).
+
 ### Release automation (v3.23+)
 
 ```bash
@@ -218,7 +231,10 @@ git tag vX.Y.Z && git push origin vX.Y.Z
 # → Release workflow: smoke + neon-genie-X.Y.Z.tar.gz + sha256 + notes
 ```
 
+Current tagged privacy release: **v3.24.0**.
+
 See [CONTRIBUTING.md](../CONTRIBUTING.md) and [docs/GOVERNANCE.md](./GOVERNANCE.md).
+
 ---
 
 ## One-liner for users

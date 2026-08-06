@@ -4,7 +4,7 @@
 **Skill target:** 3.24.0+  
 **Status:** Binding product contract for repository-owned behavior
 
-This document is the human-readable privacy contract for Neon Genie (Hermes skill + packaging CLI). A hub-safe mirror ships as [`references/PRIVACY.md`](references/PRIVACY.md). Runtime provenance appears on run receipts and envelope `privacy` summaries.
+This document is the human-readable privacy contract for Neon Genie (Hermes skill + packaging CLI). A hub-safe mirror ships as [`references/PRIVACY.md`](references/PRIVACY.md). Compact machine summary: [`references/privacy-contract.md`](references/privacy-contract.md). Runtime engine: [`scripts/privacy_runtime.py`](scripts/privacy_runtime.py). Provenance appears on run receipts and envelopes (nested `privacy` context + top-level `privacy_mode`).
 
 ---
 
@@ -60,7 +60,7 @@ envelope, ledger*               = external boundary
 | Path | What enforces privacy |
 |------|------------------------|
 | Live Hermes run | Doctrine in SKILL + `profiles/privacy.md` + gates; agent logs `external_actions` / redaction on receipt |
-| Packaging CLI | Builds/validates privacy fields; secret preflight; doctor / `do privacy`; fixtures |
+| Packaging CLI | `privacy_runtime` context into receipts/envelopes; preflight; doctor / `do privacy --json`; fixtures |
 | Neither | May control a frontier model’s own logging — disclosed as host boundary |
 
 Neon does **not** proxy host research in Python. The packaging CLI makes no network research calls.
@@ -83,15 +83,17 @@ Receipt field `data_sources_used` lists the subset actually used for a run. Pack
 
 ## 4. Privacy modes
 
+Runtime / receipt vocabulary (canonical, lowercase):
+
 | Mode | Meaning |
 |------|---------|
-| `LOCAL_ONLY` | Research disabled / offline; no Neon-initiated external research **sends**; `external_actions` empty or only `sent: false` deny/block records |
-| `EXTERNAL_RESEARCH_ALLOWED` | Host research may run; every egress attempt should pass egress check and be logged |
-| `UNKNOWN_HOST_BOUNDARY` | Host cannot confirm offline enforcement or provider policy; do not claim `LOCAL_ONLY` absolutes; warn |
+| `local_only` | Default packaging mode. No Neon-initiated external research **sends**; `egress.allowed=false`; `external_actions` empty or only blocked/denied records |
+| `external_research_allowed` | Host research may run under purpose-bound rules; every successful egress should be logged |
+| `custom` | Explicit operator configuration (still no global privacy-disable) |
 
-Packaging recipes that never call host tools still emit privacy provenance (defaults: `LOCAL_ONLY`, telemetry disabled, empty external actions).
+Doctrine docs may also use uppercase aliases (`LOCAL_ONLY`, `EXTERNAL_RESEARCH_ALLOWED`, `UNKNOWN_HOST_BOUNDARY`). **Packaging receipts follow the runtime schema** (`local_only`, …).
 
-`LOCAL_ONLY` means **Neon did not record a successful external research send**. It does **not** mean the model weights, host session, or provider logs are local.
+`local_only` means **Neon did not record a successful external research send**. It does **not** mean the model weights, host session, or provider logs are local. Absolute “never leaves your device” claims without a fully local stack are forbidden (Gate **W** / `NOT_COMPUTABLE`).
 
 ---
 
@@ -115,7 +117,7 @@ Packaging recipes that never call host tools still emit privacy provenance (defa
 ## 7. Offline / research
 
 - Operator flags map into receipt `research_policy` (`enabled`, `offline`) and influence `privacy_mode`.
-- Under `LOCAL_ONLY` / research disabled: packaging and doctrine require **zero** `external_actions[].sent == true` (Gate **T**).
+- Under `local_only` / research disabled: packaging and doctrine require **zero** successful external sends (Gate **T**; `NG-PRIV-003`).
 - Offline requested but host cannot enforce it → prefer `UNKNOWN_HOST_BOUNDARY` + warnings rather than false offline claims.
 
 ---
@@ -174,7 +176,7 @@ Privacy CLEAR gates (after authority and evidence P–R). Full registration: [`r
 | Gate | Name | Blocking when |
 |------|------|---------------|
 | **S** | `egress_destination_known` | `sent: true` and destination unknown/empty |
-| **T** | `offline_no_external_send` | `LOCAL_ONLY` / research disabled but `sent: true` |
+| **T** | `offline_no_external_send` | `local_only` / research disabled but successful external send recorded |
 | **U** | `secret_no_egress` | Credential/secret-like payload would be or was sent |
 | **V** | `private_egress_needs_consent` | Private/operator egress without `consent_ref` |
 | **W** | `privacy_claim_must_be_supported` | Absolute privacy claim without matching mode + evidence |

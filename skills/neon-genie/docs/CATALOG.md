@@ -24,7 +24,7 @@ skills.sh.json         # Product Intelligence grouping
 distribution.yaml      # mirror + support-file contract
 ```
 
-Verified: security scan SAFE, hub install ~118 files, `do doctor` green (hub layout).
+Verified: security scan SAFE, hub install pulls `PRIVACY.md` / privacy runtime + schemas via hub support list, `do doctor` green (hub layout). Skill **3.24.0** ships privacy-by-construction (`do privacy --json`, always-on `privacy` profile).
 
 ## Official optional catalog (PR)
 

@@ -14,15 +14,11 @@
 
 **Turn weak signals and blocked transitions into evidence-bound, testable product and opportunity packets — without inventing facts or granting spend/execute rights.**
 
-[How to use](#how-to-use) · [Install](#installation) · [Commands](#command-cheat-sheet) · [Demo](./docs/DEMO.md) · [Premiere](./docs/PREMIERE.md) · [Contributing](./CONTRIBUTING.md)
+[How to use](#how-to-use) · [Install](#installation) · [Commands](#command-cheat-sheet) · [Privacy](#privacy--data-handling) · [Demo](./docs/DEMO.md) · [Premiere](./docs/PREMIERE.md) · [Contributing](./CONTRIBUTING.md)
 
 </div>
 
 ---
-
-## Privacy
-
-Private by construction: Neon Genie does not operate an advertising profile, silently enable repository telemetry, or train a model on your content. Runs default to **`local_only`** and write to the output path you choose. External research and model calls occur through host tools (provider retention is `NOT_COMPUTABLE` here). Briefs may set `privacy.mode` and **purpose-bound consents only** — there is no global privacy-disable switch. Inspect with `python scripts/neon_genie.py do privacy --json` and the run receipt’s `external_actions`. See [PRIVACY.md](./PRIVACY.md).
 
 ## What it is
 
@@ -40,24 +36,23 @@ It is **not** Kubrick (cinematic), **not** Wayfinder (engineering execution), an
 | Evidence-bound | Claims are `OBSERVED` · `INFERRED` · `SPECULATIVE` · `NOT_COMPUTABLE` |
 | Find or request | Public facts → research. Private facts → `DataRequest`. Never invent. |
 | Advisory only | May draft and recommend. May **not** spend, publish, contact, or mutate repos. |
-| Smallest profiles | Loads only the contracts the job needs (`core` always). |
+| Privacy by construction | Default `local_only`; telemetry off; purpose-bound consents only; egress on the receipt |
+| Smallest profiles | Loads only the contracts the job needs (`core` + `privacy` always). |
 
 ---
 
 ## Privacy & Data Handling
 
-**Private by construction (repository guarantees):** Neon Genie does not enable
-repository telemetry, does not train models on your content, and writes artifacts
-only under operator-selected output paths. Offline / `research.enabled=false`
-means this skill initiates no external research.
+**Repository guarantees (this skill):** no advertising profile, no silent repository telemetry, no model training on your content, artifacts only under the operator-selected output path. Packaging runs default to **`local_only`**. Briefs may set `privacy.mode` and **purpose-bound consents only** — there is no global privacy-disable switch.
 
-**Host boundary:** Hermes, model providers, and search tools have their own
-policies. Neon records egress on the run receipt when research runs; it cannot
-rewrite vendor retention. See [PRIVACY.md](./PRIVACY.md).
+**Host boundary:** Hermes, model providers, search tools, and MCP servers have their own policies. Their retention is **`NOT_COMPUTABLE`** here. Neon records egress in the run receipt (`external_actions` / nested `privacy` context) when research is allowed; it does not rewrite vendor retention.
 
 ```bash
-python scripts/neon_genie.py do privacy
+python scripts/neon_genie.py do privacy --json   # resolved boundary + diagnostics
+python scripts/neon_genie.py do doctor           # includes privacy diagnostics
 ```
+
+Full contract: [PRIVACY.md](./PRIVACY.md) · machine summary: [references/privacy-contract.md](./references/privacy-contract.md) · ADR [0006](./docs/adr/0006-privacy-by-construction.md).
 
 ---
 
@@ -167,6 +162,7 @@ From a clone, `cd` into the repo first. From a Hub install, use the full path un
 | In plain English | Command |
 |------------------|---------|
 | Check the install | `do doctor` |
+| Privacy boundary report | `do privacy --json` |
 | Run a named sample end-to-end | `do run --recipe product-audit --out out/neon-genie/demo` |
 | Run from a short YAML brief | `do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo` |
 | See what the skill can do (JSON) | `do capabilities --json` |
@@ -188,7 +184,7 @@ python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/
 | File | Meaning |
 |------|---------|
 | `run-envelope.json` | **Start here** — index of the whole run |
-| `run-receipt.json` | Status, profiles, open data requests |
+| `run-receipt.json` | Status, profiles, privacy provenance, open data requests |
 | `*-packet*.json` / handoff stubs | Draft product/opportunity content |
 | `HERMES_NEXT.md` | Reminder that real judgment is in Hermes + `SKILL.md` |
 
@@ -203,8 +199,9 @@ Full command list: [Command cheat sheet](#command-cheat-sheet) · 10-minute walk
 | Evidence-bound | Important claims must be labeled; no silent guessing |
 | Find or request | Public facts → research if tools allow; private facts → ask you; else **NOT_COMPUTABLE** |
 | Advisory only | Neon Genie will not spend, publish, contact targets, or change your repo |
-| Smallest profiles | Only loads the skill “modes” the job needs (`core` is always on) |
-| Wayfinder handoff | Neon Genie decides *what* and *why*; engineering tools decide *how to build* — product intent stays frozen unless Neon Genie reviews a change |
+| Privacy by construction | Default `local_only`; inspect receipts / `do privacy --json`; no global privacy off-switch |
+| Smallest profiles | Only loads the skill “modes” the job needs (`core` + `privacy` always on) |
+| Wayfinder handoff | Neon Genie decides *what* and *why*; engineering tools decide *how to build* — product intent stays frozen unless Neon Genie reviews a change · Wayfinder remains **optional** |
 
 ---
 
@@ -286,18 +283,19 @@ python scripts/neon_genie.py do doctor
 Run from a **clone** of this repo (or prefix with `~/.hermes/skills/neon-genie/` after Hub install).
 
 ```bash
-# Check install
+# Check install (+ privacy diagnostics)
 python scripts/neon_genie.py do doctor
+python scripts/neon_genie.py do privacy --json
 
-# Sample end-to-end runs (write files under out/)
+# Sample end-to-end runs (write files under out/; default privacy_mode local_only)
 python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/run1
 python scripts/neon_genie.py do run --brief examples/zero-option.brief.yaml --out out/neon-genie/zero
-# Open run-envelope.json in that folder first
+# Open run-envelope.json in that folder first — then run-receipt.json privacy fields
 
 # What can this skill do? (for agents / orchestrators)
 python scripts/neon_genie.py do capabilities --json
 
-# Suggest profiles from free text
+# Suggest profiles from free text (always includes core + privacy)
 python scripts/neon_genie.py do route --text "first cash zero capital" --json
 
 # Check a finished envelope
@@ -344,14 +342,15 @@ Briefs live in [`examples/`](./examples/). Gallery index: [`examples/gallery/`](
 |------|---------|
 | Discover surface | `do capabilities --json` |
 | Verify install | `do doctor` |
+| Privacy boundary | `do privacy --json` |
 | Packaging workspace | `do run --brief …` or `--recipe …` |
 | Resume a run | open `run-envelope.json` first |
 | CI | `do eval` · `do behavioral` · `do dist verify` |
 | Ship a version | `do release-check` → tag `vX.Y.Z` → Release workflow |
 
-**Rules:** no model-prior as `OBSERVED`; public→research / private→`DataRequest`; no spend/publish/mutate; Wayfinder must not rewrite product intent; `TESTABLE`+ needs `completion_proof`.
+**Rules:** no model-prior as `OBSERVED`; public→research / private→`DataRequest`; no spend/publish/mutate; privacy egress check before host tools; Wayfinder must not rewrite product intent (Wayfinder optional); `TESTABLE`+ needs `completion_proof`.
 
-Contract: [`references/hermes-runtime-contract.md`](./references/hermes-runtime-contract.md) · Schemas: [`references/schema-versioning.md`](./references/schema-versioning.md)
+Contract: [`references/hermes-runtime-contract.md`](./references/hermes-runtime-contract.md) · Privacy: [`PRIVACY.md`](./PRIVACY.md) · Schemas: [`references/schema-versioning.md`](./references/schema-versioning.md)
 
 ### How it works (short)
 
@@ -369,6 +368,7 @@ Neon Genie owns *what/why/user/boundary/proof*. Wayfinder owns *decomposition/mi
 ```text
 Neon-Genie-Hermes/          ← skill root (also full install tree)
 ├── SKILL.md                # operating contract
+├── PRIVACY.md              # privacy-by-construction contract
 ├── distribution.yaml       # Hub mirror single source
 ├── scripts/neon_genie.py   # do <job>
 ├── skills/neon-genie/      # tap / Hub package (generated)

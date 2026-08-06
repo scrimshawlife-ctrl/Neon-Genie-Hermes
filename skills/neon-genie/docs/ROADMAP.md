@@ -84,7 +84,9 @@ Public entry points:
 | **3.21.0** | Operator surface: do run, do capabilities, worked example, tighter README |
 | **3.22.0** | Feedback loop: issue templates, learn↔run_id reconcile, ADRs |
 | **3.23.0** | Release automation, branch protection, gates.yaml registry, CONTRIBUTING |
-| **3.24.0** | Privacy-by-construction spine (issue #15) |
+| **3.24.0** | Privacy-by-construction spine + runtime (issues #15 + #17); tagged `v3.24.0` |
+
+Also on main around this line: **capital_sprint** profile/protocol and **external-signals** corpus (labeled references).
 
 ## Production maturity (3.18–3.23) — complete
 
@@ -97,15 +99,22 @@ Public entry points:
 | Feedback loop | Issue templates, learn↔run_id reconcile, ADRs |
 | Governance | Tag-driven Release workflow, branch protection, CONTRIBUTING |
 
-## Privacy spine (3.24.0) — W1 complete
+## Privacy spine (3.24.0) — shipped
 
 | Theme | Shipped |
 |-------|---------|
-| Privacy-by-construction | `PRIVACY.md`, ADR 0006, always-on `privacy` profile, gates S–Y, preflight, `do privacy` |
+| Human + hub contract | `PRIVACY.md`, `references/PRIVACY.md`, ADR 0006, `references/privacy-contract.md` |
+| Doctrine | Always-on `privacy` profile, gates S–Y, egress rune in research loop |
+| Runtime engine | `scripts/privacy_runtime.py` — `local_only` default, purpose-bound consents, `REDACT_THEN_ALLOW` |
+| Packaging surface | Receipt/envelope privacy provenance, `do privacy --json`, doctor diagnostics, NG-PRIV-* validation |
+| Helpers & tests | `privacy_preflight.py`, runtime/integration unit tests, 12 behavioral cases (incl. privacy) |
+| Hub parity | Distribution spine mirrors + package under `skills/neon-genie/` |
 
-**Next:** W2 Outcomes ∥ W3 Judgment (parallel per program design; interfaces frozen in W1 fields only).
+**Program next (optional waves):** W2 Outcomes ∥ W3 Judgment in parallel, then W4 distribution/announce polish. Interfaces: privacy fields on receipt/envelope, `do privacy`, Wayfinder remains optional handoff only.
 
-Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md) · [PRIVACY](../PRIVACY.md)
+Design/plan: [privacy spine design](./superpowers/specs/2026-08-06-neon-genie-privacy-spine-design.md) · [implementation plan](./superpowers/plans/2026-08-06-neon-genie-privacy-spine.md)
+
+Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [PRIVACY](../PRIVACY.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md)
 
 ### Optional later (not blocking)
 

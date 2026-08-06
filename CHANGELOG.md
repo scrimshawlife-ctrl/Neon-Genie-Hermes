@@ -7,6 +7,13 @@ and this project uses semantic versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Docs aligned to shipped **3.24.0** privacy surface: README privacy section (single),
+  `local_only` vocabulary, `do privacy --json` in command tables, schema-versioning
+  (envelope `1.0.0` + privacy-context), ROADMAP privacy spine complete, docs index,
+  CATALOG / HERMES_DISTRIBUTION privacy notes
+
 ## [3.24.0] — 2026-08-06
 
 ### Added

@@ -24,10 +24,10 @@ python scripts/neon_genie.py do doctor
 
 Expected: full smoke `PASS` at current VERSION.
 
-**Privacy notice:** Packaging runs default to `privacy_mode: LOCAL_ONLY` (no Neon-initiated external research; telemetry off; artifacts under your `--out` path).
-Hermes chat may research unless you set `research.enabled=false` / offline.
+**Privacy notice:** Packaging runs default to `privacy_mode: local_only` (no Neon-initiated external research; telemetry off; artifacts under your `--out` path).
+Hermes chat may research unless you set `research.enabled=false` / offline / keep `local_only`.
 Neon records egress on the run receipt; it does not rewrite host or model-provider retention.
-See [PRIVACY.md](../PRIVACY.md). Run `python scripts/neon_genie.py do privacy` for a local report.
+See [PRIVACY.md](../PRIVACY.md). Run `python scripts/neon_genie.py do privacy --json` for the resolved boundary.
 
 ## Minute 2–4: Operator run (preferred path)
 
@@ -41,11 +41,11 @@ You should see:
 | File | Role |
 |------|------|
 | **`run-envelope.json`** | **Open this first** — canonical entry point |
-| `profile-route.json` | Smallest profile set |
+| `profile-route.json` | Smallest profile set (`core` + `privacy` always) |
 | `product-packet.stub.json` | Boundary + `completion_proof` / `proof_path` |
 | `data-requests.json` | Private access request |
-| `wayfinder-handoff.stub.json` | Intent freeze flag |
-| `run-receipt.json` | Advisory receipt |
+| `wayfinder-handoff.stub.json` | Intent freeze flag (Wayfinder consumer optional) |
+| `run-receipt.json` | Advisory receipt + privacy provenance / `external_actions` |
 | `HERMES_NEXT.md` | Judgment stays in Hermes + SKILL.md |
 
 ```bash

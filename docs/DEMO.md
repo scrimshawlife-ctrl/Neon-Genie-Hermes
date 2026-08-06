@@ -22,6 +22,11 @@ python scripts/neon_genie.py do doctor
 
 Expected: full smoke `PASS` at current VERSION.
 
+**Privacy notice:** Packaging runs default to `privacy_mode: LOCAL_ONLY` (no Neon-initiated external research; telemetry off; artifacts under your `--out` path).
+Hermes chat may research unless you set `research.enabled=false` / offline.
+Neon records egress on the run receipt; it does not rewrite host or model-provider retention.
+See [PRIVACY.md](../PRIVACY.md). Run `python scripts/neon_genie.py do privacy` for a local report.
+
 ## Minute 2–4: Operator run (preferred path)
 
 ```bash

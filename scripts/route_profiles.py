@@ -163,6 +163,18 @@ def match_profiles(text: str) -> list[str]:
     return matched
 
 
+def ensure_privacy(profiles: list[str]) -> list[str]:
+    """Always co-load privacy after core on every route result."""
+    out = list(profiles)
+    if "core" not in out:
+        out = ["core"] + out
+    if "privacy" not in out:
+        # insert after core
+        idx = out.index("core") + 1
+        out = out[:idx] + ["privacy"] + out[idx:]
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Route Neon Genie profiles")
     src = parser.add_mutually_exclusive_group(required=True)
@@ -204,6 +216,10 @@ def main(argv: list[str] | None = None) -> int:
         selected = [p for p in selected if p in known]
     else:
         unknown = []
+
+    # Always co-load privacy after known-filter so it is never stripped as unknown
+    # (privacy may land in manifest/profiles later; selected still requires it).
+    selected = ensure_privacy(selected)
 
     notes: list[str] = []
     if "evidence_intelligence" not in selected and args.auto_evidence:

@@ -153,10 +153,36 @@ def test_validate_rejects_telemetry_enabled() -> None:
         print("PASS: telemetry enabled rejected")
 
 
+def test_route_includes_privacy() -> None:
+    r = subprocess.run(
+        [
+            PY,
+            str(SCRIPT_DIR / "neon_genie.py"),
+            "do",
+            "route",
+            "--text",
+            "product audit for missing buyer",
+            "--json",
+        ],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    assert r.returncode == 0, r.stderr + r.stdout
+    data = json.loads(r.stdout)
+    selected = data.get("selected") or data.get("profiles") or []
+    assert "core" in selected
+    assert "privacy" in selected
+    # privacy must sit immediately after core
+    assert selected.index("privacy") == selected.index("core") + 1
+    print("PASS: route includes privacy")
+
+
 def main() -> int:
     test_receipt_includes_privacy_fields()
     test_validate_rejects_local_only_with_sent_action()
     test_validate_rejects_telemetry_enabled()
+    test_route_includes_privacy()
     return 0
 
 

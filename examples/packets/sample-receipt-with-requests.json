@@ -1,6 +1,6 @@
 {
   "status": "PROPOSED",
-  "profiles_loaded": ["core", "product_architecture"],
+  "profiles_loaded": ["core", "privacy", "product_architecture"],
   "claims_by_label": {
     "OBSERVED": [],
     "INFERRED": [],

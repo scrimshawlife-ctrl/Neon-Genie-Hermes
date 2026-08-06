@@ -37,6 +37,22 @@ without breaking envelope discovery.
 | New required field / rename / type change | **major** (1.x → 2.0.0) |
 | Remove field | **major** |
 
+### Exception — envelope `1.1.0` privacy (W1 privacy spine)
+
+Envelope schema version **1.1.0** intentionally treats the top-level `privacy`
+summary object as **required** for packaging emission and validation, while
+shipping as a **minor** bump (not 2.0.0). Rationale:
+
+- Skill package **3.24.0+** always co-loads the privacy profile and emits
+  envelope `schema_version: 1.1.0` with a `privacy` object on every packaging run.
+- Pre-3.24 consumers and older sample envelopes may lack `privacy`; treat that
+  as a transitional gap, not a supported long-term shape.
+- Packaging CLI validation (`NG-PRIV-004`) fails when `schema_version >= 1.1.0`
+  and `privacy` is missing. Current packaging always writes `1.1.0`.
+
+This is a documented one-time exception for the privacy spine; future *required*
+fields still follow the major-bump rule above.
+
 ## Support window
 
 - Wayfinder (and other consumers) **must** accept the current major schema_version

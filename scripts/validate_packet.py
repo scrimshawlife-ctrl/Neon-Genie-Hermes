@@ -187,8 +187,23 @@ def _schema_version_ge(version: Any, minimum: str) -> bool:
     return left >= right
 
 
+PRIVACY_RECEIPT_KEYS = (
+    "privacy_mode",
+    "privacy_contract_version",
+    "data_sources_used",
+    "external_actions",
+    "artifact_paths",
+    "telemetry_status",
+    "retention_statement",
+    "privacy_warnings",
+    "deletion_instructions",
+    "redaction",
+    "research_policy",
+)
+
+
 def check_privacy_rules(data: dict[str, Any], packet_type: str) -> list[str]:
-    """Privacy gates NG-PRIV-001..004 for receipt and envelope packets."""
+    """Privacy gates NG-PRIV-001..005 for receipt and envelope packets."""
     errors: list[str] = []
     if not isinstance(data, dict):
         return errors
@@ -198,11 +213,37 @@ def check_privacy_rules(data: dict[str, Any], packet_type: str) -> list[str]:
         tel = data.get("telemetry_status")
         if tel is not None and tel != "disabled":
             errors.append("NG-PRIV-002: telemetry_status must be 'disabled'")
-        if data.get("privacy_mode") == "LOCAL_ONLY":
+
+        # Gate Y: SEALED receipts require full privacy provenance (NG-PRIV-005)
+        status = data.get("status")
+        if isinstance(status, str) and status.upper() == "SEALED":
+            for field in PRIVACY_RECEIPT_KEYS:
+                if field not in data:
+                    errors.append(
+                        f"NG-PRIV-005: SEALED receipt missing required privacy field: {field}"
+                    )
+            if tel is not None and tel != "disabled":
+                # already NG-PRIV-002; Gate Y also requires disabled when present
+                pass
+
+        # Gate T: no successful external send under LOCAL_ONLY / research disabled / offline
+        rp = data.get("research_policy") if isinstance(data.get("research_policy"), dict) else {}
+        offline_or_disabled = (
+            data.get("privacy_mode") == "LOCAL_ONLY"
+            or rp.get("enabled") is False
+            or rp.get("offline") is True
+        )
+        if offline_or_disabled:
             for i, act in enumerate(data.get("external_actions") or []):
                 if isinstance(act, dict) and act.get("sent") is True:
+                    reason = "LOCAL_ONLY"
+                    if data.get("privacy_mode") != "LOCAL_ONLY":
+                        if rp.get("enabled") is False:
+                            reason = "research_policy.enabled=false"
+                        elif rp.get("offline") is True:
+                            reason = "research_policy.offline=true"
                     errors.append(
-                        f"NG-PRIV-003: external_actions[{i}].sent true under LOCAL_ONLY"
+                        f"NG-PRIV-003: external_actions[{i}].sent true under {reason}"
                     )
     if key in {"envelope"}:
         priv = data.get("privacy") or {}

@@ -24,6 +24,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 import lineage  # noqa: E402
 import paths as ng_paths  # noqa: E402
+from route_profiles import ensure_privacy  # noqa: E402
 
 ENVELOPE_SCHEMA_ID = "neon-genie/run-envelope"
 ENVELOPE_SCHEMA_VERSION = "1.1.0"
@@ -120,6 +121,7 @@ def build_envelope(
     )
     if "core" not in profiles:
         profiles = ["core"] + profiles
+    profiles = ensure_privacy(profiles)
 
     summary_path = out_dir / "recipe-summary.json"
     summary = _load(summary_path) if summary_path.is_file() else {}

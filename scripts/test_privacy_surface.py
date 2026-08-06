@@ -193,12 +193,112 @@ def test_do_privacy_json() -> None:
     print("PASS: do privacy --json")
 
 
+def _minimal_receipt_base(**overrides: object) -> dict:
+    base: dict = {
+        "status": "SEALED",
+        "profiles_loaded": ["core", "privacy"],
+        "claims_by_label": {
+            "OBSERVED": [],
+            "INFERRED": [],
+            "SPECULATIVE": [],
+            "NOT_COMPUTABLE": [],
+        },
+        "not_computable_fields": [],
+        "promotion_state": "RAW_SIGNAL",
+        "human_review_required": True,
+        "privacy_mode": "LOCAL_ONLY",
+        "privacy_contract_version": "1.0.0",
+        "data_sources_used": ["operator_input"],
+        "external_actions": [],
+        "artifact_paths": [],
+        "telemetry_status": "disabled",
+        "retention_statement": "x",
+        "privacy_warnings": [],
+        "deletion_instructions": "x",
+        "redaction": {
+            "enabled": True,
+            "blocked_categories": [],
+            "events": [],
+        },
+        "research_policy": {"enabled": False, "offline": True},
+    }
+    base.update(overrides)
+    return base
+
+
+def test_sealed_missing_privacy_mode_ng_priv_005() -> None:
+    """Gate Y: SEALED receipt missing privacy_mode → NG-PRIV-005."""
+    with tempfile.TemporaryDirectory(prefix="ng-priv-y-") as td:
+        path = Path(td) / "sealed-incomplete.json"
+        rec = _minimal_receipt_base()
+        del rec["privacy_mode"]
+        path.write_text(json.dumps(rec), encoding="utf-8")
+        r = subprocess.run(
+            [
+                PY,
+                str(SCRIPT_DIR / "validate_packet.py"),
+                "--packet",
+                str(path),
+                "--type",
+                "receipt",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        assert r.returncode != 0
+        assert "NG-PRIV-005" in (r.stderr + r.stdout)
+        print("PASS: SEALED missing privacy_mode → NG-PRIV-005")
+
+
+def test_research_offline_with_sent_ng_priv_003() -> None:
+    """Gate T: research offline + sent true → NG-PRIV-003 (even if not LOCAL_ONLY)."""
+    with tempfile.TemporaryDirectory(prefix="ng-priv-t-") as td:
+        path = Path(td) / "offline-sent.json"
+        rec = _minimal_receipt_base(
+            status="PROPOSED",
+            privacy_mode="EXTERNAL_RESEARCH_ALLOWED",
+            research_policy={"enabled": True, "offline": True},
+            external_actions=[
+                {
+                    "action_id": "ea_1",
+                    "outcome": "ALLOW",
+                    "sent": True,
+                    "destination": "example.com",
+                    "tool_or_provider": "web_search",
+                    "purpose": "test",
+                    "data_categories": ["public_web"],
+                    "payload_redacted": True,
+                }
+            ],
+        )
+        path.write_text(json.dumps(rec), encoding="utf-8")
+        r = subprocess.run(
+            [
+                PY,
+                str(SCRIPT_DIR / "validate_packet.py"),
+                "--packet",
+                str(path),
+                "--type",
+                "receipt",
+            ],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        assert r.returncode != 0
+        assert "NG-PRIV-003" in (r.stderr + r.stdout)
+        print("PASS: research offline + sent → NG-PRIV-003")
+
+
 def main() -> int:
     test_receipt_includes_privacy_fields()
     test_validate_rejects_local_only_with_sent_action()
     test_validate_rejects_telemetry_enabled()
     test_route_includes_privacy()
     test_do_privacy_json()
+    test_sealed_missing_privacy_mode_ng_priv_005()
+    test_research_offline_with_sent_ng_priv_003()
     return 0
 
 

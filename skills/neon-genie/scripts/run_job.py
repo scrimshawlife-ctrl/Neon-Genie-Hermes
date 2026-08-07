@@ -43,6 +43,8 @@ PROFILE_RECIPE_HINTS: list[tuple[str, str]] = [
     ("zero_option", "zero-option"),
     ("product_architecture", "product-audit"),
     ("fragmentation", "fragmentation"),
+    # capital_sprint before commercial: capital briefs often also match commercial
+    ("capital_sprint", "capital-sprint"),
     ("commercial", "commercial"),
     ("audit_delivery", "audit"),
     ("agentic_services", "agentic"),

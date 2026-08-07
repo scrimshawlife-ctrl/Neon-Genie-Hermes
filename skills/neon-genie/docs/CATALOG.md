@@ -28,7 +28,8 @@ Verified: security scan SAFE, hub install pulls `PRIVACY.md` / privacy runtime +
 
 ## Official optional catalog (PR)
 
-**PR:** https://github.com/NousResearch/hermes-agent/pull/75028
+**PR:** https://github.com/NousResearch/hermes-agent/pull/75028  
+**Status:** open — refreshed 2026-08-07 for authoring standards + **3.25.0** leaf (`test_neon_genie_skill.py`)
 
 Per [Hermes optional skills contributing](https://hermes-agent.nousresearch.com/docs/reference/optional-skills-catalog):
 

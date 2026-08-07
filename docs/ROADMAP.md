@@ -85,6 +85,7 @@ Public entry points:
 | **3.22.0** | Feedback loop: issue templates, learn↔run_id reconcile, ADRs |
 | **3.23.0** | Release automation, branch protection, gates.yaml registry, CONTRIBUTING |
 | **3.24.0** | Privacy-by-construction spine + runtime (issues #15 + #17); tagged `v3.24.0` |
+| **3.25.0** | Founder cold-start: founder-language routing, capital_sprint recipe, default transitional-builder job shape, hub list after doctrine, judgment honesty |
 
 Also on main around this line: **capital_sprint** profile/protocol and **external-signals** corpus (labeled references).
 

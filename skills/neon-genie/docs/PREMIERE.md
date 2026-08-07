@@ -75,6 +75,8 @@ With:
 | Outcomes | `python scripts/neon_genie.py do learn …` |
 | Design | `docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md` |
 
+These commands prove packaging and fixture soundness; live multi-turn Hermes judgment remains a separate maturity track.
+
 ---
 
 ## 10-minute demo

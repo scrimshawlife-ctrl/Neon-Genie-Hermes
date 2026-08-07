@@ -7,12 +7,19 @@ and this project uses semantic versioning.
 
 ## [Unreleased]
 
+## [3.25.0] — 2026-08-06
+
+### Added
+
+- **Founder cold-start** — language that maps solo/roadmap/limited-resource intent into
+  opportunity + zero-option profile routes without VC false positives
+- **`capital_sprint`** router triggers + packaging recipe for capital-constrained sprints
+- Default transitional-builder job shape in SKILL.md (plain operator example)
+
 ### Changed
 
-- Docs aligned to shipped **3.24.0** privacy surface: README privacy section (single),
-  `local_only` vocabulary, `do privacy --json` in command tables, schema-versioning
-  (envelope `1.0.0` + privacy-context), ROADMAP privacy spine complete, docs index,
-  CATALOG / HERMES_DISTRIBUTION privacy notes
+- Hub support file list moved below operating doctrine in SKILL.md
+- Docs: packaging checks vs Hermes judgment (honesty boundary)
 
 ## [3.24.0] — 2026-08-06
 

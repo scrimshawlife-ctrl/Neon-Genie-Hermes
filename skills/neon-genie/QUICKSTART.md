@@ -56,6 +56,16 @@ SPECULATIVE / NOT_COMPUTABLE. Do not modify the repository.
 No fictional resources.
 ```
 
+Plain English (transitional builders):
+
+```text
+Use Neon Genie. I'm between jobs with limited money and an app idea.
+I need a realistic roadmap and first approaches I can actually run.
+Do not invent buyers, capital, or skills I did not declare.
+Research public facts if you can; request private facts with DataRequest.
+Label every important claim. Advisory only — do not modify any repo.
+```
+
 ```text
 /neon-genie research.enabled=false
 ```

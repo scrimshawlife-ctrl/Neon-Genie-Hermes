@@ -386,32 +386,41 @@ def sync_hub_package(root: Path, dist: dict[str, Any]) -> Path:
     pkg = dist.get("hub_package") or {}
     dest = root / str(pkg.get("root") or "skills/neon-genie")
     excludes = set(pkg.get("exclude") or [])
+    # Always skip monorepo noise at package root
+    hard_skip = {".git", "out", "skills", ".superpowers", ".hallmark", "__pycache__", ".venv", "venv"}
     dest.mkdir(parents=True, exist_ok=True)
+
+    def is_excluded(name: str, rel: str) -> bool:
+        if name in hard_skip or name.endswith(".pyc"):
+            return True
+        for ex in excludes:
+            if fnmatch.fnmatch(name, ex) or fnmatch.fnmatch(rel, ex):
+                return True
+            if rel == ex or rel.startswith(ex.rstrip("/") + "/"):
+                return True
+        return False
 
     def ignore(directory: str, names: list[str]) -> set[str]:
         ignored: set[str] = set()
         dir_path = Path(directory)
         for name in names:
             rel = (dir_path / name).relative_to(root).as_posix()
-            if name in {".git", "out", "skills", ".superpowers", "__pycache__", ".venv", "venv"}:
+            if is_excluded(name, rel):
                 ignored.add(name)
-                continue
-            if name.endswith(".pyc"):
-                ignored.add(name)
-                continue
-            if rel in {"docs/superpowers", "docs/assets"} or rel.startswith("docs/superpowers/") or rel.startswith("docs/assets/"):
-                ignored.add(name)
-            for ex in excludes:
-                if fnmatch.fnmatch(name, ex) or fnmatch.fnmatch(rel, ex):
-                    ignored.add(name)
         return ignored
 
-    # Copy top-level entries selectively
+    # Drop leftover package-only noise from prior syncs (Pages, hallmark, etc.)
+    for leftover in (".hallmark",):
+        p = dest / leftover
+        if p.is_dir():
+            shutil.rmtree(p)
+        elif p.is_file():
+            p.unlink()
+
+    # Copy top-level entries selectively (skip excluded dirs like full docs/)
     for child in sorted(root.iterdir()):
         name = child.name
-        if name in {".git", "out", "skills", ".superpowers", "__pycache__", ".venv", "venv"}:
-            continue
-        if name.endswith(".pyc"):
+        if is_excluded(name, name):
             continue
         target = dest / name
         if child.is_dir():
@@ -421,17 +430,20 @@ def sync_hub_package(root: Path, dist: dict[str, Any]) -> Path:
         else:
             shutil.copy2(child, target)
 
-    # Ensure key docs
+    # Curated human docs only (not Pages assets / checklists)
     docs_dest = dest / "docs"
+    if docs_dest.exists():
+        shutil.rmtree(docs_dest)
     docs_dest.mkdir(parents=True, exist_ok=True)
-    for f in ("PREMIERE.md", "DEMO.md", "ROADMAP.md", "HERMES_DISTRIBUTION.md", "README.md"):
+    for f in ("PREMIERE.md", "DEMO.md", "ROADMAP.md", "HERMES_DISTRIBUTION.md", "CATALOG.md", "README.md"):
         src = root / "docs" / f
         if src.is_file():
             shutil.copy2(src, docs_dest / f)
     if (root / "skills.sh.json").is_file():
         shutil.copy2(root / "skills.sh.json", dest / "skills.sh.json")
     (dest / ".gitignore").write_text(
-        "out/\n__pycache__/\n*.pyc\n.superpowers/\n.venv/\nvenv/\n", encoding="utf-8"
+        "out/\n__pycache__/\n*.pyc\n.superpowers/\n.hallmark/\n.venv/\nvenv/\n",
+        encoding="utf-8",
     )
     return dest
 

@@ -47,7 +47,9 @@ hub_package:
     - out
     - skills
     - .superpowers
+    - .hallmark
     - __pycache__
+    - docs
     - docs/superpowers
     - docs/assets
     - "*.pyc"

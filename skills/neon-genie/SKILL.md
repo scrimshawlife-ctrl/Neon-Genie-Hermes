@@ -358,6 +358,7 @@ A run emits one or more of:
 - `MemeticPressurePacket` → `references/schemas/memetic-pressure-packet.schema.json`
 - `AuditDeliveryPacket` → `references/schemas/audit-delivery-packet.schema.json`
 - `WayfinderExecutionPacket` → `references/schemas/wayfinder-execution-packet.schema.json`
+- `CapitalSprintPacket` → `references/schemas/capital-sprint-packet.schema.json`
 - `NeonGenieRunReceipt` → `references/schemas/run-receipt.schema.json`
 
 Anti-overclaim gates: `references/anti-overclaim-patterns.md`. Privacy: `PRIVACY.md`, `references/PRIVACY.md`, `profiles/privacy.md`.
@@ -523,6 +524,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `examples/fragmentation.brief.yaml`
 - `examples/memetic.brief.yaml`
 - `examples/opportunity.brief.yaml`
+- `examples/packets/sample-capital-sprint.packet.json`
 - `examples/packets/sample-data-request.json`
 - `examples/packets/sample-external-action.json`
 - `examples/packets/sample-opportunity.packet.json`

@@ -46,6 +46,8 @@ PACKET_TYPE_TO_SCHEMA = {
     "audit": "audit-delivery-packet.schema.json",
     "audit_delivery": "audit-delivery-packet.schema.json",
     "wayfinder": "wayfinder-execution-packet.schema.json",
+    "capital_sprint": "capital-sprint-packet.schema.json",
+    "capital-sprint": "capital-sprint-packet.schema.json",
     "receipt": "run-receipt.schema.json",
     "run_receipt": "run-receipt.schema.json",
     "envelope": "run-envelope.schema.json",

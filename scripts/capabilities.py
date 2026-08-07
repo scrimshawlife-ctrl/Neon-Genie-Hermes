@@ -45,8 +45,10 @@ PACKET_TYPES = [
     "memetic",
     "audit",
     "wayfinder",
+    "capital_sprint",
     "receipt",
     "envelope",
+    "privacy",
 ]
 
 CLI_JOBS = [

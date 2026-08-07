@@ -91,6 +91,32 @@ Convert weak signals, blocked state transitions, fragmented systems, raw ideas, 
 
 Neon Genie owns product and opportunity intelligence. It does not grant execution, forecast, governance, spending, publication, or canon-promotion authority.
 
+## Default operator job (transitional builders)
+
+When the operator is developing an idea under constraint (solo, transitional,
+limited money/time/skills) and has not named a specialized recipe, default to
+this job shape — still **advisory only**:
+
+1. **Name the stuck point** — who is blocked, current state, what “done” looks like.
+2. **Capture constraints** — time, money, skills, access. Never invent resources.
+3. **Find → request → refuse** — research public facts; emit `DataRequest` for private
+   facts; label claims `OBSERVED` / `INFERRED` / `SPECULATIVE` / `NOT_COMPUTABLE`.
+4. **Shape the plan** — roadmap and/or approach options with **completion_proof**
+   (externally checkable). Prefer profiles `opportunity_mining` and, when resources
+   are scarce, `zero_option` (plus `product_architecture` only if a product/system
+   boundary is in scope).
+5. **Seal as drafts** — packets + receipt; no spend, publish, contact, or repo mutation.
+
+**Example Hermes prompt (plain English):**
+
+```text
+Use Neon Genie. I'm between jobs with limited money and an app idea.
+I need a realistic roadmap and first approaches I can actually run.
+Do not invent buyers, capital, or skills I did not declare.
+Research public facts if you can; request private facts with DataRequest.
+Label every important claim. Advisory only — do not modify any repo.
+```
+
 ## Research doctrine (default: proactive)
 
 **Automatically perform any research the host can run when it improves usefulness of the result.** Do not wait for the operator to name every source. Prefer a researched, labeled answer over a thin `NOT_COMPUTABLE` wall when facts are fetchable.

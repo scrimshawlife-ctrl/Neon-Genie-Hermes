@@ -2,6 +2,7 @@
 
 | Doc | Purpose |
 |-----|---------|
+| [index.html](./index.html) | **GitHub Pages landing** (install-first; transitional builders) |
 | [../README.md](../README.md) | Public overview + **How to use** (Hermes & CLI) + privacy summary |
 | [../PRIVACY.md](../PRIVACY.md) | **Privacy-by-construction** human contract (hub mirror: `references/PRIVACY.md`) |
 | [../QUICKSTART.md](../QUICKSTART.md) | Short install and command table |

@@ -120,8 +120,9 @@ Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [PRIVACY](../PRIVAC
 ### Optional later (not blocking)
 
 - Live multi-turn Hermes LLM evals (needs API keys / host tools in CI)
-- Official Nous `optional-skills/` PR (only if desired)
+- Official Nous `optional-skills/` merge ([PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028) — leaf refreshed for 3.25.0 authoring standards)
 - Discord/social announce with install one-liner
+- Shorter community install path (repo rename / skills monorepo)
 - Profile capability-contract router (beyond keyword routing)
 - Required PR reviews when collaborators join
 

@@ -7,6 +7,17 @@ and this project uses semantic versioning.
 
 ## [Unreleased]
 
+### Added
+
+- Schema-valid `examples/packets/sample-capital-sprint.packet.json`
+- `CapitalSprintPacket` in SKILL output selection; `validate` / `capabilities` types
+
+### Changed
+
+- `do run --brief` auto-recipe prefers `capital-sprint` over commercial when both match
+- Hub package no longer ships Pages assets, hallmark, or monorepo ADR/checklist bulk
+- Public docs/README aligned to **3.25.0** (site link, founder prompts, capital-sprint CLI)
+
 ## [3.25.0] — 2026-08-06
 
 ### Added
@@ -15,6 +26,7 @@ and this project uses semantic versioning.
   opportunity + zero-option profile routes without VC false positives
 - **`capital_sprint`** router triggers + packaging recipe for capital-constrained sprints
 - Default transitional-builder job shape in SKILL.md (plain operator example)
+- GitHub Pages landing under `docs/` (install-first for transitional builders)
 
 ### Changed
 

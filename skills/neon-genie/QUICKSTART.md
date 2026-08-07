@@ -4,17 +4,21 @@ Governed Hermes skill for opportunity and product intelligence. **Advisory only.
 
 **Privacy:** runs default to `local_only`; inspect with `python scripts/neon_genie.py do privacy --json`. Briefs may set `privacy.mode` and purpose-bound consents only (never a global disable). Host/provider retention is `NOT_COMPUTABLE`. See [PRIVACY.md](./PRIVACY.md).
 
-**Paths:** [How to use (README)](./README.md#how-to-use) · [10-minute demo](./docs/DEMO.md) · [Premiere thesis](./docs/PREMIERE.md) · [Distribution](./docs/HERMES_DISTRIBUTION.md)
+**Paths:** [How to use (README)](./README.md#how-to-use) · [Site](https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/) · [10-minute demo](./docs/DEMO.md) · [Premiere thesis](./docs/PREMIERE.md) · [Distribution](./docs/HERMES_DISTRIBUTION.md)
+
+**Version:** see [`VERSION`](./VERSION) (current packaging line: **3.25.0**).
 
 ---
 
 ## Install
 
-**Hermes Skills Hub**
+**Hermes Skills Hub** (community / always-latest)
 
 ```bash
 hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
 ```
+
+After the official optional skill merges: `hermes skills install official/productivity/neon-genie` ([PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028)).
 
 **Clone**
 
@@ -84,13 +88,14 @@ python scripts/neon_genie.py do <job> [options]
 
 | Job | When to use |
 |-----|-------------|
-| `doctor` | Full smoke (install / CI / agents) |
+| `doctor` | Full smoke (install / CI / agents; includes founder routing) |
 | `run` | **Start here for packaging** — brief/recipe → workspace + envelope |
+| `privacy` | Resolved privacy boundary (`--json`) |
 | `check` | Skill integrity only |
 | `capabilities` | Machine-readable surface (`--json`) for orchestrators |
-| `recipe` | Named example end-to-end (`--list` / `--name`) |
-| `route` | Profile suggestion from text or brief |
-| `validate` | Packet or envelope vs schema |
+| `recipe` | Named example end-to-end (`--list` / `--name`; includes `capital-sprint`) |
+| `route` | Profile suggestion from text or brief (`core` + `privacy` always) |
+| `validate` | Packet or envelope vs schema (`capital-sprint` supported) |
 | `receipt` / `envelope` | Advisory receipt; rebuild `run-envelope.json` |
 | `eval` / `transcripts` / `behavioral` | Golden gates, prose, semantic suites |
 | `learn` / `reconcile` | PROPOSED ledger + run_id linkage |

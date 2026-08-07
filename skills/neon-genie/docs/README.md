@@ -7,12 +7,12 @@
 | [../PRIVACY.md](../PRIVACY.md) | **Privacy-by-construction** human contract (hub mirror: `references/PRIVACY.md`) |
 | [../QUICKSTART.md](../QUICKSTART.md) | Short install and command table |
 | [../SKILL.md](../SKILL.md) | Full skill operating contract |
-| [../CHANGELOG.md](../CHANGELOG.md) | Release history (current: **3.24.0**) |
+| [../CHANGELOG.md](../CHANGELOG.md) | Release history (current: **3.25.0**) |
 | [PREMIERE.md](./PREMIERE.md) | Premiere thesis & comparison vs idea agents |
 | [DEMO.md](./DEMO.md) | 10-minute install → recipe → ledger demo |
 | [HERMES_DISTRIBUTION.md](./HERMES_DISTRIBUTION.md) | Skills Hub / tap / catalog submission |
-| [CATALOG.md](./CATALOG.md) | Catalog submission notes |
-| [ROADMAP.md](./ROADMAP.md) | Packaging waves, premiere, production maturity, privacy spine |
+| [CATALOG.md](./CATALOG.md) | Catalog submission notes (community live; official PR open) |
+| [ROADMAP.md](./ROADMAP.md) | Packaging waves, premiere, production maturity, privacy + founder cold-start |
 | [GOVERNANCE.md](./GOVERNANCE.md) | Branch protection / contribution authority notes |
 | [adr/](./adr/) | Architecture decision records (incl. [0006 privacy](./adr/0006-privacy-by-construction.md)) |
 | [../references/privacy-contract.md](../references/privacy-contract.md) | Compact machine-oriented privacy contract 1.0.0 |
@@ -30,5 +30,7 @@
 | [superpowers/plans/2026-07-30-neon-genie-evidence-spine-p0.md](./superpowers/plans/2026-07-30-neon-genie-evidence-spine-p0.md) | Wave P0 Evidence spine implementation plan |
 | [superpowers/specs/2026-08-06-neon-genie-privacy-spine-design.md](./superpowers/specs/2026-08-06-neon-genie-privacy-spine-design.md) | Privacy spine design (W1) |
 | [superpowers/plans/2026-08-06-neon-genie-privacy-spine.md](./superpowers/plans/2026-08-06-neon-genie-privacy-spine.md) | Privacy spine implementation plan |
+| [superpowers/specs/2026-08-06-neon-genie-skill-audit-design.md](./superpowers/specs/2026-08-06-neon-genie-skill-audit-design.md) | Skill 360 audit + founder cold-start design |
+| [superpowers/plans/2026-08-06-neon-genie-founder-cold-start.md](./superpowers/plans/2026-08-06-neon-genie-founder-cold-start.md) | Founder cold-start implementation plan (3.25.0) |
 
-Assets: [assets/](./assets/).
+Assets: [assets/](./assets/) · Live site: https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/

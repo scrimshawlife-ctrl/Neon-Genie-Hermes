@@ -14,7 +14,9 @@
 
 **Turn weak signals and blocked transitions into evidence-bound, testable product and opportunity packets — without inventing facts or granting spend/execute rights.**
 
-[How to use](#how-to-use) · [Install](#installation) · [Commands](#command-cheat-sheet) · [Privacy](#privacy--data-handling) · [Demo](./docs/DEMO.md) · [Premiere](./docs/PREMIERE.md) · [Contributing](./CONTRIBUTING.md)
+Especially for **transitional builders**: solo / limited-resource ideas that need a roadmap, approaches, or both — fail-closed when proof or private facts are missing.
+
+[Site](https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/) · [How to use](#how-to-use) · [Install](#installation) · [Commands](#command-cheat-sheet) · [Privacy](#privacy--data-handling) · [Demo](./docs/DEMO.md) · [Premiere](./docs/PREMIERE.md) · [Contributing](./CONTRIBUTING.md)
 
 </div>
 
@@ -25,8 +27,9 @@
 Neon Genie is a **Hermes skill** (this repo root is the skill). It helps you:
 
 - audit product coherence and draft Wayfinder-ready handoffs  
-- mine opportunities and zero-capital first-cash loops  
-- map fragmentation, commercial models, agentic graphs, evidence gaps  
+- mine opportunities and zero-capital / limited-resource first-cash loops  
+- shape **roadmaps and approaches** for solo or transitional builders (plain-language routing)  
+- map fragmentation, commercial models, agentic graphs, capital sprints, evidence gaps  
 - **fail closed** when proof, buyer, or access is missing  
 
 It is **not** Kubrick (cinematic), **not** Wayfinder (engineering execution), and **not** a free-form idea generator.
@@ -100,17 +103,26 @@ This is the normal path.
 
 1. **Start Hermes** (desktop or CLI) with Neon Genie installed.
 2. **Ask for Neon Genie** by name, or describe a product/opportunity problem so the skill loads  
-   (triggers include: product audit, opportunity mining, zero option, wayfinder handoff).
+   (triggers include: product audit, opportunity mining, zero option / limited money, roadmap, capital sprint, wayfinder handoff).
 3. **Say what you need in ordinary language.** Include:
    - Who is stuck (person, team, customer)
    - What “done” looks like
    - What you already know (links, notes, constraints)
    - What you do **not** want (e.g. do not invent a buyer; do not change the repo)
 4. **Let Hermes work through the steps.** Neon Genie always runs in order:  
-   understand request → gather evidence → build the answer → check gates → seal outputs.
+   understand request → gather evidence → build the answer → check gates → seal outputs  
+   (`OPEN → ALIGN → ASCEND → CLEAR → SEAL`).
 5. **Treat everything as a draft.** Neon Genie can recommend. It cannot spend money, publish, email people, or change git history.
 
 **Example things to say**
+
+```text
+Use Neon Genie. I'm between jobs with limited money and an app idea.
+I need a realistic roadmap and first approaches I can actually run.
+Do not invent buyers, capital, or skills I did not declare.
+Research public facts if you can; request private facts with DataRequest.
+Label every important claim. Advisory only — do not modify any repo.
+```
 
 ```text
 Use Neon Genie. We have an audio continuity tool but no defined buyer.
@@ -165,10 +177,13 @@ From a clone, `cd` into the repo first. From a Hub install, use the full path un
 | Privacy boundary report | `do privacy --json` |
 | Run a named sample end-to-end | `do run --recipe product-audit --out out/neon-genie/demo` |
 | Run from a short YAML brief | `do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo` |
+| Capital-sprint sample | `do run --brief examples/capital-sprint.brief.yaml --out out/neon-genie/sprint` |
 | See what the skill can do (JSON) | `do capabilities --json` |
 | List sample recipes | `do recipe --list` |
 | Suggest profiles from text | `do route --text "first cash zero capital" --json` |
+| Founder-language route check | `do route --text "roadmap for my app idea, limited money" --json` |
 | Check a packet or envelope file | `do validate --packet path/to/file.json --type envelope` |
+| Validate a capital-sprint sample | `do validate --packet examples/packets/sample-capital-sprint.packet.json --type capital-sprint` |
 | Record a real outcome later | `do learn --class proof_obtained --summary "…" --envelope out/…/run-envelope.json` |
 
 ```bash
@@ -286,7 +301,9 @@ python scripts/neon_genie.py do doctor
 - Research uses tools Hermes already has (search, fetch, etc.) when available.  
 - For offline-only work, say `research.enabled=false`.  
 - Sibling skill: [Kubrick](https://github.com/scrimshawlife-ctrl/Kubrick) for cinematic work — not required here.  
-- Catalog / tap docs: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md) · [docs/CATALOG.md](./docs/CATALOG.md)
+- Landing site: [scrimshawlife-ctrl.github.io/Neon-Genie-Hermes](https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/)  
+- Catalog / tap docs: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md) · [docs/CATALOG.md](./docs/CATALOG.md)  
+- Official optional (after merge): `hermes skills install official/productivity/neon-genie` — [PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028)
 
 ---
 
@@ -302,6 +319,7 @@ python scripts/neon_genie.py do privacy --json
 # Sample end-to-end runs (write files under out/; default privacy_mode local_only)
 python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/run1
 python scripts/neon_genie.py do run --brief examples/zero-option.brief.yaml --out out/neon-genie/zero
+python scripts/neon_genie.py do run --brief examples/capital-sprint.brief.yaml --out out/neon-genie/sprint
 # Open run-envelope.json in that folder first — then run-receipt.json privacy fields
 
 # What can this skill do? (for agents / orchestrators)
@@ -309,9 +327,11 @@ python scripts/neon_genie.py do capabilities --json
 
 # Suggest profiles from free text (always includes core + privacy)
 python scripts/neon_genie.py do route --text "first cash zero capital" --json
+python scripts/neon_genie.py do route --text "between jobs, limited money, roadmap for my app idea" --json
 
-# Check a finished envelope
+# Check a finished envelope or sample capital-sprint packet
 python scripts/neon_genie.py do validate --packet out/neon-genie/run1/run-envelope.json --type envelope
+python scripts/neon_genie.py do validate --packet examples/packets/sample-capital-sprint.packet.json --type capital-sprint
 
 # Quality gates (CI-style)
 python scripts/neon_genie.py do check
@@ -391,9 +411,12 @@ Neon-Genie-Hermes/          ← skill root (also full install tree)
 
 | Doc | Purpose |
 |-----|---------|
+| [Site (GitHub Pages)](https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/) | Install-first landing for transitional builders |
 | [QUICKSTART.md](./QUICKSTART.md) | Short install + prompts |
 | [docs/DEMO.md](./docs/DEMO.md) | 10-minute path |
 | [docs/PREMIERE.md](./docs/PREMIERE.md) | Why this skill vs idea agents |
+| [docs/CATALOG.md](./docs/CATALOG.md) | Hub / official catalog status |
+| [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md) | Tap, hub package, release |
 | [docs/ROADMAP.md](./docs/ROADMAP.md) | History + maintenance |
 | [docs/adr/](./docs/adr/) | Architecture decisions |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Dev + release process |

@@ -231,9 +231,16 @@ git tag vX.Y.Z && git push origin vX.Y.Z
 # → Release workflow: smoke + neon-genie-X.Y.Z.tar.gz + sha256 + notes
 ```
 
-Current tagged privacy release: **v3.24.0**.
+Current tagged release: **v3.25.0** (privacy spine from **v3.24.0** + founder cold-start).
 
 See [CONTRIBUTING.md](../CONTRIBUTING.md) and [docs/GOVERNANCE.md](./GOVERNANCE.md).
+
+---
+
+## Landing site
+
+GitHub Pages (from `docs/` on `main`):  
+https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/
 
 ---
 
@@ -241,4 +248,10 @@ See [CONTRIBUTING.md](../CONTRIBUTING.md) and [docs/GOVERNANCE.md](./GOVERNANCE.
 
 ```bash
 hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+```
+
+Official optional (after [PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028) merges):
+
+```bash
+hermes skills install official/productivity/neon-genie
 ```

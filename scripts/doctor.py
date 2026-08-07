@@ -116,6 +116,19 @@ def main() -> int:
         if code != 0:
             return code
 
+    # Founder-routing regression (packaging CLI) — keep cold-start triggers honest
+    route_test = SCRIPT_DIR / "test_route_profiles.py"
+    if route_test.is_file():
+        print("==> founder profile routing")
+        r = subprocess.run([PY, str(route_test)], cwd=SKILL_ROOT)
+        if r.returncode != 0:
+            print("FAIL: founder profile routing", file=sys.stderr)
+            return r.returncode
+        print("OK: founder profile routing")
+    else:
+        print("==> founder profile routing")
+        print("SKIP: test_route_profiles.py not present")
+
     print("")
     print("PASS: neon-genie doctor (all smokes green)")
     print("  authority remains advisory_only; no execution granted")

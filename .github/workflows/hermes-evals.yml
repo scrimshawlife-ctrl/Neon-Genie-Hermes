@@ -90,6 +90,7 @@ jobs:
       - name: Operator surface (run + capabilities)
         run: |
           python scripts/test_operator_surface.py
+          python scripts/test_route_profiles.py
           python scripts/neon_genie.py do capabilities --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['authority']=='advisory_only'"
 
       - name: Learning ledger reconcile

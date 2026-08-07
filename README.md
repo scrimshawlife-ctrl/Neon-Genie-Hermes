@@ -190,6 +190,18 @@ python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/
 
 Full command list: [Command cheat sheet](#command-cheat-sheet) · 10-minute walkthrough: [docs/DEMO.md](./docs/DEMO.md)
 
+### What packaging checks prove (and what they do not)
+
+| Proved by `do doctor` / `do eval` / dist spine | Still requires Hermes judgment |
+|-----------------------------------------------|--------------------------------|
+| Install integrity, hub package parity | Live research quality |
+| Schema and receipt/envelope shape | Claim labeling in free chat |
+| Fixture gates (P–R, privacy packaging, authority stubs) | Multi-turn honesty under pressure |
+| Recipe packaging stubs | Outcome usefulness in the real world |
+
+Green CI means the **shell** is sound. It does **not** mean every chat run is fully evaluated.
+Live multi-turn Hermes evals remain a later roadmap item.
+
 ---
 
 ### 4. Rules of the road (so you are not surprised)

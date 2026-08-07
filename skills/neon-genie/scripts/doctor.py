@@ -82,6 +82,10 @@ def main() -> int:
             ["do", "recipe", "--name", "opportunity", "--out", "out/neon-genie/doctor-opportunity"],
         ),
         (
+            "recipe smoke: capital-sprint",
+            ["do", "recipe", "--name", "capital-sprint", "--out", "out/neon-genie/doctor-capital-sprint"],
+        ),
+        (
             "sample opportunity validate",
             [
                 "do",

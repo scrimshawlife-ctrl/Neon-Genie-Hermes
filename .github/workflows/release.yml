@@ -94,7 +94,7 @@ jobs:
           print(body)
           print("\n### Install\n")
           print("```bash")
-          print("hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie")
+          print("hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie")
           print("```")
           print("\n### Package\n")
           print(f"Attached: `neon-genie-{version}.tar.gz` + sha256.")

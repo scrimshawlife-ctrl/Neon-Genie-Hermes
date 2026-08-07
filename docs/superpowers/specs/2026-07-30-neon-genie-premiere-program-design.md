@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-30  
 **Status:** Approved for implementation planning (Wave P0 first)  
-**Repo:** [Neon-Genie-Hermes](https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes)  
+**Repo:** [NeonGenie](https://github.com/scrimshawlife-ctrl/NeonGenie)  
 **Baseline skill version:** 3.7.0  
 **Approach:** Evidence spine + quality corpus  
 

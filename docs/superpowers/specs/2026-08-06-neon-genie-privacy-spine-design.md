@@ -1,11 +1,11 @@
 # Neon Genie Privacy-by-Construction Spine — Design Spec
 
 **Date:** 2026-08-06  
-**Status:** Shipped as **3.24.0** (`v3.24.0`); integrated with privacy runtime [#17](https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/pull/17)  
-**Repo:** [Neon-Genie-Hermes](https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes)  
+**Status:** Shipped as **3.24.0** (`v3.24.0`); integrated with privacy runtime [#17](https://github.com/scrimshawlife-ctrl/NeonGenie/pull/17)  
+**Repo:** [NeonGenie](https://github.com/scrimshawlife-ctrl/NeonGenie)  
 **Baseline skill version:** 3.23.0  
 **Target skill version:** 3.24.0  
-**Implements:** [issue #15](https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/issues/15) P0–P2 (+ runtime from #17)  
+**Implements:** [issue #15](https://github.com/scrimshawlife-ctrl/NeonGenie/issues/15) P0–P2 (+ runtime from #17)  
 **Approach:** Doctrine + deterministic packaging spine (not a Python research proxy)
 
 **Ship note:** Packaging uses `scripts/privacy_runtime.py` with receipt/envelope

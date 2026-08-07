@@ -5,7 +5,7 @@
 ### Product & opportunity intelligence for Hermes
 
 [![Version](https://img.shields.io/badge/version-3.25.0-7c3aed?style=for-the-badge)](./manifest.json)
-[![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/Neon-Genie-Hermes/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
+[![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/NeonGenie/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#what-it-will-not-do)
 [![Privacy](https://img.shields.io/badge/privacy-by%20construction-a855f7?style=for-the-badge)](./PRIVACY.md)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=for-the-badge)](./LICENSE)
@@ -16,7 +16,7 @@
 
 Neon Genie is a Hermes skill for people turning ideas into roadmaps and approaches under real constraints (solo, between jobs, limited money). It labels what is known vs guessed, asks for missing private facts, and **refuses to invent** what it cannot know.
 
-[Website](https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/) · [Install](#install) · [Use it](#use-it-in-hermes) · [Privacy](./PRIVACY.md) · [Demo](./docs/DEMO.md)
+[Website](https://scrimshawlife-ctrl.github.io/NeonGenie/) · [Install](#install) · [Use it](#use-it-in-hermes) · [Privacy](./PRIVACY.md) · [Demo](./docs/DEMO.md)
 
 </div>
 
@@ -37,7 +37,7 @@ Neon Genie is a Hermes skill for people turning ideas into roadmaps and approach
 ## Install
 
 ```bash
-hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 Then reload or restart Hermes.
@@ -45,8 +45,8 @@ Then reload or restart Hermes.
 **Or clone this repo:**
 
 ```bash
-git clone https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes.git
-cd Neon-Genie-Hermes
+git clone https://github.com/scrimshawlife-ctrl/NeonGenie.git
+cd NeonGenie
 ./install.sh
 python scripts/neon_genie.py do doctor
 ```
@@ -177,7 +177,7 @@ python scripts/neon_genie.py do run --recipe commercial --out out/neon-genie/aud
 
 | Link | What it is |
 |------|------------|
-| [Website](https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/) | Short landing page |
+| [Website](https://scrimshawlife-ctrl.github.io/NeonGenie/) | Short landing page |
 | [QUICKSTART.md](./QUICKSTART.md) | Install + prompts |
 | [docs/DEMO.md](./docs/DEMO.md) | 10-minute walkthrough |
 | [docs/PREMIERE.md](./docs/PREMIERE.md) | Why this vs free-form idea chat |

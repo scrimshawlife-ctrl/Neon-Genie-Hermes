@@ -33,4 +33,4 @@
 | [superpowers/specs/2026-08-06-neon-genie-skill-audit-design.md](./superpowers/specs/2026-08-06-neon-genie-skill-audit-design.md) | Skill 360 audit + founder cold-start design |
 | [superpowers/plans/2026-08-06-neon-genie-founder-cold-start.md](./superpowers/plans/2026-08-06-neon-genie-founder-cold-start.md) | Founder cold-start implementation plan (3.25.0) |
 
-Assets: [assets/](./assets/) · Live site: https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/
+Assets: [assets/](./assets/) · Live site: https://scrimshawlife-ctrl.github.io/NeonGenie/

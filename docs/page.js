@@ -3,7 +3,7 @@
   "use strict";
 
   const INSTALL =
-    "hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie";
+    "hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie";
 
   /* —— Reveal —— */
   const revealEls = document.querySelectorAll(".reveal");

@@ -14,8 +14,8 @@ See also: [README — How to use](../README.md#how-to-use) · [PREMIERE.md](./PR
 ## Minute 0–2: Install
 
 ```bash
-git clone https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes.git
-cd Neon-Genie-Hermes
+git clone https://github.com/scrimshawlife-ctrl/NeonGenie.git
+cd NeonGenie
 ./install.sh
 # → ~/.hermes/skills/neon-genie
 

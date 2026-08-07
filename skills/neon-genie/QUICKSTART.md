@@ -2,7 +2,7 @@
 
 **Advice only.** Helps turn ideas into roadmaps and approaches without inventing buyers, capital, or proof.
 
-**Site:** https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/  
+**Site:** https://scrimshawlife-ctrl.github.io/NeonGenie/  
 **Full README:** [README.md](./README.md) · **Privacy:** [PRIVACY.md](./PRIVACY.md) · **Version:** [VERSION](./VERSION)
 
 ---
@@ -10,7 +10,7 @@
 ## Install
 
 ```bash
-hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 Reload Hermes. Or clone and run `./install.sh`, then:

@@ -923,7 +923,7 @@ git commit -m "feat: always co-load privacy profile in router"
 10. Secret/PII preflight scope  
 11. Gates S–Y pointer  
 12. What we cannot guarantee  
-13. Contact / issues path (`https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/issues`)
+13. Contact / issues path (`https://github.com/scrimshawlife-ctrl/NeonGenie/issues`)
 
 Include mermaid or ASCII diagram from design §3.2.
 

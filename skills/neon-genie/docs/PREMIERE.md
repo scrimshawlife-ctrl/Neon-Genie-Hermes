@@ -67,9 +67,9 @@ With:
 
 | Layer | Command / path |
 |-------|----------------|
-| Install (community) | `hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie` |
+| Install (community) | `hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie` |
 | Install (clone) | `./install.sh` → `~/.hermes/skills/neon-genie` |
-| Site | https://scrimshawlife-ctrl.github.io/Neon-Genie-Hermes/ |
+| Site | https://scrimshawlife-ctrl.github.io/NeonGenie/ |
 | Integrity | `python scripts/neon_genie.py do check` |
 | Privacy | `python scripts/neon_genie.py do privacy --json` |
 | Gate evals | `python scripts/neon_genie.py do eval` |

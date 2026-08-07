@@ -7,6 +7,12 @@ and this project uses semantic versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Public install/docs paths updated for repo rename **NeonGenie**
+  (`scrimshawlife-ctrl/NeonGenie`, Pages `…/NeonGenie/`)
+
+
 ### Added
 
 - Schema-valid `examples/packets/sample-capital-sprint.packet.json`

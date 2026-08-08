@@ -55,6 +55,7 @@ CLI_JOBS = [
     "doctor",
     "privacy",
     "check",
+    "wizard",
     "run",
     "recipe",
     "route",

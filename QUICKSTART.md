@@ -71,7 +71,13 @@ Only use what I paste and what is already in this workspace.
 Most people stop after Hermes chat. From a clone:
 
 ```bash
-# Healthy install?
+# Healthy install + sample package (recommended first run)
+python scripts/neon_genie.py do wizard --path quick --auto
+
+# Or: plan only (no disk writes) for a named recipe
+python scripts/neon_genie.py do wizard --preset product-audit --print-only --json
+
+# Healthy install only?
 python scripts/neon_genie.py do doctor
 
 # One sample package on disk (open run-envelope.json after)
@@ -84,6 +90,8 @@ More samples:
 python scripts/neon_genie.py do run --brief examples/zero-option.brief.yaml --out out/neon-genie/zero
 python scripts/neon_genie.py do run --brief examples/capital-sprint.brief.yaml --out out/neon-genie/sprint
 ```
+
+Guided packaging reference: [references/wizard.md](./references/wizard.md).
 
 Maintainer / CI commands: see [CHANGELOG.md](./CHANGELOG.md) and [CONTRIBUTING.md](./CONTRIBUTING.md).
 

@@ -4,7 +4,7 @@
 
 ### Product & opportunity intelligence for Hermes
 
-[![Version](https://img.shields.io/badge/version-3.25.0-7c3aed?style=for-the-badge)](./manifest.json)
+[![Version](https://img.shields.io/badge/version-3.26.0-7c3aed?style=for-the-badge)](./manifest.json)
 [![Hermes Skill Evals](https://img.shields.io/github/actions/workflow/status/scrimshawlife-ctrl/NeonGenie/hermes-evals.yml?branch=main&label=hermes-evals&style=for-the-badge)](./.github/workflows/hermes-evals.yml)
 [![Authority](https://img.shields.io/badge/authority-advisory%20only-0ea5e9?style=for-the-badge)](#what-it-will-not-do)
 [![Privacy](https://img.shields.io/badge/privacy-by%20construction-a855f7?style=for-the-badge)](./PRIVACY.md)
@@ -48,10 +48,11 @@ Then reload or restart Hermes.
 git clone https://github.com/scrimshawlife-ctrl/NeonGenie.git
 cd NeonGenie
 ./install.sh
-python scripts/neon_genie.py do doctor
+python scripts/neon_genie.py do wizard --path quick --auto
+# or: python scripts/neon_genie.py do doctor
 ```
 
-You want a final line that says the doctor passed.
+You want doctor smoke to pass and a sample package under `out/neon-genie/wizard-quick/`.
 
 More detail: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md)
 

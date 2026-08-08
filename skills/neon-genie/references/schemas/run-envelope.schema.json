@@ -171,7 +171,7 @@
       "properties": {
         "ingest": { "type": "string", "const": "run-envelope.json" },
         "product_intent_changes_require_neon_genie_review": { "type": "boolean" },
-        "handoff_path": { "type": "string" }
+        "handoff_path": { "type": ["string", "null"] }
       }
     },
     "selected_profiles": {

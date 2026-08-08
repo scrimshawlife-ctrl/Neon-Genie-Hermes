@@ -32,6 +32,7 @@ def copy_skill_tree() -> Path:
         "SKILL.md",
         "VERSION",
         "manifest.json",
+        "PRIVACY.md",  # mirrored → references/PRIVACY.md (privacy spine)
         "schemas",
         "profiles",
         "evals",

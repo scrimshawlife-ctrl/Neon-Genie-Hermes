@@ -9,11 +9,53 @@ and this project uses semantic versioning.
 
 ### Changed
 
-- Docs refresh: README, QUICKSTART, DEMO, ROADMAP aligned to operator surface,
-  run-envelope, feedback loop, release automation, and production maturity (3.18–3.23)
-- `distribution_spine` package parity skips standalone leaf installs (Hub /
-  optional-skills) so `do doctor` is green outside the monorepo
-- Catalog submission notes (`docs/CATALOG.md`); official optional PR filed
+- Public install/docs paths updated for repo rename **NeonGenie**
+  (`scrimshawlife-ctrl/NeonGenie`, Pages `…/NeonGenie/`)
+
+
+### Added
+
+- Schema-valid `examples/packets/sample-capital-sprint.packet.json`
+- `CapitalSprintPacket` in SKILL output selection; `validate` / `capabilities` types
+
+### Changed
+
+- `do run --brief` auto-recipe prefers `capital-sprint` over commercial when both match
+- Hub package no longer ships Pages assets, hallmark, or monorepo ADR/checklist bulk
+- Public docs/README aligned to **3.25.0** (site link, founder prompts, capital-sprint CLI)
+
+## [3.25.0] — 2026-08-06
+
+### Added
+
+- **Founder cold-start** — language that maps solo/roadmap/limited-resource intent into
+  opportunity + zero-option profile routes without VC false positives
+- **`capital_sprint`** router triggers + packaging recipe for capital-constrained sprints
+- Default transitional-builder job shape in SKILL.md (plain operator example)
+- GitHub Pages landing under `docs/` (install-first for transitional builders)
+
+### Changed
+
+- Hub support file list moved below operating doctrine in SKILL.md
+- Docs: packaging checks vs Hermes judgment (honesty boundary)
+
+## [3.24.0] — 2026-08-06
+
+### Added
+
+- **Privacy-by-construction spine + runtime** (issue #15 + #17)
+  - `PRIVACY.md` + `references/PRIVACY.md`, ADR 0006, gates S–Y doctrine
+  - Always-on `privacy` profile; egress rune doctrine
+  - Runtime engine `scripts/privacy_runtime.py` (contract 1.0.0): fail-closed
+    `local_only` defaults, purpose-bound consents, `REDACT_THEN_ALLOW` safe queries
+  - Receipt/envelope privacy provenance; packaging validation NG-PRIV-*
+  - Deterministic preflight helpers; `do privacy --json` diagnostics
+  - Behavioral privacy cases + golden evals; sample privacy-context packets
+
+### Changed
+
+- Profile router always co-loads `privacy` with `core`
+- Brief/recipe `privacy:` config flows into receipt, envelope, and learning ledger
 
 ## [3.23.0] — 2026-07-30
 

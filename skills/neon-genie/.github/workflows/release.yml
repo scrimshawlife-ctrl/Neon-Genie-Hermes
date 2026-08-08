@@ -48,6 +48,7 @@ jobs:
           python scripts/neon_genie.py do dist verify
           python scripts/test_run_envelope.py
           python scripts/test_operator_surface.py
+          python scripts/test_route_profiles.py
           python scripts/test_learning_reconcile.py
           python scripts/test_distribution_spine.py
           python scripts/neon_genie.py do eval
@@ -93,7 +94,7 @@ jobs:
           print(body)
           print("\n### Install\n")
           print("```bash")
-          print("hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie")
+          print("hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie")
           print("```")
           print("\n### Package\n")
           print(f"Attached: `neon-genie-{version}.tar.gz` + sha256.")

@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-30  
 **Status:** Approved for implementation planning  
-**Repo:** [Neon-Genie-Hermes](https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes)  
+**Repo:** [NeonGenie](https://github.com/scrimshawlife-ctrl/NeonGenie)  
 **Reference architecture (patterns only):** [Kubrick](https://github.com/scrimshawlife-ctrl/Kubrick)  
 **Skill version target:** 3.2.0  
 

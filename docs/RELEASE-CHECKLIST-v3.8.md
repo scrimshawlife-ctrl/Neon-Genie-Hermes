@@ -5,7 +5,7 @@
 | Item | Status |
 |------|--------|
 | Wave P0 Evidence Request Protocol | Shipped **v3.8.0** |
-| GitHub Release | https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes/releases/tag/v3.8.0 |
+| GitHub Release | https://github.com/scrimshawlife-ctrl/NeonGenie/releases/tag/v3.8.0 |
 
 ## Required gates
 

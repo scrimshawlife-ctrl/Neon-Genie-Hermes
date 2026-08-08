@@ -67,6 +67,24 @@ def test_run_brief_auto_recipe() -> None:
         shutil.rmtree(tmp, ignore_errors=True)
 
 
+def test_run_capital_sprint_brief_auto_recipe() -> None:
+    """capital_sprint preferred_profiles must not lose to commercial in hints."""
+    tmp = Path(tempfile.mkdtemp(prefix="ng-run-capital-"))
+    out = tmp / "capital-run"
+    try:
+        brief = ROOT / "examples" / "capital-sprint.brief.yaml"
+        r = run_cli("do", "run", "--brief", str(brief), "--out", str(out))
+        assert r.returncode == 0, r.stderr + r.stdout
+        assert (out / "run-envelope.json").is_file()
+        summary = out / "recipe-summary.json"
+        assert summary.is_file(), "auto recipe should emit recipe-summary.json"
+        data = json.loads(summary.read_text(encoding="utf-8"))
+        assert data.get("recipe") == "capital-sprint", data
+        print("PASS: do run --brief capital-sprint (auto recipe)")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 def test_run_text_scaffold() -> None:
     tmp = Path(tempfile.mkdtemp(prefix="ng-run-text-"))
     out = tmp / "text-run"
@@ -95,6 +113,7 @@ def main() -> int:
         test_capabilities_json,
         test_run_recipe,
         test_run_brief_auto_recipe,
+        test_run_capital_sprint_brief_auto_recipe,
         test_run_text_scaffold,
     ):
         try:

@@ -35,6 +35,14 @@ def test_recipe_emits_envelope() -> None:
         env = json.loads(env_path.read_text(encoding="utf-8"))
         assert env["schema_id"] == "neon-genie/run-envelope"
         assert env["schema_version"] == "1.0.0"
+        # privacy_runtime (#17): nested privacy-context object
+        assert isinstance(env.get("privacy"), dict) or env.get("privacy_mode") in {
+            "local_only",
+            "LOCAL_ONLY",
+        }
+        if isinstance(env.get("privacy"), dict):
+            tel = env["privacy"].get("telemetry") or env["privacy"].get("telemetry_status")
+            assert tel in (None, "disabled")
         assert env["authority"] == "advisory_only"
         assert env["grants_execution"] is False
         assert env["run_id"].startswith("ng_run_")

@@ -17,7 +17,7 @@ Official guidance ([Hermes CONTRIBUTING](https://github.com/NousResearch/hermes-
 This repo is already public. Tap layout:
 
 ```text
-scrimshawlife-ctrl/Neon-Genie-Hermes
+scrimshawlife-ctrl/NeonGenie
 ├── skills/
 │   └── neon-genie/          # install slug
 │       ├── SKILL.md
@@ -32,13 +32,13 @@ scrimshawlife-ctrl/Neon-Genie-Hermes
 
 ```bash
 # Subscribe to the tap (once)
-hermes skills tap add scrimshawlife-ctrl/Neon-Genie-Hermes
+hermes skills tap add scrimshawlife-ctrl/NeonGenie
 
 # Install the skill (security scan runs)
-hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 
 # Or install one skill without adding the whole tap
-hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 Also works:
@@ -73,8 +73,8 @@ Diagnostics use `NG-PKG-*` codes (see spine stderr).
 
 | Method | Command / action |
 |--------|------------------|
-| **Direct GitHub path** | `hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie` |
-| **Direct SKILL.md URL** | `hermes skills install https://raw.githubusercontent.com/scrimshawlife-ctrl/Neon-Genie-Hermes/main/skills/neon-genie/SKILL.md` (support files follow references) |
+| **Direct GitHub path** | `hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie` |
+| **Direct SKILL.md URL** | `hermes skills install https://raw.githubusercontent.com/scrimshawlife-ctrl/NeonGenie/main/skills/neon-genie/SKILL.md` (support files follow references) |
 | **skills.sh** | Optional: list on [skills.sh](https://skills.sh/) if you want Vercel directory discovery |
 | **ClawHub** | `hermes skills publish skills/neon-genie --to clawhub` (when ready for that marketplace) |
 | **Discord** | Share in [Nous Research Discord](https://discord.gg/NousResearch) Skills channel for community install |
@@ -82,7 +82,7 @@ Diagnostics use `NG-PKG-*` codes (see spine stderr).
 Inspect before install:
 
 ```bash
-hermes skills inspect scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills inspect scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 ---
@@ -120,7 +120,7 @@ Full submission notes: [docs/CATALOG.md](./CATALOG.md).
 - [x] `do doctor` / `do check` pass  
 - [x] `hermes skills inspect` — listed (skills.sh / community)  
 - [x] `hermes skills install …` — security scan SAFE, installs as community  
-- [x] Tap registered: `hermes skills tap add scrimshawlife-ctrl/Neon-Genie-Hermes`  
+- [x] Tap registered: `hermes skills tap add scrimshawlife-ctrl/NeonGenie`  
 - [x] `distribution.yaml` + spine verify (Hub mirrors / package parity)  
 - [x] Behavioral suite + hub-layout runtime smoke  
 - [x] Run envelope on every packaging recipe  
@@ -210,6 +210,19 @@ Ledger entries are always **PROPOSED** with `auto_apply_forbidden: true`.
 GitHub intake: issue templates under `.github/ISSUE_TEMPLATE/` (operator outcome, behavior, hub, schema).  
 ADRs: `docs/adr/`.
 
+### Privacy (v3.24+)
+
+Hub installs include the privacy contract and runtime surface via `distribution.yaml`
+mirrors (`references/PRIVACY.md`, `privacy-context` schema, `privacy_runtime` /
+`privacy_diagnostics` scripts). Operators:
+
+```bash
+python scripts/neon_genie.py do privacy --json
+python scripts/neon_genie.py do doctor   # runs privacy diagnostics
+```
+
+See [PRIVACY.md](../PRIVACY.md) and [references/privacy-contract.md](../references/privacy-contract.md).
+
 ### Release automation (v3.23+)
 
 ```bash
@@ -218,11 +231,27 @@ git tag vX.Y.Z && git push origin vX.Y.Z
 # → Release workflow: smoke + neon-genie-X.Y.Z.tar.gz + sha256 + notes
 ```
 
+Current tagged release: **v3.25.0** (privacy spine from **v3.24.0** + founder cold-start).
+
 See [CONTRIBUTING.md](../CONTRIBUTING.md) and [docs/GOVERNANCE.md](./GOVERNANCE.md).
+
+---
+
+## Landing site
+
+GitHub Pages (from `docs/` on `main`):  
+https://scrimshawlife-ctrl.github.io/NeonGenie/
+
 ---
 
 ## One-liner for users
 
 ```bash
-hermes skills install scrimshawlife-ctrl/Neon-Genie-Hermes/skills/neon-genie
+hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
+```
+
+Official optional (after [PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028) merges):
+
+```bash
+hermes skills install official/productivity/neon-genie
 ```

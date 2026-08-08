@@ -2,6 +2,8 @@
 
 From zero to a governed packet path. **Advisory only.**
 
+Packaging examples are `local_only`; receipts declare external actions explicitly and host/provider retention remains `NOT_COMPUTABLE`.
+
 See also: [README — How to use](../README.md#how-to-use) · [PREMIERE.md](./PREMIERE.md)
 
 ## Prerequisites
@@ -12,8 +14,8 @@ See also: [README — How to use](../README.md#how-to-use) · [PREMIERE.md](./PR
 ## Minute 0–2: Install
 
 ```bash
-git clone https://github.com/scrimshawlife-ctrl/Neon-Genie-Hermes.git
-cd Neon-Genie-Hermes
+git clone https://github.com/scrimshawlife-ctrl/NeonGenie.git
+cd NeonGenie
 ./install.sh
 # → ~/.hermes/skills/neon-genie
 
@@ -21,6 +23,11 @@ python scripts/neon_genie.py do doctor
 ```
 
 Expected: full smoke `PASS` at current VERSION.
+
+**Privacy notice:** Packaging runs default to `privacy_mode: local_only` (no Neon-initiated external research; telemetry off; artifacts under your `--out` path).
+Hermes chat may research unless you set `research.enabled=false` / offline / keep `local_only`.
+Neon records egress on the run receipt; it does not rewrite host or model-provider retention.
+See [PRIVACY.md](../PRIVACY.md). Run `python scripts/neon_genie.py do privacy --json` for the resolved boundary.
 
 ## Minute 2–4: Operator run (preferred path)
 
@@ -34,11 +41,11 @@ You should see:
 | File | Role |
 |------|------|
 | **`run-envelope.json`** | **Open this first** — canonical entry point |
-| `profile-route.json` | Smallest profile set |
+| `profile-route.json` | Smallest profile set (`core` + `privacy` always) |
 | `product-packet.stub.json` | Boundary + `completion_proof` / `proof_path` |
 | `data-requests.json` | Private access request |
-| `wayfinder-handoff.stub.json` | Intent freeze flag |
-| `run-receipt.json` | Advisory receipt |
+| `wayfinder-handoff.stub.json` | Intent freeze flag (Wayfinder consumer optional) |
+| `run-receipt.json` | Advisory receipt + privacy provenance / `external_actions` |
 | `HERMES_NEXT.md` | Judgment stays in Hermes + SKILL.md |
 
 ```bash

@@ -35,6 +35,9 @@ mirrors:
   - kind: file
     source: VERSION
     destination: references/VERSION
+  - kind: file
+    source: PRIVACY.md
+    destination: references/PRIVACY.md
 
 hub_package:
   root: skills/neon-genie
@@ -44,7 +47,9 @@ hub_package:
     - out
     - skills
     - .superpowers
+    - .hallmark
     - __pycache__
+    - docs
     - docs/superpowers
     - docs/assets
     - "*.pyc"
@@ -56,6 +61,8 @@ hub_package:
 hub_support_globs:
   - scripts/paths.py
   - scripts/neon_genie.py
+  - scripts/privacy_runtime.py
+  - scripts/privacy_diagnostics.py
   - scripts/doctor.py
   - scripts/validate_hermes_skill.py
   - scripts/validate_packet.py
@@ -81,15 +88,19 @@ hub_support_globs:
   - scripts/reconcile_learning.py
   - scripts/test_learning_reconcile.py
   - scripts/release_check.py
+  - scripts/privacy_preflight.py
+  - scripts/privacy_report.py
   - references/VERSION
   - references/gates.yaml
   - references/manifest.json
   - references/hermes-runtime-contract.md
+  - references/privacy-contract.md
   - references/CAPABILITY_MAP.md
   - references/GOLDEN_TESTS.md
   - references/anti-overclaim-patterns.md
   - references/post-seal-verification.md
   - references/schema-versioning.md
+  - references/PRIVACY.md
   - references/profiles/*.md
   - references/schemas/*.json
   - templates/request.yaml

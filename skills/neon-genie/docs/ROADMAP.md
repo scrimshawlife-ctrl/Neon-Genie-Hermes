@@ -84,6 +84,10 @@ Public entry points:
 | **3.21.0** | Operator surface: do run, do capabilities, worked example, tighter README |
 | **3.22.0** | Feedback loop: issue templates, learn↔run_id reconcile, ADRs |
 | **3.23.0** | Release automation, branch protection, gates.yaml registry, CONTRIBUTING |
+| **3.24.0** | Privacy-by-construction spine + runtime (issues #15 + #17); tagged `v3.24.0` |
+| **3.25.0** | Founder cold-start: founder-language routing, capital_sprint recipe, default transitional-builder job shape, hub list after doctrine, judgment honesty |
+
+Also on main around this line: **capital_sprint** profile/protocol and **external-signals** corpus (labeled references).
 
 ## Production maturity (3.18–3.23) — complete
 
@@ -96,13 +100,29 @@ Public entry points:
 | Feedback loop | Issue templates, learn↔run_id reconcile, ADRs |
 | Governance | Tag-driven Release workflow, branch protection, CONTRIBUTING |
 
-Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md)
+## Privacy spine (3.24.0) — shipped
+
+| Theme | Shipped |
+|-------|---------|
+| Human + hub contract | `PRIVACY.md`, `references/PRIVACY.md`, ADR 0006, `references/privacy-contract.md` |
+| Doctrine | Always-on `privacy` profile, gates S–Y, egress rune in research loop |
+| Runtime engine | `scripts/privacy_runtime.py` — `local_only` default, purpose-bound consents, `REDACT_THEN_ALLOW` |
+| Packaging surface | Receipt/envelope privacy provenance, `do privacy --json`, doctor diagnostics, NG-PRIV-* validation |
+| Helpers & tests | `privacy_preflight.py`, runtime/integration unit tests, 12 behavioral cases (incl. privacy) |
+| Hub parity | Distribution spine mirrors + package under `skills/neon-genie/` |
+
+**Program next (optional waves):** W2 Outcomes ∥ W3 Judgment in parallel, then W4 distribution/announce polish. Interfaces: privacy fields on receipt/envelope, `do privacy`, Wayfinder remains optional handoff only.
+
+Design/plan: [privacy spine design](./superpowers/specs/2026-08-06-neon-genie-privacy-spine-design.md) · [implementation plan](./superpowers/plans/2026-08-06-neon-genie-privacy-spine.md)
+
+Public entry: [README](../README.md) · [DEMO](./DEMO.md) · [PRIVACY](../PRIVACY.md) · [HERMES_DISTRIBUTION](./HERMES_DISTRIBUTION.md) · [GOVERNANCE](./GOVERNANCE.md)
 
 ### Optional later (not blocking)
 
 - Live multi-turn Hermes LLM evals (needs API keys / host tools in CI)
-- Official Nous `optional-skills/` PR (only if desired)
+- Official Nous `optional-skills/` merge ([PR #75028](https://github.com/NousResearch/hermes-agent/pull/75028) — leaf refreshed for 3.25.0 authoring standards)
 - Discord/social announce with install one-liner
+- Shorter community install path (repo rename / skills monorepo)
 - Profile capability-contract router (beyond keyword routing)
 - Required PR reviews when collaborators join
 

@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.23.0
+version: 3.25.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -65,6 +65,7 @@ python scripts/neon_genie.py do <job> [options]
 | Job | Use |
 |-----|-----|
 | `doctor` | Full smoke after install |
+| `privacy` | Resolved repository privacy boundary (`--json`) |
 | `check` | Skill integrity |
 | `run` | Operator packaging run (brief/recipe → envelope) |
 | `capabilities` | Machine-readable skill surface (JSON) |
@@ -82,139 +83,39 @@ python scripts/neon_genie.py do doctor
 python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
 ```
 
-See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`. Gate ontology: `references/gates.yaml`.
-
-### Hermes Hub support files
-
-
-Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files under allowlisted dirs (`references/`, `templates/`, `scripts/`, `assets/`, `examples/`). The list below is **generated** from `distribution.yaml` — run `python scripts/distribution_spine.py write` after adding packaging files:
-
-<!-- BEGIN HUB_SUPPORT_FILES (generated; do not edit) -->
-- `examples/README.md`
-- `examples/agentic.brief.yaml`
-- `examples/audit.brief.yaml`
-- `examples/commercial.brief.yaml`
-- `examples/evals/behavioral/README.md`
-- `examples/evals/behavioral/cases/memetic-weak-proof.json`
-- `examples/evals/behavioral/cases/private-buyer-datarequest.json`
-- `examples/evals/behavioral/cases/public-market-research.json`
-- `examples/evals/behavioral/cases/repo-mutation-advisory-only.json`
-- `examples/evals/behavioral/cases/wayfinder-change-control.json`
-- `examples/evals/behavioral/cases/zero-resources-not-computable.json`
-- `examples/evals/behavioral/transcripts/01-private-buyer-datarequest.md`
-- `examples/evals/behavioral/transcripts/02-public-market-research.md`
-- `examples/evals/behavioral/transcripts/03-zero-resources-not-computable.md`
-- `examples/evals/behavioral/transcripts/04-repo-mutation-advisory-only.md`
-- `examples/evals/behavioral/transcripts/05-memetic-weak-proof.md`
-- `examples/evals/behavioral/transcripts/06-wayfinder-change-control.md`
-- `examples/evals/cases/authority-leakage.json`
-- `examples/evals/cases/buyer-beneficiary-conflation.json`
-- `examples/evals/cases/completion-proof-present.json`
-- `examples/evals/cases/completion-proof-required.json`
-- `examples/evals/cases/fictional-resource.json`
-- `examples/evals/cases/memetic-cannot-promote.json`
-- `examples/evals/cases/offline-no-fabricated-observed.json`
-- `examples/evals/cases/private-gap-must-request.json`
-- `examples/evals/cases/private-gap-request-open.json`
-- `examples/evals/cases/private-gap-silent-invent.json`
-- `examples/evals/cases/public-gap-must-attempt-research.json`
-- `examples/evals/cases/public-gap-research-attempted.json`
-- `examples/evals/cases/scorecard-cannot-override-gate.json`
-- `examples/evals/cases/wayfinder-change-control.json`
-- `examples/evals/cases/x402-misfit.json`
-- `examples/evals/cases/zero-option.json`
-- `examples/evals/rubric.md`
-- `examples/evals/transcripts/01-zero-option-empty.md`
-- `examples/evals/transcripts/02-product-audit.md`
-- `examples/evals/transcripts/03-fragmentation.md`
-- `examples/evals/transcripts/04-commercial-missing-buyer.md`
-- `examples/evals/transcripts/05-offline-audit.md`
-- `examples/evals/transcripts/06-agentic-x402-misfit.md`
-- `examples/evals/transcripts/07-memetic-cannot-promote.md`
-- `examples/evals/transcripts/08-evidence-intelligence.md`
-- `examples/evals/transcripts/09-opportunity-mining.md`
-- `examples/evals/transcripts/README.md`
-- `examples/evals/transcripts/rubric.md`
-- `examples/evidence.brief.yaml`
-- `examples/fragmentation.brief.yaml`
-- `examples/memetic.brief.yaml`
-- `examples/opportunity.brief.yaml`
-- `examples/packets/sample-data-request.json`
-- `examples/packets/sample-opportunity.packet.json`
-- `examples/packets/sample-receipt-with-requests.json`
-- `examples/packets/sample-receipt.packet.json`
-- `examples/packets/sample-run-envelope.json`
-- `examples/product-audit.brief.yaml`
-- `examples/zero-option-with-skills.brief.yaml`
-- `examples/zero-option.brief.yaml`
-- `references/CAPABILITY_MAP.md`
-- `references/GOLDEN_TESTS.md`
-- `references/VERSION`
-- `references/anti-overclaim-patterns.md`
-- `references/gates.yaml`
-- `references/hermes-runtime-contract.md`
-- `references/manifest.json`
-- `references/post-seal-verification.md`
-- `references/profiles/agentic_services.md`
-- `references/profiles/audit_delivery.md`
-- `references/profiles/commercial.md`
-- `references/profiles/core.md`
-- `references/profiles/evidence_intelligence.md`
-- `references/profiles/fragmentation.md`
-- `references/profiles/memetic.md`
-- `references/profiles/opportunity_mining.md`
-- `references/profiles/product_architecture.md`
-- `references/profiles/wayfinder_handoff.md`
-- `references/profiles/zero_option.md`
-- `references/schema-versioning.md`
-- `references/schemas/agentic-service-graph.schema.json`
-- `references/schemas/audit-delivery-packet.schema.json`
-- `references/schemas/commercial-simulation.schema.json`
-- `references/schemas/data-request.schema.json`
-- `references/schemas/evidence-intelligence-packet.schema.json`
-- `references/schemas/fragmentation-packet.schema.json`
-- `references/schemas/learning-ledger-entry.schema.json`
-- `references/schemas/memetic-pressure-packet.schema.json`
-- `references/schemas/opportunity-packet.schema.json`
-- `references/schemas/product-packet.schema.json`
-- `references/schemas/run-envelope.schema.json`
-- `references/schemas/run-receipt.schema.json`
-- `references/schemas/wayfinder-execution-packet.schema.json`
-- `references/schemas/zero-option-packet.schema.json`
-- `scripts/audit_release_version.py`
-- `scripts/build_envelope.py`
-- `scripts/build_receipt.py`
-- `scripts/capabilities.py`
-- `scripts/check_behavioral_invariants.py`
-- `scripts/check_transcripts.py`
-- `scripts/distribution_spine.py`
-- `scripts/doctor.py`
-- `scripts/hermes_runtime_smoke.py`
-- `scripts/lineage.py`
-- `scripts/neon_genie.py`
-- `scripts/paths.py`
-- `scripts/recipe_common.py`
-- `scripts/recipe_product_audit.py`
-- `scripts/recipe_run.py`
-- `scripts/reconcile_learning.py`
-- `scripts/record_learning.py`
-- `scripts/release_check.py`
-- `scripts/route_profiles.py`
-- `scripts/run_fixture_invariants.py`
-- `scripts/run_hermes_evals.py`
-- `scripts/run_job.py`
-- `scripts/validate_hermes_skill.py`
-- `scripts/validate_packet.py`
-- `templates/request.yaml`
-<!-- END HUB_SUPPORT_FILES -->
-
-Full tree also keeps root schemas, profiles, evals, VERSION, and manifest for clone/`./install.sh` installs (scripts resolve either layout via `scripts/paths.py`).
+See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`. Gate ontology: `references/gates.yaml`. Privacy contract: root `PRIVACY.md` and hub mirror `references/PRIVACY.md`; always-on profile `profiles/privacy.md`.
 
 ## Mission
 
 Convert weak signals, blocked state transitions, fragmented systems, raw ideas, and incomplete products into evidence-bound, externally testable, buildable opportunity systems.
 
 Neon Genie owns product and opportunity intelligence. It does not grant execution, forecast, governance, spending, publication, or canon-promotion authority.
+
+## Default operator job (transitional builders)
+
+When the operator is developing an idea under constraint (solo, transitional,
+limited money/time/skills) and has not named a specialized recipe, default to
+this job shape — still **advisory only**:
+
+1. **Name the stuck point** — who is blocked, current state, what “done” looks like.
+2. **Capture constraints** — time, money, skills, access. Never invent resources.
+3. **Find → request → refuse** — research public facts; emit `DataRequest` for private
+   facts; label claims `OBSERVED` / `INFERRED` / `SPECULATIVE` / `NOT_COMPUTABLE`.
+4. **Shape the plan** — roadmap and/or approach options with **completion_proof**
+   (externally checkable). Prefer profiles `opportunity_mining` and, when resources
+   are scarce, `zero_option` (plus `product_architecture` only if a product/system
+   boundary is in scope).
+5. **Seal as drafts** — packets + receipt; no spend, publish, contact, or repo mutation.
+
+**Example Hermes prompt (plain English):**
+
+```text
+Use Neon Genie. I'm between jobs with limited money and an app idea.
+I need a realistic roadmap and first approaches I can actually run.
+Do not invent buyers, capital, or skills I did not declare.
+Research public facts if you can; request private facts with DataRequest.
+Label every important claim. Advisory only — do not modify any repo.
+```
 
 ## Research doctrine (default: proactive)
 
@@ -242,10 +143,12 @@ Run research during `ALIGN` and again in `ASCEND` whenever any of these hold:
 ### Research loop
 
 ```text
-GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
+GAP_DETECT → QUERY_PLAN → PRIVACY_EGRESS_CHECK → FETCH (host tools) → NORMALIZE → CITE
   → LABEL (OBSERVED | INFERRED | SPECULATIVE | NOT_COMPUTABLE)
   → RE-SCORE → (repeat until usefulness plateaus or budget/tooling ends)
 ```
+
+Before every host research/tool send: classify → minimize → `RUNE.PRIVACY_EGRESS_CHECK` → only then FETCH. Outcomes: `ALLOW` | `REDACT_THEN_ALLOW` | `REQUEST_CONSENT` | `BLOCK`. Log attempts in receipt `external_actions`. See `profiles/privacy.md` and `references/PRIVACY.md`.
 
 ### Research rules
 
@@ -257,7 +160,7 @@ GAP_DETECT → QUERY_PLAN → FETCH (host tools) → NORMALIZE → CITE
 - **Freshness** — prefer primary/current sources; note retrieval time for volatile facts.
 - **Attribution boundaries** — separate person / company / foundation / model inference.
 - **Authority unchanged** — research may draft; it may not submit, contact, spend, publish, or mutate repos.
-- **Privacy** — do not probe private systems without declared access; public + operator-granted only; request private facts via `DataRequest`.
+- **Privacy** — do not probe private systems without declared access; public + operator-granted only; request private facts via `DataRequest`. Run egress check before host tools; credentials never leave; private/operator egress needs consent.
 
 ## Evidence Request Protocol
 
@@ -279,10 +182,13 @@ Priority when a material fact is missing:
 - Private decision-critical gap + no DataRequest → fail (Gate Q)
 - Private/unknown fact labeled OBSERVED from model prior without source → fail (Gate R)
 - Open DataRequests with `blocks_promotion: true` cap promotion until satisfied or waived
+- CLEAR order: authority → evidence P–R → privacy S–Y → remaining anti-overclaim
 
 ### SEAL
 
 Run receipt must list `data_requests`, `open_blocking_requests`, and `research_attempts` (may be empty arrays). See `references/schemas/run-receipt.schema.json`.
+
+Privacy provenance (Gate Y / `RUNE.PRIVACY_SEAL_PROVENANCE`) is also required: `privacy_mode`, `privacy_contract_version`, `data_sources_used`, `external_actions`, `artifact_paths`, `telemetry_status` (`disabled`), `retention_statement`, `privacy_warnings`, `deletion_instructions`, `redaction`, `research_policy`. Contract: `PRIVACY.md` / `references/PRIVACY.md`.
 
 Opportunity, product, and zero-option packets at `TESTABLE` or higher require **`completion_proof`** (externally checkable) and should include a **`proof_path`**. After SEAL, follow `references/post-seal-verification.md`. Record real outcomes with:
 
@@ -322,14 +228,17 @@ Determine the smallest sufficient profile set. **Additionally auto-load** `evide
 ```yaml
 profile_router:
   core: always
+  privacy:
+    triggers: [always]
+    default_when: always_with_core
   product_architecture:
     triggers: [product audit, app design, game design, system design, feature coherence]
   opportunity_mining:
-    triggers: [new venture, unmet need, market opportunity, blocked transition]
+    triggers: [new venture, unmet need, market opportunity, blocked transition, roadmap, business idea, go into business, side project, app idea, product idea, what should I build, where do I start, next steps]
   fragmentation:
     triggers: [many portals, repeated handoffs, incompatible systems, coordination problem]
   zero_option:
-    triggers: [zero capital, first cash, immediate executable opportunity, constrained launch]
+    triggers: [zero capital, first cash, immediate executable opportunity, constrained launch, limited money, limited resources, limited capital, between jobs, bootstrapped, no budget, first revenue]
   agentic_services:
     triggers: [agent workflow, delegated outcome, automation, x402, machine services]
   commercial:
@@ -349,6 +258,16 @@ profile_router:
     triggers: [client audit, cost of inaction, diagnostic package, implementation offer]
   wayfinder_handoff:
     triggers: [build plan, engineering readiness, execution packet]
+  capital_sprint:
+    triggers:
+      - capital sprint
+      - annual fund
+      - donation drive
+      - membership drive
+      - fundraising deadline
+      - impact object
+      - donor sprint
+      - nonprofit capital raise
 ```
 
 Do not activate a specialized product/commercial profile merely because it exists. Do activate research when usefulness requires it.
@@ -360,7 +279,7 @@ SIGNAL
 → BLOCKED TRANSITION
 → OUTCOME MODEL
 → EVIDENCE GAPS
-→ RESEARCH LOOP (host tools)
+→ RESEARCH LOOP (PRIVACY_EGRESS_CHECK → host tools)
 → SYSTEM TOPOLOGY
 → OPPORTUNITY THESIS
 → INTERVENTION
@@ -392,6 +311,10 @@ SIGNAL
 - `RUNE.NG.ROUTE`
 - `RUNE.NG.CLEAR_CHECK`
 - `RUNE.NG.SEAL`
+- `RUNE.PRIVACY_CLASSIFY`
+- `RUNE.PRIVACY_MINIMIZE`
+- `RUNE.PRIVACY_EGRESS_CHECK`
+- `RUNE.PRIVACY_SEAL_PROVENANCE`
 
 ## Authority boundaries
 
@@ -435,9 +358,10 @@ A run emits one or more of:
 - `MemeticPressurePacket` → `references/schemas/memetic-pressure-packet.schema.json`
 - `AuditDeliveryPacket` → `references/schemas/audit-delivery-packet.schema.json`
 - `WayfinderExecutionPacket` → `references/schemas/wayfinder-execution-packet.schema.json`
+- `CapitalSprintPacket` → `references/schemas/capital-sprint-packet.schema.json`
 - `NeonGenieRunReceipt` → `references/schemas/run-receipt.schema.json`
 
-Anti-overclaim gates: `references/anti-overclaim-patterns.md`.
+Anti-overclaim gates: `references/anti-overclaim-patterns.md`. Privacy: `PRIVACY.md`, `references/PRIVACY.md`, `profiles/privacy.md`.
 
 ## Promotion ladder
 
@@ -474,9 +398,16 @@ Fail closed when:
 - missing data is fabricated instead of marked `NOT_COMPUTABLE` after research was attempted (or correctly skipped under offline mode);
 - public fetchable facts are skipped without a research attempt (Gate P);
 - private decision-critical facts lack a `DataRequest` (Gate Q);
-- private facts are silently invented as `OBSERVED` without source or request (Gate R).
+- private facts are silently invented as `OBSERVED` without source or request (Gate R);
+- external action sent with unknown/empty destination (Gate S);
+- offline / `LOCAL_ONLY` / research disabled but external send recorded (Gate T);
+- credential or secret-like payload would be or was sent (Gate U);
+- private/operator egress without consent reference (Gate V);
+- absolute privacy claim without matching mode and evidence (Gate W);
+- telemetry status is not `disabled` (Gate X);
+- SEAL without required privacy provenance fields (Gate Y).
 
-Also apply anti-overclaim gates A–R in `references/anti-overclaim-patterns.md` during CLEAR.
+Also apply anti-overclaim gates A–R and privacy gates S–Y in `references/anti-overclaim-patterns.md` during CLEAR. Registry: `references/gates.yaml`.
 
 ## Profile loading
 
@@ -521,3 +452,160 @@ Every run should record:
 - human review status.
 
 Neon Genie must become harder to impress over time by learning from failed opportunities, brittle integrations, buyer failures, distribution failures, and anti-capture failures. Capture those as append-only learning ledger observations (`references/schemas/learning-ledger-entry.schema.json`, `do learn`) with `canon_status: PROPOSED` only — never auto-apply to the skill corpus.
+
+### Hermes Hub support files
+
+
+Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files under allowlisted dirs (`references/`, `templates/`, `scripts/`, `assets/`, `examples/`). The list below is **generated** from `distribution.yaml` — run `python scripts/distribution_spine.py write` after adding packaging files:
+
+<!-- BEGIN HUB_SUPPORT_FILES (generated; do not edit) -->
+- `examples/README.md`
+- `examples/agentic.brief.yaml`
+- `examples/audit.brief.yaml`
+- `examples/capital-sprint.brief.yaml`
+- `examples/commercial.brief.yaml`
+- `examples/evals/behavioral/README.md`
+- `examples/evals/behavioral/cases/memetic-weak-proof.json`
+- `examples/evals/behavioral/cases/privacy-api-key-block.json`
+- `examples/evals/behavioral/cases/privacy-local-only-blocks-egress.json`
+- `examples/evals/behavioral/cases/privacy-offline-no-send.json`
+- `examples/evals/behavioral/cases/privacy-private-list-consent.json`
+- `examples/evals/behavioral/cases/privacy-private-list-requires-consent.json`
+- `examples/evals/behavioral/cases/privacy-unknown-retention-claim.json`
+- `examples/evals/behavioral/cases/private-buyer-datarequest.json`
+- `examples/evals/behavioral/cases/public-market-research.json`
+- `examples/evals/behavioral/cases/repo-mutation-advisory-only.json`
+- `examples/evals/behavioral/cases/wayfinder-change-control.json`
+- `examples/evals/behavioral/cases/zero-resources-not-computable.json`
+- `examples/evals/behavioral/transcripts/01-private-buyer-datarequest.md`
+- `examples/evals/behavioral/transcripts/02-public-market-research.md`
+- `examples/evals/behavioral/transcripts/03-zero-resources-not-computable.md`
+- `examples/evals/behavioral/transcripts/04-repo-mutation-advisory-only.md`
+- `examples/evals/behavioral/transcripts/05-memetic-weak-proof.md`
+- `examples/evals/behavioral/transcripts/06-wayfinder-change-control.md`
+- `examples/evals/behavioral/transcripts/07-privacy-local-only-blocks-egress.md`
+- `examples/evals/behavioral/transcripts/07-privacy-offline-no-send.md`
+- `examples/evals/behavioral/transcripts/08-privacy-api-key-block.md`
+- `examples/evals/behavioral/transcripts/08-privacy-private-list-requires-consent.md`
+- `examples/evals/behavioral/transcripts/09-privacy-private-list-consent.md`
+- `examples/evals/behavioral/transcripts/10-privacy-unknown-retention-claim.md`
+- `examples/evals/cases/authority-leakage.json`
+- `examples/evals/cases/buyer-beneficiary-conflation.json`
+- `examples/evals/cases/completion-proof-present.json`
+- `examples/evals/cases/completion-proof-required.json`
+- `examples/evals/cases/fictional-resource.json`
+- `examples/evals/cases/memetic-cannot-promote.json`
+- `examples/evals/cases/offline-no-fabricated-observed.json`
+- `examples/evals/cases/privacy-consent-purpose-bound.json`
+- `examples/evals/cases/privacy-egress-local-only.json`
+- `examples/evals/cases/privacy-secret-blocks-egress.json`
+- `examples/evals/cases/private-gap-must-request.json`
+- `examples/evals/cases/private-gap-request-open.json`
+- `examples/evals/cases/private-gap-silent-invent.json`
+- `examples/evals/cases/public-gap-must-attempt-research.json`
+- `examples/evals/cases/public-gap-research-attempted.json`
+- `examples/evals/cases/scorecard-cannot-override-gate.json`
+- `examples/evals/cases/wayfinder-change-control.json`
+- `examples/evals/cases/x402-misfit.json`
+- `examples/evals/cases/zero-option.json`
+- `examples/evals/rubric.md`
+- `examples/evals/transcripts/01-zero-option-empty.md`
+- `examples/evals/transcripts/02-product-audit.md`
+- `examples/evals/transcripts/03-fragmentation.md`
+- `examples/evals/transcripts/04-commercial-missing-buyer.md`
+- `examples/evals/transcripts/05-offline-audit.md`
+- `examples/evals/transcripts/06-agentic-x402-misfit.md`
+- `examples/evals/transcripts/07-memetic-cannot-promote.md`
+- `examples/evals/transcripts/08-evidence-intelligence.md`
+- `examples/evals/transcripts/09-opportunity-mining.md`
+- `examples/evals/transcripts/README.md`
+- `examples/evals/transcripts/rubric.md`
+- `examples/evidence.brief.yaml`
+- `examples/fragmentation.brief.yaml`
+- `examples/memetic.brief.yaml`
+- `examples/opportunity.brief.yaml`
+- `examples/packets/sample-capital-sprint.packet.json`
+- `examples/packets/sample-data-request.json`
+- `examples/packets/sample-external-action.json`
+- `examples/packets/sample-opportunity.packet.json`
+- `examples/packets/sample-privacy-context.json`
+- `examples/packets/sample-purpose-bound-consent.json`
+- `examples/packets/sample-receipt-with-requests.json`
+- `examples/packets/sample-receipt.packet.json`
+- `examples/packets/sample-run-envelope.json`
+- `examples/privacy-external-research.brief.yaml`
+- `examples/product-audit.brief.yaml`
+- `examples/zero-option-with-skills.brief.yaml`
+- `examples/zero-option.brief.yaml`
+- `references/CAPABILITY_MAP.md`
+- `references/GOLDEN_TESTS.md`
+- `references/PRIVACY.md`
+- `references/VERSION`
+- `references/anti-overclaim-patterns.md`
+- `references/gates.yaml`
+- `references/hermes-runtime-contract.md`
+- `references/manifest.json`
+- `references/post-seal-verification.md`
+- `references/privacy-contract.md`
+- `references/profiles/agentic_services.md`
+- `references/profiles/audit_delivery.md`
+- `references/profiles/capital_sprint.md`
+- `references/profiles/commercial.md`
+- `references/profiles/core.md`
+- `references/profiles/evidence_intelligence.md`
+- `references/profiles/fragmentation.md`
+- `references/profiles/memetic.md`
+- `references/profiles/opportunity_mining.md`
+- `references/profiles/privacy.md`
+- `references/profiles/product_architecture.md`
+- `references/profiles/wayfinder_handoff.md`
+- `references/profiles/zero_option.md`
+- `references/schema-versioning.md`
+- `references/schemas/agentic-service-graph.schema.json`
+- `references/schemas/audit-delivery-packet.schema.json`
+- `references/schemas/capital-sprint-packet.schema.json`
+- `references/schemas/commercial-simulation.schema.json`
+- `references/schemas/data-request.schema.json`
+- `references/schemas/evidence-intelligence-packet.schema.json`
+- `references/schemas/fragmentation-packet.schema.json`
+- `references/schemas/learning-ledger-entry.schema.json`
+- `references/schemas/memetic-pressure-packet.schema.json`
+- `references/schemas/opportunity-packet.schema.json`
+- `references/schemas/privacy-context.schema.json`
+- `references/schemas/product-packet.schema.json`
+- `references/schemas/run-envelope.schema.json`
+- `references/schemas/run-receipt.schema.json`
+- `references/schemas/wayfinder-execution-packet.schema.json`
+- `references/schemas/zero-option-packet.schema.json`
+- `scripts/audit_release_version.py`
+- `scripts/build_envelope.py`
+- `scripts/build_receipt.py`
+- `scripts/capabilities.py`
+- `scripts/check_behavioral_invariants.py`
+- `scripts/check_transcripts.py`
+- `scripts/distribution_spine.py`
+- `scripts/doctor.py`
+- `scripts/hermes_runtime_smoke.py`
+- `scripts/lineage.py`
+- `scripts/neon_genie.py`
+- `scripts/paths.py`
+- `scripts/privacy_diagnostics.py`
+- `scripts/privacy_preflight.py`
+- `scripts/privacy_report.py`
+- `scripts/privacy_runtime.py`
+- `scripts/recipe_common.py`
+- `scripts/recipe_product_audit.py`
+- `scripts/recipe_run.py`
+- `scripts/reconcile_learning.py`
+- `scripts/record_learning.py`
+- `scripts/release_check.py`
+- `scripts/route_profiles.py`
+- `scripts/run_fixture_invariants.py`
+- `scripts/run_hermes_evals.py`
+- `scripts/run_job.py`
+- `scripts/validate_hermes_skill.py`
+- `scripts/validate_packet.py`
+- `templates/request.yaml`
+<!-- END HUB_SUPPORT_FILES -->
+
+Full tree also keeps root schemas, profiles, evals, VERSION, and manifest for clone/`./install.sh` installs (scripts resolve either layout via `scripts/paths.py`).

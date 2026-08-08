@@ -1,0 +1,49 @@
+{
+  "org_identity": {
+    "legal_name": "Example Membership Org",
+    "ein": "00-0000000",
+    "tax_status": "501(c)(3)",
+    "note": "Operator-supplied placeholder — replace with real workspace identity"
+  },
+  "deadline": "2026-12-31",
+  "targets": {
+    "floor_usd": 25000,
+    "stretch_usd": 40000
+  },
+  "revenue_mix": {
+    "membership": "primary",
+    "program": "secondary",
+    "gifts": "target_uplift",
+    "grants": "not_in_sprint"
+  },
+  "donation_rails": [
+    {
+      "processor": "example_processor",
+      "url": "https://example.org/give",
+      "status": "live"
+    }
+  ],
+  "impact_object": {
+    "goal": "Fund 100 member-facing program slots",
+    "unit_cost_usd": 250,
+    "beneficiaries": "members",
+    "deadline": "2026-12-31"
+  },
+  "sprint_design": {
+    "windows_days": [7, 14, 30],
+    "channels": ["member_email", "alumni", "corporate"]
+  },
+  "warm_network": {
+    "classes": ["member", "alumni", "corporate", "creator", "cold"]
+  },
+  "completion_proof": "Gift total vs floor by deadline, externally checkable on processor dashboard or bank deposit",
+  "proof_path": [
+    "confirm org identity and board-approved deadline",
+    "publish campaign card (operator executes)",
+    "record gifts against floor",
+    "ledger proof_obtained or proof_failed"
+  ],
+  "promotion_state": "TESTABLE",
+  "authority": "advisory_only",
+  "grants_execution": false
+}

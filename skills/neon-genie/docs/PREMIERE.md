@@ -67,13 +67,18 @@ With:
 
 | Layer | Command / path |
 |-------|----------------|
-| Install | `./install.sh` → `~/.hermes/skills/neon-genie` |
+| Install (community) | `hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie` |
+| Install (clone) | `./install.sh` → `~/.hermes/skills/neon-genie` |
+| Site | https://scrimshawlife-ctrl.github.io/NeonGenie/ |
 | Integrity | `python scripts/neon_genie.py do check` |
+| Privacy | `python scripts/neon_genie.py do privacy --json` |
 | Gate evals | `python scripts/neon_genie.py do eval` |
 | Prose goldens | `python scripts/neon_genie.py do transcripts` |
-| Recipes | `python scripts/neon_genie.py do recipe --list` |
+| Recipes | `python scripts/neon_genie.py do recipe --list` (includes `capital-sprint`) |
 | Outcomes | `python scripts/neon_genie.py do learn …` |
 | Design | `docs/superpowers/specs/2026-07-30-neon-genie-premiere-program-design.md` |
+
+These commands prove packaging and fixture soundness; live multi-turn Hermes judgment remains a separate maturity track. Current packaging line: **3.25.0**.
 
 ---
 

@@ -7,5 +7,6 @@
 | [0003](./0003-hub-mirror-strategy.md) | Hub mirror strategy |
 | [0004](./0004-neon-genie-wayfinder-boundary.md) | Neon Genie / Wayfinder boundary |
 | [0005](./0005-claim-label-ontology.md) | Claim label ontology |
+| [0006](./0006-privacy-by-construction.md) | Privacy by construction |
 
 New ADRs: sequential number, status Accepted|Superseded, short context/decision/consequences.

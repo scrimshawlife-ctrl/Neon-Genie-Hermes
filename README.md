@@ -64,6 +64,31 @@ More detail: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md)
 3. Explain in plain language: who is stuck, what “done” looks like, what you already know, and what you refuse to invent.  
 4. Read the answer as a **draft**. Check that claims are labeled and missing private facts are asked for, not filled in.
 
+### Guided dashboard wizard
+
+Hermes installations that include the Neon Genie dashboard integration also
+show a **Neon Genie** page in the sidebar at `/neon-genie`.
+
+```bash
+hermes dashboard
+```
+
+Use the wizard when you want help shaping the prompt before entering Chat:
+
+1. Pick a mission such as product audit, opportunity mining, zero-option,
+   commercial, fragmentation, evidence, agentic services, audit delivery, or
+   Wayfinder handoff.
+2. Add the outcome, current state, target user, desired state, known evidence,
+   and constraints. Outcome and current state are required.
+3. Choose whether public research is allowed and optionally set a fetch limit.
+4. Review the generated prompt, then select **Copy and open Chat**.
+
+The wizard selects the smallest starting profile and includes Neon Genie's
+claim labels, DataRequest behavior, fail-closed gates, privacy/research setting,
+and advisory-only authority. It does not bypass Hermes Chat or grant execution
+rights. If browser clipboard access is denied, it remains on the review screen
+so you can copy the prompt manually.
+
 ### Example prompts
 
 ```text

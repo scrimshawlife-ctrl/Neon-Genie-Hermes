@@ -37,6 +37,10 @@ INTENTS: dict[str, dict[str, str]] = {
         "script": "run_job.py",
         "description": "Operator run: brief/recipe → workspace + envelope",
     },
+    "wizard": {
+        "script": "wizard.py",
+        "description": "Guided packaging: resolve plan or quick onboarding",
+    },
     "recipe": {
         "script": "recipe_run.py",
         "description": "Run a named example end-to-end (--list / --name)",
@@ -96,7 +100,16 @@ INTENTS: dict[str, dict[str, str]] = {
 }
 
 # Everyday first in help; aliases for older script-style names
-EVERYDAY = ("doctor", "check", "run", "recipe", "route", "validate", "capabilities")
+EVERYDAY = (
+    "doctor",
+    "check",
+    "wizard",
+    "run",
+    "recipe",
+    "route",
+    "validate",
+    "capabilities",
+)
 VERIFY = ("eval", "transcripts", "behavioral", "runtime", "dist", "release-check", "privacy")
 OUTCOMES = ("receipt", "envelope", "learn", "reconcile")
 
@@ -122,6 +135,7 @@ ALIASES = {
     "memetic": ("recipe", ["--name", "memetic"]),
     "evidence": ("recipe", ["--name", "evidence"]),
     "opportunity": ("recipe", ["--name", "opportunity"]),
+    "wizard-quick": ("wizard", ["--path", "quick", "--auto"]),
 }
 
 
@@ -149,6 +163,8 @@ def top_help() -> str:
             "",
             "Examples:",
             "  python scripts/neon_genie.py do doctor",
+            "  python scripts/neon_genie.py do wizard --preset product-audit --print-only --json",
+            "  python scripts/neon_genie.py do wizard --path quick --auto",
             "  python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo",
             "  python scripts/neon_genie.py do run --brief examples/product-audit.brief.yaml --out out/neon-genie/demo",
             "  python scripts/neon_genie.py do capabilities --json",

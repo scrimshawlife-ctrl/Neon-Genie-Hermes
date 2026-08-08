@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zero-state.local/schemas/neon-genie-wizard-answers.v1.json",
+  "title": "neon-genie-wizard-answers.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema"],
+  "properties": {
+    "schema": {
+      "const": "neon-genie-wizard-answers.v1"
+    },
+    "path": {
+      "type": "string",
+      "enum": ["resolve", "quick"]
+    },
+    "intent": {
+      "type": ["string", "null"],
+      "enum": ["doctor", "check", "privacy", "route", "run", "recipe", null]
+    },
+    "recipe": {
+      "type": ["string", "null"]
+    },
+    "recipe_name": {
+      "type": ["string", "null"]
+    },
+    "brief": {
+      "type": ["string", "null"]
+    },
+    "text": {
+      "type": ["string", "null"]
+    },
+    "out": {
+      "type": ["string", "null"]
+    },
+    "packet": {
+      "type": ["string", "null"]
+    },
+    "packet_type": {
+      "type": ["string", "null"]
+    },
+    "validate_packet": {
+      "type": "boolean"
+    },
+    "json_out": {
+      "type": "boolean"
+    }
+  }
+}

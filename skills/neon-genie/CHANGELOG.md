@@ -12,13 +12,32 @@ and this project uses semantic versioning.
 - Public install/docs paths updated for repo rename **NeonGenie**
   (`scrimshawlife-ctrl/NeonGenie`, Pages `…/NeonGenie/`)
 
+## [3.26.0] — 2026-08-08
 
 ### Added
+
+- **Hermes packaging wizard** (`do wizard`) — resolve-path plan resolver (default
+  print-only) plus `--path quick` onboarding (doctor → sample product-audit)
+- Presets: `doctor`, `check`, `privacy`, `product-audit`, `zero-option`,
+  `opportunity`, `audit`, `route-sample`, `offline-scaffold`, `quick`
+- Alias `wizard-quick` → `do wizard --path quick --auto`
+- `references/wizard.md`, `schemas/wizard-answers.v1.schema.json`,
+  `scripts/wizard.py`, `scripts/test_wizard.py`
+- Design + plan:
+  `docs/superpowers/specs/2026-08-08-neon-genie-hermes-wizard-design.md`,
+  `docs/superpowers/plans/2026-08-08-neon-genie-hermes-wizard.md`
+
+### Changed
+
+- Everyday CLI help lists `wizard`; capabilities `cli_jobs` includes `wizard`
+- SKILL.md / QUICKSTART document prefer-wizard agent protocol
+
+### Added (prior unreleased)
 
 - Schema-valid `examples/packets/sample-capital-sprint.packet.json`
 - `CapitalSprintPacket` in SKILL output selection; `validate` / `capabilities` types
 
-### Changed
+### Changed (prior unreleased)
 
 - `do run --brief` auto-recipe prefers `capital-sprint` over commercial when both match
 - Hub package no longer ships Pages assets, hallmark, or monorepo ADR/checklist bulk

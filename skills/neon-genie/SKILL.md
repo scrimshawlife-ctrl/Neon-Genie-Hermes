@@ -5,7 +5,7 @@ description: >
   loops, commercial models, agentic graphs, and Wayfinder handoffs with claim
   labels and fail-closed gates. Use for product intent, opportunity mining,
   and advisory packets — not cinematic work (use Kubrick) or code execution.
-version: 3.25.0
+version: 3.26.0
 author: Applied Alchemy Labs / Zero State
 license: MIT
 platforms: [linux, macos, windows]
@@ -65,6 +65,7 @@ python scripts/neon_genie.py do <job> [options]
 | Job | Use |
 |-----|-----|
 | `doctor` | Full smoke after install |
+| `wizard` | Guided packaging: resolve plan or quick onboarding |
 | `privacy` | Resolved repository privacy boundary (`--json`) |
 | `check` | Skill integrity |
 | `run` | Operator packaging run (brief/recipe → envelope) |
@@ -80,8 +81,25 @@ python scripts/neon_genie.py do <job> [options]
 ```bash
 python scripts/neon_genie.py help
 python scripts/neon_genie.py do doctor
+python scripts/neon_genie.py do wizard --preset product-audit --print-only --json
+python scripts/neon_genie.py do wizard --path quick --auto
 python scripts/neon_genie.py do run --recipe product-audit --out out/neon-genie/demo
 ```
+
+### Prefer the wizard
+
+When the operator is new, unsure which packaging job to run, or says “wizard” /
+“guide me” / “walk me through”:
+
+1. Prefer `do wizard` over freestyling `do run` flags.
+2. **Chat-driven Q&A** (Desktop-safe): merge answers JSON →
+   `do wizard --answers answers.json --print-only --json` → confirm → `--run`.
+3. **New install:** `do wizard --path quick --auto` (doctor + sample product-audit).
+4. After packaging, resume product judgment in chat (OPEN→SEAL). Envelope is not
+   execution authority.
+
+Load [references/wizard.md](references/wizard.md) while guiding. Packaging only —
+no invented opportunities, no ledger writes, no repo mutation.
 
 See `README.md` (How to use) and `QUICKSTART.md`. Golden prose: `examples/evals/transcripts/README.md`. Post-SEAL: `references/post-seal-verification.md`. Gate ontology: `references/gates.yaml`. Privacy contract: root `PRIVACY.md` and hub mirror `references/PRIVACY.md`; always-on profile `profiles/privacy.md`.
 
@@ -576,7 +594,9 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `references/schemas/run-envelope.schema.json`
 - `references/schemas/run-receipt.schema.json`
 - `references/schemas/wayfinder-execution-packet.schema.json`
+- `references/schemas/wizard-answers.v1.schema.json`
 - `references/schemas/zero-option-packet.schema.json`
+- `references/wizard.md`
 - `scripts/audit_release_version.py`
 - `scripts/build_envelope.py`
 - `scripts/build_receipt.py`
@@ -605,6 +625,7 @@ Hermes Hub installs only `SKILL.md` plus **explicitly path-referenced** files un
 - `scripts/run_job.py`
 - `scripts/validate_hermes_skill.py`
 - `scripts/validate_packet.py`
+- `scripts/wizard.py`
 - `templates/request.yaml`
 <!-- END HUB_SUPPORT_FILES -->
 

@@ -10,7 +10,8 @@
 ## Install
 
 ```bash
-hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
+hermes skills install Zero-State-LLC/NeonGenie/skills/neon-genie
+# mirror: scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 Reload Hermes. Or clone and run `./install.sh`, then:
@@ -27,6 +28,22 @@ python scripts/neon_genie.py do doctor
 2. Describe who is stuck, what “done” looks like, and your constraints.  
 3. Tell it what **not** to invent (buyers, money, skills).  
 4. Treat the answer as a **draft**.
+
+### Dashboard wizard
+
+If your Hermes dashboard includes the Neon Genie integration, launch it and
+open **Neon Genie** in the sidebar:
+
+```bash
+hermes dashboard
+# then open /neon-genie
+```
+
+Choose a mission, enter the outcome and current state, set research guardrails,
+review the generated evidence-bound prompt, and select **Copy and open Chat**.
+Clipboard failure keeps you on the review step so you can copy manually. The
+wizard prepares the request; the installed Neon Genie skill still runs inside
+the real Hermes Chat session and remains advisory only.
 
 ### Prompts that work
 

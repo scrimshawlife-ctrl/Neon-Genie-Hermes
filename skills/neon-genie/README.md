@@ -37,7 +37,9 @@ Neon Genie is a Hermes skill for people turning ideas into roadmaps and approach
 ## Install
 
 ```bash
-hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
+# Prefer org path (Zero State)
+hermes skills install Zero-State-LLC/NeonGenie/skills/neon-genie
+# Mirror (personal): scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 Then reload or restart Hermes.
@@ -45,7 +47,8 @@ Then reload or restart Hermes.
 **Or clone this repo:**
 
 ```bash
-git clone https://github.com/scrimshawlife-ctrl/NeonGenie.git
+git clone https://github.com/Zero-State-LLC/NeonGenie.git
+# mirror: https://github.com/scrimshawlife-ctrl/NeonGenie.git
 cd NeonGenie
 ./install.sh
 python scripts/neon_genie.py do wizard --path quick --auto
@@ -64,6 +67,33 @@ More detail: [docs/HERMES_DISTRIBUTION.md](./docs/HERMES_DISTRIBUTION.md)
 2. Say **“Use Neon Genie”** (or describe a product/opportunity problem).  
 3. Explain in plain language: who is stuck, what “done” looks like, what you already know, and what you refuse to invent.  
 4. Read the answer as a **draft**. Check that claims are labeled and missing private facts are asked for, not filled in.
+
+### Packaging wizard (CLI)
+
+When you are new to the skill or unsure which packaging job to run:
+
+```bash
+python scripts/neon_genie.py do wizard --preset product-audit --print-only --json
+python scripts/neon_genie.py do wizard --path quick --auto
+python scripts/neon_genie.py do wizard --answers answers.json --run
+```
+
+Resolve path defaults to **print-only** (exact `do …` argv). Quick path runs
+doctor + a sample product-audit package. Product judgment stays in Hermes chat
+(OPEN→SEAL). See [references/wizard.md](./references/wizard.md).
+
+### Guided dashboard wizard
+
+Hermes installations that include the Neon Genie dashboard integration also
+show a **Neon Genie** page in the sidebar at `/neon-genie`.
+
+```bash
+hermes dashboard
+```
+
+Use the dashboard wizard when you want help shaping the **chat prompt** before
+entering Chat (mission, outcome, constraints, research toggles). It does not
+replace the packaging CLI wizard above and does not grant execution rights.
 
 ### Example prompts
 
@@ -187,10 +217,10 @@ python scripts/neon_genie.py do run --recipe commercial --out out/neon-genie/aud
 | [CHANGELOG.md](./CHANGELOG.md) | What’s new |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Development |
 
-**Version:** 3.25.0 · **License:** MIT · **Maintainers:** [Applied Alchemy Labs / @scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl)
+**Version:** 3.26.0 · **License:** MIT · **Maintainers:** [Applied Alchemy Labs / @scrimshawlife-ctrl](https://github.com/scrimshawlife-ctrl) · [Zero-State-LLC](https://github.com/Zero-State-LLC)
 
 ---
 
 <div align="center">
-<sub>Neon Genie v3.25.0 · advice only · evidence before invention</sub>
+<sub>Neon Genie v3.26.0 · advice only · evidence before invention</sub>
 </div>

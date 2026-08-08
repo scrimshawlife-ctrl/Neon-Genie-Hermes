@@ -10,7 +10,8 @@
 ## Install
 
 ```bash
-hermes skills install scrimshawlife-ctrl/NeonGenie/skills/neon-genie
+hermes skills install Zero-State-LLC/NeonGenie/skills/neon-genie
+# mirror: scrimshawlife-ctrl/NeonGenie/skills/neon-genie
 ```
 
 Reload Hermes. Or clone and run `./install.sh`, then:

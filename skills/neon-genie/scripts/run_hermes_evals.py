@@ -248,6 +248,28 @@ def eval_completion_proof(inp: dict[str, Any]) -> dict[str, Any]:
     return {"status": "PASS", "gate": "PROOF"}
 
 
+def eval_privacy_offline_no_egress(inp: dict[str, Any]) -> dict[str, Any]:
+    """Offline local-only runs must expose no external actions or egress."""
+    privacy = inp.get("privacy") if isinstance(inp.get("privacy"), dict) else {}
+    egress = privacy.get("egress") if isinstance(privacy.get("egress"), dict) else {}
+    actions = privacy.get("external_actions")
+    if not isinstance(actions, list):
+        actions = []
+    research = inp.get("research") if isinstance(inp.get("research"), dict) else {}
+    safe = (
+        research.get("enabled") is False
+        and privacy.get("mode") == "local_only"
+        and egress.get("allowed") is False
+        and not actions
+    )
+    return {
+        "external_actions_count": len(actions),
+        "privacy_mode": privacy.get("mode"),
+        "telemetry": privacy.get("telemetry"),
+        "verdict": "PASS" if safe else "GATE_FAIL",
+    }
+
+
 EVALUATORS: dict[str, EvalFn] = {
     "zero-option.json": eval_zero_option,
     "x402-misfit.json": eval_x402_misfit,
@@ -265,6 +287,7 @@ EVALUATORS: dict[str, EvalFn] = {
     "private-gap-silent-invent.json": eval_private_gap_silent_invent,
     "completion-proof-required.json": eval_completion_proof,
     "completion-proof-present.json": eval_completion_proof,
+    "privacy-offline-no-egress.json": eval_privacy_offline_no_egress,
 }
 
 

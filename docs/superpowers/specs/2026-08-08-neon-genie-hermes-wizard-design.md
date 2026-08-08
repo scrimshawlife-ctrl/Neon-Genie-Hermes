@@ -1,6 +1,6 @@
 # Neon Genie — Hermes Wizard Design
 
-**Status:** Draft (awaiting operator review)  
+**Status:** Approved  
 **Date:** 2026-08-08  
 **Version target:** 3.26.0 (minor — new public CLI surface)  
 **Hosts:** Hermes (CLI, gateway, Desktop), OpenClaw  

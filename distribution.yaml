@@ -83,6 +83,7 @@ hub_support_globs:
   - scripts/build_envelope.py
   - scripts/test_run_envelope.py
   - scripts/run_job.py
+  - scripts/wizard.py
   - scripts/capabilities.py
   - scripts/test_operator_surface.py
   - scripts/reconcile_learning.py
@@ -95,6 +96,7 @@ hub_support_globs:
   - references/manifest.json
   - references/hermes-runtime-contract.md
   - references/privacy-contract.md
+  - references/wizard.md
   - references/CAPABILITY_MAP.md
   - references/GOLDEN_TESTS.md
   - references/anti-overclaim-patterns.md
